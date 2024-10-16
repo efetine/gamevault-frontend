@@ -1,6 +1,6 @@
 //import { IProduct } from "@/interfaces/IProduct";
 
-import type { IProduct } from "~/interfaces/IProduct";
+import type { IProduct } from "~/Interfaces/IProduct";
 
 export const productsToPreLoad: IProduct[] = [
   {
