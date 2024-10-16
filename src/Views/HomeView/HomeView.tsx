@@ -1,4 +1,5 @@
 import React from 'react'
+import { SteamClone } from '~/components/steam-clone'
 
 const HomeView = () => {
   return (
@@ -6,6 +7,7 @@ const HomeView = () => {
         <h1 className='font-semibold text-3xl'>
             Welcome to the home page
         </h1>
+        <SteamClone/>
     </div>
   )
 }
