@@ -2,7 +2,7 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { ThemeProvider } from "~/components/theme-provider"
+import { ThemeProvider } from "~/components/Navbar/theme-provider"
 import Navbar from "~/components/Navbar/Navbar";
 
 export const metadata: Metadata = {
