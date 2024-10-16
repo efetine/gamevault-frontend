@@ -1,8 +1,12 @@
-import HomeView from "~/Views/HomeView/HomeView";
-
+import { ModeToggle } from "~/components/mode-toogle";
+import { Button } from "~/components/ui/button";
 
 export default function HomePage() {
   return (
-      <HomeView />    
+    <main>
+      Hello world
+      <Button variant="default">Press me</Button>
+      <ModeToggle />
+    </main>
   );
 }
