@@ -2,9 +2,9 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { ThemeProvider } from "~/components/Navbar/theme-provider"
-import Navbar from "~/components/Navbar/Navbar";
-import Footer from "~/components/Footer/Footer";
+import { ThemeProvider } from "~/components/navbar/theme-provider"
+import Navbar from "~/components/navbar/navbar";
+import Footer from "~/components/footer/footer";
 
 export const metadata: Metadata = {
   title: "Create T3 App",

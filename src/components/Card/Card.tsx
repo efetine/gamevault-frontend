@@ -1,4 +1,4 @@
-import type { IProductsCardProps } from "~/Interfaces/IProduct";
+import type { IProductsCardProps } from "~/interfaces/IProduct";
 
 const Card: React.FC<IProductsCardProps> = ({
   name,
@@ -12,7 +12,7 @@ const Card: React.FC<IProductsCardProps> = ({
       <img
         className="p-8 rounded-t-lg max-w-xs transition duration-300 ease-in-out hover:scale-110"
         src={image}
-        alt="imagen del videojuego"
+        alt={name}
       />
       <div className="px-5 pb-5">
         <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">

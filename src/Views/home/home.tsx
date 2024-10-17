@@ -1,5 +1,5 @@
 import React from 'react'
-import CardList from '~/components/CardList/CardList'
+import CardList from '~/components/card-list/card-list'
 
 const HomeView = () => {
   return (

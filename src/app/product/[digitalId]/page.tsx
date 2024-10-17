@@ -1,4 +1,4 @@
-import ProductDigitalDetail from "~/Views/ProductDetailView/ProductDetailView";
+import ProductDigitalDetail from "~/Views/product-detail/product-detail";
 
 const ProductDigital: React.FC<{ params: { digitalId: string } }> = ({
   params,
