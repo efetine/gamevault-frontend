@@ -1,5 +1,5 @@
 import { productsToPreLoad } from "~/helpers/products";
-import Card from "../card/card";
+import Card from "../card/Card";
 
 const CardList = () => {
   const products = productsToPreLoad;
