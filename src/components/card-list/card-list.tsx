@@ -1,8 +1,24 @@
-import { productsToPreLoad } from "~/helpers/products";
+// import { productsToPreLoad } from "~/helpers/products";
 import Card from "../card/Card";
+import { useEffect, useState } from "react";
+import { getProductsFromDb } from "~/helpers/products-from-db";
+import { IProduct } from "~/interfaces/IProduct";
 
 const CardList = () => {
-  const products = productsToPreLoad;
+  const [products, setProducts] = useState<IProduct[]>([]);
+
+  useEffect (async () => {
+    async function fetchProducts() {
+      try {
+        const fetchedProducts = await getProductsFromDb();
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error searching for products:", error);        
+      }
+    }
+    await fetchProducts();
+  }, [])
+
   return (
     <div>
       <h1>VIDEOJUEGOS</h1>
