@@ -7,7 +7,7 @@ import { IProduct } from "~/interfaces/IProduct";
 const CardList = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
 
-  useEffect (async () => {
+  useEffect ( () => {
     async function fetchProducts() {
       try {
         const fetchedProducts = await getProductsFromDb();
@@ -16,7 +16,7 @@ const CardList = () => {
         console.error("Error searching for products:", error);        
       }
     }
-    await fetchProducts();
+     void fetchProducts();
   }, [])
 
   return (
