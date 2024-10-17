@@ -1,6 +1,6 @@
 import type { IProductsCardProps } from "~/interfaces/IProduct";
 
-const Card: React.FC<IProductsCardProps> = ({
+const card: React.FC<IProductsCardProps> = ({
   name,
   price,
   stock,
@@ -31,4 +31,4 @@ const Card: React.FC<IProductsCardProps> = ({
   );
 };
 
-export default Card;
+export default card;
