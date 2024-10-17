@@ -2,12 +2,11 @@ export interface IProduct {
   id: number;
   name: string;
   description: string;
-  developer: string;
-  date: string;
+  type: string;
   price: number;
   stock: number;
-  image: string;
-  genreId?: number;
+  imageUrl: string;
+  category?: number;
 }
 
 export interface IProductListProps {
@@ -17,10 +16,9 @@ export interface IProductListProps {
 export interface IProductsCardProps {
   id: number;
   name: string;
+  type: string;
   price: number;
-  stock: number;
-  date: string;
-  image: string;
+  imageUrl: string;
 }
 
 export interface cartItemProps {
