@@ -45,7 +45,7 @@ export default async function CardList({ page }: CardListProps) {
           return (
             <Link
               className="hover:scale-[1.05] transition duration-700 ease-in-out"
-              href={`/products/${product.id}`}
+              href={`/product/${product.id}`}
               key={product.id}
             >
               <Card {...product} />
