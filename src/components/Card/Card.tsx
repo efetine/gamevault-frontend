@@ -1,4 +1,4 @@
-import type { IProductsCardProps } from "~/interfaces/IProduct";
+import type { IProductsCardProps } from "~/Interfaces/IProduct";
 
 const Card: React.FC<IProductsCardProps> = ({
   name,
