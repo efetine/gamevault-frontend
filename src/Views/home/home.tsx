@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import Link from "next/link";
@@ -47,3 +48,10 @@ export default function HomeView() {
     </div>
   );
 }
+=======
+const HomeView = () => {
+  return <h1>Landing Page</h1>;
+};
+
+export default HomeView;
+>>>>>>> 9a55147 (Changed products  to landing page)
