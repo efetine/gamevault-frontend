@@ -1,5 +1,6 @@
 import Link from "next/link";
-import Card from "~/components/card/Card";
+import Card from "../Card/Card";
+
 import {
   Pagination,
   PaginationContent,
@@ -7,7 +8,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
-import { getProductsFromDb } from "~/helpers/products-from-db";
+import { getProductsFromDb } from "~/Helpers/products-from-db";
 
 interface CardListProps {
   page: number;
