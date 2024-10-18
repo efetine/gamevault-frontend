@@ -18,7 +18,7 @@ export interface IProductsCardProps {
   name: string;
   type: string;
   price: number;
-  imageUrlUrl: string;
+  imageUrl: string;
 }
 
 export interface cartItemProps {
