@@ -2,7 +2,9 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { ThemeProvider } from "~/components/theme-provider";
+import { ThemeProvider } from "~/components/navbar/theme-provider"
+import Navbar from "~/components/navbar/navbar";
+import Footer from "~/components/footer/footer";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -22,7 +24,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Navbar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
