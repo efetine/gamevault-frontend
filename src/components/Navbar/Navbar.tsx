@@ -12,21 +12,32 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import Link from "next/link";
 
 const Navbar = () => {
   const { setTheme } = useTheme();
 
   return (
-    <header className="bg-gray-300 dark:bg-gray-800 py-4 transition-colors duration-200">
-      <div className="container mx-auto px-4 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Pixel Games</h1>
+    <header className=" w-screen h-1/3 bg-gray-300 dark:bg-gray-800 py-4 transition-colors duration-200 ">
+      <div className=" w-full flex flex-col md:flex-row md:w-full lg:flex-row lg:w-[60%] mx-auto px-4  items-center justify-between ">
+        <div className="flex items-center space-x-4  ">
+          <Link href="/">
+          <h1 className="text-base md:text-xl lg:text-xl font-bold text-gray-900 text-center dark:text-white">Pixel Games</h1>
+          </Link>
           <nav>
-            <ul className="flex space-x-4">
+          <div className="relative">
+            <Input className="pl-8 bg-gray-100 dark:bg-gray-700" placeholder="Search games..." />
+            <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
+          </div>
+            
+          </nav>
+        </div>
+        <div className="flex items-center space-x-4">
+        <ul className="text-xs md:text-lg flex space-x-3">
               <li>
-                <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                <Link href="/products" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
                   Store
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
@@ -43,14 +54,7 @@ const Navbar = () => {
                   Support
                 </a>
               </li>
-            </ul>
-          </nav>
-        </div>
-        <div className="flex items-center space-x-4">
-          <div className="relative">
-            <Input className="pl-8 bg-gray-100 dark:bg-gray-700" placeholder="Search games..." />
-            <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
-          </div>
+            </ul>          
           <Button variant="ghost" size="icon">
             <ShoppingCart className="h-5 w-5" />
           </Button>
