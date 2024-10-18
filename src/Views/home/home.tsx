@@ -1,13 +1,9 @@
-import CardList from "~/components/card-list/card-list";
-import type { HomeViewProps } from "~/interfaces/IHomeViewProps";
 
 
 
-const HomeView = ({ page }: HomeViewProps) => {
+const HomeView = () => {
   return (
-    <div className="w-full justify-center items-center content-center">
-      <CardList page={page} />
-    </div>
+    <h1>Landing Page</h1>
   );
 };
 
