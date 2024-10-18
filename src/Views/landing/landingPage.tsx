@@ -1,6 +1,6 @@
 import React from 'react'
 
-const landing = () => {
+const landingPage = () => {
   return (
     <div>
         <h1>Welcome to our landing page</h1>
@@ -8,4 +8,4 @@ const landing = () => {
   )
 }
 
-export default landing
+export default landingPage

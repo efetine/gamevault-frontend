@@ -1,5 +1,5 @@
 import CardList from "~/components/card-list/card-list";
-import type { HomeViewProps } from "~/interfaces/IHomeViewPros";
+import type { HomeViewProps } from "~/interfaces/IHomeViewProps";
 
 
 
