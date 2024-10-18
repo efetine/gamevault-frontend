@@ -1,3 +1,3 @@
-export interface CardListProps {
-  page: number;
-}
+export interface ProductsViewProps {
+    page: number;
+  }
