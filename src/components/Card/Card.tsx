@@ -5,13 +5,13 @@ const Card: React.FC<IProductsCardProps> = ({
   price,
   stock,
   date,
-  image,
+  imageUrl,
 }) => {
   return (
-    <div className="px-4 py-3 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="px-4 py-3 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full">
       <img
         className="p-8 rounded-t-lg max-w-xs transition duration-300 ease-in-out hover:scale-110"
-        src={image}
+        src={imageUrl}
         alt={name}
       />
       <div className="px-5 pb-5">
@@ -23,9 +23,6 @@ const Card: React.FC<IProductsCardProps> = ({
           Price: ${price}
         </p>
         <p className="text-gray-500 dark:text-gray-400">Stock: {stock}</p>
-        <button className="text-white bg-[#880808] hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-          VER DETALLE
-        </button>
       </div>
     </div>
   );
