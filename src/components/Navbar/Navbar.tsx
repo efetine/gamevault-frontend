@@ -1,17 +1,18 @@
 "use client";
 
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Search, ShoppingCart, User } from "lucide-react";
+import Link from "next/link";
+
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { Input } from "~/components/ui/input";
 
 const Navbar = () => {
   const { setTheme } = useTheme();
@@ -20,42 +21,39 @@ const Navbar = () => {
     <header className="bg-gray-300 dark:bg-gray-800 py-4 transition-colors duration-200">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Pixel Games</h1>
+          <Link href="/">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Pixel Games
+            </h1>
+          </Link>
           <nav>
             <ul className="flex space-x-4">
-              <li>
-                <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                  Store
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                  Community
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                  Support
-                </a>
-              </li>
+              <Link href="/">Home</Link>
+              <Link href="/products">Products</Link>
             </ul>
           </nav>
         </div>
         <div className="flex items-center space-x-4">
           <div className="relative">
-            <Input className="pl-8 bg-gray-100 dark:bg-gray-700" placeholder="Search games..." />
+            <Input
+              className="pl-8 bg-gray-100 dark:bg-gray-700"
+              placeholder="Search games..."
+            />
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
           </div>
+          <Link href="/auth/register">
+            <Button variant="secondary">Register</Button>
+          </Link>
+          <Link href="/api/auth/signin">
+            <Button>Login</Button>
+          </Link>
+          <Link href="/profile">
+            <Button variant="ghost" size="icon">
+              <User className="h-5 w-5" />
+            </Button>
+          </Link>
           <Button variant="ghost" size="icon">
             <ShoppingCart className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <User className="h-5 w-5" />
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

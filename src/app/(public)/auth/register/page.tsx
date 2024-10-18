@@ -23,6 +23,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
+import { env } from "~/env";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -45,7 +46,7 @@ export default function Register() {
   function onSubmit(values: FormSchema) {
     const { confirmPassword, ...rest } = values;
 
-    fetch("http://localhost:3001/auth/register", {
+    fetch(`${env.API_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

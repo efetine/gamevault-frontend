@@ -1,5 +1,6 @@
 import Link from "next/link";
-import Card from "~/components/card/Card";
+
+import Card from "~/components/card/card";
 import {
   Pagination,
   PaginationContent,

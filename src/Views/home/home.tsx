@@ -1,8 +1,6 @@
 import CardList from "~/components/card-list/card-list";
 import type { HomeViewProps } from "~/interfaces/IHomeViewProps";
 
-
-
 const HomeView = ({ page }: HomeViewProps) => {
   return (
     <div className="w-full justify-center items-center content-center">
