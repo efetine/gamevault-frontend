@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Card from "~/components/card/Card";
-import type { CardListProps } from "~/interfaces/IProductsViewProps";
 import { getProductsFromDb } from "~/helpers/products-from-db";
+import type { CardListProps } from "~/interfaces/IProductsViewProps";
 
 import {
   Pagination,
@@ -10,8 +10,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
-
-
 
 export default async function CardList({ page }: CardListProps) {
   const products = await getProductsFromDb(8, page);
@@ -23,11 +21,11 @@ export default async function CardList({ page }: CardListProps) {
   return (
     <div className="flex flex-col gap-16">
       <h1 className="text-center">VIDEOJUEGOS</h1>
-      <div className="grid grid-cols-4 gap-16 px-16 columns-2">
+      <div className="grid columns-2 grid-cols-4 gap-16 px-16">
         {products?.map((product) => {
           return (
             <Link
-              className="hover:scale-[1.05] transition duration-700 ease-in-out"
+              className="transition duration-700 ease-in-out hover:scale-[1.05]"
               href={`/products/${product.id}`}
               key={product.id}
             >
