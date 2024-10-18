@@ -1,6 +1,3 @@
-import { getProductsById } from "~/Helpers/products.helper";
-import ProductDetail from "~/Views/ProductDetailView/ProductDetailView";
-
 const ProductDigital = async ({
   params,
 }: {

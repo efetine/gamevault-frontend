@@ -6,7 +6,7 @@ export interface IProduct {
   price: number;
   stock: number;
   imageUrl: string;
-  category?: number;
+  genreId?: number;
 }
 
 export interface IProductListProps {
@@ -18,7 +18,7 @@ export interface IProductsCardProps {
   name: string;
   type: string;
   price: number;
-  imageUrl: string;
+  imageUrlUrl: string;
 }
 
 export interface cartItemProps {

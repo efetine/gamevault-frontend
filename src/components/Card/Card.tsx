@@ -1,17 +1,17 @@
-import type { IProductsCardProps } from "~/Interfaces/IProduct";
+import type { IProductsCardProps } from "~/interfaces/IProduct";
 
 const Card: React.FC<IProductsCardProps> = ({
   name,
   type,
   price,
-  imageUrl,
+  imageUrlUrl,
 }) => {
   return (
-    <div className="px-4 py-3 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="px-4 py-3 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full">
       <img
         className="p-8 rounded-t-lg max-w-xs transition duration-300 ease-in-out hover:scale-110"
-        src={imageUrl}
-        alt="imagen del videojuego"
+        src={imageUrlUrl}
+        alt={name}
       />
       <div className="px-5 pb-5">
         <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">

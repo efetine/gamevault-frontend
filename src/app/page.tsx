@@ -1,7 +1,7 @@
-import HomeView from "~/Views/HomeView/HomeView";
+import HomeView from "~/views/home/home";
 
 export default function HomePage() {
   return (
-    <HomeView/>   
-  );
+    <HomeView/>
+  )
 }
