@@ -1,7 +1,7 @@
 import type { IProduct } from "~/Interfaces/IProduct";
 //import {z} from 'zod'
 
-// const APIURL = process.env.API_URL;
+const APIURL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getProductsFromDb(
   limit: number,
@@ -9,7 +9,7 @@ export async function getProductsFromDb(
 ): Promise<IProduct[]> {
   try {
     const response = await fetch(
-      `http://localhost:3001/products?limit=${limit}&page=${page}`,
+      `${APIURL}/products?limit=${limit}&page=${page}`,
       {
         method: "GET",
         next: { revalidate: 1200 },
@@ -28,7 +28,7 @@ export async function getProductsFromDb(
 
 export async function getProductsById(id: string): Promise<IProduct> {
   try {
-    const response = await fetch(`http://localhost:3001/products/${id}`, {
+    const response = await fetch(`${APIURL}/products/${id}`, {
       method: "GET",
       next: { revalidate: 1200 },
     });
