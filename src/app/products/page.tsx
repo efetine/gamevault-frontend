@@ -1,10 +1,9 @@
-
-import HomeView from "~/views/home/home";
+import ProductsPage from "~/views/products/products-page";
 
 export default function HomePage({
   searchParams,
 }: {
   searchParams: Record<string, string | string[] | undefined>
 }) {
-  return <HomeView page={Number(searchParams.page ?? 1)} />;
+  return <ProductsPage page = {Number(searchParams.page ?? 1)} />;
 }
