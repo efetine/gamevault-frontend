@@ -1,6 +1,6 @@
 //import { IProduct } from "@/interfaces/IProduct";
 
-import type { IProduct } from "~/interfaces/IProduct";
+import type { IProduct } from "~/Interfaces/IProduct";
 
 export const productsToPreLoad: IProduct[] = [
   {
@@ -12,7 +12,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://static.ivory.getloconow.com/games/0aee9f18-58fd-41c9-9c24-35266aa22262/square_cover/94929c57-6130-4108-ac1d-42274fec2092.png",
     type: "PUBG Corporation",
-    category: 1,
+    genreId: 1,
     stock: 10,
   },
   {
@@ -24,7 +24,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
     type: "Game Science",
-    category: 2,
+    genreId: 2,
     stock: 10,
   },
   {
@@ -36,7 +36,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://static.getloconow.com/onboarding-categories-images/DOTA-2.png",
     type: "Valve",
-    category: 3,
+    genreId: 3,
     stock: 10,
   },
   {
@@ -48,7 +48,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://i0.wp.com/achievementunlocker.com/wp-content/uploads/2022/08/1837410971.png",
     type: "24 Entertainment",
-    category: 4,
+    genreId: 4,
     stock: 10,
   },
   {
@@ -60,7 +60,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
     type: "Respawn",
-    category: 5,
+    genreId: 5,
     stock: 10,
   },
   {
@@ -72,7 +72,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
     type: "Bungie",
-    category: 6,
+    genreId: 6,
     stock: 10,
   },
   {
@@ -84,7 +84,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
     type: "Digital Xtremes",
-    category: 7,
+    genreId: 7,
     stock: 10,
   },
   {
@@ -96,7 +96,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
     type: "Digital Xtremes",
-    category: 8,
+    genreId: 8,
     stock: 10,
   },
   {
@@ -108,7 +108,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
     type: "Bloober Team SA",
-    category: 9,
+    genreId: 9,
     stock: 10,
   },
   {
@@ -120,7 +120,7 @@ export const productsToPreLoad: IProduct[] = [
     imageUrl:
       "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
     type: "NCSOFT",
-    category: 10,
+    genreId: 10,
     stock: 10,
   },
 ];
