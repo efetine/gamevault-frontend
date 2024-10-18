@@ -1,15 +1,14 @@
-import React from 'react'
-import CardList from '~/components/card-list/card-list'
+import CardList from "~/components/card-list/card-list";
+import type { HomeViewProps } from "~/interfaces/IHomeViewPros";
 
-const HomeView = () => {
+
+
+const HomeView = ({ page }: HomeViewProps) => {
   return (
     <div className="w-full justify-center items-center content-center">
-        <h1 className='font-semibold text-3xl'>
-            Welcome to the home page
-        </h1>
-        <CardList/>
+      <CardList page={page} />
     </div>
-  )
-}
+  );
+};
 
-export default HomeView
+export default HomeView;
