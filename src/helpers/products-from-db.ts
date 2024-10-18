@@ -1,11 +1,11 @@
 import type { IProduct } from "~/interfaces/IProduct";
 //import {z} from 'zod'
 
-const APIURL = process.env.NEXTAUTH_URL;
+// const APIURL = process.env.API_URL;
 
-export async function getProductsFromDb(): Promise<IProduct[]> {
+export async function getProductsFromDb(limit: number, page: number): Promise<IProduct[]> {
   try {
-    const response = await fetch(`${APIURL}/products`, {
+    const response = await fetch(`http://localhost:3001/products?limit=${limit}&page=${page}`, {
       method: "GET",
       next: { revalidate: 1200 },
     });
