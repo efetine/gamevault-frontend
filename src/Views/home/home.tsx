@@ -1,11 +1,13 @@
-import CardList from "~/components/card-list/card-list";
-import type { HomeViewProps } from "~/interfaces/IHomeViewProps";
 
+<<<<<<< HEAD
 const HomeView = ({ page }: HomeViewProps) => {
+=======
+
+
+const HomeView = () => {
+>>>>>>> f8f8310 (Changed products  to landing page)
   return (
-    <div className="w-full justify-center items-center content-center">
-      <CardList page={page} />
-    </div>
+    <h1>Landing Page</h1>
   );
 };
 
