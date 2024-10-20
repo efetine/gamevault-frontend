@@ -26,3 +26,11 @@ export interface IProductsCardProps {
 export interface cartItemProps {
   producto: IProduct;
 }
+
+export interface IOurServices {
+  id: number;
+  name: string;
+  description: string;
+  imageUrl: string;
+  price: number;
+}
