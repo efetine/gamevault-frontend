@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import Card from "~/components/card/card";
+import { getProductsFromDb } from "~/helpers/products-from-db";
+
 import {
   Pagination,
   PaginationContent,
@@ -8,7 +10,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
-import { getProductsFromDb } from "~/helpers/products-from-db";
 
 interface CardListProps {
   page: number;
@@ -16,22 +17,6 @@ interface CardListProps {
 
 export default async function CardList({ page }: CardListProps) {
   const products = await getProductsFromDb(8, page);
-
-  // const [products, setProducts] = useState<IProduct[]>([]);
-  // const [page, setPage] = useState(2);
-  // const [limit] = useState(8);
-
-  // useEffect(() => {
-  //   async function fetchProducts() {
-  //     try {
-  //       const fetchedProducts = await getProductsFromDb(limit, page);
-  //       setProducts(fetchedProducts);
-  //     } catch (error) {
-  //       console.error("Error searching for products:", error);
-  //     }
-  //   }
-  //   void fetchProducts();
-  // }, [page]);
 
   if (products.length === 0) {
     return <div>No hay productos en esta pagina</div>;
@@ -68,30 +53,35 @@ export default async function CardList({ page }: CardListProps) {
             );
           })}
         </div>
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href={{
-                  query: {
-                    page: page - 1,
-                  },
-                }}
-                isActive={page <= 1}
-              />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext
-                href={{
-                  query: {
-                    page: page + 1,
-                  },
-                }}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
       </div>
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              href={{
+                query: {
+                  page: page - 1,
+                },
+              }}
+              aria-disabled={page <= 1}
+              tabIndex={page <= 1 ? -1 : undefined}
+              isActive={page <= 1}
+              className={
+                page <= 1 ? "pointer-events-none opacity-50" : undefined
+              }
+            />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext
+              href={{
+                query: {
+                  page: page + 1,
+                },
+              }}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 }
