@@ -35,7 +35,7 @@ export const servicesToPreLoad: IOurServices[] = [
   },
   {
     id: 4,
-    name: "Gift Cards",
+    name: "Cards",
     price: 21,
     description:
       "Large selection of accessories that enhance the gaming experience on any platform.",
