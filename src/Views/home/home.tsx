@@ -26,7 +26,7 @@ const HomeView = () => {
     Autoplay({ delay: 4000, stopOnInteraction: true }),
   );
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-start gap-20">
+    <div className="flex h-screen w-full flex-col items-center justify-start gap-20">
       <div className="relative flex w-full items-center justify-center bg-[url('https://external-preview.redd.it/-tdsH0dYAyxmliFvvlrqfSQ-9i_Nqsqobi9c7Zwgznc.jpg?auto=webp&s=5dc0d71cdcd8dcca22d9eeee3ce500f45a66403c')] bg-cover bg-no-repeat p-4 md:h-[40%] md:w-full lg:h-[40%]">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/80 to-black/60"></div>
         <p className="relative z-10 flex flex-col gap-10 text-center text-lg text-white md:text-2xl lg:text-2xl">
