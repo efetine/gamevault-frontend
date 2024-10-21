@@ -34,13 +34,14 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    session: ({ session }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+        },
+      };
+    },
   },
   providers: [
     CredentialsProvider({
@@ -61,7 +62,7 @@ export const authOptions: NextAuthOptions = {
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const res = await fetch(`${env.API_URL}/auth/login`, {
+        const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/auth/login`, {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" },
@@ -70,6 +71,7 @@ export const authOptions: NextAuthOptions = {
 
         // If no error and we have user data, return it
         if (res.ok && user) {
+          console.log("is ok and user", user);
           return user;
         }
         // Return null if user data could not be retrieved
@@ -77,6 +79,9 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/auth/login",
+  },
 };
 
 /**

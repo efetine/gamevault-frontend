@@ -1,7 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -24,60 +25,30 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { env } from "~/env";
 
-const formSchema = z
-  .object({
-    email: z.string().email(),
-    password: z.string().min(6).max(20),
-    confirmPassword: z.string().min(6).max(20),
-  })
-  .superRefine((value, ctx) => {
-    if (value.password !== value.confirmPassword) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Passwords should be equals",
-        path: ["confirmPassword"],
-      });
-
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Passwords should be equals",
-        path: ["password"],
-      });
-    }
-
-    return true;
-  });
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6).max(20),
+});
 
 type FormSchema = z.infer<typeof formSchema>;
 
 export default function Register() {
-  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      email: searchParams.get("email") ?? "",
       password: "",
-      confirmPassword: "",
     },
   });
 
-  async function onSubmit(values: FormSchema) {
-    const { confirmPassword, ...rest } = values;
-
-    const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(rest),
+  function onSubmit(values: FormSchema) {
+    signIn("credentials", {
+      callbackUrl: "/",
+      ...values,
     });
-
-    if (response.ok === true) {
-      router.replace(`/auth/login?email=${values.email}`);
-    }
   }
 
   return (
@@ -90,10 +61,10 @@ export default function Register() {
           <Card className="border border-[#30363d] bg-[#0d1117]/80 shadow-lg backdrop-blur-sm">
             <CardHeader className="space-y-1">
               <CardTitle className="text-2xl font-bold text-gray-100">
-                Register
+                Login
               </CardTitle>
               <CardDescription className="text-gray-300">
-                Create a new account
+                Login to your account
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -111,7 +82,7 @@ export default function Register() {
                       />
                     </FormControl>
                     <FormDescription className="text-gray-300">
-                      Add your email.
+                      enter your email
                     </FormDescription>
                     <FormMessage className="text-red-300" />
                   </FormItem>
@@ -132,30 +103,7 @@ export default function Register() {
                       />
                     </FormControl>
                     <FormDescription className="text-gray-300">
-                      Create your password.
-                    </FormDescription>
-                    <FormMessage className="text-red-300" />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="confirmPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-gray-100">
-                      Confirm Password
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="********"
-                        {...field}
-                        className="border-[#30363d] bg-[#1a2332]/60 text-white placeholder:text-gray-400"
-                      />
-                    </FormControl>
-                    <FormDescription className="text-gray-300">
-                      Confirm your password.
+                      enter your password
                     </FormDescription>
                     <FormMessage className="text-red-300" />
                   </FormItem>
@@ -167,7 +115,7 @@ export default function Register() {
                 type="submit"
                 className="bg-[#238636] text-white transition-colors duration-200 hover:bg-[#2ea043]"
               >
-                Register
+                Login
               </Button>
             </CardFooter>
           </Card>

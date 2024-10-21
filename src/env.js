@@ -22,7 +22,6 @@ export const env = createEnv({
       // VERCEL_URL doesn't include `https` so it cant be validated as a URL
       process.env.VERCEL ? z.string() : z.string().url(),
     ),
-    API_URL: z.string(),
     // DISCORD_CLIENT_ID: z.string(),
     // DISCORD_CLIENT_SECRET: z.string(),
   },
@@ -33,7 +32,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_API_URL: z.string(),
   },
 
   /**
@@ -41,7 +40,7 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    API_URL: process.env.API_URL,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
