@@ -10,7 +10,7 @@
 
 //     //!Featured games
 
-//     <div className="flex flex-col min-h-screen bg-gray-900 text-white  ">      
+//     <div className="flex flex-col min-h-screen bg-gray-900 text-white  ">
 //       <main className="flex-1 container mx-auto px-4 py-8">
 //         <div className="grid grid-cols-4 gap-8">
 //           <div className="col-span-3">
@@ -63,7 +63,7 @@
 //           </div>
 //         </div>
 //       </main>
-      
+
 //     </div>
 //   )
 // }

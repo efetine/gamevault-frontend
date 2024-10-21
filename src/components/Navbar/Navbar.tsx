@@ -14,7 +14,6 @@ import { useTheme } from "next-themes";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 
-import Link from "next/link";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -23,6 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { useIsMobile } from "~/hooks/use-mobile";
+import { cn } from "~/lib/utils";
 import { Drawer, DrawerContent } from "../ui/drawer";
 import {
   SidebarContent,
@@ -65,7 +65,7 @@ const MenuToggle = () => {
         <Button size="icon" onClick={toggleDrawer}>
           <MenuIcon />
         </Button>
-        <DrawerContent>
+        <DrawerContent className={cn(isMobile && "w-[250px]")}>
           <SidebarContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -90,59 +90,61 @@ const Navbar = () => {
   const { setTheme } = useTheme();
 
   return (
-    <header className="h-1/3 w-full bg-gray-300 py-4 transition-colors duration-200 dark:bg-gray-800">
-      <div className="mx-auto flex w-full flex-col items-center justify-between md:w-full md:flex-row lg:w-[60%] lg:flex-row">
-        <div className="flex w-[50%] items-center space-x-4">
-          <Link href="/">
-            <h1 className="text-center text-base font-bold text-gray-900 dark:text-white md:text-xl lg:text-2xl">
-              Pixel Games
-            </h1>
-          </Link>
-
-          <div className="relative w-[70%]">
+    <header className="bg-gray-300 py-4 transition-colors duration-200 dark:bg-gray-800">
+      <div className="container mx-auto flex items-center justify-between px-4">
+        <MenuToggle />
+        <div className="flex items-center space-x-4">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Pixel Games
+          </h1>
+          <nav>
+            <ul className="flex space-x-4">
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                >
+                  Store
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                >
+                  Community
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                >
+                  Support
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className="flex items-center space-x-4">
+          <div className="relative">
             <Input
               className="bg-gray-100 pl-8 dark:bg-gray-700"
               placeholder="Search games..."
             />
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
           </div>
-        </div>
-        <div className="flex items-center space-x-4">
-          <ul className="flex space-x-3 text-xs md:text-lg">
-            <li>
-              <Link
-                href="/products"
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-              >
-                Store
-              </Link>
-            </li>
-
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-              >
-                Support
-              </a>
-            </li>
-          </ul>
-          <Link
-            href="/shopping-cart"
-            className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-          >
-            <Button variant="ghost" size="icon">
-              <ShoppingCart className="h-5 w-5" />
-            </Button>
-          </Link>
+          <Button variant="ghost" size="icon">
+            <ShoppingCart className="h-5 w-5" />
+          </Button>
           <Button variant="ghost" size="icon">
             <User className="h-5 w-5" />
           </Button>

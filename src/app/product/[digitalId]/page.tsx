@@ -1,5 +1,5 @@
 import { getProductsById } from "~/helpers/products-from-db";
-import ProductDetail from "~/Views/product-detail/product-detail";
+import ProductDetail from "~/views/product-detail/product-detail";
 
 const ProductDigital = async ({
   params,

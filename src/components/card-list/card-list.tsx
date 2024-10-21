@@ -1,7 +1,5 @@
 import Link from "next/link";
 import Card from "~/components/card/Card";
-import { getProductsFromDb } from "~/helpers/products-from-db";
-
 import {
   Pagination,
   PaginationContent,
@@ -9,11 +7,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
-
 import { recommendedGames } from "~/helpers/products";
-// import { getProductsFromDb } from "~/Helpers/products-from-db";
-
-// import { recommendedGames } from "~/Helpers/products";
+import { getProductsFromDb } from "~/helpers/products-from-db";
 import Carousel from "../carousel/carousel";
 
 interface CardListProps {

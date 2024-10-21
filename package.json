@@ -11,6 +11,7 @@
     "db:studio": "drizzle-kit studio",
     "dev": "next dev",
     "lint": "next lint",
+    "format": "prettier --write .",
     "start": "next start"
   },
   "dependencies": {
@@ -49,13 +50,16 @@
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^8.1.0",
     "drizzle-kit": "^0.24.0",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.4",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-drizzle": "^0.2.3",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.1",
     "postcss": "^8.4.39",
-    "prettier": "^3.3.2",
+    "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier-plugin-tailwindcss": "^0.6.5",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.5.3"
   },
