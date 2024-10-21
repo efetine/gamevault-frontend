@@ -10,12 +10,16 @@ import {
 } from "~/components/ui/pagination";
 import { getProductsFromDb } from "~/Helpers/products-from-db";
 
+import { recommendedGames } from "~/Helpers/products";
+import Carousel from "../carousel/carousel";
+
 interface CardListProps {
   page: number;
 }
 
 export default async function CardList({ page }: CardListProps) {
   const products = await getProductsFromDb(8, page);
+  //const recommended = recommendedGames;
 
   // const [products, setProducts] = useState<IProduct[]>([]);
   // const [page, setPage] = useState(2);
@@ -39,20 +43,28 @@ export default async function CardList({ page }: CardListProps) {
 
   return (
     <div className="flex flex-col gap-16">
-      <h1 className="text-center">VIDEOJUEGOS</h1>
-      <div className="grid grid-cols-4 gap-16 px-16 columns-2">
-        {products?.map((product) => {
-          return (
-            <Link
-              className="hover:scale-[1.05] transition duration-700 ease-in-out"
-              href={`/product/${product.id}`}
-              key={product.id}
-            >
-              <Card {...product} />
-            </Link>
-          );
-        })}
-      </div>
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">
+          Destacados y recomendados
+        </h2>
+        <Carousel images={recommendedGames} />
+      </section>
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Todos los juegos</h2>
+        <div className="grid grid-cols-4 gap-16 px-16 columns-2">
+          {products?.map((product) => {
+            return (
+              <Link
+                className="hover:scale-[1.05] transition duration-700 ease-in-out"
+                href={`/product/${product.id}`}
+                key={product.id}
+              >
+                <Card {...product} />
+              </Link>
+            );
+          })}
+        </div>
+      </section>
       <Pagination>
         <PaginationContent>
           <PaginationItem>
