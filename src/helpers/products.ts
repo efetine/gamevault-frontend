@@ -1,47 +1,45 @@
 //import { IProduct } from "@/interfaces/IProduct";
 
-import type { IProduct } from "~/interfaces/IProduct";
+import type { IOurServices, IProduct } from "~/interfaces/IProduct";
 
-export const productsToPreLoad: IProduct[] = [
+export const servicesToPreLoad: IOurServices[] = [
   {
     id: 1,
-    name: "PUBG: Battlegrounds",
+    name: "Video Games",
     price: 25,
     description:
-      "Juega gratis a PUBG: BATTLEGROUNDS. Aterriza en posiciones estratégicas, saquea armas y suministros, y sobrevive para que vuestro equipo sea el único en pie en los distintos y variados campos de batalla.",
+      "Wide variety of video games from digital copies to great classics in physical.",
     imageUrl:
-      "https://static.ivory.getloconow.com/games/0aee9f18-58fd-41c9-9c24-35266aa22262/square_cover/94929c57-6130-4108-ac1d-42274fec2092.png",
-    developer: "PUBG Corporation",
-    date: "21 DIC 2017",
-    genreId: 1,
-    stock: 10,
+      "https://preview.redd.it/your-favorite-game-from-2011-v0-t2cheorxu5ic1.jpeg?width=640&crop=smart&auto=webp&s=42c11a4521b601562b3afa41e8f77b90a767c0ac",
   },
   {
     id: 2,
-    name: "Black Myth: Wukong",
+    name: "Consoles",
     price: 19,
-    description:
-      "Black Myth: Wukong es un RPG de acción inspirado en la mitología china. Encarnarás al Predestinado, que ha de embarcarse en un viaje repleto de peligros y maravillas para descubrir la verdad oculta acerca de una gloriosa leyenda del pasado.",
+    description: "Wide range of consoles",
     imageUrl:
-      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
-    developer: "Game Science",
-    date: "19 AGO 2024",
-    genreId: 2,
-    stock: 10,
+      "https://erikstore.com/blog/wp-content/uploads/2024/04/BannerBlog_CONSOLAS_EVOLUCION.webp",
   },
   {
     id: 3,
-    name: "Dota 2",
+    name: "Accessories",
     price: 21,
     description:
-      "Cada día, millones de jugadores de todo el mundo entran en batalla como uno de los más de cien héroes de Dota. Y no importa si es su décima hora de juego o la milésima, siempre hay algo nuevo que descubrir.",
+      "Large selection of accessories that enhance the gaming experience on any platform.",
     imageUrl:
-      "https://static.getloconow.com/onboarding-categories-images/DOTA-2.png",
-    developer: "Valve",
-    date: "9 JUL 2013",
-    genreId: 3,
-    stock: 10,
+      "https://www.gamerpoint.com.mx/cdn/shop/collections/accesorios_y_consolas.webp?v=1655923939&width=2048",
   },
+  {
+    id: 4,
+    name: "Cards",
+    price: 21,
+    description:
+      "Large selection of accessories that enhance the gaming experience on any platform.",
+    imageUrl: "https://gameflip.com/img/front/overview_giftcards_header.webp",
+  },
+];
+
+export const productsToPreLoad: IProduct[] = [
   {
     id: 4,
     name: "Naraka: Bladepoint",
