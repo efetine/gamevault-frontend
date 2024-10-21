@@ -8,9 +8,9 @@ const Card: React.FC<IProductsCardProps> = ({
   imageUrl,
 }) => {
   return (
-    <div className="p-1 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full">
+    <div className="h-full w-full max-w-sm rounded-lg border border-gray-200 bg-white p-1 shadow dark:border-gray-700 dark:bg-gray-800">
       <img
-        className="w-full p-2 rounded-t-lg max-w-xs transition duration-300 ease-in-out hover:scale-110"
+        className="w-full max-w-xs rounded-t-lg p-2"
         src={imageUrl}
         alt={name}
       />

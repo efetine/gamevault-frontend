@@ -10,7 +10,7 @@ export async function getProductsFromDb(
 ): Promise<IProduct[]> {
   try {
     const response = await fetch(
-      `${env.API_URL}/products?limit=${limit}&page=${page}`,
+      `${env.NEXT_PUBLIC_API_URL}/products?limit=${limit}&page=${page}`,
       {
         method: "GET",
         next: { revalidate: 1200 },
