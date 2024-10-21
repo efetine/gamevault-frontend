@@ -11,6 +11,9 @@ import {
 } from "~/components/ui/pagination";
 
 import { recommendedGames } from "~/helpers/products";
+// import { getProductsFromDb } from "~/Helpers/products-from-db";
+
+// import { recommendedGames } from "~/Helpers/products";
 import Carousel from "../carousel/carousel";
 
 interface CardListProps {
