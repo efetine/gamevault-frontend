@@ -40,7 +40,7 @@ export const servicesToPreLoad: IOurServices[] = [
     description:
       "Large selection of accessories that enhance the gaming experience on any platform.",
       imageUrl:
-      "https://fullsync.co.uk/wp-content/uploads/2022/10/Gaming-Gift-Cards-and-Vouchers.jpg",
+      "https://gameflip.com/img/front/overview_giftcards_header.webp",
   },
 ]
 
