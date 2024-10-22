@@ -143,7 +143,10 @@ export const recommendedGames = [
     imageUrl:
       "https://static.ivory.getloconow.com/games/0aee9f18-58fd-41c9-9c24-35266aa22262/square_cover/94929c57-6130-4108-ac1d-42274fec2092.png",
     thumbnails: [
-      "https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514,https://sysrqmts.com/images/games/dota-2.jpg,https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514,https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
+      "https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
+      "https://sysrqmts.com/images/games/dota-2.jpg",
+      "https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
+      "https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
     ],
   },
   {
@@ -154,7 +157,10 @@ export const recommendedGames = [
     imageUrl:
       "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
     thumbnails: [
-      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg,https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg,https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg,https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
+      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
+      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
+      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
+      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
     ],
   },
   {
@@ -164,7 +170,10 @@ export const recommendedGames = [
     imageUrl:
       "https://static.getloconow.com/onboarding-categories-images/DOTA-2.png",
     thumbnails: [
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fsysrqmts.com%2Fes%2Fgames%2Fdota-2&psig=AOvVaw3bkXYPyUUWdzOl9Jel1Q4y&ust=1729559131344000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOia64GknokDFQAAAAAdAAAAABAE,https://cdn.akamai.steamstatic.com/apps/dota2/images/700/hud/carousel_01.jpg,https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
+      "https://i.redd.it/mj5n1z6huzqb1.png",
+      "https://cdn.akamai.steamstatic.com/apps/dota2/images/700/hud/carousel_01.jpg",
+      "https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
+      "https://preview.redd.it/dota-2-new-profile-hero-portrait-v0-036gn8fzv4fc1.png?width=2483&format=png&auto=webp&s=0d1076e5b1110d23c17c430f07dce858f4822274",
     ],
   },
 
@@ -175,7 +184,10 @@ export const recommendedGames = [
     imageUrl:
       "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
     thumbnails: [
-      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png,https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png,https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png,https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
+      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
+      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
+      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
+      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
     ],
   },
   {
@@ -185,7 +197,10 @@ export const recommendedGames = [
     imageUrl:
       "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
     thumbnails: [
-      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png,https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png,https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png,https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
+      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
+      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
+      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
+      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
     ],
   },
   {
@@ -195,7 +210,10 @@ export const recommendedGames = [
     imageUrl:
       "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
     thumbnails: [
-      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png,https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png,https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png,https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
+      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
+      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
+      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
+      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
     ],
   },
   {
@@ -205,7 +223,10 @@ export const recommendedGames = [
     imageUrl:
       "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
     thumbnails: [
-      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png,https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png,https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png,https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
+      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
+      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
+      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
+      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
     ],
   },
   {
@@ -215,7 +236,10 @@ export const recommendedGames = [
     imageUrl:
       "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
     thumbnails: [
-      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg,https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg,https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg,https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
+      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
+      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
+      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
+      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
     ],
   },
   {
@@ -225,7 +249,10 @@ export const recommendedGames = [
     imageUrl:
       "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
     thumbnails: [
-      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png,https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png,https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png,https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
+      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
+      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
+      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
+      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
     ],
   },
 ];

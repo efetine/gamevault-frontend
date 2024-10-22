@@ -2,12 +2,7 @@ import Image from "next/image";
 import React from "react";
 import type { IProductsCardProps } from "~/interfaces/IProduct";
 // px-4 py-3
-const Card: React.FC<IProductsCardProps> = ({
-  name,
-  type,
-  price,
-  imageUrl,
-}) => {
+const Card: React.FC<IProductsCardProps> = ({ name, price, imageUrl }) => {
   return (
     <div className="h-full min-h-[315px] w-[200px] max-w-[200px] rounded-lg border border-gray-200 bg-white shadow transition duration-300 ease-in-out hover:scale-100 dark:border-gray-700 dark:bg-gray-800">
       <div className="max-h-[200px] max-w-[200px]">
