@@ -20,6 +20,7 @@ const config = {
       'www.google.com',
       'cdn.akamai.steamstatic.com',
       'sysrqmts.com',
+      'loremflickr.com',
     ],
   },
 };

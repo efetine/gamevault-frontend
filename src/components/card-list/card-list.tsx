@@ -25,7 +25,7 @@ export default async function CardList({ page }: CardListProps) {
 
   return (
     <div className="flex flex-col gap-16">
-      <section>
+      <section className="hero">
         <h2 className="mb-4 text-2xl font-semibold">
           Destacados y recomendados
         </h2>
@@ -33,7 +33,7 @@ export default async function CardList({ page }: CardListProps) {
       </section>
       <section>
         <h2 className="mb-4 text-2xl font-semibold">Todos los juegos</h2>
-        <div className="grid columns-2 grid-cols-4 gap-16 px-16">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-16 px-16 sm:justify-items-center">
           {products?.map((product) => {
             return (
               <Link

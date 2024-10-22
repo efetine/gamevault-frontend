@@ -1,6 +1,7 @@
+import Image from "next/image";
 import React from "react";
 import type { IProductsCardProps } from "~/interfaces/IProduct";
-
+// px-4 py-3
 const Card: React.FC<IProductsCardProps> = ({
   name,
   type,
@@ -8,27 +9,23 @@ const Card: React.FC<IProductsCardProps> = ({
   imageUrl,
 }) => {
   return (
-    <div className="h-full w-full max-w-sm rounded-lg border border-gray-200 bg-white px-4 py-3 shadow dark:border-gray-700 dark:bg-gray-800">
-      <img
-        className="max-w-xs rounded-t-lg p-8 transition duration-300 ease-in-out hover:scale-110"
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        src={imageUrl}
-        alt={name}
-      />
-      <div className="px-5 pb-5">
-        <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+    <div className="h-full min-h-[315px] w-[200px] max-w-[200px] rounded-lg border border-gray-200 bg-white shadow transition duration-300 ease-in-out hover:scale-100 dark:border-gray-700 dark:bg-gray-800">
+      <div className="max-h-[200px] max-w-[200px]">
+        <Image
+          className="w-full rounded-t-lg object-cover"
+          src={imageUrl}
+          alt={name}
+          width={500}
+          height={300}
+        />
+      </div>
+      <div className="flex h-[calc(100%-200px)] flex-col px-3 py-4">
+        <h2 className="text-base tracking-tight text-gray-900 dark:text-white">
           {name}
         </h2>
-
-        <p>Type: {type}</p>
-
-        <p className="text-xl font-bold text-gray-900 dark:text-white">
+        <p className="mt-auto text-[20px] font-semibold text-gray-900 dark:text-white">
           Price: ${price}
         </p>
-
-        <button className="rounded-lg bg-[#880808] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-          VER DETALLE
-        </button>
       </div>
     </div>
   );
