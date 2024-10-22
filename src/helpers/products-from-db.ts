@@ -26,3 +26,21 @@ export async function getProductsFromDb(
     }
   }
 }
+
+export async function getProductsById(id: string): Promise<IProduct> {
+
+  try {
+    const response = await fetch(`http://localhost:3001/products${id}`, {
+      method: "GET",
+      next: { revalidate: 1200 },
+    });
+    const product: IProduct = (await response.json()) as IProduct;
+    return product;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("Se produjo un error desconocido");
+    }
+  }
+}

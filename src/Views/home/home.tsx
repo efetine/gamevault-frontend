@@ -26,7 +26,7 @@ const HomeView = () => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-start">
       <div className="relative flex w-full items-center justify-center bg-[url('https://external-preview.redd.it/-tdsH0dYAyxmliFvvlrqfSQ-9i_Nqsqobi9c7Zwgznc.jpg?auto=webp&s=5dc0d71cdcd8dcca22d9eeee3ce500f45a66403c')] bg-cover bg-no-repeat p-4 md:h-[40%] md:w-full lg:h-[400px]">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-500/90 to-black/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-700/60 to-black/80"></div>
         <p className="text-md relative z-10 flex flex-col gap-10 text-center text-white md:text-2xl lg:text-xl">
           <span className="text-3xl font-bold lg:text-6xl">
             MORE THAN A HOBBY, IT&apos;S A LIFESTYLE
@@ -44,7 +44,7 @@ const HomeView = () => {
         <div className="mb-20 flex w-full flex-col items-center justify-center p-2 lg:w-[60%]">
           <div className="w-full pb-3">
             <h1 className="text-xl font-semibold lg:mb-2 lg:text-2xl">
-              Recomendados y destacados
+              Featured & Recommended
             </h1>
           </div>
 
@@ -79,7 +79,7 @@ const HomeView = () => {
         <div className="mb-5 flex w-full flex-col items-center justify-center p-2 lg:w-[60%]">
           <div className="w-full pb-3">
             <h1 className="text-xl font-semibold lg:mb-2 lg:text-2xl">
-              Explorar por categoría
+              Browse by category
             </h1>
           </div>
           <Carousel className="w-full" plugins={[plugin.current]}>
