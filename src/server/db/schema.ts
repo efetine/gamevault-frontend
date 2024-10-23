@@ -1,27 +1,22 @@
 import {
   boolean,
   integer,
-  pgEnum,
   pgTable,
   primaryKey,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
 
-export const productTypeEnum = pgEnum("type_product_enum", [
-  "DIGITAL",
-  "PHISICAL",
-]);
-
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   name: text("name"),
-  email: text("email").unique(),
+  email: text("email").unique().notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   password: text("password"),
-  image: text("image"),
+  image: text("image").default("default_profile_picture.png").notNull(),
+  active: boolean().default(true).notNull(),
 });
 
 export const accounts = pgTable(
@@ -30,7 +25,6 @@ export const accounts = pgTable(
     userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    // type: text('type').$type<AdapterAccountType>().notNull(),
     type: text("type").notNull(),
     provider: text("provider").notNull(),
     providerAccountId: text("providerAccountId").notNull(),

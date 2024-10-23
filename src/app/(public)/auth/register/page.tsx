@@ -28,6 +28,8 @@ import { env } from "~/env";
 
 const formSchema = z
   .object({
+    username: z.string().min(3).max(20),
+    fullname: z.string().min(3).max(20),
     email: z.string().email(),
     password: z.string().min(6).max(20),
     confirmPassword: z.string().min(6).max(20),
@@ -52,12 +54,14 @@ const formSchema = z
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export default function Register() {
+export default function RegisterPage() {
   const router = useRouter();
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      username: "",
+      fullname: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -99,6 +103,48 @@ export default function Register() {
             <CardContent className="space-y-4">
               <FormField
                 control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-100">Username</FormLabel>
+                    <FormControl>
+                      <Input
+                        type=""
+                        placeholder=""
+                        {...field}
+                        className="border-[#30363d] bg-[#1a2332]/60 text-white placeholder:text-gray-400"
+                      />
+                    </FormControl>
+                    <FormDescription className="text-gray-300">
+                      Create your username.
+                    </FormDescription>
+                    <FormMessage className="text-red-300" />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="fullname"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-100">Full name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type=""
+                        placeholder=""
+                        {...field}
+                        className="border-[#30363d] bg-[#1a2332]/60 text-white placeholder:text-gray-400"
+                      />
+                    </FormControl>
+                    <FormDescription className="text-gray-300">
+                      Add your full name.
+                    </FormDescription>
+                    <FormMessage className="text-red-300" />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
@@ -117,6 +163,7 @@ export default function Register() {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="password"
