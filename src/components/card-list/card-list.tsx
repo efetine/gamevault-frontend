@@ -12,11 +12,11 @@ import {
 } from "~/components/ui/pagination";
 
 interface CardListProps {
-  page: number;
+  cursor: string;
 }
 
-export default async function CardList({ page }: CardListProps) {
-  const products = await getProductsFromDb(8, page);
+export default async function CardList({ cursor }: CardListProps) {
+  const products = await getProductsFromDb(8, cursor);
 
   if (products.length === 0) {
     return <div>No hay productos en esta pagina</div>;

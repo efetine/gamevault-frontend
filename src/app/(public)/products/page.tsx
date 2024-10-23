@@ -1,4 +1,4 @@
-import ProductsPage from "~/views/products/products-page";
+import ProductsPage from "~/Views/products/products-page";
 
 export default function HomePage({
   searchParams,
