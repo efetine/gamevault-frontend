@@ -16,7 +16,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="flex min-h-screen flex-col bg-gradient-to-b from-[#0d1117] via-[#1a2332] to-black">
+      <body className="flex min-h-screen flex-col ">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

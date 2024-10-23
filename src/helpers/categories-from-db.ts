@@ -1,21 +1,21 @@
-import type { IProduct } from "~/interfaces/IProduct";
+import type { ICategory } from "~/interfaces/ICategory";
 //import {z} from 'zod'
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getProductsFromDb(
+export async function getCategoriesFromDb(
   limit: number,
   cursor: string,
-): Promise<IProduct[]> {
+): Promise<ICategory[]> {
   try {
     const response = await fetch(
-      `${APIURL}/products?limit=${limit}&cursor=${cursor}`,
+      `${APIURL}/categories?limit=${limit}&page=${cursor}`,
       {
         method: "GET",
         next: { revalidate: 1200 },
       },
     );
-    const products: IProduct[] = (await response.json()) as IProduct[];
+    const products: ICategory[] = (await response.json()) as ICategory[];
     return products;
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -26,14 +26,14 @@ export async function getProductsFromDb(
   }
 }
 
-export async function getProductsById(id: string): Promise<IProduct> {
+export async function getcategoriesById(id: string): Promise<ICategory> {
 
   try {
     const response = await fetch(`${APIURL}${id}`, {
       method: "GET",
       next: { revalidate: 1200 },
     });
-    const product: IProduct = (await response.json()) as IProduct;
+    const product: ICategory = (await response.json()) as ICategory;
     return product;
   } catch (error: unknown) {
     if (error instanceof Error) {

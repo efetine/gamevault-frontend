@@ -1,5 +1,5 @@
 import React from 'react'
-import Cart from '~/views/cart/cart'
+import Cart from '~/Views/cart/cart'
 
 const page = () => {
   return (
