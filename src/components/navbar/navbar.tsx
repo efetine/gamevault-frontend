@@ -13,7 +13,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           <Link href="/">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Pixel Games
+              Game Vault
             </h1>
           </Link>
           <nav>

@@ -38,7 +38,9 @@ export async function UserMenu() {
           className="overflow-hidden rounded-full"
         >
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage
+              src={session.user.image ?? "/default_profile_picture.png"}
+            />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </Button>
