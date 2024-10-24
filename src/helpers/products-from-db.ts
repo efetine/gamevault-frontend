@@ -29,7 +29,7 @@ export async function getProductsFromDb(
 export async function getProductsById(id: string): Promise<IProduct> {
 
   try {
-    const response = await fetch(`${APIURL}${id}`, {
+    const response = await fetch(`${APIURL}/products/${id}`, {
       method: "GET",
       next: { revalidate: 1200 },
     });

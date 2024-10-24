@@ -23,7 +23,7 @@ export async function UserMenu() {
           <Button variant="secondary">Register</Button>
         </Link>
         <Link href="/api/auth/signin">
-          <Button>Login</Button>
+          <Button variant="secondary">Login</Button>
         </Link>
       </>
     );
