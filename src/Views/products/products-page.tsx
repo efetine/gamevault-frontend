@@ -1,13 +1,14 @@
-import React from 'react'
-import CardList from '~/components/card-list/card-list'
-import type { ProductsViewProps } from '~/interfaces/IProductsViewProps'
+import CardList from "~/components/card-list/card-list";
+import { PaginationDto } from "~/schemas/pagination-dto";
 
-const ProductsPage = ({ page }: ProductsViewProps) => {
+type ProductsPageProps = PaginationDto;
+
+const ProductsPage = ({ prevCursor, cursor }: ProductsPageProps) => {
   return (
-    <div className="w-full justify-center items-center content-center">
-      <CardList page={page} />
+    <div className="w-full content-center items-center justify-center">
+      <CardList prevCursor={prevCursor} cursor={cursor} />
     </div>
-  )
-}
+  );
+};
 
-export default ProductsPage
+export default ProductsPage;

@@ -10,20 +10,19 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
+import { PaginationDto } from "~/schemas/pagination-dto";
 
-interface CardListProps {
-  cursor: string;
-}
+type CardListProps = PaginationDto;
 
-export default async function CardList({ cursor }: CardListProps) {
-  const products = await getProductsFromDb(8, cursor);
+export default async function CardList({ prevCursor, cursor }: CardListProps) {
+  const { products, nextCursor } = await getProductsFromDb(8, cursor);
 
   if (products.length === 0) {
     return <div>No hay productos en esta pagina</div>;
   }
 
   return (
-    <div className="flex gap-1">
+    <div className="flex flex-col gap-1">
       <div className="w-48 space-y-6 bg-[#030712] p-6">
         <div className="flex flex-col space-y-2">
           <h2 className="mb-6 text-2xl font-bold">Categorías</h2>
@@ -60,26 +59,29 @@ export default async function CardList({ cursor }: CardListProps) {
             <PaginationPrevious
               href={{
                 query: {
-                  page: page - 1,
+                  cursor: prevCursor,
                 },
               }}
-              aria-disabled={page <= 1}
-              tabIndex={page <= 1 ? -1 : undefined}
-              isActive={page <= 1}
+              aria-disabled={prevCursor === undefined}
               className={
-                page <= 1 ? "pointer-events-none opacity-50" : undefined
+                prevCursor === undefined
+                  ? "pointer-events-none opacity-50"
+                  : undefined
               }
             />
           </PaginationItem>
-          <PaginationItem>
-            <PaginationNext
-              href={{
-                query: {
-                  page: page + 1,
-                },
-              }}
-            />
-          </PaginationItem>
+          {nextCursor !== undefined ? (
+            <PaginationItem>
+              <PaginationNext
+                href={{
+                  query: {
+                    prevCursor: products[0]?.id,
+                    cursor: nextCursor,
+                  },
+                }}
+              />
+            </PaginationItem>
+          ) : null}
         </PaginationContent>
       </Pagination>
     </div>
