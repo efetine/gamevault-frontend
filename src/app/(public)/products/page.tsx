@@ -1,9 +1,20 @@
+import { z } from "zod";
+import { paginationDtoSchema } from "~/schemas/pagination-dto";
 import ProductsPage from "~/Views/products/products-page";
 
-export default function HomePage({
-  searchParams,
-}: {
-  searchParams: Record<string, string | string[] | undefined>;
-}) {
-  return <ProductsPage page={Number(searchParams.page ?? 1)} />;
+const propsSchema = z.object({
+  searchParams: paginationDtoSchema,
+});
+
+type HomePageProps = z.infer<typeof propsSchema>;
+
+export default function HomePage(props: HomePageProps) {
+  const { searchParams } = propsSchema.parse(props);
+
+  return (
+    <ProductsPage
+      prevCursor={searchParams.prevCursor}
+      cursor={searchParams.cursor}
+    />
+  );
 }
