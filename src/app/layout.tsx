@@ -1,10 +1,11 @@
-import "~/styles/globals.css";
-
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { ThemeProvider } from "~/components/navbar/theme-provider"
-import Navbar from "~/components/navbar/navbar";
-import Footer from "~/components/footer/footer";
+
+import { ThemeProvider } from "~/components/navbar/theme-provider";
+import { ReactQueryProvider } from "~/components/react-query-provider";
+import { Toaster } from "~/components/ui/toaster";
+import { TooltipProvider } from "~/components/ui/tooltip";
+import "~/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -17,17 +18,18 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          {children}
-          <Footer />
-        </ThemeProvider>
+      <body className="flex min-h-screen flex-col">
+        <ReactQueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TooltipProvider>{children}</TooltipProvider>
+            <Toaster />
+          </ThemeProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
