@@ -8,6 +8,7 @@ export interface IProduct {
   stock: number;
   imageUrl: string;
   genreId?: number;
+  category: IGetCategoryInProduct;
 }
 
 export interface IProductListProps {
