@@ -11,7 +11,7 @@ import { Button } from "~/components/ui/button";
 
 export default function HomeView() {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-start bg-red-50 from-[#0d1117] via-[#1a2332] to-black text-white dark:bg-gradient-to-b">
+    <div className="flex min-h-screen w-full flex-col items-center justify-start bg-red-50 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black text-white ">
       <HeroSection />
       <main className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
         <FeaturedProducts />

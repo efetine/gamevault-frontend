@@ -1,5 +1,4 @@
 import type { IProduct } from "~/interfaces/IProduct";
-//import {z} from 'zod'
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -40,7 +39,9 @@ export async function getProductsById(id: string): Promise<IProduct> {
       next: { revalidate: 1200 },
     });
     const product: IProduct = (await response.json()) as IProduct;
-    return product;
+    return {
+      ...product,
+      type: product.type ? 'digital' : 'physical',};
   } catch (error: unknown) {
     if (error instanceof Error) {
       throw new Error(error.message);

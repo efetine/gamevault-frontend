@@ -1,11 +1,16 @@
+
+
 import { getProductsById } from "~/helpers/products-from-db";
-import ProductDetail from "~/Views/product-detail/product-detail";
+import ProductDetailView from "~/Views/product-detail/product-detail";
 
-const Detail: React.FC<{params: {productId: string}}> =  async  ({params}) => {  
-  const product = await getProductsById(params.productId)
-  return (
-    <ProductDetail {...product}/>
-  )
-};
+const ProductDetail: React.FC<{ params: { id: string } }> = async ({ params }) => {
+  const product = await getProductsById(params.id);
 
-export default Detail;
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
+  return <ProductDetailView {...product} />;
+}
+
+export default ProductDetail;

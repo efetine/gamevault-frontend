@@ -17,17 +17,23 @@ import ProductsCarousel from "./products-carousel";
 type CardListProps = PaginationDto;
 
 export default async function CardList({ prevCursor, cursor }: CardListProps) {
-  const { products, nextCursor } = await getProductsFromDb(8, cursor);
+  const { products, nextCursor } = await getProductsFromDb(12, cursor);
 
     return (
-    <div className='flex flex-col gap-16 '>
-    <section className='relative flex flex-col h-[60vh] w-full items-center justify-center overflow-hidden bg-fuchsia-400'>
+    <div className='h-full flex flex-col justify-center items-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black'>
+    <section className='relative flex flex-col h-[50%] w-[60%] items-center justify-center overflow-hidden '>
+      <div className="w-full items-center ">
       <h2 className='mb-4 text-2xl font-semibold'>Featured & Recommended</h2>
+      </div>
+      <div className="w-full">
       <ProductsCarousel images={featuredGames} />
+      </div>
     </section>
-    <section>
-      <h2 className='mb-4 text-2xl font-semibold'>All games</h2>
-      <div className='grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-16 px-16 sm:justify-items-center'>
+    <section className='relative flex flex-col h-[50%] w-[60%] items-center justify-center overflow-hidden '>
+      <div className="w-full justify-center">
+      <h2 className='mb-4 text-2xl font-semibold'>Trending</h2>
+      </div>
+      <div className='w-full grid grid-cols-4 py-5 gap-7 sm:justify-items-center '>
         {products &&
           products.length > 0 &&
           products.map((product) => {
