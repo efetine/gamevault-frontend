@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ConsolePromotion } from "~/components/home/banner-bottom-home/banner-bottom";
 import { BestSellingAccessories } from "~/components/home/best-sell-accessories-home/best-sell-accessories";
 import { CategoryBrowser } from "~/components/home/browse-category-home/browse-category";
+import ChatButton from "~/components/home/chat-home/chat-home";
 import { ExploreButtons } from "~/components/home/explore-buttons-home/explore-buttons";
 import { FeaturedProducts } from "~/components/home/featured-home/featured";
 import { HeroSection } from "~/components/home/hero-home/hero";
@@ -42,6 +43,7 @@ export default function HomeView() {
         <ExploreButtons />
       </main>
       <ConsolePromotion />
+      <ChatButton/>
     </div>
   );
 }
