@@ -1,13 +1,12 @@
-import { Search, ShoppingCart } from "lucide-react";
+import { Search } from "lucide-react";
 import Link from "next/link";
 
 import { Input } from "~/components/ui/input";
-import { Button } from "../ui/button";
 // import { ModeToggle } from "./mode-toggle";
 
 const SubNavbar = () => {
   return (
-    <nav className="fixed top-20 w-full">
+    <nav className="fixed top-20 z-10 w-full">
       <div className="mx-auto mt-2 flex h-10 w-3/5 items-center justify-center gap-10 bg-gradient-to-r from-blue-900 via-[#1a2332] to-slate-600 p-3 transition-colors duration-200 dark:bg-slate-700">
         <div className="flex flex-row items-center space-x-4">
           <nav>
@@ -20,9 +19,6 @@ const SubNavbar = () => {
               <Link href="/"></Link>
             </ul>
           </nav>
-          <Button variant="outline" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-          </Button>
         </div>
         <div className="flex items-center space-x-4">
           <div className="relative">
