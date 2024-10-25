@@ -1,8 +1,11 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { CgSpinnerTwo } from "react-icons/cg";
 import { z } from "zod";
 
 import { Button } from "~/components/ui/button";
@@ -23,22 +26,44 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { env } from "~/env";
+import { useToast } from "~/hooks/use-toast";
+import { createProduct } from "~/services/products-service";
+import { CategoriesCombobox } from "./categories";
 
 const formSchema = z.object({
   name: z.string().min(3).max(20),
   type: z.enum(["digital", "physical"], {
     required_error: "You need to select a notification type.",
   }),
-  stock: z.number().nonnegative(),
-  price: z.number().nonnegative(),
+  stock: z.coerce.number().nonnegative(),
+  price: z.coerce.number().nonnegative(),
   description: z.string().min(6).max(50),
-  imgUrl: z.string().url(),
+  imageUrl: z.string().url(),
+  categoryId: z.string(),
 });
 
-type FormSchema = z.infer<typeof formSchema>;
+export type FormSchema = z.infer<typeof formSchema>;
 
 export default function CreateProduct() {
+  const router = useRouter();
+  const { toast } = useToast();
+
+  const createProductMutation = useMutation<{}, {}, FormSchema>({
+    mutationFn: async (values) => createProduct(values),
+    onError: () => {
+      toast({
+        title: "Failed to create product 😔",
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "Product created! 😊",
+      });
+
+      router.push("/admin/products");
+    },
+  });
+
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,18 +72,12 @@ export default function CreateProduct() {
       stock: 0,
       price: 0,
       description: "",
-      imgUrl: "",
+      imageUrl: "",
     },
   });
 
   async function onSubmit(values: FormSchema) {
-    const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/products/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
+    createProductMutation.mutate(values);
   }
 
   return (
@@ -170,7 +189,7 @@ export default function CreateProduct() {
               </div>
               <FormField
                 control={form.control}
-                name="imgUrl"
+                name="imageUrl"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-100">imgUrl</FormLabel>
@@ -203,6 +222,7 @@ export default function CreateProduct() {
                   </FormItem>
                 )}
               />
+              <CategoriesCombobox />
             </CardContent>
             <CardFooter className="justify-end gap-2">
               <Link href={"/admin/products"}>
@@ -215,8 +235,12 @@ export default function CreateProduct() {
               </Link>
               <Button
                 type="submit"
+                disabled={createProductMutation.status === "pending"}
                 className="bg-green-500 text-white transition-colors duration-200 hover:bg-[#2ea043]"
               >
+                {createProductMutation.status === "pending" ? (
+                  <CgSpinnerTwo className="animate-spin" />
+                ) : null}
                 Create
               </Button>
             </CardFooter>
