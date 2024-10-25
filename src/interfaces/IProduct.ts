@@ -14,6 +14,10 @@ export interface IProductListProps {
   products: IProduct[];
 }
 
+export interface IGetCategoryInProduct {
+  name: string;
+}
+
 export interface IProductsCardProps {
   id: number;
   name: string;
@@ -21,6 +25,7 @@ export interface IProductsCardProps {
   stock: number;
   date: string;
   imageUrl: string;
+  category: IGetCategoryInProduct;
 }
 
 export interface cartItemProps {

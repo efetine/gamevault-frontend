@@ -1,30 +1,45 @@
 import type { IProductsCardProps } from "~/interfaces/IProduct";
+import { Button } from "~/components/ui/button"
+import { CardContent, CardFooter, Card as Cards } from "~/components/ui/card"
+import { Badge } from "~/components/ui/badge"
+import { ShoppingCart } from "lucide-react"
 
 const Card: React.FC<IProductsCardProps> = ({
   name,
   price,
-  stock,
-  date,
   imageUrl,
+  category
 }) => {
   return (
-    <div className="h-full w-full max-w-sm rounded-lg border border-gray-200 bg-white p-1 shadow dark:border-gray-700 dark:bg-gray-800">
-      <img
-        className="w-full max-w-xs rounded-t-lg p-2"
-        src={imageUrl}
-        alt={name}
-      />
-      <div className="px-5 pb-5">
-        <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-          {name}
-        </h2>
-        <p>Fecha de Publicacion: {date}</p>
-        <p className="text-xl font-bold text-gray-900 dark:text-white">
-          Price: ${price}
-        </p>
-        <p className="text-gray-500 dark:text-gray-400">Stock: {stock}</p>
+    <Cards className="w-[300px] overflow-hidden group">
+      <div className="relative overflow-hidden">
+        <img
+          src={imageUrl}
+          alt={name}
+          className="w-full h-[150px] object-cover transition-transform duration-300 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <Button variant="secondary" className="text-white">
+            Ver detalles
+          </Button>
+        </div>
       </div>
-    </div>
+      <CardContent className="p-4">
+        <h3 className="font-bold text-lg mb-2 truncate">{name}</h3>
+        <div className="flex flex-wrap gap-1 mb-2">
+            <Badge variant="secondary" className="text-xs">
+              {category.name}
+            </Badge>
+        </div>
+      </CardContent>
+      <CardFooter className="p-4 pt-0 flex justify-between items-center">
+        <span className="text-lg font-bold">${price.toFixed(2)}</span>
+        <Button className="bg-green-600 hover:bg-green-700">
+          <ShoppingCart className="mr-2 h-4 w-4" />
+          Añadir
+        </Button>
+      </CardFooter>
+    </Cards>
   );
 };
 
