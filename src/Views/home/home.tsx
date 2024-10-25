@@ -17,7 +17,7 @@ export default function HomeView() {
         <FeaturedProducts />
         <CategoryBrowser />
         <div>
-          <section className="my-12 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-center shadow-lg">
+          <section className="my-12 rounded-lg bg-gradient-to-r from-blue-900/60 via-indigo-950 to-purple-900/60 p-8 text-center shadow-lg">
             <h2 className="mb-4 text-2xl font-bold">
               Log in to see personalized recommendations
             </h2>

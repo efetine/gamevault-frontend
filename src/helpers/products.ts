@@ -48,10 +48,12 @@ export const productsToPreLoad: IProduct[] = [
       "NARAKA: BLADEPOINT es una experiencia de combate y acción para hasta 60 jugadores con enfrentamientos cuerpo a cuerpo basados en las artes marciales, movimientos que desafían la gravedad, héroes personalizables dotados de habilidades épicas.",
     imageUrl:
       "https://i0.wp.com/achievementunlocker.com/wp-content/uploads/2022/08/1837410971.png",
-    developer: "24 Entertainment",
-    date: "11 AGO 2021",
-    genreId: 4,
     stock: 10,
+    type: "Digital",
+    category:{
+      id: 1,
+      name: "Action"
+    }
   },
   {
     id: 5,
@@ -61,10 +63,12 @@ export const productsToPreLoad: IProduct[] = [
       "Apex Legends es el galardonado juego gratuito de acción en primera persona de Respawn Entertainment. Domina un elenco creciente de leyendas con potentes habilidades. Juego estratégico basado en pelotones y jugabilidad innovadora en la nueva evolución.",
     imageUrl:
       "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
-    developer: "Respawn",
-    date: "4 NOV 2020",
-    genreId: 5,
     stock: 10,
+    type: "Digital",
+    category:{
+      id: 1,
+      name: "FPS"
+    }
   },
   {
     id: 6,
@@ -74,10 +78,12 @@ export const productsToPreLoad: IProduct[] = [
       "Destiny 2 es un MMO de acción con un mundo único y dinámico al que tus amigos y tú os podéis unir en cualquier momento y desde cualquier lugar de forma totalmente gratuita.",
     imageUrl:
       "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
-    developer: "Bungie",
-    date: "1 OCT 2019",
-    genreId: 6,
     stock: 10,
+    type: "Digital",
+    category:{
+      id: 1,
+      name: "FPS"
+    }
   },
   {
     id: 7,
@@ -87,10 +93,12 @@ export const productsToPreLoad: IProduct[] = [
       "Despierta como un guerrero imparable y lucha junto a tus amigos en este juego de acción gratuito en línea y basado en historias.",
     imageUrl:
       "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
-    developer: "Digital Xtremes",
-    date: "25 MAR 2013",
-    genreId: 7,
     stock: 10,
+    type: "Digital",
+    category:{
+      id: 1,
+      name: "FPS"
+    }
   },
   {
     id: 8,
@@ -100,10 +108,12 @@ export const productsToPreLoad: IProduct[] = [
       "Durante las dos últimas décadas, Counter Strike ha proporcionado una experiencia competitiva de primer nivel para los millones de jugadores de todo el mundo que contribuyeron a darle forma. Ahora el próximo capítulo en la historia de CS está a punto de comenzar. Hablamos de Counter Strike 2.",
     imageUrl:
       "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
-    developer: "Digital Xtremes",
-    date: "25 MAR 2013",
-    genreId: 8,
     stock: 10,
+    type: "digital",
+    category:{
+      id: 1,
+      name: "FPS"
+    }
   },
   {
     id: 9,
@@ -113,10 +123,12 @@ export const productsToPreLoad: IProduct[] = [
       "Disfruta de una clase magistral de terror psicológico. Aclamada como la mejor entrega de la serie, descubre en el último hardware escalofriantes imágenes y un sonido visceral.",
     imageUrl:
       "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
-    developer: "Bloober Team SA",
-    date: "7 OCT 2024",
-    genreId: 9,
     stock: 10,
+    type: "digital",
+    category:{
+      id: 1,
+      name: "Adventure"
+    }
   },
   {
     id: 10,
@@ -126,10 +138,12 @@ export const productsToPreLoad: IProduct[] = [
       "Esto es THRONE AND LIBERTY, un juego de rol multijugador masivo en línea gratuito para varias plataformas. Explora entornos en constante evolución, libra batallas JcJcE de gran escala y metamorfoséate en criaturas para luchar por tierra, mar y aire.",
     imageUrl:
       "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
-    developer: "NCSOFT",
-    date: "1 OCT 2024",
-    genreId: 10,
     stock: 10,
+    type: "digital",
+    category:{
+      id: 1,
+      name: "RPG"
+    }
   },
 ];
 
@@ -139,3 +153,126 @@ export const categoriesBrowser = [
   { id: 3, name: "RPG", imageUrl: "https://intef.es/wp-content/uploads/2021/05/03_RPG.jpg?height=300&width=400" },
   { id: 4, name: "Strategy", imageUrl: "https://e.rpp-noticias.io/xlarge/2020/04/14/265926_927757.jpg?height=300&width=400" },
 ]
+
+export const featuredGames = [
+  {
+    id: 1,
+    name: "PUBG: Battlegrounds",
+    price: 25,
+
+    imageUrl:
+      "https://static.ivory.getloconow.com/games/0aee9f18-58fd-41c9-9c24-35266aa22262/square_cover/94929c57-6130-4108-ac1d-42274fec2092.png",
+    thumbnails: [
+      "https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
+      "https://sysrqmts.com/images/games/dota-2.jpg",
+      "https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
+      "https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
+    ],
+  },
+  {
+    id: 2,
+    name: " Myth: WuBlackkong",
+    price: 19,
+
+    imageUrl:
+      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
+    thumbnails: [
+      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
+      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
+      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
+      "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.300.jpg",
+    ],
+  },
+  {
+    id: 3,
+    name: "Dota 2",
+    price: 21,
+    imageUrl:
+      "https://static.getloconow.com/onboarding-categories-images/DOTA-2.png",
+    thumbnails: [
+      "https://i.redd.it/mj5n1z6huzqb1.png",
+      "https://cdn.akamai.steamstatic.com/apps/dota2/images/700/hud/carousel_01.jpg",
+      "https://static.wikia.nocookie.net/dota2_gamepedia/images/1/12/Marci_icon.png/revision/latest?cb=20211029000514",
+      "https://preview.redd.it/dota-2-new-profile-hero-portrait-v0-036gn8fzv4fc1.png?width=2483&format=png&auto=webp&s=0d1076e5b1110d23c17c430f07dce858f4822274",
+    ],
+  },
+
+  {
+    id: 5,
+    name: "Apex Legends",
+    price: 28,
+    imageUrl:
+      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
+    thumbnails: [
+      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
+      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
+      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
+      "https://www.clavecd.es/wp-content/uploads/buy-apex-legends-loba-edition-cd-key-compare-prices.png",
+    ],
+  },
+  {
+    id: 6,
+    name: "Destiny 2",
+    price: 18,
+    imageUrl:
+      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
+    thumbnails: [
+      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
+      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
+      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
+      "https://data.xxlgamer.com/bundle-products/4900/FMm4JQuJq0OGHb.png",
+    ],
+  },
+  {
+    id: 7,
+    name: "Warframe",
+    price: 14,
+    imageUrl:
+      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
+    thumbnails: [
+      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
+      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
+      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
+      "https://www.zonammorpg.com/wp-content/uploads/2023/11/warframe-300x300.png",
+    ],
+  },
+  {
+    id: 8,
+    name: "Counter-Strike 2",
+    price: 16,
+    imageUrl:
+      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
+    thumbnails: [
+      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
+      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
+      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
+      "https://sm.ign.com/t/ign_fr/game/c/counter-st/counter-strike-2_7kag.300.png",
+    ],
+  },
+  {
+    id: 9,
+    name: "Silent Hill 2",
+    price: 17,
+    imageUrl:
+      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
+    thumbnails: [
+      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
+      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
+      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
+      "https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg",
+    ],
+  },
+  {
+    id: 10,
+    name: "Throne And Liberty",
+    price: 20,
+    imageUrl:
+      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
+    thumbnails: [
+      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
+      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
+      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
+      "https://img.xboxachievements.com/images/2024/09/26/icon/106e47839e800bacc7b0dec003499296-l.png",
+    ],
+  },
+];

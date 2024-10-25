@@ -2,13 +2,18 @@ export interface IProduct {
   id: number;
   name: string;
   description: string;
-  developer: string;
-  date: string;
+  // developer: string;
+  // date: string;
+  type: string;
   price: number;
   stock: number;
   imageUrl: string;
-  genreId?: number;
-}
+  category: {        
+      id: number;
+      name: string;
+   }
+  };
+
 
 export interface IProductListProps {
   products: IProduct[];

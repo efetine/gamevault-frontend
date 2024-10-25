@@ -11,6 +11,10 @@ const config = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ['static.wikia.nocookie.net', 'sysrqmts.com','static.ivory.getloconow.com','sm.ign.com','static.getloconow.com','static.getloconow.com','www.clavecd.es','data.xxlgamer.com','www.zonammorpg.com','www.zonammorpg.com','img.xboxachievements.com','loremflickr.com','i.redd.it','cdn.akamai.steamstatic.com','cdn.akamai.steamstatic.com','preview.redd.it',''],
+  },
+  
 };
 
 export default config;

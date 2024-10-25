@@ -1,28 +1,43 @@
-import type { IProductsCardProps } from "~/interfaces/IProduct";
+import { Star } from 'lucide-react';
+import Image from 'next/image';
+import React from 'react';
+import type { IProduct } from '~/interfaces/IProduct';
+import { cn } from '~/lib/utils';
 
-const Card: React.FC<IProductsCardProps> = ({
-  name,
-  price,
-  stock,
-  date,
-  imageUrl,
-}) => {
+const Card: React.FC<IProduct> = ({ name, price, imageUrl, category }) => {
+  const calification = 4;
   return (
-    <div className="h-full w-full max-w-sm rounded-lg border border-gray-200 bg-white p-1 shadow dark:border-gray-700 dark:bg-gray-800">
-      <img
-        className="w-full max-w-xs rounded-t-lg p-2"
-        src={imageUrl}
-        alt={name}
-      />
-      <div className="px-5 pb-5">
-        <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-          {name}
-        </h2>
-        <p>Fecha de Publicacion: {date}</p>
-        <p className="text-xl font-bold text-gray-900 dark:text-white">
-          Price: ${price}
-        </p>
-        <p className="text-gray-500 dark:text-gray-400">Stock: {stock}</p>
+    <div className='h-full shadow-lg w-full rounded-lg border border-gray-200 bg-white transition duration-300 ease-in-out hover:scale-100 dark:border-gray-700 dark:bg-gray-800 overflow-hidden'>
+      <div className=''>
+        <Image 
+        className='w-full rounded-t-lg object-cover' 
+        src={imageUrl} 
+        alt={name} 
+        width={500} 
+        height={300}
+         />
+      </div>
+      <div className='p-4'>
+        <h3 className='text-lg font-semibold mb-2 tracking-tight text-gray-900 dark:text-white'>{name}</h3>
+        <div className='flex items-center justify-between mb-2'>
+          <span className='text-sm'> {category.name}</span>
+          <div className='flex items-center'>
+            {[...Array.from({ length: 5 }, (_, i) => i)].map((_, i) => (
+               <Star
+               key={i}
+               className={cn('w-4 h-4', i < calification ? 'text-yellow-400 fill-current' : ' text-gray-600')}
+             />
+            ))}
+          </div>
+        </div>
+        <div className='flex items-center justify-between mb-2'>
+          <span className='text-lg font-bold'>
+            {price.toLocaleString('es-US', {
+              currency: 'USD',
+              style: 'currency',
+            })}
+          </span>
+        </div>
       </div>
     </div>
   );

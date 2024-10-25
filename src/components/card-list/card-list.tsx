@@ -10,49 +10,39 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
-import { PaginationDto } from "~/schemas/pagination-dto";
+import type { PaginationDto } from "~/schemas/pagination-dto";
+import { featuredGames } from "~/helpers/products";
+import ProductsCarousel from "./products-carousel";
 
 type CardListProps = PaginationDto;
 
 export default async function CardList({ prevCursor, cursor }: CardListProps) {
   const { products, nextCursor } = await getProductsFromDb(8, cursor);
 
-  if (products.length === 0) {
-    return <div>No hay productos en esta pagina</div>;
-  }
-
-  return (
-    <div className="flex flex-col gap-1">
-      <div className="w-48 space-y-6 bg-[#030712] p-6">
-        <div className="flex flex-col space-y-2">
-          <h2 className="mb-6 text-2xl font-bold">Categorías</h2>
-          {/* <Button variant="ghost" className="justify-start">
-            <Star className="mr-2 h-4 w-4" /> Arcade
-          </Button>
-          <Button variant="ghost" className="justify-start">
-            <ShoppingBag className="mr-2 h-4 w-4" /> Terror
-          </Button>
-          <Button variant="ghost" className="justify-start">
-            <Settings className="mr-2 h-4 w-4" /> Edit Profile
-          </Button> */}
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-10 p-10">
-        <div className="grid columns-2 grid-cols-2 gap-10 md:grid-cols-4">
-          {products?.map((product) => {
+    return (
+    <div className='flex flex-col gap-16 '>
+    <section className='relative flex flex-col h-[60vh] w-full items-center justify-center overflow-hidden bg-fuchsia-400'>
+      <h2 className='mb-4 text-2xl font-semibold'>Featured & Recommended</h2>
+      <ProductsCarousel images={featuredGames} />
+    </section>
+    <section>
+      <h2 className='mb-4 text-2xl font-semibold'>All games</h2>
+      <div className='grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-16 px-16 sm:justify-items-center'>
+        {products &&
+          products.length > 0 &&
+          products.map((product) => {
             return (
               <Link
-                className=""
-                href={`/products/${product.id}`}
+                className='transition duration-700 ease-in-out hover:scale-[1.05]'
+                href={`/product/${product.id}`}
                 key={product.id}
               >
                 <Card {...product} />
               </Link>
             );
           })}
-        </div>
       </div>
+    </section>
       <Pagination>
         <PaginationContent>
           <PaginationItem>

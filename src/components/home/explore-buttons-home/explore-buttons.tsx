@@ -11,7 +11,7 @@ export function ExploreButtons() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {categories.map((category) => (
           <Link href={`/category/${category.toLowerCase()}`} key={category}>
-            <Button className="h-20 w-full bg-gradient-to-r from-blue-600 to-blue-800 text-lg font-semibold shadow-md shadow-slate-700 transition-all hover:from-blue-500 hover:to-blue-700 hover:text-[#dad9dc] hover:shadow-lg hover:shadow-slate-700">
+            <Button className="h-20 w-full bg-gradient-to-r text-[#c4c3c6] from-blue-600 to-blue-800 text-lg font-semibold shadow-md shadow-slate-700 transition-all hover:from-blue-500 hover:to-blue-700 hover:text-[#dddcdf] hover:shadow-md hover:shadow-slate-700">
               {category}
             </Button>
           </Link>

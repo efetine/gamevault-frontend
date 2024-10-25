@@ -1,5 +1,5 @@
 import CardList from "~/components/card-list/card-list";
-import { PaginationDto } from "~/schemas/pagination-dto";
+import type { PaginationDto } from "~/schemas/pagination-dto";
 
 type ProductsPageProps = PaginationDto;
 

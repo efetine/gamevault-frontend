@@ -11,9 +11,9 @@ interface AdminProps {
 export default async function ProtectedLayout({ children }: AdminProps) {
   const session = await getServerAuthSession();
 
-  if (session === null) {
-    redirect("/api/auth/signin");
-  }
+  // if (session === null) {
+  //   redirect("/api/auth/signin");
+  // }
 
   return (
     <div className="flex flex-1">
