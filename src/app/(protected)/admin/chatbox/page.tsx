@@ -1,5 +1,9 @@
+"use client";
+
 import { CornerDownLeft, Mic, Paperclip, Settings } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
+import { Avatar, AvatarFallback } from "~/components/ui/avatar";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
@@ -19,37 +23,57 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 
+interface ClientMessage {
+  clientId: string;
+  messages: string[];
+}
+
 export default function ChatboxAdmin() {
-  const chatMessages = [
-    {
-      id: 1,
-      name: "María González",
-      messageCount: 15,
-      lastMessage: "Necesito ayuda con mi pedido #1234, no ha llegado aún.",
-      avatar: "/placeholder.svg?height=40&width=40",
-    },
-    {
-      id: 2,
-      name: "Juan Pérez",
-      messageCount: 8,
-      lastMessage: "¿Cuándo estará disponible el nuevo producto?",
-      avatar: "/placeholder.svg?height=40&width=40",
-    },
-    {
-      id: 3,
-      name: "Ana Rodríguez",
-      messageCount: 23,
-      lastMessage: "Gracias por la rápida respuesta. Todo solucionado.",
-      avatar: "/placeholder.svg?height=40&width=40",
-    },
-    {
-      id: 4,
-      name: "Carlos Sánchez",
-      messageCount: 5,
-      lastMessage: "¿Puedo cambiar la dirección de envío de mi pedido?",
-      avatar: "/placeholder.svg?height=40&width=40",
-    },
-  ];
+  const [socket, setSocket] = useState<Socket | null>(null);
+  const [clients, setClients] = useState<Map<string, ClientMessage>>(new Map());
+  const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
+  const [messageInput, setMessageInput] = useState<string>("");
+
+  useEffect(() => {
+    const newSocket = io("http://localhost:3001", {
+      query: { role: "admin" },
+    });
+
+    newSocket.on(
+      "messageFromClient",
+      (data: { clientId: string; message: string }) => {
+        setClients((prev) => {
+          const clientMessages = prev.get(data.clientId) || {
+            clientId: data.clientId,
+            messages: [],
+          };
+          clientMessages.messages.push(data.message);
+          return new Map(prev).set(data.clientId, clientMessages);
+        });
+      },
+    );
+
+    setSocket(newSocket);
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
+
+  const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent page refresh on form submission
+    if (socket && selectedClientId && messageInput.trim()) {
+      socket.emit("messageToClient", {
+        clientId: selectedClientId,
+        message: messageInput,
+      });
+      setMessageInput("");
+    }
+  };
+
+  // Extraer mensajes del cliente seleccionado
+  const currentClientMessages = selectedClientId
+    ? clients.get(selectedClientId)?.messages
+    : [];
 
   return (
     <div className="grid h-screen w-full pl-[56px]">
@@ -81,35 +105,26 @@ export default function ChatboxAdmin() {
               </div>
               <ScrollArea className="h-[400px]">
                 <div className="p-4">
-                  {chatMessages.map((message) => (
+                  {currentClientMessages?.map((message, index) => (
                     <div
-                      key={message.id}
+                      key={index}
                       className="mb-6 flex items-start space-x-4"
                     >
                       <Avatar>
-                        <AvatarImage src={message.avatar} alt={message.name} />
-                        <AvatarFallback>
-                          {message.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </AvatarFallback>
+                        <AvatarFallback>U</AvatarFallback>
                       </Avatar>
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-medium text-foreground">
-                          {message.name}
+                          Client {selectedClientId}
                         </p>
                         <div className="mt-1 flex items-center">
-                          <Badge variant="secondary" className="mr-2">
-                            {message.messageCount} mensajes
-                          </Badge>
                           <p className="truncate text-sm text-muted-foreground">
-                            {message.lastMessage}
+                            {message}
                           </p>
                         </div>
                       </div>
                     </div>
-                  ))}
+                  )) || <p>No messages</p>}
                 </div>
               </ScrollArea>
             </div>
@@ -120,12 +135,17 @@ export default function ChatboxAdmin() {
               Output
             </Badge>
             <div className="flex-1" />
-            <form className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring">
+            <form
+              onSubmit={handleSendMessage}
+              className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
+            >
               <Label htmlFor="message" className="sr-only">
                 Message
               </Label>
               <Textarea
                 id="message"
+                value={messageInput}
+                onChange={(e) => setMessageInput(e.target.value)}
                 placeholder="Type your message here..."
                 className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
               />
