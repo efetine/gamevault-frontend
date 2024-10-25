@@ -1,16 +1,14 @@
 import "~/styles/globals.css";
 
-import Footer from "~/components/footer/footer";
-import Navbar from "~/components/navbar/navbar";
+import SubNavbar from "~/components/navbar/sub-navbar";
 
 export default function PublicLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <Navbar />
+      <SubNavbar />
       {children}
-      <Footer />
     </>
   );
 }

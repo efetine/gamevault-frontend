@@ -7,8 +7,8 @@ import { Button } from "../ui/button";
 
 const SubNavbar = () => {
   return (
-    <section className="w-full p-3 my-10">
-      <div className="container mx-auto flex h-10 w-[60%] items-center justify-center gap-10 bg-gradient-to-r from-blue-900 via-[#1a2332] to-slate-600 p-3 transition-colors duration-200 dark:bg-slate-700">
+    <nav className="fixed top-20 w-full">
+      <div className="mx-auto mt-2 flex h-10 w-3/5 items-center justify-center gap-10 bg-gradient-to-r from-blue-900 via-[#1a2332] to-slate-600 p-3 transition-colors duration-200 dark:bg-slate-700">
         <div className="flex flex-row items-center space-x-4">
           <nav>
             <ul className="flex gap-10 text-lg font-semibold text-[#dad9dc]">
@@ -18,11 +18,11 @@ const SubNavbar = () => {
               <Link href="/">About</Link>
               <Link href="/">Suport</Link>
               <Link href="/"></Link>
-            </ul>            
+            </ul>
           </nav>
-              <Button variant="outline" size="icon">
-                <ShoppingCart className="h-5 w-5" />
-              </Button>
+          <Button variant="outline" size="icon">
+            <ShoppingCart className="h-5 w-5" />
+          </Button>
         </div>
         <div className="flex items-center space-x-4">
           <div className="relative">
@@ -34,7 +34,7 @@ const SubNavbar = () => {
           </div>
         </div>
       </div>
-    </section>
+    </nav>
   );
 };
 
