@@ -21,6 +21,7 @@ const ChatButton: React.FC = () => {
     console.log("Chat button clicked");
     setChatOpen(true);
 
+    // Establece la conexión WebSocket solo cuando el chat se abre
     if (!socket) {
       const newSocket: Socket = io("http://localhost:3001", {
         query: { role: "client" },
@@ -52,6 +53,8 @@ const ChatButton: React.FC = () => {
   const handleCloseChat = () => {
     console.log("Chat closed");
     setChatOpen(false);
+
+    // Desconecta el WebSocket al cerrar el chat
     if (socket) {
       socket.disconnect();
       setSocket(null);
