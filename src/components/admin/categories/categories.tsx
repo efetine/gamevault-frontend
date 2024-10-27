@@ -68,7 +68,7 @@ export function CategoriesCombobox() {
       control={form.control}
       name="categoryId"
       render={({ field }) => (
-        <FormItem className="flex flex-col">
+        <FormItem className="space-y-2">
           <FormLabel>Category</FormLabel>
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -107,7 +107,9 @@ export function CategoriesCombobox() {
                               : "opacity-0",
                           )}
                         />
-                        {category.name}
+                        <span className="first-letter:uppercase">
+                          {category.name}
+                        </span>
                       </CommandItem>
                     ))}
                   </CommandGroup>

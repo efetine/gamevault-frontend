@@ -18,7 +18,7 @@ export default async function ProtectedLayout({ children }: AdminProps) {
   return (
     <div className="flex flex-1">
       <Aside />
-      <div className="size-full p-6">{children}</div>
+      <div className="flex flex-1 p-6">{children}</div>
     </div>
   );
 }

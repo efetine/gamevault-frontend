@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { LogoutButton } from "~/components/logout-button";
+import { LogoutButton } from "~/components/layout/logout-button";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import {
@@ -46,14 +46,18 @@ export async function UserMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{session.user.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href="/profile">
           <DropdownMenuItem>My Profile</DropdownMenuItem>
         </Link>
-        <DropdownMenuItem disabled>Settings</DropdownMenuItem>
+        <Link href="/admin">
+          <DropdownMenuItem>Admin</DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
-        <LogoutButton />
+        <DropdownMenuItem>
+          <LogoutButton />
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

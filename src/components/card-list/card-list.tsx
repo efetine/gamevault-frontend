@@ -1,21 +1,23 @@
 import Link from "next/link";
 
 import Card from "~/components/card/card";
-import { getProductsFromDb } from "~/helpers/products-from-db";
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "~/components/ui/pagination";
+// import {
+//   Pagination,
+//   PaginationContent,
+//   PaginationItem,
+//   PaginationNext,
+//   PaginationPrevious,
+// } from "~/components/ui/pagination";
 import { PaginationDto } from "~/schemas/pagination-dto";
+import { getProducts } from "~/services/products-service";
 
 type CardListProps = PaginationDto;
 
-export default async function CardList({ prevCursor, cursor }: CardListProps) {
-  const { products, nextCursor } = await getProductsFromDb(8, cursor);
+export default async function CardList({ cursor }: CardListProps) {
+  const { products } = await getProducts({
+    cursor,
+  });
 
   if (products.length === 0) {
     return <div>No hay productos en esta pagina</div>;
@@ -40,20 +42,20 @@ export default async function CardList({ prevCursor, cursor }: CardListProps) {
 
       <div className="flex flex-col gap-10 p-10">
         <div className="grid columns-2 grid-cols-2 gap-10 md:grid-cols-4">
-          {products?.map((product) => {
+          {products.map((product) => {
             return (
               <Link
                 className=""
                 href={`/products/${product.id}`}
                 key={product.id}
               >
-                <Card {...product} />
+                <Card product={product} />
               </Link>
             );
           })}
         </div>
       </div>
-      <Pagination>
+      {/* <Pagination>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
@@ -83,7 +85,7 @@ export default async function CardList({ prevCursor, cursor }: CardListProps) {
             </PaginationItem>
           ) : null}
         </PaginationContent>
-      </Pagination>
+      </Pagination> */}
     </div>
   );
 }

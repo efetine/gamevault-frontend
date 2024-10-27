@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { CgSpinnerTwo } from "react-icons/cg";
-import { z } from "zod";
 
+import { CategoriesCombobox } from "~/components/admin/categories/categories";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -27,28 +27,17 @@ import {
 import { Input } from "~/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { useToast } from "~/hooks/use-toast";
+import {
+  createProductSchema,
+  type CreateProduct,
+} from "~/schemas/create-product-schema";
 import { createProduct } from "~/services/products-service";
-import { CategoriesCombobox } from "./categories";
-
-const formSchema = z.object({
-  name: z.string().min(3).max(20),
-  type: z.enum(["digital", "physical"], {
-    required_error: "You need to select a notification type.",
-  }),
-  stock: z.coerce.number().nonnegative(),
-  price: z.coerce.number().nonnegative(),
-  description: z.string().min(6).max(50),
-  imageUrl: z.string().url(),
-  categoryId: z.string(),
-});
-
-export type FormSchema = z.infer<typeof formSchema>;
 
 export default function CreateProduct() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const createProductMutation = useMutation<{}, {}, FormSchema>({
+  const createProductMutation = useMutation<{}, {}, CreateProduct>({
     mutationFn: async (values) => createProduct(values),
     onError: () => {
       toast({
@@ -64,8 +53,8 @@ export default function CreateProduct() {
     },
   });
 
-  const form = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<CreateProduct>({
+    resolver: zodResolver(createProductSchema),
     defaultValues: {
       name: "",
       type: "digital",
@@ -76,7 +65,7 @@ export default function CreateProduct() {
     },
   });
 
-  async function onSubmit(values: FormSchema) {
+  async function onSubmit(values: CreateProduct) {
     createProductMutation.mutate(values);
   }
 
@@ -99,9 +88,7 @@ export default function CreateProduct() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-100">
-                      Product Name
-                    </FormLabel>
+                    <FormLabel className="text-gray-100">Name</FormLabel>
                     <FormControl>
                       <Input
                         type=""
@@ -119,7 +106,7 @@ export default function CreateProduct() {
                 control={form.control}
                 name="type"
                 render={({ field }) => (
-                  <FormItem className="space-y-3">
+                  <FormItem className="space-y-2">
                     <FormLabel>Select the type</FormLabel>
                     <FormControl>
                       <RadioGroup
@@ -147,7 +134,7 @@ export default function CreateProduct() {
                   </FormItem>
                 )}
               />
-              <div className="flex gap-2">
+              <div className="flex items-end gap-2 space-y-2">
                 <FormField
                   control={form.control}
                   name="price"
@@ -192,7 +179,7 @@ export default function CreateProduct() {
                 name="imageUrl"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-100">imgUrl</FormLabel>
+                    <FormLabel className="text-gray-100">Image</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
