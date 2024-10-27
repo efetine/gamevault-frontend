@@ -4,7 +4,7 @@ import React from 'react';
 import type { IProduct } from '~/interfaces/IProduct';
 import { cn } from '~/lib/utils';
 
-const Card: React.FC<IProduct> = ({ name, price, imageUrl, category }) => {
+const Card: React.FC<IProduct> = ({ name, price, imageUrl, category, }) => {
   const calification = 4;
   return (
     <div className='h-full shadow-lg w-full rounded-lg border border-gray-200 bg-white transition duration-300 ease-in-out hover:scale-100 dark:border-gray-700 dark:bg-gray-800 overflow-hidden'>
@@ -19,14 +19,14 @@ const Card: React.FC<IProduct> = ({ name, price, imageUrl, category }) => {
       </div>
       <div className='p-4'>
         <h3 className='text-lg font-semibold mb-2 tracking-tight text-gray-900 dark:text-white'>{name}</h3>
-        <div className='flex items-center justify-between mb-2'>
-          <span className='text-sm'> {category.name}</span>
+        <div className='flex items-center justify-between mb-2 '>
+          <span className='text-sm'> {category?.name || "Categoría desconocida"}</span>
           <div className='flex items-center'>
             {[...Array.from({ length: 5 }, (_, i) => i)].map((_, i) => (
-               <Star
-               key={i}
-               className={cn('w-4 h-4', i < calification ? 'text-yellow-400 fill-current' : ' text-gray-600')}
-             />
+              <Star
+              key={i}
+              className={cn('w-4 h-4', i < calification ? 'text-yellow-400 fill-current' : ' text-gray-600')}
+              />
             ))}
           </div>
         </div>

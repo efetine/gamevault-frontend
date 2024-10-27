@@ -1,20 +1,23 @@
-import { z } from "zod";
-import { paginationDtoSchema } from "~/schemas/pagination-dto";
-import ProductsPage from "~/Views/products/products-page";
+'use client'
 
-const propsSchema = z.object({
-  searchParams: paginationDtoSchema,
-});
+import { useSearchParams } from 'next/navigation'
+import CardList from "~/components/card-list/card-list";
+import type { PaginationDto } from "~/schemas/pagination-dto";
 
-type HomePageProps = z.infer<typeof propsSchema>;
+type ProductsPageProps = PaginationDto;
 
-export default function HomePage(props: HomePageProps) {
-  const { searchParams } = propsSchema.parse(props);
+const ProductsPage = ({ prevCursor, cursor }: ProductsPageProps) => {
+  const searchParams = useSearchParams()
+  const type = searchParams.get('type') ?? undefined
 
   return (
-    <ProductsPage
-      prevCursor={searchParams.prevCursor}
-      cursor={searchParams.cursor}
-    />
+    <div className="w-full content-center items-center justify-center">
+      <CardList prevCursor={prevCursor} cursor={cursor} type={type} />
+    </div>
   );
-}
+};
+
+export default ProductsPage;
+
+
+

@@ -122,16 +122,16 @@ const ProductDetailView: React.FC<IProduct> = ({
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div className="flex items-center space-x-2">
                   <GamepadIcon className="h-4 w-4 text-muted-foreground" />
-                  <span className="capitalize">{type}</span>
+                  <span className="capitalize">Product: {type}</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                {/* <div className="flex items-center space-x-2">
                   <DownloadIcon className="h-4 w-4 text-muted-foreground" />
                   <span>Digital Download</span>
-                </div>
-                <div className="flex items-center space-x-2">
+                </div> */}
+                {/* <div className="flex items-center space-x-2">
                   <ClockIcon className="h-4 w-4 text-muted-foreground" />
                   <span>50+ hours gameplay</span>
-                </div>
+                </div> */}
                 <div className="flex items-center space-x-2">
                   <ShieldCheckIcon className="h-4 w-4 text-muted-foreground" />
                   <span>14-day refund</span>
