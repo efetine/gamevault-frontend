@@ -1,20 +1,15 @@
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { eq } from "drizzle-orm";
 import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 
 import { env } from "~/env";
-import { db } from "~/server/db/db";
-import {
-  accounts,
-  sessions,
-  users,
-  verificationTokens,
-} from "~/server/db/schema";
+import { db } from "~/server/db";
+import { users } from "~/server/db/schema";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -31,10 +26,11 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    id: string;
+    // ...other properties
+    // role: UserRole;
+  }
 }
 
 /**
@@ -43,23 +39,61 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-  adapter: DrizzleAdapter(db, {
-    usersTable: users,
-    accountsTable: accounts,
-    sessionsTable: sessions,
-    verificationTokensTable: verificationTokens,
-  }),
+  // adapter: DrizzleAdapter(db, {
+  //   usersTable: users,
+  //   accountsTable: accounts,
+  //   sessionsTable: sessions,
+  //   verificationTokensTable: verificationTokens,
+  // }) as Adapter,
   callbacks: {
-    session: ({ session }) => {
+    session({ session }) {
       return {
         ...session,
-        user: {
-          ...session.user,
-        },
+        // user: {
+        //   ...session.user,
+        //   id: user.id,
+        // },
       };
+    },
+    async jwt({ token, user }) {
+      if (user === undefined) {
+        return token;
+      }
+
+      const selectedUsers = await db
+        .select()
+        .from(users)
+        .where(eq(users.email, user.email!))
+        .limit(1);
+
+      const selectedUser = selectedUsers[0];
+
+      if (selectedUser) {
+        token.user = selectedUser;
+      }
+
+      return token;
+    },
+    async signIn({ account, profile }) {
+      if (account?.provider === "google") {
+        const googleProfile = profile as GoogleProfile;
+
+        if (googleProfile.email_verified === true) {
+          return true;
+        }
+      } else if (account?.provider === "credentials") {
+        return true;
+      }
+
+      return false;
     },
   },
   providers: [
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
+    }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: "Credentials",
@@ -72,12 +106,8 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
+        // Add logic here to look up the user from the credentials supplied
+
         const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/auth/login`, {
           method: "POST",
           body: JSON.stringify(credentials),
@@ -85,18 +115,12 @@ export const authOptions: NextAuthOptions = {
         });
         const user = await res.json();
 
-        // If no error and we have user data, return it
         if (res.ok && user) {
           return user;
         }
-        // Return null if user data could not be retrieved
+
         return null;
       },
-    }),
-    GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
-      allowDangerousEmailAccountLinking: true,
     }),
   ],
   pages: {
