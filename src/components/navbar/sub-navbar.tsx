@@ -7,7 +7,7 @@ import { Input } from "~/components/ui/input";
 const SubNavbar = () => {
   return (
     <nav className="w-full relative">
-      <div className="relative lg:absolute lg:top-4 lg:left-20 z-10 mx-auto flex md:flex-row flex-col md:h-10 h-auto w-screen md:w-fit items-center justify-center md:gap-10 gap-3 bg-gradient-to-r from-blue-900 via-[#1a2332] to-slate-600 p-3 transition-colors duration-200 dark:bg-slate-700">
+      <div className="relative lg:absolute lg:top-4 lg:right-32 z-10 mx-auto flex md:flex-row flex-col md:h-10 h-auto w-screen md:w-fit items-center justify-center md:gap-10 gap-3 bg-gradient-to-r from-blue-900 via-[#1a2332] to-slate-600 p-3 transition-colors duration-200 dark:bg-slate-700">
         <div className="flex flex-row items-center space-x-4">
           <nav>
             <ul className="flex md:gap-10 gap-5 justify-center text-sm md:text-lg font-semibold text-[#dad9dc]">

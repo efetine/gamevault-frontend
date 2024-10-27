@@ -17,7 +17,7 @@ type CardListProps = PaginationDto;
 export default async function CardList({ prevCursor, cursor }: CardListProps) {
   const { products, nextCursor } = await getProductsFromDb(8, cursor);
 
-  if (products.length === 0) {
+  if (products?.length === 0 || !products) {
     return <div>No hay productos en esta pagina</div>;
   }
 
@@ -39,7 +39,7 @@ export default async function CardList({ prevCursor, cursor }: CardListProps) {
       </div>
 
       <div className="flex flex-col gap-10 p-10">
-        <div className="grid columns-2 grid-cols-2 gap-10 md:grid-cols-4">
+        <div className="grid columns-2 grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {products?.map((product) => {
             return (
               <Link

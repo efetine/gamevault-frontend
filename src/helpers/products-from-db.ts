@@ -21,8 +21,9 @@ export async function getProductsFromDb(
       next: { revalidate: 1200 },
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = await response.json();
-
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return data;
   } catch (error: unknown) {
     if (error instanceof Error) {
