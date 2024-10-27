@@ -12,7 +12,7 @@ const categoryColors = {
 export function CategoryBrowser() {
   return (
     <section className="my-12">
-      <h2 className="mb-6 text-2xl font-semibold md:text-3xl">
+      <h2 className="mb-6 text-2xl font-semibold md:text-3xl text-gray-800 dark:text-gray-300">
         Browse by category
       </h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -29,7 +29,7 @@ export function CategoryBrowser() {
                   <div
                     className={`absolute inset-0 bg-gradient-to-tr ${categoryColors[category.id as keyof typeof categoryColors]} flex items-end to-black/40 p-4`}
                   >
-                    <h3 className="text-xl font-bold">{category.name}</h3>
+                    <h3 className="text-xl font-bold text-gray-300">{category.name}</h3>
                   </div>
                 </div>
               </CardContent>

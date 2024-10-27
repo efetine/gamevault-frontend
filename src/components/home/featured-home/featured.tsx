@@ -11,7 +11,7 @@ export function FeaturedProducts() {
   );
   return (
     <section className="my-12">
-      <h2 className="mb-6 text-2xl font-semibold md:text-3xl">
+      <h2 className="mb-6 text-2xl font-semibold md:text-3xl text-gray-800 dark:text-gray-300	">
         Featured & Recommended
       </h2>
       <Carousel className="w-full" plugins={[plugin.current]}>

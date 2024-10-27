@@ -4,7 +4,7 @@ import { Card, CardContent } from "../../ui/card";
 export function BestSellingAccessories() {
   return (
     <section className="my-12">
-      <h2 className="mb-6 text-2xl font-semibold md:text-3xl">
+      <h2 className="mb-6 text-2xl font-semibold md:text-3xl text-gray-800 dark:text-gray-300">
         Best-Selling Accessories
       </h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

@@ -4,7 +4,7 @@ import { FaXTwitter, FaInstagram, FaGithub, FaYoutube } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 py-5">
+    <footer className="dark:bg-gray-800 bg-gray-300 py-5">
       <div className="flex flew-row justify-center mt-3 mb-4">
         <h1 className="flex items-center text-3xl font-semibold"><IconComponent/>Game Vault</h1>
       </div>

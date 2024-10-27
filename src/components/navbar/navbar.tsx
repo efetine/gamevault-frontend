@@ -7,9 +7,9 @@ import { Button } from "~/components/ui/button";
 
 const Navbar = () => {
   return (
-    <header className="fixed z-10 h-20 w-full bg-gray-300 py-3 transition-colors duration-200 dark:bg-slate-700">
-      <div className="container mx-auto flex items-center justify-center gap-10 px-4">
-        <div className="flex w-[60%] items-center justify-end">
+    <header className="sticky top-0 z-20 h-auto md:h-20 w-full bg-gray-300 py-3 transition-colors duration-200 dark:bg-slate-700">
+      <div className="container mx-auto flex items-center md:flex-row flex-col justify-center gap-3 md:gap-10 px-4">
+        <div className="flex items-center w-full md:w-3/5 md:justify-end justify-center">
           <Link href="/" className="flex flex-row items-center gap-3">
             <img
               src="/b2936695e4c1d28d1232842dfd361b9d.jpg"
@@ -21,7 +21,7 @@ const Navbar = () => {
             </h1>
           </Link>
         </div>
-        <div className="flex w-[45%] items-center justify-end space-x-6">
+        <div className="flex md:w-[40%] w-full items-center md:justify-end justify-center space-x-6">
           <UserMenu />
           <Button variant="ghost" size="icon">
             <ShoppingCart className="h-5 w-5" />
