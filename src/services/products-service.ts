@@ -28,16 +28,21 @@ export type GetProducts = z.infer<typeof getProductsSchema>;
 export const paginationDtoSchema = z.object({
   cursor: z.string().nullish(),
   limit: z.string().optional(),
+  type: z.enum(["digital", "physical"]).optional(),
 });
 
 export type PaginationDto = z.infer<typeof paginationDtoSchema>;
 
 export async function getProducts(params: PaginationDto): Promise<GetProducts> {
-  const { cursor, limit = "10" } = paginationDtoSchema.parse(params);
+  const { cursor, limit = "10", type } = paginationDtoSchema.parse(params);
   const url = new URL("/products", env.NEXT_PUBLIC_API_URL);
 
   if (cursor) {
     url.searchParams.append("cursor", cursor);
+  }
+
+  if (type === "digital" || type === "physical") {
+    url.searchParams.append("type", type);
   }
 
   url.searchParams.append("limit", limit);

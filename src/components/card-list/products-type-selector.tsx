@@ -7,18 +7,19 @@ export default function ProductTypeSelector() {
   const type = searchParams.get("type");
   const router = useRouter();
 
-  const handleTypeChange = (type: "all" | "digital" | "physical") => {
-    const url = new URL("/products");
+  const handleTypeChange = (type?: "digital" | "physical") => {
+    if (type === undefined) {
+      router.push("/products");
+      return;
+    }
 
-    url.searchParams.set("type", type);
-
-    router.push(url.toString());
+    router.push(`/products?type=${type}`);
   };
 
   return (
     <div className="mb-4 flex w-full justify-center space-x-4">
       <button
-        onClick={() => handleTypeChange("all")}
+        onClick={() => handleTypeChange(undefined)}
         className={`rounded px-4 py-2 ${type === "all" ? "bg-gradient-to-r from-blue-900/60 via-indigo-950 to-purple-900/60 p-8 text-center text-white shadow-lg" : "bg-gray-400"}`}
       >
         All Products

@@ -2,8 +2,10 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
+import { z } from "zod";
 
 import Card from "../card/card";
 // import ProductsCarousel from "./products-carousel";
@@ -11,24 +13,31 @@ import { getProducts } from "~/services/products-service";
 import { Loading } from "../layout/loading";
 import ProductTypeSelector from "./products-type-selector";
 
+export const paramsSchema = z.object({
+  type: z.enum(["digital", "physical"]).optional(),
+});
+
 export default function CardList() {
+  const searchParams = useSearchParams();
+  const typeParam = searchParams.get("type") ?? undefined;
+  const { type } = paramsSchema.parse({ type: typeParam });
+
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
   });
 
-  const { data, status, error, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: ["products"],
+  const { data, status, hasNextPage, fetchNextPage } = useInfiniteQuery({
+    queryKey: ["products", type],
     queryFn: ({ pageParam }) =>
       getProducts({
         cursor: pageParam,
         limit: "8",
+        type,
       }),
     initialPageParam: "",
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
-
-  console.log({ status, error });
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -52,16 +61,16 @@ export default function CardList() {
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black">
-      <section className="relative flex flex-col items-center justify-center overflow-hidden">
+      {/* <section className="relative flex flex-col items-center justify-center overflow-hidden">
         <div className="w-full items-center">
           <h2 className="mb-4 text-2xl font-semibold">
             Featured & Recommended
           </h2>
         </div>
         <div className="w-full">
-          {/* <ProductsCarousel images={featuredGames} /> */}
+          <ProductsCarousel images={featuredGames} />
         </div>
-      </section>
+      </section> */}
       <section className="relative flex flex-col items-center justify-center overflow-hidden">
         <ProductTypeSelector />
         <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">
