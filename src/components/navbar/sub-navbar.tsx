@@ -12,11 +12,16 @@ const SubNavbar = () => {
           <nav>
             <ul className="flex gap-10 text-lg font-semibold text-[#dad9dc]">
               <Link href="/">Home</Link>
-              <Link href="/products">Store</Link>
-              <Link href="/">Categories</Link>
-              <Link href="/">About</Link>
-              <Link href="/">Suport</Link>
-              <Link href="/"></Link>
+              <Link href="/products">Products</Link>
+              <Link href="/" className="pointer-events-none opacity-15">
+                Categories
+              </Link>
+              <Link href="/" className="pointer-events-none opacity-15">
+                About
+              </Link>
+              <Link href="/" className="pointer-events-none opacity-15">
+                Support
+              </Link>
             </ul>
           </nav>
         </div>
