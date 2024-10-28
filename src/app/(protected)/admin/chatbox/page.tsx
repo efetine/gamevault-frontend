@@ -23,9 +23,14 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 
+interface Message {
+  sender: "client" | "admin";
+  text: string;
+}
+
 interface ClientMessage {
   clientId: string;
-  messages: string[];
+  messages: { sender: "client" | "admin"; text: string }[];
 }
 
 export default function ChatboxAdmin() {
@@ -35,8 +40,10 @@ export default function ChatboxAdmin() {
   const [messageInput, setMessageInput] = useState<string>("");
 
   useEffect(() => {
-    const newSocket = io("http://localhost:3001", {
+    const newSocket: Socket = io("http://localhost:3001", {
       query: { role: "admin" },
+      transports: ["websocket"],
+      upgrade: false,
     });
 
     newSocket.on(
@@ -47,9 +54,20 @@ export default function ChatboxAdmin() {
             clientId: data.clientId,
             messages: [],
           };
-          clientMessages.messages.push(data.message);
+          if (
+            !clientMessages.messages.some((msg) => msg.text === data.message)
+          ) {
+            clientMessages.messages.push({
+              sender: "client",
+              text: data.message,
+            });
+          }
           return new Map(prev).set(data.clientId, clientMessages);
         });
+
+        if (!selectedClientId) {
+          setSelectedClientId(data.clientId);
+        }
       },
     );
 
@@ -60,20 +78,40 @@ export default function ChatboxAdmin() {
   }, []);
 
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent page refresh on form submission
+    e.preventDefault();
+
     if (socket && selectedClientId && messageInput.trim()) {
+      console.log(`Sending message to client: ${selectedClientId}`);
+      console.log(`Message content: ${messageInput}`);
+
       socket.emit("messageToClient", {
         clientId: selectedClientId,
         message: messageInput,
       });
+
+      setClients((prev) => {
+        const clientMessages = prev.get(selectedClientId) || {
+          clientId: selectedClientId,
+          messages: [] as Message[],
+        };
+        const newMessage: Message = { sender: "admin", text: messageInput };
+        const newMessages = [...clientMessages.messages, newMessage];
+        return new Map(prev).set(selectedClientId, {
+          clientId: selectedClientId,
+          messages: newMessages,
+        });
+      });
+
       setMessageInput("");
+    } else {
+      console.log("No client selected or message is empty");
     }
   };
 
-  // Extraer mensajes del cliente seleccionado
   const currentClientMessages = selectedClientId
     ? clients.get(selectedClientId)?.messages
     : [];
+  console.log(currentClientMessages);
 
   return (
     <div className="grid h-screen w-full pl-[56px]">
@@ -104,28 +142,33 @@ export default function ChatboxAdmin() {
                 <h2 className="text-lg font-semibold">Customers messages</h2>
               </div>
               <ScrollArea className="h-[400px]">
-                <div className="p-4">
-                  {currentClientMessages?.map((message, index) => (
-                    <div
-                      key={index}
-                      className="mb-6 flex items-start space-x-4"
-                    >
-                      <Avatar>
-                        <AvatarFallback>U</AvatarFallback>
-                      </Avatar>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-foreground">
-                          Client {selectedClientId}
+                {Array.from(clients.values()).map((client) => (
+                  <div
+                    key={client.clientId}
+                    className={`mb-6 flex items-start space-x-4 ${
+                      selectedClientId === client.clientId ? "bg-gray-200" : ""
+                    }`}
+                    onClick={() => setSelectedClientId(client.clientId)}
+                  >
+                    <Avatar>
+                      <AvatarFallback>U</AvatarFallback>
+                    </Avatar>
+                    <div className="min-w-0 flex-1">
+                      <p
+                        className={`text-sm font-medium ${selectedClientId === client.clientId ? "text-black" : "text-foreground"}`}
+                      >
+                        Client {client.clientId}
+                      </p>
+                      <div className={`mt-1 flex items-center`}>
+                        <p
+                          className={`truncate text-sm ${selectedClientId === client.clientId ? "text-black" : "text-muted-foreground"}`}
+                        >
+                          {client.messages[client.messages.length - 1]?.text}
                         </p>
-                        <div className="mt-1 flex items-center">
-                          <p className="truncate text-sm text-muted-foreground">
-                            {message}
-                          </p>
-                        </div>
                       </div>
                     </div>
-                  )) || <p>No messages</p>}
-                </div>
+                  </div>
+                ))}
               </ScrollArea>
             </div>
           </div>
@@ -134,7 +177,29 @@ export default function ChatboxAdmin() {
             <Badge variant="outline" className="absolute right-3 top-3">
               Output
             </Badge>
-            <div className="flex-1" />
+            <ScrollArea className="flex-1 overflow-y-auto p-3">
+              {currentClientMessages?.map((msg, index) => {
+                console.log(`Rendering message: ${msg.text}`);
+                return (
+                  <div
+                    key={index}
+                    className={`flex ${
+                      msg.sender === "admin" ? "justify-end" : "justify-start"
+                    }`}
+                  >
+                    <div
+                      className={`my-2 max-w-[60%] rounded-lg p-2 ${
+                        msg.sender === "admin"
+                          ? "bg-blue-500 text-white"
+                          : "bg-gray-200 text-black"
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  </div>
+                );
+              })}
+            </ScrollArea>
             <form
               onSubmit={handleSendMessage}
               className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"

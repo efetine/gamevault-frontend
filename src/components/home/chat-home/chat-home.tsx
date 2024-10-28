@@ -2,7 +2,7 @@
 
 import { faHeadset } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 interface Message {
@@ -16,12 +16,12 @@ const ChatButton: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const [socket, setSocket] = useState<Socket | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = () => {
     console.log("Chat button clicked");
     setChatOpen(true);
 
-    // Establece la conexión WebSocket solo cuando el chat se abre
     if (!socket) {
       const newSocket: Socket = io("http://localhost:3001", {
         query: { role: "client" },
@@ -29,7 +29,6 @@ const ChatButton: React.FC = () => {
         upgrade: false,
       });
 
-      // Manejar los mensajes del admin
       newSocket.on("messageFromAdmin", (data: { message: string }) => {
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -37,9 +36,14 @@ const ChatButton: React.FC = () => {
         ]);
       });
 
-      // Conexión y desconexión de WebSocket
       newSocket.on("connect", () => {
         console.log("Connected to WebSocket Server");
+        const welcomeMessage =
+          "¡Hola! Por favor, dime tu nombre y deja tu consulta. A la brevedad te atenderemos.";
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: welcomeMessage, sender: "admin" },
+        ]);
       });
 
       newSocket.on("disconnect", () => {
@@ -53,8 +57,6 @@ const ChatButton: React.FC = () => {
   const handleCloseChat = () => {
     console.log("Chat closed");
     setChatOpen(false);
-
-    // Desconecta el WebSocket al cerrar el chat
     if (socket) {
       socket.disconnect();
       setSocket(null);
@@ -76,11 +78,15 @@ const ChatButton: React.FC = () => {
     }
   }, [isChatOpen]);
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <div className="fixed bottom-16 right-16 z-50 flex flex-col items-center">
       {!isChatOpen ? (
         <div
-          className="group relative flex h-16 w-16 items-center justify-center shadow-lg transition-transform duration-300 hover:scale-110 hover:from-gray-500 hover:to-gray-800"
+          className="group relative flex h-16 w-16 items-center justify-center transition-transform duration-300 hover:scale-110 hover:from-gray-500 hover:to-gray-800"
           onClick={handleClick}
         >
           <FontAwesomeIcon
@@ -121,6 +127,7 @@ const ChatButton: React.FC = () => {
                   </p>
                 </div>
               ))}
+              <div ref={messagesEndRef} />
             </div>
           </div>
           <form onSubmit={handleSubmit} className="mt-2 flex">
