@@ -1,9 +1,8 @@
-import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
+import { Cart } from "~/components/cart/Cart";
 import { ModeToggle } from "~/components/navbar/mode-toggle";
 import { UserMenu } from "~/components/navbar/user-menu";
-import { Button } from "~/components/ui/button";
 
 const Navbar = () => {
   return (
@@ -23,9 +22,7 @@ const Navbar = () => {
         </div>
         <div className="flex w-[45%] items-center justify-end space-x-6">
           <UserMenu />
-          <Button variant="ghost" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-          </Button>
+          <Cart />
           <ModeToggle />
         </div>
       </div>

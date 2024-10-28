@@ -1,7 +1,6 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
@@ -86,13 +85,7 @@ export default function CardList() {
             )
           }) */}
           {products.map((product) => (
-            <Link
-              className="transition duration-700 ease-in-out hover:scale-[1.05]"
-              href={`/product/${product.id}`}
-              key={product.id}
-            >
-              <Card product={product} />
-            </Link>
+            <Card key={product.id} product={product} />
           ))}
         </div>
       </section>
