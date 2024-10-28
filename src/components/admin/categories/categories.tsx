@@ -26,11 +26,7 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover";
 import { cn } from "~/lib/utils";
-
-interface Category {
-  id: string;
-  name: string;
-}
+import { getCategories } from "~/services/categories-service";
 
 export function CategoriesCombobox() {
   const form = useFormContext();
@@ -38,11 +34,7 @@ export function CategoriesCombobox() {
 
   const { data: categories, status } = useQuery({
     queryKey: ["categories"],
-    queryFn: async () => {
-      const response = await fetch("http://localhost:3001/categories");
-      const categories = (await response.json()) as Category[];
-      return categories;
-    },
+    queryFn: async () => getCategories(),
   });
 
   if (status === "error") {
@@ -52,16 +44,6 @@ export function CategoriesCombobox() {
   if (status === "pending") {
     return <div>Loading...</div>;
   }
-
-  // const [categories, setCategories] = React.useState<Category[]>([]);
-  // React.useEffect(() => {
-  //   const fn = async () => {
-  //     const response = await fetch("http://localhost:3001/categories");
-  //     const categories = await response.json();
-  //     setCategories(categories);
-  //   };
-  //   fn();
-  // }, []);
 
   return (
     <FormField
