@@ -34,7 +34,8 @@ export default function AdminProducts() {
 
   return (
     <ProductsTable
-      products={products}
+      data={products}
+      pagesSize={data.pages.length}
       hasNextPage={hasNextPage}
       fetchNextPage={fetchNextPage}
     />

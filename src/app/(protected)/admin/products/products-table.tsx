@@ -16,7 +16,6 @@ import {
   Trash,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
 import { Badge } from "~/components/ui/badge";
 
 import {
@@ -154,34 +153,30 @@ const columns: ColumnDef<Product>[] = [
 ];
 
 interface ProductsTableProps {
-  products: Product[];
+  data: Product[];
   hasNextPage: boolean;
+  pagesSize: number;
   fetchNextPage: Function;
 }
 
 export function ProductsTable({
-  products,
+  data,
   hasNextPage,
+  pagesSize = 10,
   fetchNextPage,
 }: ProductsTableProps) {
-  const table = useReactTable({
-    data: products,
+  const table = useReactTable<Product>({
+    data,
     columns,
     initialState: {
       columnVisibility: {
         id: false,
       },
     },
+    autoResetPageIndex: false,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
-
-  useEffect(() => {
-    // TODO: La paginacion de productos deberia fetchear los productos solo cuando este en la ultima pagina y si tiene un siguiente cursor.
-    if (table.getCanNextPage() === true && hasNextPage === true) {
-      fetchNextPage();
-    }
-  }, [table, hasNextPage]);
 
   return (
     <div className="flex w-full flex-col">
@@ -311,7 +306,9 @@ export function ProductsTable({
                 <CardFooter className="flex w-full items-center justify-center">
                   <DataTablePagination
                     table={table}
+                    pagesSize={pagesSize}
                     hasNextPage={hasNextPage}
+                    fetchNextPage={fetchNextPage}
                   />
                 </CardFooter>
               </Card>
