@@ -8,7 +8,8 @@ export async function createProduct(values: FormSchema) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(values),
-  });
+  })
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return await response.json();
 }

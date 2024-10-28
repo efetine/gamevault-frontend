@@ -44,7 +44,7 @@ export default async function CardList({ prevCursor, cursor }: CardListProps) {
             return (
               <Link
                 className=""
-                href={`/products/${product.id}`}
+                href={`/product/${product.id}`}
                 key={product.id}
               >
                 <Card {...product} />

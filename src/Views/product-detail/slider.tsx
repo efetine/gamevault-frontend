@@ -51,7 +51,7 @@ export default function EmblaCarousel({ images, options }: CarouselProps) {
               {images.map((image, index) => (
                 <div key={index} className='flex-[0_0_100%] min-w-0'>
                   <div className='relative aspect-video'>
-                    <Image fill className='object-cover' src={image.src} alt={image.alt} />
+                    <img className='rounded-xl object-cover h-full w-[-webkit-fill-available]' src={`${image.src}`} alt={image.alt} />
                   </div>
                 </div>
               ))}
@@ -80,7 +80,7 @@ function Thumb({ selected, image, onClick }: ThumbProps) {
   return (
     <div className={'flex-[0_0_15%] min-w-0 '.concat(selected ? ' embla-thumbs__slide--selected' : '')}>
       <button onClick={onClick} type='button' className=' w-full h-full'>
-        <Image src={image.src} className='object-cover w-full h-full' width={100} height={100} alt={image.alt} />
+        <img src={image.src} className='object-cover w-full h-full' width={100} height={100} alt={image.alt} />
       </button>
     </div>
   );

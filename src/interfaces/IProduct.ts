@@ -5,6 +5,7 @@ export interface IProduct {
   developer: string;
   date: string;
   price: number;
+  type: string;
   stock: number;
   imageUrl: string;
   genreId?: number;

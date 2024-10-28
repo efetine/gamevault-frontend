@@ -1,9 +1,14 @@
-import ProductDigitalDetail from "~/Views/product-detail/product-detail";
+import { getProductsById } from "~/helpers/products-from-db";
+import ProductDetail from "~/Views/product-detail/product-detail";
 
-const ProductDigital: React.FC<{ params: { digitalId: string } }> = ({
+const ProductDigital = async ({
   params,
+}: {
+  params: { digitalId: string };
 }) => {
-  return <ProductDigitalDetail />;
+  //console.log(params.digitalId);
+  const productId = await getProductsById(params.digitalId);
+  return <ProductDetail {...productId} />;
 };
 
 export default ProductDigital;
