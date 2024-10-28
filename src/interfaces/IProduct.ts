@@ -1,18 +1,20 @@
+import { ICategory } from './ICategory';
+
 export interface IProduct {
   id: number;
   name: string;
   description: string;
-  developer: string;
-  date: string;
+  type: string;
   price: number;
   stock: number;
   imageUrl: string;
-  genreId?: number;
+  active: boolean;
+  category: ICategory;
 }
 
-export interface IProductListProps {
-  products: IProduct[];
-}
+// export interface IProductListProps {
+//   products: IProduct[];
+// }
 
 export interface IGetCategoryInProduct {
   name: string;
@@ -23,7 +25,6 @@ export interface IProductsCardProps {
   name: string;
   price: number;
   stock: number;
-  date: string;
   imageUrl: string;
   category: IGetCategoryInProduct;
 }
