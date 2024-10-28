@@ -21,28 +21,26 @@ export async function createProduct(values: CreateProduct) {
 const getProductsSchema = z.object({
   products: productsSchema,
   nextCursor: z.string().nullable(),
-  prevCursor: z.string().nullable(),
-  count: z.number(),
 });
 
 export type GetProducts = z.infer<typeof getProductsSchema>;
 
 export const paginationDtoSchema = z.object({
   cursor: z.string().nullish(),
+  limit: z.string().optional(),
 });
 
 export type PaginationDto = z.infer<typeof paginationDtoSchema>;
 
-export async function getProducts({
-  cursor,
-}: PaginationDto): Promise<GetProducts> {
+export async function getProducts(params: PaginationDto): Promise<GetProducts> {
+  const { cursor, limit = "10" } = paginationDtoSchema.parse(params);
   const url = new URL("/products", env.NEXT_PUBLIC_API_URL);
 
   if (cursor) {
     url.searchParams.append("cursor", cursor);
   }
 
-  url.searchParams.append("limit", "10");
+  url.searchParams.append("limit", limit);
 
   const response = await fetch(url.toString(), {
     method: "GET",
@@ -56,6 +54,7 @@ export async function getProducts({
   const parsedProducts = getProductsSchema.safeParse(body);
 
   if (parsedProducts.success === false) {
+    console.log(parsedProducts.error);
     throw new Error(parsedProducts.error.message);
   }
 

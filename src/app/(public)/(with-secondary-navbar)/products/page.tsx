@@ -1,21 +1,9 @@
-import { z } from "zod";
+import CardList from "~/components/card-list/card-list";
 
-import { paginationDtoSchema } from "~/schemas/pagination-dto";
-import ProductsPage from "~/Views/products/products-page";
-
-const propsSchema = z.object({
-  searchParams: paginationDtoSchema,
-});
-
-type HomePageProps = z.infer<typeof propsSchema>;
-
-export default function HomePage(props: HomePageProps) {
-  const { searchParams } = propsSchema.parse(props);
-
+export default function ProductsPage() {
   return (
-    <ProductsPage
-      prevCursor={searchParams.prevCursor}
-      cursor={searchParams.cursor}
-    />
+    <div className="w-full content-center items-center justify-center">
+      <CardList />
+    </div>
   );
 }

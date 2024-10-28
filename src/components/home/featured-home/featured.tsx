@@ -1,14 +1,32 @@
 import * as React from "react";
 
+import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
-import { productsToPreLoad } from "~/helpers/products";
+import { getProducts } from "~/services/products-service";
 import { Card, CardContent } from "../../ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "../../ui/carousel";
 
 export function FeaturedProducts() {
+  const { data, status } = useQuery({
+    queryKey: ["products"],
+    queryFn: () =>
+      getProducts({
+        limit: "8",
+      }),
+  });
+
   const plugin = React.useRef(
     Autoplay({ delay: 4000, stopOnInteraction: true }),
   );
+
+  if (status === "error") {
+    return <div>Error...</div>;
+  }
+
+  if (status === "pending") {
+    return <div>Loading...</div>;
+  }
+
   return (
     <section className="my-12">
       <h2 className="mb-6 text-2xl font-semibold md:text-3xl">
@@ -16,7 +34,7 @@ export function FeaturedProducts() {
       </h2>
       <Carousel className="w-full" plugins={[plugin.current]}>
         <CarouselContent>
-          {productsToPreLoad.map((product) => (
+          {data.products.map((product) => (
             <CarouselItem
               key={product.id}
               className="md:basis-1/2 lg:basis-1/3"
