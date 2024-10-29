@@ -26,15 +26,6 @@ export default async function CardList({ prevCursor, cursor }: CardListProps) {
       <div className='w-48 space-y-6 bg-[#030712] p-6'>
         <div className='flex flex-col space-y-2'>
           <h2 className='mb-6 text-2xl font-bold'>Categorías</h2>
-          {/* <Button variant="ghost" className="justify-start">
-            <Star className="mr-2 h-4 w-4" /> Arcade
-          </Button>
-          <Button variant="ghost" className="justify-start">
-            <ShoppingBag className="mr-2 h-4 w-4" /> Terror
-          </Button>
-          <Button variant="ghost" className="justify-start">
-            <Settings className="mr-2 h-4 w-4" /> Edit Profile
-          </Button> */}
         </div>
       </div>
 
@@ -42,7 +33,7 @@ export default async function CardList({ prevCursor, cursor }: CardListProps) {
         <div className='grid columns-2 grid-cols-2 gap-10 md:grid-cols-4'>
           {products?.map((product) => {
             return (
-              <Link className='' href={`/products/${product.id}`} key={product.id}>
+              <Link className='' href={`/product/${product.id}`} key={product.id}>
                 <Card {...product} />
               </Link>
             );

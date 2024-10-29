@@ -1,5 +1,3 @@
-import { ICategory } from './ICategory';
-
 export interface IProduct {
   id: number;
   name: string;
@@ -9,7 +7,10 @@ export interface IProduct {
   stock: number;
   imageUrl: string;
   active: boolean;
-  category: ICategory;
+  category: {
+    id: string;
+    name: string;
+  };
 }
 
 // export interface IProductListProps {

@@ -11,10 +11,14 @@ const CategoriesList = async () => {
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
         {categoriesAll &&
           categoriesAll.length > 0 &&
-          categoriesAll?.map((category) => {
+          categoriesAll?.map((categoryId) => {
             return (
-              <Link href={`/category/${category.id}`} key={category.id} className='text-blue-600 hover:underline'>
-                <CategoryCard {...category} products={[]} />
+              <Link
+                href={`/products/category/${categoryId.id}`}
+                key={categoryId.id}
+                className='text-blue-600 hover:underline'
+              >
+                <CategoryCard {...categoryId} products={[]} />
               </Link>
             );
           })}
