@@ -20,13 +20,11 @@ import {
 } from "~/components/ui/card";
 
 import { Progress } from "~/components/ui/progress";
-import { useIsMobile } from "~/hooks/use-mobile";
-import { cn } from "~/lib/utils";
 import { Product } from "~/schemas/product-schema";
 import EmblaCarousel from "./slider";
 const OPTIONS = {};
 
-const ProductDetailView: React.FC<Product> = ({
+export const ProductDetailPage: React.FC<Product> = ({
   price,
   description,
   type,
@@ -35,8 +33,6 @@ const ProductDetailView: React.FC<Product> = ({
   imageUrl,
   category,
 }) => {
-  const isMobile = useIsMobile();
-
   const stockPercentage = (stock / 100) * 100;
   const lowStock = stockPercentage <= 20;
 
@@ -45,10 +41,9 @@ const ProductDetailView: React.FC<Product> = ({
 
   return (
     <div
-      className={cn(
-        "flex h-full w-full flex-row justify-center gap-12 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black pb-14",
-        isMobile && "flex-col",
-      )}
+      className={
+        "flex h-full w-full flex-row justify-center gap-12 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black pb-14 md:flex-col"
+      }
     >
       <div className="flex w-[60%] flex-row">
         <div className="w-[60%] p-4">
@@ -163,5 +158,3 @@ const ProductDetailView: React.FC<Product> = ({
     </div>
   );
 };
-
-export default ProductDetailView;

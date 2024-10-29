@@ -7,11 +7,11 @@ import { CardContent, CardFooter, Card as Cards } from "~/components/ui/card";
 import { Product } from "~/schemas/product-schema";
 import { useCart } from "~/state/cart-state";
 
-interface CardProps {
+interface ProductCardProps {
   product: Product;
 }
 
-const Card: React.FC<CardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { dispatch } = useCart();
 
   return (
@@ -62,5 +62,3 @@ const Card: React.FC<CardProps> = ({ product }) => {
     </Cards>
   );
 };
-
-export default Card;

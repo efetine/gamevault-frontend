@@ -1,10 +1,16 @@
-import * as React from "react";
+"use client";
 
 import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
+
+import { Card, CardContent } from "~/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "~/components/ui/carousel";
 import { getProducts } from "~/services/products-service";
-import { Card, CardContent } from "../../ui/card";
-import { Carousel, CarouselContent, CarouselItem } from "../../ui/carousel";
 
 export function FeaturedProducts() {
   const { data, status } = useQuery({
@@ -15,9 +21,7 @@ export function FeaturedProducts() {
       }),
   });
 
-  const plugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true }),
-  );
+  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
 
   if (status === "error") {
     return <div>Error...</div>;

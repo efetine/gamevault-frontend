@@ -1,7 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-
 import { Card, CardContent } from "~/components/ui/card";
-import { getProducts } from "~/services/products-service";
 
 const servicesToPreLoad = [
   {
@@ -41,22 +38,6 @@ const servicesToPreLoad = [
 ];
 
 export function BestSellingAccessories() {
-  const { data, status } = useQuery({
-    queryKey: ["products"],
-    queryFn: () =>
-      getProducts({
-        limit: "8",
-      }),
-  });
-
-  if (status === "error") {
-    return <div>Error...</div>;
-  }
-
-  if (status === "pending") {
-    return <div>Loading...</div>;
-  }
-
   return (
     <section className="my-12">
       <h2 className="mb-6 text-2xl font-semibold md:text-3xl">

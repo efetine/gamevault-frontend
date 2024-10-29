@@ -1,6 +1,6 @@
 import "~/styles/globals.css";
 
-import SubNavbar from "~/components/navbar/sub-navbar";
+import SubNavbar from "~/components/layout/navbar/sub-navbar";
 
 export default function PublicLayout({
   children,

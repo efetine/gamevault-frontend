@@ -1,5 +1,5 @@
+import { ProductDetailPage } from "~/components/products/product-detail-page";
 import { getProductById } from "~/services/products-service";
-import ProductDetailView from "~/Views/product-detail/product-detail";
 
 const ProductDetail: React.FC<{ params: { id: string } }> = async ({
   params,
@@ -10,7 +10,7 @@ const ProductDetail: React.FC<{ params: { id: string } }> = async ({
     return <div>Product not found</div>;
   }
 
-  return <ProductDetailView {...product} />;
+  return <ProductDetailPage {...product} />;
 };
 
 export default ProductDetail;

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { Cart } from "~/components/cart/Cart";
-import { ModeToggle } from "~/components/navbar/mode-toggle";
-import { UserMenu } from "~/components/navbar/user-menu";
+import { ModeToggle } from "~/components/layout/navbar/mode-toggle";
+import { UserMenu } from "~/components/layout/navbar/user-menu";
 
 const Navbar = () => {
   return (

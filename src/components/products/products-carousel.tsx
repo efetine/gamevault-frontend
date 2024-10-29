@@ -16,7 +16,7 @@ export interface ICarouselProps {
   images: ICarouselImageProps[];
 }
 
-export default function ProductsCarousel({ images }: ICarouselProps) {
+export function ProductsCarousel({ images }: ICarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleButtonClick = useCallback((index: number) => {

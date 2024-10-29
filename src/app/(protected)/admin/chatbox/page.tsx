@@ -114,7 +114,7 @@ export default function ChatboxAdmin() {
   console.log(currentClientMessages);
 
   return (
-    <div className="grid h-screen w-full pl-[56px]">
+    <div className="grid w-full pl-[56px]">
       <div className="flex flex-col">
         <header className="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
           <h1 className="text-xl font-semibold">Chat Box</h1>

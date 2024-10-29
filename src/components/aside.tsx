@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import { UserMenu } from "~/components/navbar/user-menu";
+import { UserMenu } from "~/components/layout/navbar/user-menu";
 import {
   Tooltip,
   TooltipContent,
