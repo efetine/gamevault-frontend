@@ -28,11 +28,11 @@ import {
 import { Textarea } from "~/components/ui/textarea";
 import { useToast } from "~/hooks/use-toast";
 import {
-  editProductSchema,
   type EditProduct,
+  editProductSchema,
 } from "~/schemas/edit-product-schema";
 import type { Product } from "~/schemas/product-schema";
-import { updateProduct } from "~/services/products-service";
+import { updateProduct, uploadImage } from "~/services/products-service";
 
 type ProductEditFormProps = {
   product: Product;
@@ -43,49 +43,69 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const updateMutation = useMutation<Product["id"], unknown, EditProduct>({
+  const updateMutation = useMutation<unknown, unknown, EditProduct>({
     mutationKey: ["update-product", product.id],
-    mutationFn: (data) => updateProduct(product.id, data),
+    mutationFn: async (data) => {
+      await updateProduct(product.id, data);
+
+      if (data.imageUrl instanceof File) {
+        await uploadImage(product.id, data.imageUrl);
+      }
+
+      return Promise.resolve();
+    },
     onError: () => {
       toast({
         title: "Failed to update product 😔",
       });
     },
-    onSuccess: () => {
-      toast({
-        title: "Product updated!",
-      });
-
-      queryClient.invalidateQueries({
-        queryKey: ["products"],
-      });
-
-      router.push("/admin/products");
-    },
   });
 
   const form = useForm<EditProduct>({
     resolver: zodResolver(editProductSchema),
-    defaultValues: product,
+    defaultValues: {
+      ...product,
+      active: product.active ? "active" : "inactive",
+    },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: EditProduct) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    updateMutation.mutate(values);
+  async function onSubmit(values: EditProduct) {
+    const result = await updateMutation.mutateAsync(values);
+
+    toast({
+      title: "Product updated!",
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: ["products"],
+    });
+
+    form.reset();
+
+    router.push("/admin/products");
   }
 
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (file && file.type.startsWith("image/")) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       setPreviewImage(e.target?.result as string);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
+  const renderPreview = (value: File | string) => {
+    let src = null;
+
+    if (typeof value === "string") {
+      src = value;
+    } else {
+      const blob = new Blob([value], { type: value.type });
+
+      src = URL.createObjectURL(blob);
+    }
+
+    return (
+      <FormItem className="flex flex-col items-center justify-center">
+        <FormLabel>Preview</FormLabel>
+        <div className="relative h-48 w-48 overflow-hidden rounded-lg border">
+          <img src={src} />
+        </div>
+      </FormItem>
+    );
+  };
 
   return (
     <Form {...form}>
@@ -231,9 +251,7 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
                         <FormItem>
                           <Select
                             onValueChange={field.onChange}
-                            defaultValue={
-                              field.value === true ? "active" : "inactive"
-                            }
+                            defaultValue={field.value}
                           >
                             <FormControl>
                               <SelectTrigger>
@@ -263,51 +281,25 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
                       <FormField
                         control={form.control}
                         name="imageUrl"
-                        render={({ field }) => (
+                        render={({
+                          field: { value, onChange, ...fieldProps },
+                        }) => (
                           <FormItem>
-                            <FormLabel>Imagen</FormLabel>
                             <FormControl>
-                              <div className="flex flex-col space-y-2">
-                                <Button
-                                  type="button"
-                                  onClick={() =>
-                                    document
-                                      .getElementById("image-upload")
-                                      ?.click()
-                                  }
-                                  variant="outline"
-                                >
-                                  Choose image
-                                </Button>
-                                <Input
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  // {...field}
-                                  // onChange={(e) => {
-                                  //   field.onChange(e.target.files);
-                                  //   handleFileChange(e);
-                                  // }}
-                                />
-                                {/* {field.value && field.value[0] ? (
-                                  <span className="text-sm text-gray-500">
-                                    Archivo seleccionado: {field.value[0].name}
-                                  </span>
-                                ) : (
-                                  <span className="text-sm text-gray-500">
-                                    Ningún archivo seleccionado
-                                  </span>
-                                )} */}
-                                {field.value && (
-                                  <FormItem>
-                                    <FormLabel>Vista previa</FormLabel>
-                                    <div className="relative h-48 w-full overflow-hidden rounded-lg border">
-                                      <img src={field.value} />
-                                    </div>
-                                  </FormItem>
-                                )}
-                              </div>
+                              <Input
+                                {...fieldProps}
+                                placeholder="Image"
+                                type="file"
+                                accept="image/*"
+                                className="border-[#30363d] bg-[#1a2332]/60 text-white placeholder:text-gray-400"
+                                onChange={(event) =>
+                                  onChange(
+                                    event.target.files && event.target.files[0],
+                                  )
+                                }
+                              />
                             </FormControl>
+                            {value && renderPreview(value)}
                             <FormMessage />
                           </FormItem>
                         )}

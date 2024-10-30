@@ -31,25 +31,25 @@ import {
   createProductSchema,
   type CreateProduct,
 } from "~/schemas/create-product-schema";
-import { createProduct } from "~/services/products-service";
+import type { Product } from "~/schemas/product-schema";
+import { createProduct, uploadImage } from "~/services/products-service";
 
 export default function CreateProduct() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const createProductMutation = useMutation<{}, {}, CreateProduct>({
-    mutationFn: async (values) => createProduct(values),
+  const createProductMutation = useMutation<Product, {}, CreateProduct>({
+    mutationFn: async (data) => {
+      const product = await createProduct(data);
+
+      await uploadImage(product.id, data.imageUrl);
+
+      return product;
+    },
     onError: () => {
       toast({
         title: "Failed to create product 😔",
       });
-    },
-    onSuccess: () => {
-      toast({
-        title: "Product created! 😊",
-      });
-
-      router.push("/admin/products");
     },
   });
 
@@ -66,7 +66,13 @@ export default function CreateProduct() {
   });
 
   async function onSubmit(values: CreateProduct) {
-    createProductMutation.mutate(values);
+    await createProductMutation.mutateAsync(values);
+
+    toast({
+      title: "Product created! 😊",
+    });
+
+    router.push("/admin/products");
   }
 
   return (
@@ -177,17 +183,22 @@ export default function CreateProduct() {
               <FormField
                 control={form.control}
                 name="imageUrl"
-                render={({ field }) => (
+                render={({ field: { value, onChange, ...fieldProps } }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-100">Image</FormLabel>
+                    <FormLabel>Image</FormLabel>
                     <FormControl>
                       <Input
-                        {...field}
+                        {...fieldProps}
+                        placeholder="Image"
+                        type="file"
+                        accept="image/*"
                         className="border-[#30363d] bg-[#1a2332]/60 text-white placeholder:text-gray-400"
+                        onChange={(event) =>
+                          onChange(event.target.files && event.target.files[0])
+                        }
                       />
                     </FormControl>
-
-                    <FormMessage className="text-red-300" />
+                    <FormMessage />
                   </FormItem>
                 )}
               />
