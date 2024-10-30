@@ -55,6 +55,7 @@ import {
   TableRow,
 } from "~/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { cn } from "~/lib/utils";
 import { Product } from "~/schemas/product-schema";
 
 const columns: ColumnDef<Product>[] = [
@@ -95,11 +96,13 @@ const columns: ColumnDef<Product>[] = [
     accessorKey: "active",
     header: "Status",
     cell: ({ row }) => {
+      const status: string = row.getValue("active");
       return (
-        <Badge variant="outline">
-          <span className="first-letter:uppercase">
-            {row.getValue("active") === true ? "Active" : "Inactive"}
-          </span>
+        <Badge
+          variant="outline"
+          className={cn(status === "active" ? "bg-green-700" : "bg-red-700")}
+        >
+          <span className="first-letter:uppercase">{status}</span>
         </Badge>
       );
     },

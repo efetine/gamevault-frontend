@@ -6,7 +6,7 @@ import { EditProduct } from "~/schemas/edit-product-schema";
 import { Product, productSchema } from "~/schemas/product-schema";
 import { productsSchema } from "~/schemas/products-schema";
 
-export async function createProduct(values: CreateProduct) {
+export async function createProduct(values: CreateProduct): Promise<Product> {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/products/create`, {
     method: "POST",
     headers: {
@@ -15,7 +15,15 @@ export async function createProduct(values: CreateProduct) {
     body: JSON.stringify(values),
   });
 
-  return await response.json();
+  const body = await response.json();
+
+  const createdProduct = productSchema.safeParse(body);
+
+  if (createdProduct.success === false) {
+    throw new Error(createdProduct.error.message);
+  }
+
+  return createdProduct.data;
 }
 
 const getProductsSchema = z.object({
@@ -59,7 +67,6 @@ export async function getProducts(params: PaginationDto): Promise<GetProducts> {
   const parsedProducts = getProductsSchema.safeParse(body);
 
   if (parsedProducts.success === false) {
-    console.log(parsedProducts.error);
     throw new Error(parsedProducts.error.message);
   }
 
@@ -97,4 +104,23 @@ export async function updateProduct(id: Product["id"], values: EditProduct) {
   const result = response.json();
 
   return result;
+}
+
+export async function uploadImage(uuid: Product["id"], file: File) {
+  const blob = new Blob([file], { type: file.type });
+  const formData = new FormData();
+
+  formData.append("image", blob);
+
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_API_URL}/products/uploadImage/${uuid}`,
+    {
+      method: "PATCH",
+      body: formData,
+    },
+  );
+
+  const body = await response.json();
+
+  return body;
 }
