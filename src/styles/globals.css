@@ -57,18 +57,6 @@
   }
 }
 
-.relative::after {
-  content: "";
-  background-image: url(https://img.freepik.com/fotos-premium/dos-controladores-videojuegos-muestran-palabras-alegria-parte-inferior_657790-20696.jpg);
-  background-color: #bd1b1b;
-}
-::before,
-::after {
-  box-sizing: border-box;
-  text-decoration: inherit;
-  vertical-align: inherit;
-}
-
 @layer base {
   * {
     @apply border-border;
