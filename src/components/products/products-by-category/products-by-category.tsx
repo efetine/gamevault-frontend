@@ -9,14 +9,13 @@ import { getProductsByCategory } from "~/services/categories-service";
 
 type CardListProps = PaginationDto & { categoryId: string };
 
-export default function CardListByCategory({ categoryId }: CardListProps) {
+export default function ProductsByCategory({ categoryId }: CardListProps) {
   const [products, setProducts] = useState<Product[]>([]);
 
   const [nextCursor, setNextCursor] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  //const router = useRouter();
   const searchParams = useSearchParams();
   const cursor = searchParams.get("cursor");
 
@@ -39,21 +38,8 @@ export default function CardListByCategory({ categoryId }: CardListProps) {
     void fetchProducts();
   }, [cursor, categoryId]);
 
-  //! PARA PAGINADO
-  // const handleCategoryChange = (newCategory: string | undefined) => {
-  //   const params = new URLSearchParams(searchParams);
-  //   if (newCategory) {
-  //     params.set("category", newCategory);
-  //   } else {
-  //     params.delete("category");
-  //   }
-  //   params.delete("cursor");
-  //   router.push(`/products/category?${params.toString()}`, { scroll: false });
-  // };
   return (
     <div className="flex">
-      {/* <ProductCategorySelector initialCategory={category} onCategoryChange={handleCategoryChange} /> */}
-
       <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">
         {isLoading ? (
           <p>Loading products...</p>
@@ -63,7 +49,6 @@ export default function CardListByCategory({ categoryId }: CardListProps) {
           products?.map((product) => (
             <Link className="" href={`/product/${product.id}`} key={product.id}>
               <ProductCard product={product} />
-              {/* <Card {...product} /> */}
             </Link>
           ))
         ) : (

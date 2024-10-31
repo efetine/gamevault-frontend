@@ -3,28 +3,23 @@ import { categoriesSchema } from "~/schemas/categories-schema";
 import type { Category } from "~/schemas/category-schema";
 import type { Product } from "~/schemas/product-schema";
 
-// export async function getCategories(): Promise<Category[]> {
-//   const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
+export async function getCategories(): Promise<Category[]> {
+  const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
 
-//   const response = await fetch(url.toString());
+  const response = await fetch(url.toString());
 
-//   const categories = await response.json();
+  const categories = await response.json();
 
-//   const parsedCategories = categoriesSchema.safeParse(categories);
+  const parsedCategories = categoriesSchema.safeParse(categories);
 
-//   if (parsedCategories.success === false) {
-//     throw new Error(parsedCategories.error.message);
-//   }
+  if (parsedCategories.success === false) {
+    throw new Error(parsedCategories.error.message);
+  }
 
-//   return parsedCategories.data;
-// }
-
-interface IApiResponse {
-  data: Product[];
-  cursor: string | undefined;
+  return parsedCategories.data;
 }
 
-export async function getCategories(): Promise<Category[]> {
+export async function getCategoriesMenu(): Promise<Category[]> {
   const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
 
   const response = await fetch(url.toString(), {
@@ -45,6 +40,11 @@ export async function getCategories(): Promise<Category[]> {
   }
 
   return parsedCategories.data;
+}
+
+interface IApiResponse {
+  data: Product[];
+  cursor: string | undefined;
 }
 
 export async function getProductsByCategory(
