@@ -133,7 +133,7 @@ const EditCoupon: React.FC<EditCouponProps> = ({ coupon, onClose }) => {
                 onClick={handleStatusChange}
                 className={`${
                   isActive
-                    ? "bg-yellow-500 hover:bg-yellow-600"
+                  ? "bg-yellow-500 hover:bg-yellow-600"
                     : "bg-blue-500 hover:bg-blue-600"
                 } text-white transition-colors duration-200`}
               >

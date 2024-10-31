@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  File,
   Home,
   LineChart,
+  Mail,
   MoreHorizontal,
   Package,
   Package2,
@@ -18,7 +18,11 @@ import { useMutation } from "@tanstack/react-query";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "~/hooks/use-toast";
 import { Coupon } from "~/schemas/coupons-schema";
-import { getCouponById, getCoupons } from "~/services/coupon-service";
+import {
+  getCouponById,
+  getCoupons,
+  sendCouponMail,
+} from "~/services/coupon-service";
 import { Badge } from "../../../../../src/components/ui/badge";
 import {
   Breadcrumb,
@@ -64,6 +68,7 @@ import {
 } from "../../../../../src/components/ui/tooltip";
 import CreateCoupon from "./create/page";
 import EditCoupon from "./edit/page";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 export function Dashboard() {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
@@ -85,16 +90,17 @@ export function Dashboard() {
       setSelectedCoupons([...selectedCoupons, coupon]);
     }
   };
+
   const sendCouponsMutation = useMutation<
     {},
     {},
     { emails: string[]; coupons: Coupon[] }
   >({
     mutationFn: async ({ emails, coupons }) => {
-      console.log("Simulando el envío a:", emails);
+      console.log("Enviando cupones a:", emails);
       console.log("Cupones seleccionados:", coupons);
 
-      return "Cupones enviados";
+      return await sendCouponMail(emails, coupons);
     },
     onError: () => {
       toast({
@@ -111,7 +117,7 @@ export function Dashboard() {
     },
   });
 
-  const handleSendCoupons = () => {
+  const handleSendCoupons = async () => {
     if (!userEmail.trim()) {
       toast({
         title: "Por favor, ingresa al menos un correo electrónico. 😔",
@@ -128,10 +134,6 @@ export function Dashboard() {
       });
       return;
     }
-
-    console.log("Enviando a:", validEmails);
-    console.log("Cupones seleccionados:", selectedCoupons);
-
     sendCouponsMutation.mutate({
       emails: validEmails,
       coupons: selectedCoupons,
@@ -162,7 +164,15 @@ export function Dashboard() {
     };
 
     fetchCoupons();
-  }, []);
+  }, [coupons]);
+
+  async function onSubmit(values: Coupon) {
+    try {
+      await handleSendCoupons();
+    } catch (error: any) {
+      console.error("Error during form submission:", error);
+    }
+  }
 
   if (loading) return <div>Cargando cupones...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -293,7 +303,7 @@ export function Dashboard() {
                   className="h-7 gap-1"
                   onClick={() => setShowEmailInput(!showEmailInput)}
                 >
-                  <File className="h-3.5 w-3.5" />
+                  <Mail className="h-3.5 w-3.5" />
                   <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                     Send by Email
                   </span>
@@ -312,25 +322,28 @@ export function Dashboard() {
                       className="h-7 gap-1"
                       onClick={handleSendCoupons}
                     >
-                      Enviar
+                      {sendCouponsMutation.status === "pending" ? (
+                        <CgSpinnerTwo className="animate-spin" />
+                      ) : null}
+                      Send
                     </Button>
                   </div>
                 )}
-                <div className="relative">
-                  <Button
-                    size="sm"
-                    className="h-7 gap-1"
-                    onClick={() => setShowForm(!showForm)}
-                  >
-                    <PlusCircle className="h-3.5 w-3.5" />
-                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Add Coupon
-                    </span>
-                  </Button>
-                  {showForm && (
-                    <CreateCoupon onClose={() => setShowForm(false)} />
-                  )}
-                </div>
+              </div>
+              <div className="relative">
+                <Button
+                  size="sm"
+                  className="h-7 gap-1"
+                  onClick={() => setShowForm(!showForm)}
+                >
+                  <PlusCircle className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    Add Coupon
+                  </span>
+                </Button>
+                {showForm && (
+                  <CreateCoupon onClose={() => setShowForm(false)} />
+                )}
               </div>
             </div>
             <TabsContent value="all">
