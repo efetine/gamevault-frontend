@@ -1,6 +1,6 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
-import CardListByCategory from "~/components/products/categories-detail/categories-detail";
+import ProductsByCategory from "~/components/products/products-by-category/products-by-category";
 
 const CategoryId = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ const CategoryId = () => {
     return;
   }
 
-  return <CardListByCategory categoryId={categoryId} />;
+  return <ProductsByCategory categoryId={categoryId} />;
 };
 
 export default CategoryId;

@@ -14,7 +14,7 @@ import {
 } from "~/components/ui/navigation-menu";
 
 import { cn } from "~/lib/utils";
-import { getCategories } from "~/services/categories-service";
+import { getCategoriesMenu } from "~/services/categories-service";
 // import { ModeToggle } from "./mode-toggle";
 
 const ListItem = React.forwardRef<
@@ -41,8 +41,7 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem";
 
 const SubNavbar = async () => {
-  const categoriesAll = await getCategories();
-  console.log(categoriesAll, "all");
+  const categoriesAll = await getCategoriesMenu();
   return (
     <section className="my-10 w-full p-3">
       <div className="container mx-auto flex h-10 w-[60%] items-center justify-center gap-10 bg-gradient-to-r from-blue-900 via-[#1a2332] to-slate-600 p-3 transition-colors duration-200 dark:bg-slate-700">
