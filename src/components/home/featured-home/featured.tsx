@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
+import { Loading } from "~/components/layout/loading";
 
 import { Card, CardContent } from "~/components/ui/card";
 import {
@@ -13,7 +14,7 @@ import {
 import { getProducts } from "~/services/products-service";
 
 export function FeaturedProducts() {
-  const { data, status } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ["products"],
     queryFn: () =>
       getProducts({
@@ -23,12 +24,12 @@ export function FeaturedProducts() {
 
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
 
-  if (status === "error") {
+  if (isError) {
     return <div>Error...</div>;
   }
 
-  if (status === "pending") {
-    return <div>Loading...</div>;
+  if (isPending) {
+    return <Loading className="h-[325px]" />;
   }
 
   return (
@@ -38,7 +39,7 @@ export function FeaturedProducts() {
       </h2>
       <Carousel className="w-full" plugins={[plugin.current]}>
         <CarouselContent>
-          {data.products.map((product) => (
+          {data?.products.map((product) => (
             <CarouselItem
               key={product.id}
               className="md:basis-1/2 lg:basis-1/3"

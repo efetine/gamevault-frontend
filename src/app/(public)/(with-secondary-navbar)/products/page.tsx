@@ -5,9 +5,9 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { z } from "zod";
+import { Loading } from "~/components/layout/loading";
 
 // import { ProductsCarousel } from "./products-carousel";
-import { Loading } from "~/components/layout/loading";
 import { ProductCard } from "~/components/products/product-card";
 import ProductTypeSelector from "~/components/products/products-type-selector";
 import { getProducts } from "~/services/products-service";

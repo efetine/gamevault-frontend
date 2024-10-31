@@ -1,10 +1,21 @@
-import { CgSpinner } from "react-icons/cg";
+import { cn } from "~/lib/utils";
 
-export function Loading() {
+export function Loading({ className }: { className?: string }) {
   return (
-    <div className="flex h-screen w-full items-center justify-center gap-4">
-      <CgSpinner className="h-8 w-8 animate-spin" />
-      <span className="text-2xl font-bold">Loading</span>
+    <div
+      className={cn(
+        "flex h-screen w-full flex-col items-center justify-center gap-3",
+        className,
+      )}
+    >
+      <div className="animate-bounce">
+        <img
+          src="/b2936695e4c1d28d1232842dfd361b9d.jpg"
+          alt="Logo de un fantasma con cascos"
+          className="h-[60px] rounded-full"
+        />
+      </div>
+      <span>...Loading</span>
     </div>
   );
 }

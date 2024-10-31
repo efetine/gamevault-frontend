@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { notFound, useParams } from "next/navigation";
 import { z } from "zod";
 
+import { Loading } from "~/components/layout/loading";
 import { getProductById } from "~/services/products-service";
 import ProductEditForm from "./product-edit-form";
 
@@ -31,7 +32,7 @@ export default function ProductsEdits() {
   }
 
   if (status === "pending") {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return <ProductEditForm product={data} />;
