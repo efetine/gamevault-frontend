@@ -48,7 +48,7 @@ export async function UserMenu() {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/profile">
+        <Link href={`/profile/${session.user.id}`}>
           <DropdownMenuItem>My Profile</DropdownMenuItem>
         </Link>
         <DropdownMenuItem disabled>Settings</DropdownMenuItem>

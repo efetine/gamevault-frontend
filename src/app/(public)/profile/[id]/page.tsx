@@ -14,8 +14,11 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
 import { Textarea } from "~/components/ui/textarea";
+import { getServerAuthSession } from "~/server/auth";
 
-export default function Profile() {
+export async function Profile() {
+  const session = await getServerAuthSession();
+
   return (
     <div className="flex min-h-screen text-white">
       {/* Sidebar */}
@@ -51,15 +54,15 @@ export default function Profile() {
                   className="h-32 w-32 rounded-full border-4 border-blue-500"
                 />
                 <div>
-                  <h1 className="text-3xl font-bold">XxDragonSlayer99xX</h1>
+                  <h1 className="text-3xl font-bold">{session?.user.name}</h1>
                   <div className="flex items-center space-x-2">
                     <Badge
                       variant="secondary"
                       className="bg-[#4c6b22] text-white"
                     >
-                      Level 42
+                      No level ( NO API )
                     </Badge>
-                    <span className="text-white">Online</span>
+                    <span className="text-white">Online ( NO API )</span>
                   </div>
                 </div>
               </div>
@@ -78,7 +81,7 @@ export default function Profile() {
               <Textarea
                 className="border-[#0e1621] bg-[#1a2634] text-white"
                 placeholder="Add a description about yourself..."
-                defaultValue="Hardcore gamer since 2005. I live and breathe RPGs and FPS games. Always up for a challenge and making new gaming buddies!"
+                defaultValue="( NO API )"
               />
             </CardContent>
           </Card>
@@ -90,12 +93,13 @@ export default function Profile() {
               {[1, 2, 3, 4, 5, 6, 7, 8].map((game) => (
                 <Card key={game} className="border-[#0e1621] bg-[#1a2634]">
                   <CardContent className="p-4">
-                    <img
+                    {/* <img
                       src={`https://sm.ign.com/t/ign_es/cover/s/silent-hil/silent-hill-2-remake_ktez.300.jpg`}
                       alt={`Game ${game}`}
                       className="mb-2 h-auto w-full rounded"
                     />
-                    <div className="font-semibold">Game {game}</div>
+                    <div className="font-semibold">Game {game}</div> */}
+                    ( NO API )
                   </CardContent>
                 </Card>
               ))}
