@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { CardContent, CardFooter, Card as Cards } from "~/components/ui/card";
-import { Product } from "~/schemas/product-schema";
+import type { Product } from "~/schemas/product-schema";
 import { useCart } from "~/state/cart-state";
 
 interface ProductCardProps {
