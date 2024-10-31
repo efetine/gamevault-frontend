@@ -12,8 +12,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "~/components/ui/navigation-menu";
-import { getCategories } from "~/helpers/categories-from-db";
+
 import { cn } from "~/lib/utils";
+import { getCategories } from "~/services/categories-service";
 // import { ModeToggle } from "./mode-toggle";
 
 const ListItem = React.forwardRef<
@@ -41,7 +42,7 @@ ListItem.displayName = "ListItem";
 
 const SubNavbar = async () => {
   const categoriesAll = await getCategories();
-  console.log(categoriesAll);
+  console.log(categoriesAll, "all");
   return (
     <section className="my-10 w-full p-3">
       <div className="container mx-auto flex h-10 w-[60%] items-center justify-center gap-10 bg-gradient-to-r from-blue-900 via-[#1a2332] to-slate-600 p-3 transition-colors duration-200 dark:bg-slate-700">
@@ -59,17 +60,16 @@ const SubNavbar = async () => {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent">
+                <NavigationMenuTrigger className="bg-transparent text-lg font-semibold text-[#dad9dc]">
                   Categories
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-3 lg:w-[600px]">
                     {categoriesAll
                       .map((category) => ({
                         title: category.name,
                         href: `/categories/${category.id}`,
                       }))
-
                       .map((component) => (
                         <ListItem
                           key={component.title}

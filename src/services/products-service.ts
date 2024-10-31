@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 import { env } from "~/env";
-import { CreateProduct } from "~/schemas/create-product-schema";
-import { EditProduct } from "~/schemas/edit-product-schema";
+import type { CreateProduct } from "~/schemas/create-product-schema";
+import type { EditProduct } from "~/schemas/edit-product-schema";
 import { Product, productSchema } from "~/schemas/product-schema";
 import { productsSchema } from "~/schemas/products-schema";
 

@@ -1,22 +1,22 @@
 "use client";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Card from "~/components/card/card";
-
-import { getProductsByCategory } from "~/helpers/categories-from-db";
-import { IProduct } from "~/interfaces/IProduct";
-import { PaginationDto } from "~/schemas/pagination-dto";
+import { ProductCard } from "~/components/products/product-card";
+import type { PaginationDto } from "~/schemas/pagination-dto";
+import type { Product } from "~/schemas/product-schema";
+import { getProductsByCategory } from "~/services/categories-service";
 
 type CardListProps = PaginationDto & { categoryId: string };
 
 export default function CardListByCategory({ categoryId }: CardListProps) {
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+
   const [nextCursor, setNextCursor] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const router = useRouter();
+  //const router = useRouter();
   const searchParams = useSearchParams();
   const cursor = searchParams.get("cursor");
 
@@ -39,16 +39,17 @@ export default function CardListByCategory({ categoryId }: CardListProps) {
     void fetchProducts();
   }, [cursor, categoryId]);
 
-  const handleCategoryChange = (newCategory: string | undefined) => {
-    const params = new URLSearchParams(searchParams);
-    if (newCategory) {
-      params.set("category", newCategory);
-    } else {
-      params.delete("category");
-    }
-    params.delete("cursor");
-    router.push(`/products/category?${params.toString()}`, { scroll: false });
-  };
+  //! PARA PAGINADO
+  // const handleCategoryChange = (newCategory: string | undefined) => {
+  //   const params = new URLSearchParams(searchParams);
+  //   if (newCategory) {
+  //     params.set("category", newCategory);
+  //   } else {
+  //     params.delete("category");
+  //   }
+  //   params.delete("cursor");
+  //   router.push(`/products/category?${params.toString()}`, { scroll: false });
+  // };
   return (
     <div className="flex">
       {/* <ProductCategorySelector initialCategory={category} onCategoryChange={handleCategoryChange} /> */}
@@ -61,7 +62,8 @@ export default function CardListByCategory({ categoryId }: CardListProps) {
         ) : products && products.length > 0 ? (
           products?.map((product) => (
             <Link className="" href={`/product/${product.id}`} key={product.id}>
-              <Card {...product} />
+              <ProductCard product={product} />
+              {/* <Card {...product} /> */}
             </Link>
           ))
         ) : (
