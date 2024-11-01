@@ -7,6 +7,7 @@ import { io, Socket } from "socket.io-client";
 
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import { env } from "~/env";
 
 interface Message {
   text: string;
@@ -26,7 +27,7 @@ export const ChatButton: React.FC = () => {
     setChatOpen(true);
 
     if (!socket) {
-      const newSocket: Socket = io("http://localhost:3001", {
+      const newSocket: Socket = io(env.NEXT_PUBLIC_API_URL, {
         query: { role: "client" },
         transports: ["websocket"],
         upgrade: false,
