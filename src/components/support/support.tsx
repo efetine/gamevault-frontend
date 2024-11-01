@@ -1,3 +1,5 @@
+"use client";
+
 // export default function Support() {
 //   return <div>support</div>;
 // }
@@ -23,50 +25,52 @@ export default function Support() {
           <Accordion type="single" collapsible className="mb-12">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-lg text-sky-600">
-                Can I create a fan page about one of your games?
+                Do you offer refunds if I am not satisfied with a game?
               </AccordionTrigger>
               <AccordionContent className="text-base">
-                We would love that! The only thing we ask is that you follow our
-                Fan Content Policy.
+                Yes, we have a refund policy that applies under certain
+                conditions. Please check our Terms and Conditions for more
+                information.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger className="text-lg text-sky-600">
-                Can Game Vault sponsor my team in an upcoming tournament?
+                Can I transfer the games I purchase to another account?
               </AccordionTrigger>
               <AccordionContent className="text-base">
-                At this time, we do not offer sponsorships for game competitions
-                or tournaments.
+                No, game licenses are non-transferable and are linked to the
+                account used for purchase.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger className="text-lg text-sky-600">
-                Can I monetize gameplay videos that I have created that include
-                your games?
+                Is support available if I experience technical issues with a
+                game?
               </AccordionTrigger>
               <AccordionContent className="text-base">
-                Yes, that is allowed.
+                Yes, you can contact our support team or visit each game's help
+                section for common solutions.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
               <AccordionTrigger className="text-lg text-sky-600">
-                I have a really good idea for a game. Can we talk about it?
+                Do you offer discounts or promotions on certain games?
               </AccordionTrigger>
               <AccordionContent className="text-base">
-                We cannot accept outside proposals of any kind. Please do not
-                send us ideas, stories, art, game levels, music, etc. For legal
-                reasons, we cannot review them.
+                Yes, we run special offers and promotions on select dates. Check
+                our homepage and follow us on social media to stay updated on
+                our promotions.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
               <AccordionTrigger className="text-lg text-sky-600">
-                Could I visit the studio?
+                What kind of warranty do physical products, like keyboards and
+                graphics cards, come with?
               </AccordionTrigger>
               <AccordionContent className="text-base">
-                As a general policy, we do not offer studio visits. We are
-                committed to providing our team with the most conducive work
-                environment so they can focus and continue creating great games
-                and technology.
+                All our physical products come with at least a one-year
+                warranty. Check each product’s details for specific warranty
+                coverage information.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

@@ -29,15 +29,15 @@ export default function About() {
           <div className="container relative mx-auto px-4 pb-24 pt-40">
             <div className="max-w-2xl">
               <h2 className="mb-6 text-xl font-extrabold uppercase leading-8 tracking-wider">
-                SOBRE GAME VAULT
+                ABOUT GAME VAULT
               </h2>
               <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-                Tu fuente definitiva de entretenimiento digital
+                Your Ultimate Source for Digital Entertainment
               </h1>
               <p className="mb-8 max-w-lg text-lg font-normal leading-relaxed text-gray-300 md:text-xl">
-                Descubramos juntos el placer de jugar! Ya sea en PC, consolas o
-                dispositivos móviles, te respaldamos con los mejores productos a
-                precios asequibles.
+                Let's discover the joy of gaming together! Whether on PC,
+                consoles, or mobile devices, we've got you covered with the best
+                products at affordable prices.
               </p>
             </div>
           </div>
@@ -51,70 +51,68 @@ export default function About() {
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Disfruta de tus juegos con ofertas asequibles en mas de 10,000
-                juegos disponibles.
+                Enjoy your games with affordable deals on over 10,000 available
+                games.
               </CardDescription>
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
               <Users className="mb-2 h-10 w-10 text-primary" />
-              <CardTitle>Comunidad Activa</CardTitle>
+              <CardTitle>Active Community</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Únete a millones de jugadores en nuestra comunidad global.
+                Join millions of players in our global community.
               </CardDescription>
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
               <Globe className="mb-2 h-10 w-10 text-primary" />
-              <CardTitle>Entrega Global</CardTitle>
+              <CardTitle>Global Delivery</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Entrega instantánea de códigos de juego a cualquier parte del
-                mundo.
+                Instant delivery of game codes anywhere in the world.
               </CardDescription>
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
               <Award className="mb-2 h-10 w-10 text-primary" />
-              <CardTitle>Garantía de Calidad</CardTitle>
+              <CardTitle>Quality Guarantee</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Todos nuestros productos son 100% originales y garantizados.
+                All our products are 100% original and guaranteed.
               </CardDescription>
             </CardContent>
           </Card>
         </section>
         <section className="mb-12 flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="flex max-w-xl flex-col justify-center">
-            <h2 className="mb-4 text-3xl font-bold">Quienes somos</h2>
+            <h2 className="mb-4 text-3xl font-bold">Who We Are</h2>
             <p className="text-justify text-lg text-muted-foreground">
-              En Game Vault, somos apasionados por los videojuegos y la
-              tecnología. Nuestra misión es proporcionar a los jugadores de todo
-              el mundo acceso fácil y rápido a los mejores títulos del mercado.
-              Con años de experiencia en la industria, nuestro equipo está
-              comprometido a ofrecer un servicio excepcional y una experiencia
-              de compra sin igual.
+              At Game Vault, we are passionate about video games and technology.
+              Our mission is to provide players worldwide with easy, fast access
+              to the best titles on the market. With years of experience in the
+              industry, our team is committed to delivering exceptional service
+              and a seamless shopping experience.
             </p>
             <p className="mt-4 text-justify text-lg text-muted-foreground">
-              Nos enorgullece ser más que una simple tienda en línea; somos una
-              comunidad de jugadores que comparten la misma pasión. Nuestro
-              conocimiento profundo del mundo de los videojuegos nos permite
-              ofrecer recomendaciones personalizadas y mantenernos a la
-              vanguardia de las últimas tendencias y lanzamientos.
+              We take pride in being more than just an online store; we are a
+              community of gamers who share the same passion. Our deep knowledge
+              of the gaming world allows us to offer personalized
+              recommendations and stay at the forefront of the latest trends and
+              releases.
             </p>
           </div>
           <div className="relative h-[300px] w-full max-w-[300px] overflow-hidden">
             <div className="absolute inset-0 overflow-hidden rounded-bl-[40%] rounded-br-3xl rounded-tl-3xl rounded-tr-[40%] bg-black">
               <Image
-                src="https://cdn.bb.com.br/wp-content/uploads/2024/06/Imagem_Destacada_Cheque_Ouro_Empresarial.jpeg"
-                alt="Equipo de GameStore"
+                src="/logo.jpg"
+                alt="Game Vault Team"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-md"
