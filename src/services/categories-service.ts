@@ -27,6 +27,14 @@ export async function getCategories({
     url.searchParams.set('limit', limit.toString());
   }
 
+  if (cursor !== null && cursor !== undefined) {
+    url.searchParams.set("cursor", cursor.toString());
+  }
+
+  if (limit !== null && limit !== undefined) {
+    url.searchParams.set("limit", limit.toString());
+  }
+
   const response = await fetch(url.toString(), {
     method: 'GET',
     next: { revalidate: 1200 },
