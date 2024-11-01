@@ -20,7 +20,7 @@ export default function ProductTypeSelector() {
     <div className="mb-4 flex w-full justify-center space-x-4">
       <button
         onClick={() => handleTypeChange(undefined)}
-        className={`rounded px-4 py-2 ${type === "all" ? "bg-gradient-to-r from-blue-900/60 via-indigo-950 to-purple-900/60 p-8 text-center text-white shadow-lg" : "bg-gray-400"}`}
+        className={`rounded px-4 py-2 ${type === null ? "bg-gradient-to-r from-blue-900/60 via-indigo-950 to-purple-900/60 p-8 text-center text-white shadow-lg" : "bg-gray-400"}`}
       >
         All Products
       </button>

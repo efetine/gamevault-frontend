@@ -29,15 +29,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <Button variant="secondary" className="text-white">
-              Ver detalles
+              See details
             </Button>
           </div>
         </div>
       </Link>
       <CardContent className="p-4">
-        <h3 className="mb-2 truncate text-lg font-bold">{product.name}</h3>
+        <h3 className="mb-2 truncate text-lg font-bold capitalize">{product.name}</h3>
         <div className="mb-2 flex flex-wrap gap-1">
-          <Badge variant="secondary" className="text-xs">
+          <Badge variant="secondary" className="text-xs capitalize">
             {product.category.name}
           </Badge>
         </div>
