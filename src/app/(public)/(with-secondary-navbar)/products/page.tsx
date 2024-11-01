@@ -6,7 +6,6 @@ import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { z } from "zod";
 
-// import { ProductsCarousel } from "./products-carousel";
 import { Loading } from "~/components/layout/loading";
 import { ProductCard } from "~/components/products/product-card";
 import ProductTypeSelector from "~/components/products/products-type-selector";
@@ -61,16 +60,7 @@ export default function ProductsPage() {
   return (
     <div className="mt-36 w-full content-center items-center justify-center">
       <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black ">
-        {/* <section className="relative flex flex-col items-center justify-center overflow-hidden">
-        <div className="w-full items-center">
-          <h2 className="mb-4 text-2xl font-semibold">
-            Featured & Recommended
-          </h2>
-        </div>
-        <div className="w-full">
-          <ProductsCarousel images={featuredGames} />
-        </div>
-      </section> */}
+        
         <section className="relative flex flex-col items-center justify-center overflow-hidden ">
           <ProductTypeSelector />
           <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">

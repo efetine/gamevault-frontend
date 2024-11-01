@@ -39,7 +39,7 @@ export function FeaturedProducts() {
     </h2>
     <Carousel className="w-full" plugins={[plugin.current]}>
       <CarouselContent>
-        {data.products.map((product) => (
+        {data.data.map((product) => (
           <CarouselItem key={product.id} className="md:basis-1/2 lg:basis-1/3">
             <Link href={`/product/${product.id}`}>
               <div className="overflow-hidden rounded-lg">
