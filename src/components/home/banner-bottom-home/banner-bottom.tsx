@@ -1,10 +1,18 @@
 import Link from "next/link";
-
 import { Button } from "~/components/ui/button";
+import { getCategoriesMenu } from "~/services/categories-service";
 
-export function ConsolePromotion() {
+export async function ConsolePromotion() {
+  const categories = await getCategoriesMenu();
+  const consoleCategory = categories.find(
+    (category) =>
+      category.name.toLowerCase().includes("console") ||
+      category.name.toLowerCase().includes("consola"),
+  );
+  const consoleCategoryName = consoleCategory?.id ?? 'consoles';
+
   return (
-    <section className="relative flex h-[60vh] w-full items-center justify-center overflow-hidden">
+    <section className="relative flex h-[60vh] bg-slate-400 w-full items-center dark:bg-transparent justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-tr from-blue-900 via-[#4d00993c] to-black/50" />
       <div className="relative z-10 text-center">
         <h2 className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
@@ -14,7 +22,7 @@ export function ConsolePromotion() {
           Discover ultimate power: Explore the most powerful consoles on the
           market and elevate your gaming experience to the next level!
         </p>
-        <Link href="/products">
+        <Link href={`/categories/${consoleCategoryName}`}>
           <Button className="bg-white px-8 py-3 text-lg font-semibold text-blue-600 transition-colors hover:bg-gray-100">
             Shop Consoles
           </Button>

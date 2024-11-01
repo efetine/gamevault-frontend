@@ -21,7 +21,7 @@ export function Cart() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="outline" size="icon">
           <ShoppingCart className="h-5 w-5" />
         </Button>
       </PopoverTrigger>

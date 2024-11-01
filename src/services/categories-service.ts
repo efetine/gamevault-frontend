@@ -16,14 +16,6 @@ export async function getCategories({
 }: PaginationDto): Promise<PaginatedCategories> {
   const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
 
-  if (cursor !== null && cursor !== undefined) {
-    url.searchParams.set("cursor", cursor.toString());
-  }
-
-  if (limit !== null && limit !== undefined) {
-    url.searchParams.set("limit", limit.toString());
-  }
-
   const response = await fetch(url.toString(), {
     method: "GET",
     next: { revalidate: 1200 },
@@ -85,6 +77,48 @@ export async function getProductsByCategory(
     }
 
     return validated.data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("an unknown error occurred");
+    }
+  }
+}
+
+interface IApiResponse {
+  data: Product[];
+  cursor: string | undefined;
+}
+
+export async function getProductsByCategory(
+  categoryId: string,
+  limit: number | undefined = 4,
+  cursor: string | null,
+): Promise<{ products: Product[]; nextCursor: string | undefined }> {
+  try {
+    const url = new URL(`/products/category/`, env.NEXT_PUBLIC_API_URL);
+
+    url.searchParams.append("limit", String(limit));
+    if (cursor != undefined) {
+      url.searchParams.append("cursor", cursor);
+    }
+
+    if (categoryId !== undefined) {
+      url.searchParams.append("category", categoryId);
+    }
+
+    const response = await fetch(url, {
+      method: "GET",
+      next: { revalidate: 1200 },
+    });
+
+    const data: IApiResponse = (await response.json()) as IApiResponse;
+    console.log("data: ", data);
+    return {
+      products: data.data ?? [],
+      nextCursor: data.cursor,
+    };
   } catch (error: unknown) {
     if (error instanceof Error) {
       throw new Error(error.message);

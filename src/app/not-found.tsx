@@ -6,10 +6,10 @@ export default function NotFound() {
         {/* Contenedor de texto */}
         <div className="flex flex-col w-full lg:w-[50%] items-center justify-center lg:p-2 ">
           <p className="font-bold text-center text-xl lg:text-3xl mb-4 lg:mb-8">
-            Lo sentimos, no hemos encontrado la página que buscas.
+          Sorry, we couldn&apos;t find the page you were looking for.
           </p>
           <Link href="/" className="underline text-lg lg:text-xl">
-            Volver a la página principal
+          Return to the main page
           </Link>
         </div>
 

@@ -11,7 +11,7 @@ const Footer = () => {
           Game Vault
         </h1>
       </div>
-      <div className="flew-row my-4 flex columns-auto justify-center gap-2">
+      {/* <div className="flew-row my-4 flex columns-auto justify-center gap-2">
         <Link className="hover:text-gray-400" href="/">
           Home
         </Link>
@@ -27,7 +27,7 @@ const Footer = () => {
         <Link className="hover:text-gray-400" href="/">
           Suport
         </Link>
-      </div>
+      </div> */}
       <div className="flew-row my-4 flex columns-auto justify-center gap-3 text-2xl">
         <Link href="https://x.com/" target="blank">
           <FaXTwitter />

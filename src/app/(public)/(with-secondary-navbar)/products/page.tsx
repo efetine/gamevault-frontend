@@ -40,7 +40,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     if (inView && hasNextPage) {
-      fetchNextPage();
+      void fetchNextPage();
     }
   }, [inView, hasNextPage]);
 
@@ -60,7 +60,7 @@ export default function ProductsPage() {
 
   return (
     <div className="mt-36 w-full content-center items-center justify-center">
-      <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black">
+      <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black ">
         {/* <section className="relative flex flex-col items-center justify-center overflow-hidden">
         <div className="w-full items-center">
           <h2 className="mb-4 text-2xl font-semibold">
@@ -71,7 +71,7 @@ export default function ProductsPage() {
           <ProductsCarousel images={featuredGames} />
         </div>
       </section> */}
-        <section className="relative flex flex-col items-center justify-center overflow-hidden">
+        <section className="relative flex flex-col items-center justify-center overflow-hidden ">
           <ProductTypeSelector />
           <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">
             {/* {data.pages[currentPage]?.products.map((product) => {
