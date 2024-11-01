@@ -16,29 +16,6 @@ import { cn } from "~/lib/utils";
 import { getCategoriesMenu } from "~/services/categories-service";
 // import { ModeToggle } from "./mode-toggle";
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className,
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
-
 const SubNavbar = async () => {
   const categoriesAll = await getCategoriesMenu();
 
@@ -63,20 +40,7 @@ const SubNavbar = async () => {
                   Categories
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-3 lg:w-[600px]">
-                    {categoriesAll
-                      .map((category) => ({
-                        title: category.name,
-                        href: `/categories/${category.id}`,
-                      }))
-                      .map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          href={component.href}
-                        />
-                      ))}
-                  </ul>
+                  <CategoriesMenu />
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
