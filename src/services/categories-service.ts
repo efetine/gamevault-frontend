@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { env } from '~/env';
+import { categoriesSchema } from '~/schemas/categories-schema';
 import { Category, categorySchema } from '~/schemas/category-schema';
 import { CreateCategory } from '~/schemas/create-category-schema';
 import { paginatedResultSchema } from '~/schemas/paginated-result';
@@ -10,6 +11,7 @@ import { productWithCategorySchema } from '~/schemas/product-schema';
 const paginatedCategories = paginatedResultSchema(categorySchema);
 
 export type PaginatedCategories = z.infer<typeof paginatedCategories>;
+
 
 export async function getCategories({
   cursor,
@@ -36,7 +38,7 @@ export async function getCategories({
 
   const categories = await response.json();
 
-  const parsedCategories = paginatedCategories.safeParse(categories);
+  const parsedCategories = categoriesSchema.safeParse(categories);
 
   if (!parsedCategories.success) {
     throw new Error(`Validation error: ${parsedCategories.error.message}`);
@@ -90,7 +92,7 @@ export async function getProductsByCategory(
     if (error instanceof Error) {
       throw new Error(error.message);
     } else {
-      throw new Error('an unknown error occurred');
+      throw new Error('An unknown error occurred');
     }
   }
 }
