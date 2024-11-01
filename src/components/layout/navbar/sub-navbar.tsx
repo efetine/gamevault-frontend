@@ -69,7 +69,7 @@ const SubNavbar = async () => {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
+                <Link href="/support" legacyBehavior passHref>
                   <NavigationMenuLink>Support</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>

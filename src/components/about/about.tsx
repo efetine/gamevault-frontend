@@ -1,12 +1,6 @@
 import { Award, Gamepad2, Globe, Users } from "lucide-react";
 import Image from "next/image";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "~/components/ui/accordion";
-import {
   Card,
   CardContent,
   CardDescription,
@@ -16,7 +10,7 @@ import {
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0d1117] via-[#1a2332] to-black text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <section className="relative overflow-hidden pt-5">
           <div className="absolute inset-0 z-0">
             <div className="h-[700px] w-full">
@@ -99,8 +93,8 @@ export default function About() {
         </section>
         <section className="mb-12 flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="flex max-w-xl flex-col justify-center">
-            <h2 className="mb-4 text-3xl font-bold">QUIENES SOMOS</h2>
-            <p className="text-lg text-muted-foreground">
+            <h2 className="mb-4 text-3xl font-bold">Quienes somos</h2>
+            <p className="text-justify text-lg text-muted-foreground">
               En Game Vault, somos apasionados por los videojuegos y la
               tecnología. Nuestra misión es proporcionar a los jugadores de todo
               el mundo acceso fácil y rápido a los mejores títulos del mercado.
@@ -108,7 +102,7 @@ export default function About() {
               comprometido a ofrecer un servicio excepcional y una experiencia
               de compra sin igual.
             </p>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="mt-4 text-justify text-lg text-muted-foreground">
               Nos enorgullece ser más que una simple tienda en línea; somos una
               comunidad de jugadores que comparten la misma pasión. Nuestro
               conocimiento profundo del mundo de los videojuegos nos permite
@@ -127,60 +121,6 @@ export default function About() {
               />
             </div>
           </div>
-        </section>
-        <section>
-          <h2 className="mb-7 block text-2xl font-normal leading-[5rem] tracking-[-0.03em]">
-            Preguntas frecuentes
-          </h2>
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-              <AccordionTrigger className="text-sky-600">
-                Puedo crear una pagina de aficionados sobre un juego de ustedes?
-              </AccordionTrigger>
-              <AccordionContent>
-                ¡Nos encantaría! Lo único que pedimos es que se siga nuestra
-                Politica de contenido de aficionados.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger className="text-sky-600">
-                ¿Puede Game Vault patrocinar a mi equipo en un próximo torneo?
-              </AccordionTrigger>
-              <AccordionContent>
-                En este momento no ofrecemos patrocinios para competiciones de
-                juegos ni torneos.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger className="text-sky-600">
-                ¿Puedo monetizar vídeos de juego que he creado en los que se
-                incluyen juegos de ustedes?
-              </AccordionTrigger>
-              <AccordionContent>Sí, está permitido.</AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-4">
-              <AccordionTrigger className="text-sky-600">
-                Tengo una idea muy buena para un juego o para Epic. ¿Podemos
-                hablar sobre ella?
-              </AccordionTrigger>
-              <AccordionContent>
-                No podemos aceptar propuestas externas de ningún tipo. No nos
-                envíes ideas, historias, arte, niveles de juego, música, etc.
-                Por motivos legales, no podemos revisarlos.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-5">
-              <AccordionTrigger className="text-sky-600">
-                ¿Podría visitar el estudio?
-              </AccordionTrigger>
-              <AccordionContent>
-                Como política general, no ofrecemos visitas al estudio. Nos
-                comprometemos a ofrecer a nuestro equipo el entorno de trabajo
-                más propicio para que pueda concentrarse y seguir creando
-                grandes juegos y tecnología.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
         </section>
       </div>
     </div>
