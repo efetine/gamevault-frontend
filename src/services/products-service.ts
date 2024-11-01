@@ -3,8 +3,13 @@ import { z } from "zod";
 import { env } from "~/env";
 import type { CreateProduct } from "~/schemas/create-product-schema";
 import type { EditProduct } from "~/schemas/edit-product-schema";
-import { Product, productSchema } from "~/schemas/product-schema";
-import { productsSchema } from "~/schemas/products-schema";
+import { paginatedResultSchema } from "~/schemas/paginated-result";
+import { paginationDtoSchema } from "~/schemas/pagination-dto";
+import {
+  Product,
+  productSchema,
+  productWithCategorySchema,
+} from "~/schemas/product-schema";
 
 export async function createProduct(values: CreateProduct): Promise<Product> {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/products/create`, {
@@ -26,23 +31,20 @@ export async function createProduct(values: CreateProduct): Promise<Product> {
   return createdProduct.data;
 }
 
-const getProductsSchema = z.object({
-  products: productsSchema,
-  nextCursor: z.string().nullable(),
-});
+const paginatedProducts = paginatedResultSchema(productWithCategorySchema);
 
-export type GetProducts = z.infer<typeof getProductsSchema>;
+export type PaginatedProducts = z.infer<typeof paginatedProducts>;
 
-export const paginationDtoSchema = z.object({
-  cursor: z.string().nullish(),
-  limit: z.string().optional(),
+export const getProductsInputSchema = paginationDtoSchema.extend({
   type: z.enum(["digital", "physical"]).optional(),
 });
 
-export type PaginationDto = z.infer<typeof paginationDtoSchema>;
+export type GetProductsInput = z.infer<typeof getProductsInputSchema>;
 
-export async function getProducts(params: PaginationDto): Promise<GetProducts> {
-  const { cursor, limit = "10", type } = paginationDtoSchema.parse(params);
+export async function getProducts(
+  params: GetProductsInput,
+): Promise<PaginatedProducts> {
+  const { cursor, limit = "10", type } = getProductsInputSchema.parse(params);
   const url = new URL("/products", env.NEXT_PUBLIC_API_URL);
 
   if (cursor) {
@@ -64,7 +66,7 @@ export async function getProducts(params: PaginationDto): Promise<GetProducts> {
 
   const body = await response.json();
 
-  const parsedProducts = getProductsSchema.safeParse(body);
+  const parsedProducts = paginatedProducts.safeParse(body);
 
   if (parsedProducts.success === false) {
     throw new Error(parsedProducts.error.message);

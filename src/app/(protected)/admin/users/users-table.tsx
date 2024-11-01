@@ -7,16 +7,8 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  ListFilter,
-  MoreHorizontal,
-  Pencil,
-  PlusCircle,
-  Search,
-  Trash,
-} from "lucide-react";
+import { ListFilter, PlusCircle, Search } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "~/components/ui/badge";
 
 import {
   Breadcrumb,
@@ -40,7 +32,6 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -54,24 +45,23 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { cn } from "~/lib/utils";
-import { ProductWithCategory } from "~/schemas/product-schema";
+import { Tabs, TabsContent } from "~/components/ui/tabs";
+import { GetUser } from "~/services/users-service";
 
-const columns: ColumnDef<ProductWithCategory>[] = [
+const columns: ColumnDef<GetUser>[] = [
   {
     accessorKey: "id",
   },
   {
-    accessorKey: "imageUrl",
+    accessorKey: "profileImage",
     header: "Image",
     cell: ({ row }) => {
       return (
         <img
-          alt="Product image"
+          alt="Profile image"
           className="aspect-square rounded-md object-cover"
           height="64"
-          src={row.getValue("imageUrl")}
+          src={row.getValue("profileImage")}
           width="64"
         />
       );
@@ -82,93 +72,37 @@ const columns: ColumnDef<ProductWithCategory>[] = [
     header: "Name",
   },
   {
-    accessorKey: "type",
-    header: "Type",
-    cell: ({ row }) => {
-      return (
-        <Badge variant="outline">
-          <span className="first-letter:uppercase">{row.getValue("type")}</span>
-        </Badge>
-      );
-    },
+    accessorKey: "email",
+    header: "Email",
   },
   {
-    accessorKey: "active",
+    accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => {
-      const status: string = row.getValue("active");
-      return (
-        <Badge
-          variant="outline"
-          className={cn(status === "active" ? "bg-green-700" : "bg-red-700")}
-        >
-          <span className="first-letter:uppercase">{status}</span>
-        </Badge>
-      );
-    },
   },
   {
-    accessorKey: "stock",
-    header: "Stock",
+    accessorKey: "role",
+    header: "Role",
   },
   {
-    accessorKey: "price",
-    header: "Price",
-    cell: ({ row }) => {
-      return (
-        <div>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(row.getValue("price"))}
-        </div>
-      );
-    },
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => {
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button aria-haspopup="true" size="icon" variant="ghost">
-              <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem asChild>
-              <Link href={`/admin/products/edit/${row.getValue("id")}`}>
-                <Pencil className="mr-2 h-4 w-4" />
-                Edit
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem disabled>
-              <Trash className="mr-2 h-4 w-4" />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    accessorKey: "bannedReason",
+    header: "Banned Reason",
   },
 ];
 
-interface ProductsTableProps {
-  data: ProductWithCategory[];
+interface UsersTableProps {
+  data: GetUser[];
   hasNextPage: boolean;
   pagesSize: number;
   fetchNextPage: Function;
 }
 
-export function ProductsTable({
+export function UsersTable({
   data,
   hasNextPage,
   pagesSize = 10,
   fetchNextPage,
-}: ProductsTableProps) {
-  const table = useReactTable<ProductWithCategory>({
+}: UsersTableProps) {
+  const table = useReactTable<GetUser>({
     data,
     columns,
     initialState: {
@@ -194,7 +128,7 @@ export function ProductsTable({
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Products</BreadcrumbPage>
+                <BreadcrumbPage>Users</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -210,11 +144,6 @@ export function ProductsTable({
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <Tabs defaultValue="all">
             <div className="flex items-center">
-              <TabsList>
-                <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="active">Active</TabsTrigger>
-                <TabsTrigger value="inactive">Inactive</TabsTrigger>
-              </TabsList>
               <div className="ml-auto flex items-center gap-2">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -238,11 +167,11 @@ export function ProductsTable({
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <Link href="/admin/products/create">
+                <Link href="/admin/users/create">
                   <Button size="sm" className="h-8 gap-1">
                     <PlusCircle className="h-3.5 w-3.5" />
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Add Product
+                      Add Admin
                     </span>
                   </Button>
                 </Link>
@@ -251,9 +180,9 @@ export function ProductsTable({
             <TabsContent value="all">
               <Card x-chunk="dashboard-06-chunk-0">
                 <CardHeader>
-                  <CardTitle>Products</CardTitle>
+                  <CardTitle>Users</CardTitle>
                   <CardDescription>
-                    Manage your products and view their sales performance.
+                    Manage your Users and view their sales performance.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

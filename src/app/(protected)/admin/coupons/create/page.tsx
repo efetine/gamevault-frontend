@@ -27,14 +27,7 @@ import { useToast } from "~/hooks/use-toast";
 import { couponSchema, type Coupon } from "~/schemas/coupons-schema";
 import { createCoupon } from "~/services/coupon-service";
 
-type CreateCouponProps = {
-  onClose: () => void;
-};
-
-
-export default function CreateCoupon({
-  onClose,
-}: CreateCouponProps) {
+export default function CreateCoupon() {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -49,7 +42,7 @@ export default function CreateCoupon({
       toast({
         title: "Coupon created! 😊",
       });
-      onClose();
+
       router.push("/admin/coupons");
     },
   });
@@ -142,7 +135,7 @@ export default function CreateCoupon({
             <CardFooter className="justify-end gap-2">
               <Button
                 type="button"
-                onClick={onClose}
+                onClick={() => router.push("/admin/coupons")}
                 className="bg-red-500 text-white transition-colors duration-200 hover:bg-red-600"
               >
                 Close

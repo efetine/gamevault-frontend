@@ -47,7 +47,7 @@ export default function ProductsPage() {
   const products = useMemo(() => {
     if (!data) return [];
 
-    return data.pages.flatMap((page) => page.products);
+    return data.pages.flatMap((page) => page.data);
   }, [data]);
 
   if (status === "error") {

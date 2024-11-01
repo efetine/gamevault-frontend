@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { categorySchema } from "./category-schema";
 
 export const productSchema = z.object({
   id: z.string().uuid(),
@@ -15,3 +16,11 @@ export const productSchema = z.object({
 });
 
 export type Product = z.infer<typeof productSchema>;
+
+export const productWithCategorySchema = productSchema
+  .extend({
+    category: categorySchema,
+  })
+  .omit({ categoryId: true });
+
+export type ProductWithCategory = z.infer<typeof productWithCategorySchema>;

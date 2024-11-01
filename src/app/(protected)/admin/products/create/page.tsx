@@ -61,7 +61,6 @@ export default function CreateProduct() {
       stock: 0,
       price: 0,
       description: "",
-      imageUrl: "",
     },
   });
 

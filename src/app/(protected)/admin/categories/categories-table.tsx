@@ -16,7 +16,6 @@ import {
   Trash,
 } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "~/components/ui/badge";
 
 import {
   Breadcrumb,
@@ -54,76 +53,16 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { cn } from "~/lib/utils";
-import { ProductWithCategory } from "~/schemas/product-schema";
+import { Tabs, TabsContent } from "~/components/ui/tabs";
+import { Category } from "~/schemas/category-schema";
 
-const columns: ColumnDef<ProductWithCategory>[] = [
+const columns: ColumnDef<Category>[] = [
   {
     accessorKey: "id",
   },
   {
-    accessorKey: "imageUrl",
-    header: "Image",
-    cell: ({ row }) => {
-      return (
-        <img
-          alt="Product image"
-          className="aspect-square rounded-md object-cover"
-          height="64"
-          src={row.getValue("imageUrl")}
-          width="64"
-        />
-      );
-    },
-  },
-  {
     accessorKey: "name",
     header: "Name",
-  },
-  {
-    accessorKey: "type",
-    header: "Type",
-    cell: ({ row }) => {
-      return (
-        <Badge variant="outline">
-          <span className="first-letter:uppercase">{row.getValue("type")}</span>
-        </Badge>
-      );
-    },
-  },
-  {
-    accessorKey: "active",
-    header: "Status",
-    cell: ({ row }) => {
-      const status: string = row.getValue("active");
-      return (
-        <Badge
-          variant="outline"
-          className={cn(status === "active" ? "bg-green-700" : "bg-red-700")}
-        >
-          <span className="first-letter:uppercase">{status}</span>
-        </Badge>
-      );
-    },
-  },
-  {
-    accessorKey: "stock",
-    header: "Stock",
-  },
-  {
-    accessorKey: "price",
-    header: "Price",
-    cell: ({ row }) => {
-      return (
-        <div>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(row.getValue("price"))}
-        </div>
-      );
-    },
   },
   {
     id: "actions",
@@ -155,20 +94,20 @@ const columns: ColumnDef<ProductWithCategory>[] = [
   },
 ];
 
-interface ProductsTableProps {
-  data: ProductWithCategory[];
+interface UsersTableProps {
+  data: Category[];
   hasNextPage: boolean;
   pagesSize: number;
   fetchNextPage: Function;
 }
 
-export function ProductsTable({
+export function UsersTable({
   data,
   hasNextPage,
   pagesSize = 10,
   fetchNextPage,
-}: ProductsTableProps) {
-  const table = useReactTable<ProductWithCategory>({
+}: UsersTableProps) {
+  const table = useReactTable<Category>({
     data,
     columns,
     initialState: {
@@ -194,7 +133,7 @@ export function ProductsTable({
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Products</BreadcrumbPage>
+                <BreadcrumbPage>Categories</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -210,11 +149,6 @@ export function ProductsTable({
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <Tabs defaultValue="all">
             <div className="flex items-center">
-              <TabsList>
-                <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="active">Active</TabsTrigger>
-                <TabsTrigger value="inactive">Inactive</TabsTrigger>
-              </TabsList>
               <div className="ml-auto flex items-center gap-2">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -238,11 +172,11 @@ export function ProductsTable({
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <Link href="/admin/products/create">
+                <Link href="/admin/categories/create">
                   <Button size="sm" className="h-8 gap-1">
                     <PlusCircle className="h-3.5 w-3.5" />
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Add Product
+                      Add Categories
                     </span>
                   </Button>
                 </Link>
@@ -251,9 +185,9 @@ export function ProductsTable({
             <TabsContent value="all">
               <Card x-chunk="dashboard-06-chunk-0">
                 <CardHeader>
-                  <CardTitle>Products</CardTitle>
+                  <CardTitle>Categories</CardTitle>
                   <CardDescription>
-                    Manage your products and view their sales performance.
+                    Manage your categories and view their sales performance.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

@@ -21,7 +21,7 @@ export default function AdminProducts() {
   const products = useMemo(() => {
     if (!data) return [];
 
-    return data.pages.flatMap((page) => page.products);
+    return data.pages.flatMap((page) => page.data);
   }, [data]);
 
   if (status === "error") {

@@ -1,8 +1,8 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { Check, ChevronsUpDown } from "lucide-react";
-import * as React from "react";
+import { useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { Button } from "~/components/ui/button";
@@ -30,11 +30,16 @@ import { getCategories } from "~/services/categories-service";
 
 export function CategoriesCombobox() {
   const form = useFormContext();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const { data: categories, status } = useQuery({
+  const { data, status } = useInfiniteQuery({
     queryKey: ["categories"],
-    queryFn: async () => getCategories(),
+    queryFn: async () =>
+      getCategories({
+        limit: "10",
+      }),
+    initialPageParam: "",
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
   if (status === "error") {
@@ -44,6 +49,12 @@ export function CategoriesCombobox() {
   if (status === "pending") {
     return <div>Loading...</div>;
   }
+
+  const categories = useMemo(() => {
+    if (!data) return [];
+
+    return data.pages.flatMap((page) => page.data);
+  }, [data]);
 
   return (
     <FormField

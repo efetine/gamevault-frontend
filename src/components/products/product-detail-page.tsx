@@ -31,7 +31,7 @@ export const ProductDetailPage: React.FC<Product> = ({
   stock,
   name,
   imageUrl,
-  category,
+  // category,
 }) => {
   const stockPercentage = (stock / 100) * 100;
   const lowStock = stockPercentage <= 20;
@@ -92,7 +92,7 @@ export const ProductDetailPage: React.FC<Product> = ({
                     {name}
                   </CardTitle>
                   <p className="text-sm text-muted-foreground">
-                    Category: {category.name}
+                    {/* Category: {category.name} */}
                   </p>
                 </div>
                 <div className='focus:ring-offset-2" inline-flex items-center rounded-md border bg-yellow-500 px-2.5 py-0.5 text-xs font-semibold text-black transition-colors focus:outline-none focus:ring-2 focus:ring-ring'>
