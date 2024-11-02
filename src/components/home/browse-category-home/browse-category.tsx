@@ -10,7 +10,7 @@ import {
 import { getCategories } from "~/services/categories-service";
 
 export async function CategoryBrowser() {
-  const fetchedCategories = await getCategories({ cursor: null, limit: 10 });
+  const fetchedCategories = await getCategories({ cursor: null, limit: "10" });
 
 
   return (
