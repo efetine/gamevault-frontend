@@ -9,11 +9,11 @@ import {
   Star,
   Twitter,
   Users,
-} from "lucide-react";
-import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent } from "~/components/ui/card";
-import { Textarea } from "~/components/ui/textarea";
+} from 'lucide-react';
+import { Badge } from '~/components/ui/badge';
+import { Button } from '~/components/ui/button';
+import { Card, CardContent } from '~/components/ui/card';
+import { Textarea } from '~/components/ui/textarea';
 
 export default function Profile() {
   return (

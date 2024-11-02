@@ -1,6 +1,5 @@
-import { z } from "zod";
-import { couponSchema } from "./coupons-schema";
-
+import { z } from 'zod';
+import { couponSchema } from './coupons-schema';
 
 export const editCouponSchema = couponSchema
   .omit({
@@ -8,7 +7,6 @@ export const editCouponSchema = couponSchema
   })
   .extend({
     discountPercentage: z.number().min(0).optional(),
-
   });
 
 export type EditCoupon = z.infer<typeof editCouponSchema>;

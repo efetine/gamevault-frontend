@@ -1,7 +1,7 @@
-import "~/styles/globals.css";
+import '~/styles/globals.css';
 
-import Footer from "~/components/layout/footer";
-import Navbar from "~/components/layout/navbar/navbar";
+import Footer from '~/components/layout/footer';
+import Navbar from '~/components/layout/navbar/navbar';
 
 export default function PublicLayout({
   children,

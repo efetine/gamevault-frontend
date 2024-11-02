@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from 'react';
 
-import { Product } from "~/schemas/product-schema";
+import { Product } from '~/schemas/product-schema';
 
-type Action = { type: "addProduct"; payload: { productId: Product["id"] } };
+type Action = { type: 'addProduct'; payload: { productId: Product['id'] } };
 type Dispatch = (action: Action) => void;
-type State = { products: Product["id"][] };
+type State = { products: Product['id'][] };
 type CartProviderProps = { children: React.ReactNode };
 
 const CartStateContext = createContext<
@@ -15,7 +15,7 @@ const CartStateContext = createContext<
 
 function cartReducer(state: State, action: Action) {
   switch (action.type) {
-    case "addProduct": {
+    case 'addProduct': {
       return {
         products: [...state.products, action.payload.productId],
       };
@@ -41,7 +41,7 @@ function CartProvider({ children }: CartProviderProps) {
 function useCart() {
   const context = useContext(CartStateContext);
   if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider");
+    throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 }

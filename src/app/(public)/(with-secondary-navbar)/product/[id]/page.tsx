@@ -1,5 +1,5 @@
-import { ProductDetailPage } from "~/components/products/product-detail-page";
-import { getProductById } from "~/services/products-service";
+import { ProductDetailPage } from '~/components/products/product-detail-page';
+import { getProductById } from '~/services/products-service';
 
 const ProductDetail: React.FC<{ params: { id: string } }> = async ({
   params,

@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { useMemo } from "react";
-import { Loading } from "~/components/layout/loading";
-import { getUsers } from "~/services/users-service";
-import { UsersTable } from "./users-table";
+import { useMemo } from 'react';
+import { Loading } from '~/components/layout/loading';
+import { getUsers } from '~/services/users-service';
+import { UsersTable } from './users-table';
 
 export default function AdminUsers() {
   const { data, status, error, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: ["users"],
+    queryKey: ['users'],
     queryFn: ({ pageParam }) =>
       getUsers({
         cursor: pageParam,
       }),
-    initialPageParam: "",
+    initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
   console.log(error);
@@ -24,11 +24,11 @@ export default function AdminUsers() {
     return data.pages.flatMap((page) => page.data);
   }, [data]);
 
-  if (status === "error") {
+  if (status === 'error') {
     return <div>Cannot show users</div>;
   }
 
-  if (status === "pending") {
+  if (status === 'pending') {
     return <Loading />;
   }
 

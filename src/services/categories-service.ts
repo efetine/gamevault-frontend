@@ -1,10 +1,10 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { env } from "~/env";
-import { categorySchema } from "~/schemas/category-schema";
-import { paginatedResultSchema } from "~/schemas/paginated-result";
-import { PaginationDto } from "~/schemas/pagination-dto";
-import { productWithCategorySchema } from "~/schemas/product-schema";
+import { env } from '~/env';
+import { categorySchema } from '~/schemas/category-schema';
+import { paginatedResultSchema } from '~/schemas/paginated-result';
+import { PaginationDto } from '~/schemas/pagination-dto';
+import { productWithCategorySchema } from '~/schemas/product-schema';
 
 const paginatedCategories = paginatedResultSchema(categorySchema);
 
@@ -14,18 +14,18 @@ export async function getCategories({
   cursor,
   limit,
 }: PaginationDto): Promise<PaginatedCategories> {
-  const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
+  const url = new URL('/categories', env.NEXT_PUBLIC_API_URL);
 
   if (cursor !== null && cursor !== undefined) {
-    url.searchParams.set("cursor", cursor.toString());
+    url.searchParams.set('cursor', cursor.toString());
   }
 
   if (limit !== null && limit !== undefined) {
-    url.searchParams.set("limit", limit.toString());
+    url.searchParams.set('limit', limit.toString());
   }
 
   const response = await fetch(url.toString(), {
-    method: "GET",
+    method: 'GET',
     next: { revalidate: 1200 },
   });
 
@@ -60,17 +60,17 @@ export async function getProductsByCategory(
   try {
     const url = new URL(`/products/category/`, env.NEXT_PUBLIC_API_URL);
 
-    url.searchParams.append("limit", String(limit));
+    url.searchParams.append('limit', String(limit));
     if (cursor != undefined) {
-      url.searchParams.append("cursor", cursor);
+      url.searchParams.append('cursor', cursor);
     }
 
     if (categoryId !== undefined) {
-      url.searchParams.append("category", categoryId);
+      url.searchParams.append('category', categoryId);
     }
 
     const response = await fetch(url, {
-      method: "GET",
+      method: 'GET',
       next: { revalidate: 1200 },
     });
 
@@ -89,7 +89,7 @@ export async function getProductsByCategory(
     if (error instanceof Error) {
       throw new Error(error.message);
     } else {
-      throw new Error("an unknown error occurred");
+      throw new Error('an unknown error occurred');
     }
   }
 }

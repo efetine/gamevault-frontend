@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   type ColumnDef,
@@ -6,7 +6,7 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 import {
   ListFilter,
   MoreHorizontal,
@@ -14,8 +14,8 @@ import {
   PlusCircle,
   Search,
   Trash,
-} from "lucide-react";
-import Link from "next/link";
+} from 'lucide-react';
+import Link from 'next/link';
 
 import {
   Breadcrumb,
@@ -24,8 +24,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "~/components/ui/breadcrumb";
-import { Button } from "~/components/ui/button";
+} from '~/components/ui/breadcrumb';
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
@@ -33,8 +33,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
-import { DataTablePagination } from "~/components/ui/data-table-pagination";
+} from '~/components/ui/card';
+import { DataTablePagination } from '~/components/ui/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -43,8 +43,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import { Input } from "~/components/ui/input";
+} from '~/components/ui/dropdown-menu';
+import { Input } from '~/components/ui/input';
 import {
   Table,
   TableBody,
@@ -52,21 +52,21 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/table";
-import { Tabs, TabsContent } from "~/components/ui/tabs";
-import { Category } from "~/schemas/category-schema";
+} from '~/components/ui/table';
+import { Tabs, TabsContent } from '~/components/ui/tabs';
+import { Category } from '~/schemas/category-schema';
 
 const columns: ColumnDef<Category>[] = [
   {
-    accessorKey: "id",
+    accessorKey: 'id',
   },
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: 'name',
+    header: 'Name',
   },
   {
-    id: "actions",
-    header: "Actions",
+    id: 'actions',
+    header: 'Actions',
     cell: ({ row }) => {
       return (
         <DropdownMenu>
@@ -78,7 +78,7 @@ const columns: ColumnDef<Category>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem asChild>
-              <Link href={`/admin/products/edit/${row.getValue("id")}`}>
+              <Link href={`/admin/products/edit/${row.getValue('id')}`}>
                 <Pencil className="mr-2 h-4 w-4" />
                 Edit
               </Link>
@@ -215,7 +215,7 @@ export function UsersTable({
                         table.getRowModel().rows.map((row) => (
                           <TableRow
                             key={row.id}
-                            data-state={row.getIsSelected() && "selected"}
+                            data-state={row.getIsSelected() && 'selected'}
                           >
                             {row.getVisibleCells().map((cell) => (
                               <TableCell key={cell.id}>

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+import { useCallback, useEffect, useState } from 'react';
 
 export interface ICarouselImageProps {
   id: number;
@@ -53,7 +53,7 @@ export function ProductsCarousel({ images }: ICarouselProps) {
             <div
               key={index}
               className={`absolute inset-0 rounded-md transition-opacity duration-700 ease-in-out ${
-                index === activeIndex ? "opacity-100" : "opacity-0"
+                index === activeIndex ? 'opacity-100' : 'opacity-0'
               }`}
               data-carousel-item
             >
@@ -118,8 +118,8 @@ export function ProductsCarousel({ images }: ICarouselProps) {
             type="button"
             className={`h-3 w-3 rounded-full transition-colors ${
               index === activeIndex
-                ? "bg-white"
-                : "bg-gray-500 hover:bg-gray-400"
+                ? 'bg-white'
+                : 'bg-gray-500 hover:bg-gray-400'
             }`}
             aria-current={index === activeIndex}
             aria-label={`Diapositiva ${index + 1}`}

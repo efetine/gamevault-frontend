@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { editCouponSchema } from "./edit-coupon-schema";
+import { z } from 'zod';
+import { editCouponSchema } from './edit-coupon-schema';
 
 export const createCouponSchema = editCouponSchema
   .omit({

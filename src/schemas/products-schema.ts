@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { productSchema } from "./product-schema";
+import { z } from 'zod';
+import { productSchema } from './product-schema';
 
 export const productsSchema = z.array(
   productSchema.omit({ categoryId: true }).extend({

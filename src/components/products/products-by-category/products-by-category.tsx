@@ -1,18 +1,18 @@
-"use client";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import Link from "next/link";
-import { useMemo } from "react";
-import { ProductCard } from "~/components/products/product-card";
-import type { PaginationDto } from "~/schemas/pagination-dto";
-import { getProductsByCategory } from "~/services/categories-service";
+'use client';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import Link from 'next/link';
+import { useMemo } from 'react';
+import { ProductCard } from '~/components/products/product-card';
+import type { PaginationDto } from '~/schemas/pagination-dto';
+import { getProductsByCategory } from '~/services/categories-service';
 
 type CardListProps = PaginationDto & { categoryId: string };
 
 export default function ProductsByCategory({ categoryId }: CardListProps) {
   const { data, status, error } = useInfiniteQuery({
-    queryKey: ["products", categoryId],
+    queryKey: ['products', categoryId],
     queryFn: ({ pageParam }) => getProductsByCategory(categoryId, 8, pageParam),
-    initialPageParam: "",
+    initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
@@ -22,11 +22,11 @@ export default function ProductsByCategory({ categoryId }: CardListProps) {
     return data.pages.flatMap((page) => page.data);
   }, [data]);
 
-  if (status === "error") {
+  if (status === 'error') {
     return <div>Cannot show products</div>;
   }
 
-  if (status === "pending") {
+  if (status === 'pending') {
     return <div>Loading...</div>;
   }
 

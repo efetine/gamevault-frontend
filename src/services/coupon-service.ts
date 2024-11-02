@@ -1,8 +1,8 @@
-import { z } from "zod";
-import { env } from "~/env";
-import { Coupon } from "~/schemas/coupons-schema";
-import { CreateCoupon } from "~/schemas/create-coupon-schema";
-import { EditCoupon } from "~/schemas/edit-coupon-schema";
+import { z } from 'zod';
+import { env } from '~/env';
+import { Coupon } from '~/schemas/coupons-schema';
+import { CreateCoupon } from '~/schemas/create-coupon-schema';
+import { EditCoupon } from '~/schemas/edit-coupon-schema';
 
 export const couponSchema = z.object({
   couponCode: z.string(),
@@ -13,13 +13,12 @@ export const couponSchema = z.object({
 });
 export const getCouponsSchema = z.array(couponSchema);
 
-
 export async function createCoupon(values: CreateCoupon) {
   try {
     const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/create`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(values),
     });
@@ -33,7 +32,6 @@ export async function createCoupon(values: CreateCoupon) {
     throw new Error(`Error in createCoupon: ${error.message}`);
   }
 }
-
 
 export const getCoupons = async () => {
   try {
@@ -53,9 +51,9 @@ export const getCoupons = async () => {
 export async function getCouponById(id: string | number): Promise<Coupon> {
   try {
     const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/${id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
@@ -72,15 +70,14 @@ export async function getCouponById(id: string | number): Promise<Coupon> {
   }
 }
 
-
-export async function updateCoupon(id: Coupon["id"], values: EditCoupon) {
+export async function updateCoupon(id: Coupon['id'], values: EditCoupon) {
   try {
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/coupons/update-discount/${id}`,
       {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
       },
@@ -96,15 +93,14 @@ export async function updateCoupon(id: Coupon["id"], values: EditCoupon) {
   }
 }
 
-
-export async function setInactiveCoupon(id: Coupon["id"]) {
+export async function setInactiveCoupon(id: Coupon['id']) {
   try {
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/coupons/${id}/inactive`,
       {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       },
     );
@@ -119,13 +115,12 @@ export async function setInactiveCoupon(id: Coupon["id"]) {
   }
 }
 
-
-export async function deleteCoupon(id: Coupon["id"]) {
+export async function deleteCoupon(id: Coupon['id']) {
   try {
     const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
@@ -139,15 +134,14 @@ export async function deleteCoupon(id: Coupon["id"]) {
   }
 }
 
-
-export async function changeStatus(id: Coupon["id"]) {
+export async function changeStatus(id: Coupon['id']) {
   try {
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/coupons/toggle-status/${id}`,
       {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       },
     );
@@ -162,7 +156,6 @@ export async function changeStatus(id: Coupon["id"]) {
   }
 }
 
-
 export async function sendCouponMail(emails: string[], coupons: Coupon[]) {
   if (emails.length !== coupons.length) {
     throw new Error(
@@ -175,9 +168,9 @@ export async function sendCouponMail(emails: string[], coupons: Coupon[]) {
       const response = await fetch(
         `${env.NEXT_PUBLIC_API_URL}/mail-test/send-coupon`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             emails: [emails[i]],
@@ -196,5 +189,5 @@ export async function sendCouponMail(emails: string[], coupons: Coupon[]) {
     }
   }
 
-  return { message: "Coupons sent successfully!" };
+  return { message: 'Coupons sent successfully!' };
 }
