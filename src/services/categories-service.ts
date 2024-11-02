@@ -27,6 +27,8 @@ export async function getCategories({
     url.searchParams.set('limit', limit.toString());
   }
 
+
+
   if (cursor !== null && cursor !== undefined) {
     url.searchParams.set("cursor", cursor.toString());
   }
@@ -45,7 +47,8 @@ export async function getCategories({
   }
 
   const categories = await response.json();
-  console.log("Fetched Categories: ",  categories );
+  console.log("Fetched Categories: ",  categories);
+
 
   const parsedCategories = categoriesSchema.safeParse(categories);
 

@@ -1,8 +1,33 @@
 import Link from "next/link";
-
 import { Button } from "~/components/ui/button";
+import { getCategories } from "~/services/categories-service";
 
-export function ConsolePromotion() {
+export async function ConsolePromotion() {
+  let consoleCategoryId = "";
+  let consoleCategoryName = "Consoles";
+
+  try {
+    const fetchedCategories = await getCategories({ cursor: null, limit: 10 });
+
+    const consoleCategory = fetchedCategories.data.find(
+      (category) =>
+        category.name.toLowerCase().includes("console") ||
+        category.name.toLowerCase().includes("consola") ||
+        category.name.toLowerCase().includes("controller"),
+    );
+
+    if (consoleCategory) {
+      consoleCategoryId = consoleCategory.id;
+      consoleCategoryName = consoleCategory.name;
+    } else {
+      console.warn("Console category not found. Using default category.");
+      consoleCategoryId = fetchedCategories.data[0]?.id ?? "";
+      consoleCategoryName = fetchedCategories.data[0]?.name ?? "All Categories";
+    }
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+  }
+
   return (
     <section className="relative flex h-[60vh] w-full items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-tr from-blue-900 via-[#4d00993c] to-black/50" />
@@ -14,7 +39,14 @@ export function ConsolePromotion() {
           Discover ultimate power: Explore the most powerful consoles on the
           market and elevate your gaming experience to the next level!
         </p>
-        <Link href="/products">
+        <Link
+          href={
+            consoleCategoryId
+              ? `/categories/${consoleCategoryId}`
+              : "/categories"
+          }
+        >
+          {" "}
           <Button className="bg-white px-8 py-3 text-lg font-semibold text-blue-600 transition-colors hover:bg-gray-100">
             Shop Consoles
           </Button>

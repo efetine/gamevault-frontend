@@ -47,6 +47,7 @@ export async function getProducts(
 ): Promise<PaginatedProducts> {
   const { cursor, limit = "10", type } = getProductsInputSchema.parse(params);
   const url = new URL("/products", env.NEXT_PUBLIC_API_URL);
+  
 
   if (cursor) {
     url.searchParams.append("cursor", cursor);
