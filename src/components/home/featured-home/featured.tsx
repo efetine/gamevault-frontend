@@ -18,9 +18,12 @@ export function FeaturedProducts() {
     queryKey: ["products"],
     queryFn: () =>
       getProducts({
-        limit: "8",
+        limit: "10",
       }),
   });
+
+  console.log("fetched products",  data );
+
 
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
 

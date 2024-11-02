@@ -10,7 +10,7 @@ export function BestSellingAccessories() {
     queryKey: ["products", "physical"],
     queryFn: () =>
       getProducts({
-        limit: "16",
+        limit: "10",
         type: "physical",
       }),
   });
@@ -19,7 +19,7 @@ export function BestSellingAccessories() {
 
   const physicalProducts = data?.data
     .filter((product) => product.type === "physical")
-    .slice(0, 8);
+    .slice(0, 10);
 
   if (status === "error") {
     return <div>Error...</div>;

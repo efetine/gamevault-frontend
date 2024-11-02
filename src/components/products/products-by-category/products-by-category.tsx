@@ -31,14 +31,18 @@ export default function ProductsByCategory({ categoryId }: CardListProps) {
   }
 
   return (
-    <div className="flex">
-      <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">
-        {products.map((product) => (
+    <div className="mt-36 w-full content-center items-center justify-center ">
+      <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black ">
+        <section className="relative flex flex-col items-center justify-center overflow-hidden ">
+          <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">            
+          {products.map((product) => (
           <Link href={`/product/${product.id}`} key={product.id}>
             <ProductCard product={product} />
           </Link>
         ))}
+          </div>
+        </section>
       </div>
     </div>
-  );
+  ); 
 }

@@ -12,9 +12,11 @@ export type PaginatedCategories = z.infer<typeof paginatedCategories>;
 
 export async function getCategories({
   cursor =  null,
-  limit= number,
+  limit= 10,
 }: PaginationDto = {}): Promise<PaginatedCategories> {
   const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
+
+
 
   if (cursor !== null && cursor !== undefined) {
     url.searchParams.set("cursor", cursor.toString());
@@ -34,7 +36,8 @@ export async function getCategories({
   }
 
   const categories = await response.json();
-  console.log("Fetched Categories: ",  categories );
+  console.log("Fetched Categories: ",  categories);
+
 
 
   const parsedCategories = paginatedCategories.safeParse(categories);
