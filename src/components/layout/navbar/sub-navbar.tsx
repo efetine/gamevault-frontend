@@ -1,8 +1,7 @@
-import { Search, ShoppingCart } from "lucide-react";
+import { Search } from "lucide-react";
 import Link from "next/link";
 
 import { CategoriesMenu } from "~/components/categories/categories-menu";
-import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
   NavigationMenu,
@@ -13,12 +12,11 @@ import {
   NavigationMenuTrigger,
 } from "~/components/ui/navigation-menu";
 
-// import { ModeToggle } from "./mode-toggle";
 
 const SubNavbar = async () => {
   return (
     <section className="fixed top-20 z-10 w-full p-3">
-      <div className="container mx-auto flex h-10 w-[60%] items-center justify-center gap-10 bg-gradient-to-r from-blue-900 via-[#1a2332] to-slate-600 p-3 transition-colors duration-200 dark:bg-slate-700">
+      <div className="container rounded-lg mx-auto flex h-12 w-[60%] items-center justify-evenly gap-10 dark:bg-gradient-to-r from-blue-900 via-cyan-900 to-slate-800 p-4 transition-colors duration-200 ">
         <div className="flex flex-row items-center space-x-4">
           <NavigationMenu>
             <NavigationMenuList className="flex gap-10 text-lg font-semibold text-[#dad9dc]">
@@ -52,9 +50,6 @@ const SubNavbar = async () => {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          <Button variant="outline" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-          </Button>
         </div>
         <div className="flex items-center space-x-4">
           <div className="relative">

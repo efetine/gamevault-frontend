@@ -2,7 +2,7 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { Suspense, useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { z } from "zod";
 
@@ -58,21 +58,22 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="mt-36 w-full content-center items-center justify-center ">
-      <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black ">
-        
-        <section className="relative flex flex-col items-center justify-center overflow-hidden ">
-          <ProductTypeSelector />
-          <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">            
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+    <Suspense fallback={<Loading />}>
+      <div className="mt-36 w-full content-center items-center justify-center">
+        <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black">
+          <section className="relative flex flex-col items-center justify-center overflow-hidden pt-5">
+            <ProductTypeSelector />
+            <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </section>
+          <div ref={ref}>
+            {hasNextPage === true ? "Loading more products..." : null}
           </div>
-        </section>
-        <div ref={ref}>
-          {hasNextPage === true ? "Loading more products..." : null}
         </div>
       </div>
-    </div>
+    </Suspense>
   );
 }

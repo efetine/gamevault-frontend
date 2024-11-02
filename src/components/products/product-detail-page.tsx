@@ -50,16 +50,16 @@ export const ProductDetailPage: React.FC<Product> = ({
                   <CardTitle className="text-2xl font-bold capitalize">
                     {name}
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground">
+                  {/* <p className="text-sm text-muted-foreground">
                     Category: {categoryId}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-green-600">${price.toFixed(2)}</p>
+                  <p className="text-2xl font-bold text-emerald-600">${price.toFixed(2)}</p>
                   <p className="text-sm text-muted-foreground line-through">
                     ${(price + price * 0.2).toFixed(2)}
                   </p>
@@ -78,7 +78,7 @@ export const ProductDetailPage: React.FC<Product> = ({
               </div>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
-              <Button className="w-full bg-sky-700 font-bold text-black hover:bg-sky-600 ">
+              <Button className="w-full bg-gradient-to-b from-sky-600 via-cyan-900 to-slate-800 text-white hover:from-sky-500 hover:via-cyan-600 hover:to-slate-700">
                 <CreditCardIcon className="mr-2 h-5 w-5" />
                 Buy with Mercado Pago
               </Button>

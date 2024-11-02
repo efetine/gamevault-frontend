@@ -3,29 +3,15 @@ import { Button } from "~/components/ui/button";
 import { getCategories } from "~/services/categories-service";
 
 export async function ConsolePromotion() {
-  let consoleCategoryId = "";
-  let consoleCategoryName = "Consoles";
+  const fetchedCategories = await getCategories({ cursor: null, limit: "20" });
 
-  try {
-    const fetchedCategories = await getCategories({ cursor: null, limit: 10 });
+  const consoleCategory = fetchedCategories.data.find(
+    (category) => category.name.toLowerCase() === "console",
+  );
 
-    const consoleCategory = fetchedCategories.data.find(
-      (category) =>
-        category.name.toLowerCase().includes("console") ||
-        category.name.toLowerCase().includes("consola") ||
-        category.name.toLowerCase().includes("controller"),
-    );
-
-    if (consoleCategory) {
-      consoleCategoryId = consoleCategory.id;
-      consoleCategoryName = consoleCategory.name;
-    } else {
-      console.warn("Console category not found. Using default category.");
-      consoleCategoryId = fetchedCategories.data[0]?.id ?? "";
-      consoleCategoryName = fetchedCategories.data[0]?.name ?? "All Categories";
-    }
-  } catch (error) {
-    console.error("Error fetching categories:", error);
+  if (!consoleCategory) {
+    console.error("No products  found");
+    return null;
   }
 
   return (
@@ -39,14 +25,7 @@ export async function ConsolePromotion() {
           Discover ultimate power: Explore the most powerful consoles on the
           market and elevate your gaming experience to the next level!
         </p>
-        <Link
-          href={
-            consoleCategoryId
-              ? `/categories/${consoleCategoryId}`
-              : "/categories"
-          }
-        >
-          {" "}
+        <Link href={`/categories/${consoleCategory.id}`}>
           <Button className="bg-white px-8 py-3 text-lg font-semibold text-blue-600 transition-colors hover:bg-gray-100">
             Shop Consoles
           </Button>
