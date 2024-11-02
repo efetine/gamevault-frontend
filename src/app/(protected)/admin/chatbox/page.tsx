@@ -22,6 +22,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
+import { env } from "~/env";
 
 interface Message {
   sender: "client" | "admin";
@@ -40,7 +41,7 @@ export default function ChatboxAdmin() {
   const [messageInput, setMessageInput] = useState<string>("");
 
   useEffect(() => {
-    const newSocket: Socket = io("http://localhost:3001", {
+    const newSocket: Socket = io(env.NEXT_PUBLIC_API_URL, {
       query: { role: "admin" },
       transports: ["websocket"],
       upgrade: false,

@@ -1,27 +1,47 @@
 import { relations } from "drizzle-orm";
 import {
-  boolean,
   integer,
+  pgEnum,
   pgTable,
   primaryKey,
   text,
   timestamp,
   uniqueIndex,
-  varchar,
 } from "drizzle-orm/pg-core";
+
+export const pgStatusEnum = pgEnum("status_enum", [
+  "active",
+  "inactive",
+  "banned",
+]);
+
+export const pgRoleEnum = pgEnum("role_enum", ["client", "admin"]);
 
 export const users = pgTable(
   "user",
   {
-    id: varchar("id")
+    id: text("id")
       .primaryKey()
-      .$defaultFn(() => crypto.randomUUID()),
+      .$defaultFn(() => crypto.randomUUID())
+      .notNull(),
     name: text("name"),
     email: text("email").unique().notNull(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
+    tokenConfirmation: text("tokenConfirmation"),
     password: text("password"),
-    image: text("image").default("default_profile_picture.png").notNull(),
-    active: boolean().default(true).notNull(),
+    username: text("username"),
+    description: text("description"),
+    profileImage: text("profileImage")
+      .default("default_profile_picture.png")
+      .notNull(),
+    bannerImage: text("bannerImage")
+      .default(
+        "https://res.cloudinary.com/dnfslkgiv/image/upload/v1730401954/pk3ghbuuvspa1wro9y7k.jpg",
+      )
+      .notNull(),
+    status: pgStatusEnum().default("active").notNull(),
+    role: pgRoleEnum().default("client").notNull(),
+    bannedReason: text("bannedReason"),
   },
   (table) => {
     return {

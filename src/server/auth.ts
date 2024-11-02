@@ -21,15 +21,27 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      // ...other properties
-      // role: UserRole;
+      name: string | null;
+      email: string | null;
+      username: string | null;
+      description: string | null;
+      profileImage: string | null;
+      status: string | null;
+      role: string | null;
+      bannedReason: string | null;
     } & DefaultSession["user"];
   }
 
   interface User {
     id: string;
-    // ...other properties
-    // role: UserRole;
+    // name: string | null;
+    // email: string | null;
+    // username: string | null;
+    // description: string | null;
+    // profileImage: string | null;
+    // status: string | null;
+    // role: string | null;
+    // bannedReason: string | null;
   }
 }
 
@@ -46,13 +58,13 @@ export const authOptions: NextAuthOptions = {
   //   verificationTokensTable: verificationTokens,
   // }) as Adapter,
   callbacks: {
-    session({ session }) {
+    session({ session, token }) {
       return {
         ...session,
-        // user: {
-        //   ...session.user,
-        //   id: user.id,
-        // },
+        user: {
+          // @ts-expect-error
+          ...token.user,
+        },
       };
     },
     async jwt({ token, user }) {
@@ -69,7 +81,8 @@ export const authOptions: NextAuthOptions = {
       const selectedUser = selectedUsers[0];
 
       if (selectedUser) {
-        token.user = selectedUser;
+        const { password, ...rest } = selectedUser;
+        token.user = rest;
       }
 
       return token;
