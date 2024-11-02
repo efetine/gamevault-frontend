@@ -63,18 +63,7 @@ export default function ProductsPage() {
         
         <section className="relative flex flex-col items-center justify-center overflow-hidden ">
           <ProductTypeSelector />
-          <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">
-            {/* {data.pages[currentPage]?.products.map((product) => {
-            return (
-              <Link
-                className="transition duration-700 ease-in-out hover:scale-[1.05]"
-                href={`/product/${product.id}`}
-                key={product.id}
-              >
-                <Card product={product} />
-              </Link>
-            )
-          }) */}
+          <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">            
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

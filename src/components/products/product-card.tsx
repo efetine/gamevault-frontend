@@ -15,7 +15,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { dispatch } = useCart();
 
   return (
-    <Cards className="group w-[300px] overflow-hidden">
+    <Cards className="group w-[300px] overflow-hidden transition-transform duration-500 transform hover:scale-105">
       <Link
         className="transition duration-700 ease-in-out hover:scale-[1.05]"
         href={`/product/${product.id}`}
@@ -25,7 +25,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="h-[150px] w-full object-cover transition-transform duration-300 group-hover:scale-110"
+            className="h-[150px] w-full object-cover "
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <Button variant="secondary" className="text-white">

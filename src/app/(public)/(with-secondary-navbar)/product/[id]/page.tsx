@@ -1,9 +1,7 @@
 import { ProductDetailPage } from "~/components/products/product-detail-page";
 import { getProductById } from "~/services/products-service";
 
-const ProductDetail: React.FC<{ params: { id: string } }> = async ({
-  params,
-}) => {
+const ProductDetail = async ({ params }: Awaited<{ params: { id: string } }>) => {
   const product = await getProductById(params.id);
 
   if (!product) {

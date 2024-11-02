@@ -51,7 +51,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       <div className="flex flex-col w-[70%] m-auto mt-32 md:flex-row gap-8 ">
         <div className="w-full md:w-3/5 ">
           <h2 className="text-2xl font-bold capitalize mb-4">{name}</h2>
-          <div className="mb-6 ">
+          <div className="mb-6  ">
             <EmblaCarousel images={productImages} options={OPTIONS} />
           </div>
           <div>

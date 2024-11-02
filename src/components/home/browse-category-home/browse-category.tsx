@@ -7,10 +7,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "~/components/ui/carousel";
-import { getCategoriesMenu } from "~/services/categories-service";
+import { getCategories } from "~/services/categories-service";
 
 export async function CategoryBrowser() {
-  const fetchedCategories = await getCategoriesMenu();
+  const fetchedCategories = await getCategories({ cursor: null, limit: 10 });
+
 
   return (
     <section className="my-12 ">
@@ -27,7 +28,7 @@ export async function CategoryBrowser() {
         }}
       >
         <CarouselContent className="-ml-2 md:-ml-4">
-          {fetchedCategories.map((category) => (
+          {fetchedCategories.data.map((category) => (
             <CarouselItem
               key={category.id}
               className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"

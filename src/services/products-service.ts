@@ -66,7 +66,6 @@ export async function getProducts(
   });
 
   const body = await response.json();
-  console.log("Data getProducts", body)
 
   const parsedProducts = paginatedProducts.safeParse(body);
 

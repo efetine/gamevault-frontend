@@ -45,6 +45,7 @@ export async function getCategories({
   }
 
   const categories = await response.json();
+  console.log("Fetched Categories: ",  categories );
 
   const parsedCategories = categoriesSchema.safeParse(categories);
 
