@@ -32,7 +32,7 @@ export const ProductDetailPage: React.FC<Product> = ({
       <div className="flex flex-col w-[70%] m-auto mt-32 md:flex-row gap-8 ">
         <div className="w-full md:w-3/5 ">
           <h2 className="text-2xl font-bold capitalize mb-4">{name}</h2>
-          <div className="mb-6 ">
+          <div className="mb-6  ">
             <EmblaCarousel images={productImages} options={OPTIONS} />
           </div>
           <div>
@@ -43,7 +43,7 @@ export const ProductDetailPage: React.FC<Product> = ({
           </div>
         </div>
         <div className="w-full  md:w-2/5 pt-[52px] ">
-          <Card>
+          <Card className="bg-gradient-to-t from-[#161616]  to-[#1a1a1a]">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div>
@@ -78,7 +78,7 @@ export const ProductDetailPage: React.FC<Product> = ({
               </div>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
-              <Button className="w-full bg-yellow-500 font-bold text-black hover:bg-yellow-600">
+              <Button className="w-full bg-sky-700 font-bold text-black hover:bg-sky-600 ">
                 <CreditCardIcon className="mr-2 h-5 w-5" />
                 Buy with Mercado Pago
               </Button>

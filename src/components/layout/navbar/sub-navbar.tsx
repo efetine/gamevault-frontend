@@ -1,7 +1,8 @@
-import { Search } from "lucide-react";
+import { Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
-import React from "react";
+import { CategoriesMenu } from "~/components/categories/categories-menu";
+import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
   NavigationMenu,
@@ -12,16 +13,12 @@ import {
   NavigationMenuTrigger,
 } from "~/components/ui/navigation-menu";
 
-import { cn } from "~/lib/utils";
-import { getCategoriesMenu } from "~/services/categories-service";
 // import { ModeToggle } from "./mode-toggle";
 
 const SubNavbar = async () => {
-  const categoriesAll = await getCategoriesMenu();
-
   return (
-    <section className="fixed top-20 z-10 w-full">
-      <div className="mx-auto mt-2 flex h-10 w-3/5 items-center justify-between rounded-lg bg-gradient-to-r from-purple-950/40 via-cyan-950/50 to-slate-900 p-3 px-4 transition-colors duration-200 dark:bg-slate-700">
+    <section className="fixed top-20 z-10 w-full p-3">
+      <div className="container mx-auto flex h-10 w-[60%] items-center justify-center gap-10 bg-gradient-to-r from-blue-900 via-[#1a2332] to-slate-600 p-3 transition-colors duration-200 dark:bg-slate-700">
         <div className="flex flex-row items-center space-x-4">
           <NavigationMenu>
             <NavigationMenuList className="flex gap-10 text-lg font-semibold text-[#dad9dc]">
@@ -55,6 +52,9 @@ const SubNavbar = async () => {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+          <Button variant="outline" size="icon">
+            <ShoppingCart className="h-5 w-5" />
+          </Button>
         </div>
         <div className="flex items-center space-x-4">
           <div className="relative">

@@ -37,7 +37,7 @@ export default function EmblaCarousel({ images, options }: CarouselProps) {
 
   return (
     <div className="space-y-4 ">
-      <Card className="relative ">
+      <Card className="relative bg-gradient-to-t from-black  to-sky-950">
         <CardContent className="overflow-hidden p-0">
           <div className="overflow-hidden rounded-lg" ref={emblaMainRef}>
             <div className="flex ">

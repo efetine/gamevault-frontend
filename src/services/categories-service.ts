@@ -1,27 +1,19 @@
-import { z } from "zod";
+import { type z } from "zod";
 
 import { env } from "~/env";
-import { categoriesSchema } from "~/schemas/categories-schema";
-import type { Category } from "~/schemas/category-schema";
-import type { Product } from "~/schemas/product-schema";
+import { categorySchema } from "~/schemas/category-schema";
+import { paginatedResultSchema } from "~/schemas/paginated-result";
+import { type PaginationDto } from "~/schemas/pagination-dto";
+import { productWithCategorySchema } from "~/schemas/product-schema";
 
-export async function getCategories(): Promise<Category[]> {
-  const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
+const paginatedCategories = paginatedResultSchema(categorySchema);
 
-  const response = await fetch(url.toString());
+export type PaginatedCategories = z.infer<typeof paginatedCategories>;
 
-  const categories = await response.json();
-
-  const parsedCategories = categoriesSchema.safeParse(categories);
-
-  if (parsedCategories.success === false) {
-    throw new Error(parsedCategories.error.message);
-  }
-
-  return parsedCategories.data;
-}
-
-export async function getCategoriesMenu(): Promise<Category[]> {
+export async function getCategories({
+  cursor =  null,
+  limit= number,
+}: PaginationDto = {}): Promise<PaginatedCategories> {
   const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
 
   if (cursor !== null && cursor !== undefined) {
@@ -42,8 +34,10 @@ export async function getCategoriesMenu(): Promise<Category[]> {
   }
 
   const categories = await response.json();
+  console.log("Fetched Categories: ",  categories );
 
-  const parsedCategories = categoriesSchema.safeParse(categories.data);
+
+  const parsedCategories = paginatedCategories.safeParse(categories);
 
   if (!parsedCategories.success) {
     throw new Error(`Validation error: ${parsedCategories.error.message}`);
@@ -52,10 +46,13 @@ export async function getCategoriesMenu(): Promise<Category[]> {
   return parsedCategories.data;
 }
 
-interface IApiResponse {
-  data: Product[];
-  cursor: string | undefined;
-}
+const paginatedProductsWithCategories = paginatedResultSchema(
+  productWithCategorySchema,
+);
+
+export type PaginatedProductsWithCategories = z.infer<
+  typeof paginatedProductsWithCategories
+>;
 
 export async function getProductsByCategory(
   categoryId: string,
