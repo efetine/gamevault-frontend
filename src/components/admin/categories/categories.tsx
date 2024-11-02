@@ -44,6 +44,14 @@ export function CategoriesCombobox() {
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
+  if (status === 'error') {
+    return <div>Error</div>;
+  }
+
+  if (status === 'pending') {
+    return <div>Loading...</div>;
+  }
+
   const categories = useMemo(() => {
     if (!data) return [];
 

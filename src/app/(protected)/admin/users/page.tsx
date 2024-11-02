@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
@@ -24,6 +24,14 @@ export default function AdminUsers() {
 
     return data.pages.flatMap((page) => page.data);
   }, [data]);
+
+  if (status === 'error') {
+    return <div>Cannot show users</div>;
+  }
+
+  if (status === 'pending') {
+    return <Loading />;
+  }
 
   return (
     <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">

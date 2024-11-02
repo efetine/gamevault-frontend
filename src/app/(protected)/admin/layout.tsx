@@ -1,8 +1,7 @@
-import { redirect } from "next/navigation";
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
-import Aside from "~/components/aside";
-import { getServerAuthSession } from "~/server/auth";
+import Aside from '~/components/aside';
+import { getServerAuthSession } from '~/server/auth';
 
 interface AdminProps {
   children: ReactNode;

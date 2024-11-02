@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,7 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "~/components/ui/breadcrumb";
+} from '~/components/ui/breadcrumb';
 
 interface ProductsEditLayoutProps {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ export default function layout({ children }: ProductsEditLayoutProps) {
             <BreadcrumbSeparator />
 
             <BreadcrumbItem>
-              <Link href={"/admin/products"}>Products</Link>
+              <Link href={'/admin/products'}>Products</Link>
             </BreadcrumbItem>
 
             <BreadcrumbSeparator />

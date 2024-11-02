@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { productSchema } from "./product-schema";
+import { z } from 'zod';
+import { productSchema } from './product-schema';
 
 export const orderDetailsSchema = z.object({
   id: z.string().uuid(),

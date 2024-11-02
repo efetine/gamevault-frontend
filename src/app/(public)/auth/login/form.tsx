@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ClientSafeProvider, signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ClientSafeProvider, signIn } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { FcGoogle } from 'react-icons/fc';
+import { z } from 'zod';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
@@ -15,7 +15,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 import {
   Form,
   FormControl,
@@ -23,9 +23,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { Separator } from "~/components/ui/separator";
+} from '~/components/ui/form';
+import { Input } from '~/components/ui/input';
+import { Separator } from '~/components/ui/separator';
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -44,14 +44,14 @@ export function Login({ providers }: LoginProps) {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: searchParams.get("email") ?? "",
-      password: "",
+      email: searchParams.get('email') ?? '',
+      password: '',
     },
   });
 
   function onSubmit(values: FormSchema) {
-    signIn("credentials", {
-      callbackUrl: "/",
+    signIn('credentials', {
+      callbackUrl: '/',
       ...values,
     });
   }
@@ -77,7 +77,7 @@ export function Login({ providers }: LoginProps) {
                 {providers.map((provider) => (
                   <div key={provider.name}>
                     <Button onClick={() => signIn(provider.id)}>
-                      {provider.name === "Google" ? <FcGoogle /> : null}
+                      {provider.name === 'Google' ? <FcGoogle /> : null}
                       Sign in with {provider.name}
                     </Button>
                   </div>

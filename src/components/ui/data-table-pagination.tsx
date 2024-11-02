@@ -1,7 +1,7 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { Table } from "@tanstack/react-table";
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { Table } from '@tanstack/react-table';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
@@ -20,7 +20,7 @@ export function DataTablePagination<TData>({
     <div className="flex w-full flex-col items-center justify-between px-2">
       <div className="mx-auto flex items-center justify-center space-x-6 lg:space-x-8">
         <div className="flex w-[100px] flex-1 items-center justify-center text-sm font-medium">
-          Page {table.getState().pagination.pageIndex + 1} of{" "}
+          Page {table.getState().pagination.pageIndex + 1} of{' '}
           {table.getPageCount()}
         </div>
         <div className="flex items-center space-x-2">

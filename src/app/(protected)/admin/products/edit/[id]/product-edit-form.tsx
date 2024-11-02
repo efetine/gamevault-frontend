@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 
-import { CategoriesCombobox } from "~/components/admin/categories/categories";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { CategoriesCombobox } from '~/components/admin/categories/categories';
+import { Button } from '~/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
 import {
   Form,
   FormControl,
@@ -16,23 +16,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
+} from '~/components/ui/form';
+import { Input } from '~/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "~/components/ui/select";
-import { Textarea } from "~/components/ui/textarea";
-import { useToast } from "~/hooks/use-toast";
+} from '~/components/ui/select';
+import { Textarea } from '~/components/ui/textarea';
+import { useToast } from '~/hooks/use-toast';
 import {
   type EditProduct,
   editProductSchema,
-} from "~/schemas/edit-product-schema";
-import type { Product } from "~/schemas/product-schema";
-import { updateProduct, uploadImage } from "~/services/products-service";
+} from '~/schemas/edit-product-schema';
+import type { Product } from '~/schemas/product-schema';
+import { updateProduct, uploadImage } from '~/services/products-service';
 
 type ProductEditFormProps = {
   product: Product;
@@ -44,7 +44,7 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
   const queryClient = useQueryClient();
 
   const updateMutation = useMutation<unknown, unknown, EditProduct>({
-    mutationKey: ["update-product", product.id],
+    mutationKey: ['update-product', product.id],
     mutationFn: async (data) => {
       await updateProduct(product.id, data);
 
@@ -56,7 +56,7 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
     },
     onError: () => {
       toast({
-        title: "Failed to update product 😔",
+        title: 'Failed to update product 😔',
       });
     },
   });
@@ -65,7 +65,7 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
     resolver: zodResolver(editProductSchema),
     defaultValues: {
       ...product,
-      active: product.active ? "active" : "inactive",
+      active: product.active ? 'active' : 'inactive',
     },
   });
 
@@ -74,22 +74,22 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
     const result = await updateMutation.mutateAsync(values);
 
     toast({
-      title: "Product updated!",
+      title: 'Product updated!',
     });
 
     queryClient.invalidateQueries({
-      queryKey: ["products"],
+      queryKey: ['products'],
     });
 
     form.reset();
 
-    router.push("/admin/products");
+    router.push('/admin/products');
   }
 
   const renderPreview = (value: File | string) => {
     let src = null;
 
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       src = value;
     } else {
       const blob = new Blob([value], { type: value.type });

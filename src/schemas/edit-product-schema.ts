@@ -1,6 +1,6 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { productSchema } from "./product-schema";
+import { productSchema } from './product-schema';
 
 export const editProductSchema = productSchema
   .omit({
@@ -12,7 +12,7 @@ export const editProductSchema = productSchema
     description: z.string().min(1),
     categoryId: z.string().uuid(),
     imageUrl: z.union([z.string(), z.instanceof(File)]),
-    active: z.enum(["active", "inactive"]),
+    active: z.enum(['active', 'inactive']),
   });
 
 export type EditProduct = z.infer<typeof editProductSchema>;

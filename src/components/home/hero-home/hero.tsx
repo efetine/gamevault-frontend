@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 export function HeroSection() {
   return (
@@ -17,10 +17,10 @@ export function HeroSection() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h1 className=" mb-4 text-3xl font-bold text-gray-700 md:text-4xl lg:text-4xl dark:text-white">
+          <h1 className="mb-4 text-3xl font-bold text-gray-700 dark:text-white md:text-4xl lg:text-4xl">
             MORE THAN A HOBBY, IT&apos;S A LIFESTYLE
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-gray-700 md:text-xl lg:text-xl dark:text-white">
+          <p className="mx-auto max-w-2xl text-lg text-gray-700 dark:text-white md:text-xl lg:text-xl">
             We are the first e-commerce specialist to offer everything related
             to your favorite hobby in one place, from digital games to
             accessories and much more.

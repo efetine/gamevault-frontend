@@ -30,11 +30,11 @@ export async function getCategories({
 
 
   if (cursor !== null && cursor !== undefined) {
-    url.searchParams.set("cursor", cursor.toString());
+    url.searchParams.set('cursor', cursor.toString());
   }
 
   if (limit !== null && limit !== undefined) {
-    url.searchParams.set("limit", limit.toString());
+    url.searchParams.set('limit', limit.toString());
   }
 
   const response = await fetch(url.toString(), {

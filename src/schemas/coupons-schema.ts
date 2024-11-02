@@ -11,7 +11,9 @@ export const couponSchema = z.object({
     .int()
     .min(1, { message: 'Discount must be at least 1%' })
     .max(100, { message: 'Discount cannot exceed 100%' }),
-  expirationDate: z.coerce.date(),
+  expirationDate: z
+    .string()
+    .regex(dateRegex, { message: 'The date format must be YYYY/MM/DD' }),
   isActive: z.boolean().default(true),
 });
 

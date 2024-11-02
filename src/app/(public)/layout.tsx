@@ -1,4 +1,4 @@
-import "~/styles/globals.css";
+import '~/styles/globals.css';
 
 import { ChatButton } from "~/components/home/chat-home/chat-home";
 import Footer from "~/components/layout/footer";
