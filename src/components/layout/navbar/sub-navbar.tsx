@@ -1,8 +1,8 @@
-import { Search } from "lucide-react";
-import Link from "next/link";
+import { Search } from 'lucide-react';
+import Link from 'next/link';
 
-import { CategoriesMenu } from "~/components/categories/categories-menu";
-import { Input } from "~/components/ui/input";
+import { CategoriesMenu } from '~/components/categories/categories-menu';
+import { Input } from '~/components/ui/input';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,13 +10,12 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "~/components/ui/navigation-menu";
-
+} from '~/components/ui/navigation-menu';
 
 const SubNavbar = async () => {
   return (
     <section className="fixed top-20 z-10 w-full p-3">
-      <div className="container rounded-lg mx-auto flex h-12 w-[60%] items-center justify-evenly gap-10 dark:bg-gradient-to-r from-blue-900 via-cyan-900 to-slate-800 p-4 transition-colors duration-200 ">
+      <div className="container mx-auto flex h-12 w-[60%] items-center justify-evenly gap-10 rounded-lg from-blue-900 via-cyan-900 to-slate-800 p-4 transition-colors duration-200 dark:bg-gradient-to-r">
         <div className="flex flex-row items-center space-x-4">
           <NavigationMenu>
             <NavigationMenuList className="flex gap-10 text-lg font-semibold text-[#dad9dc]">

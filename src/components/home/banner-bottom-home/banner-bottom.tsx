@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { Button } from "~/components/ui/button";
-import { getCategories } from "~/services/categories-service";
+import Link from 'next/link';
+import { Button } from '~/components/ui/button';
+import { getCategories } from '~/services/categories-service';
 
 export async function ConsolePromotion() {
-  const fetchedCategories = await getCategories({ cursor: null, limit: "20" });
+  const fetchedCategories = await getCategories({ cursor: null, limit: '20' });
 
   const consoleCategory = fetchedCategories.data.find(
-    (category) => category.name.toLowerCase() === "console",
+    (category) => category.name.toLowerCase() === 'console',
   );
 
   if (!consoleCategory) {
-    console.error("No products  found");
+    console.error('No products  found');
     return null;
   }
 

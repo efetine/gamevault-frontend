@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   type ColumnDef,
@@ -6,7 +6,7 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 import {
   ListFilter,
   MoreHorizontal,
@@ -14,9 +14,9 @@ import {
   PlusCircle,
   Search,
   Trash,
-} from "lucide-react";
-import Link from "next/link";
-import { Badge } from "~/components/ui/badge";
+} from 'lucide-react';
+import Link from 'next/link';
+import { Badge } from '~/components/ui/badge';
 
 import {
   Breadcrumb,
@@ -25,8 +25,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "~/components/ui/breadcrumb";
-import { Button } from "~/components/ui/button";
+} from '~/components/ui/breadcrumb';
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
@@ -34,8 +34,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
-import { DataTablePagination } from "~/components/ui/data-table-pagination";
+} from '~/components/ui/card';
+import { DataTablePagination } from '~/components/ui/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -44,8 +44,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import { Input } from "~/components/ui/input";
+} from '~/components/ui/dropdown-menu';
+import { Input } from '~/components/ui/input';
 import {
   Table,
   TableBody,
@@ -53,54 +53,54 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { cn } from "~/lib/utils";
-import { ProductWithCategory } from "~/schemas/product-schema";
+} from '~/components/ui/table';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
+import { cn } from '~/lib/utils';
+import { ProductWithCategory } from '~/schemas/product-schema';
 
 const columns: ColumnDef<ProductWithCategory>[] = [
   {
-    accessorKey: "id",
+    accessorKey: 'id',
   },
   {
-    accessorKey: "imageUrl",
-    header: "Image",
+    accessorKey: 'imageUrl',
+    header: 'Image',
     cell: ({ row }) => {
       return (
         <img
           alt="Product image"
           className="aspect-square rounded-md object-cover"
           height="64"
-          src={row.getValue("imageUrl")}
+          src={row.getValue('imageUrl')}
           width="64"
         />
       );
     },
   },
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: 'name',
+    header: 'Name',
   },
   {
-    accessorKey: "type",
-    header: "Type",
+    accessorKey: 'type',
+    header: 'Type',
     cell: ({ row }) => {
       return (
         <Badge variant="outline">
-          <span className="first-letter:uppercase">{row.getValue("type")}</span>
+          <span className="first-letter:uppercase">{row.getValue('type')}</span>
         </Badge>
       );
     },
   },
   {
-    accessorKey: "active",
-    header: "Status",
+    accessorKey: 'active',
+    header: 'Status',
     cell: ({ row }) => {
-      const status: string = row.getValue("active");
+      const status: string = row.getValue('active');
       return (
         <Badge
           variant="outline"
-          className={cn(status === "active" ? "bg-green-700" : "bg-red-700")}
+          className={cn(status === 'active' ? 'bg-green-700' : 'bg-red-700')}
         >
           <span className="first-letter:uppercase">{status}</span>
         </Badge>
@@ -108,26 +108,26 @@ const columns: ColumnDef<ProductWithCategory>[] = [
     },
   },
   {
-    accessorKey: "stock",
-    header: "Stock",
+    accessorKey: 'stock',
+    header: 'Stock',
   },
   {
-    accessorKey: "price",
-    header: "Price",
+    accessorKey: 'price',
+    header: 'Price',
     cell: ({ row }) => {
       return (
         <div>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(row.getValue("price"))}
+          {new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          }).format(row.getValue('price'))}
         </div>
       );
     },
   },
   {
-    id: "actions",
-    header: "Actions",
+    id: 'actions',
+    header: 'Actions',
     cell: ({ row }) => {
       return (
         <DropdownMenu>
@@ -139,7 +139,7 @@ const columns: ColumnDef<ProductWithCategory>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem asChild>
-              <Link href={`/admin/products/edit/${row.getValue("id")}`}>
+              <Link href={`/admin/products/edit/${row.getValue('id')}`}>
                 <Pencil className="mr-2 h-4 w-4" />
                 Edit
               </Link>
@@ -281,7 +281,7 @@ export function ProductsTable({
                         table.getRowModel().rows.map((row) => (
                           <TableRow
                             key={row.id}
-                            data-state={row.getIsSelected() && "selected"}
+                            data-state={row.getIsSelected() && 'selected'}
                           >
                             {row.getVisibleCells().map((cell) => (
                               <TableCell key={cell.id}>

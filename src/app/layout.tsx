@@ -1,17 +1,17 @@
-import { GeistSans } from "geist/font/sans";
-import { type Metadata } from "next";
+import { GeistSans } from 'geist/font/sans';
+import { type Metadata } from 'next';
 
-import { ThemeProvider } from "~/components/layout/navbar/theme-provider";
-import { ReactQueryProvider } from "~/components/react-query-provider";
-import { Toaster } from "~/components/ui/toaster";
-import { TooltipProvider } from "~/components/ui/tooltip";
-import { CartProvider } from "~/state/cart-state";
-import "~/styles/globals.css";
+import { ThemeProvider } from '~/components/layout/navbar/theme-provider';
+import { ReactQueryProvider } from '~/components/react-query-provider';
+import { Toaster } from '~/components/ui/toaster';
+import { TooltipProvider } from '~/components/ui/tooltip';
+import { CartProvider } from '~/state/cart-state';
+import '~/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: "Game Vault",
-  description: "",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  title: 'Game Vault',
+  description: '',
+  icons: [{ rel: 'icon', url: '/favicon.ico' }],
 };
 
 export default function RootLayout({

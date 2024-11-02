@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { CgSpinnerTwo } from "react-icons/cg";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { CgSpinnerTwo } from 'react-icons/cg';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 import {
   Form,
   FormControl,
@@ -21,11 +21,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { useToast } from "~/hooks/use-toast";
-import { couponSchema, type Coupon } from "~/schemas/coupons-schema";
-import { createCoupon } from "~/services/coupon-service";
+} from '~/components/ui/form';
+import { Input } from '~/components/ui/input';
+import { useToast } from '~/hooks/use-toast';
+import { couponSchema, type Coupon } from '~/schemas/coupons-schema';
+import { createCoupon } from '~/services/coupon-service';
 
 export default function CreateCoupon() {
   const router = useRouter();
@@ -35,24 +35,24 @@ export default function CreateCoupon() {
     mutationFn: async (values) => createCoupon(values),
     onError: () => {
       toast({
-        title: "Failed to create coupon 😔",
+        title: 'Failed to create coupon 😔',
       });
     },
     onSuccess: (data) => {
       toast({
-        title: "Coupon created! 😊",
+        title: 'Coupon created! 😊',
       });
 
-      router.push("/admin/coupons");
+      router.push('/admin/coupons');
     },
   });
 
   const form = useForm<Coupon>({
     resolver: zodResolver(couponSchema),
     defaultValues: {
-      couponCode: "",
+      couponCode: '',
       discountPercentage: 0,
-      expirationDate: "",
+      expirationDate: '',
       isActive: true,
     },
   });
@@ -135,17 +135,17 @@ export default function CreateCoupon() {
             <CardFooter className="justify-end gap-2">
               <Button
                 type="button"
-                onClick={() => router.push("/admin/coupons")}
+                onClick={() => router.push('/admin/coupons')}
                 className="bg-red-500 text-white transition-colors duration-200 hover:bg-red-600"
               >
                 Close
               </Button>
               <Button
                 type="submit"
-                disabled={createCouponMutation.status === "pending"}
+                disabled={createCouponMutation.status === 'pending'}
                 className="bg-green-500 text-white transition-colors duration-200 hover:bg-[#2ea043]"
               >
-                {createCouponMutation.status === "pending" ? (
+                {createCouponMutation.status === 'pending' ? (
                   <CgSpinnerTwo className="animate-spin" />
                 ) : null}
                 Create

@@ -1,6 +1,6 @@
-"use client";
-import { useParams, useRouter } from "next/navigation";
-import ProductsByCategory from "~/components/products/products-by-category/products-by-category";
+'use client';
+import { useParams, useRouter } from 'next/navigation';
+import ProductsByCategory from '~/components/products/products-by-category/products-by-category';
 
 const CategoryId = () => {
   const router = useRouter();
@@ -9,7 +9,7 @@ const CategoryId = () => {
   }>();
 
   if (!categoryId) {
-    router.push("/");
+    router.push('/');
     return;
   }
 

@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
-import { Card, CardContent } from "~/components/ui/card";
-import { getProducts } from "~/services/products-service";
+import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
+import { Card, CardContent } from '~/components/ui/card';
+import { getProducts } from '~/services/products-service';
 
 export function BestSellingAccessories() {
   const { data, status } = useQuery({
-    queryKey: ["products", "physical"],
+    queryKey: ['products', 'physical'],
     queryFn: () =>
       getProducts({
-        limit: "20",
-        type: "physical",
+        limit: '20',
+        type: 'physical',
       }),
   });
 
-  console.log("Fetched Products:", data);
+  console.log('Fetched Products:', data);
 
   const physicalProducts = data?.data.filter(
-    (product) => product.type === "physical".slice(0, 10),
+    (product) => product.type === 'physical'.slice(0, 10),
   );
 
-  if (status === "error") {
+  if (status === 'error') {
     return (
       <div className="my-12 text-center text-red-600">
         Error loading accessories. Please try again later.
@@ -35,7 +35,7 @@ export function BestSellingAccessories() {
         Top-selling Physical Products
       </h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {status === "pending"
+        {status === 'pending'
           ? Array(8)
               .fill(0)
               .map((_, index) => (
@@ -51,7 +51,7 @@ export function BestSellingAccessories() {
           : physicalProducts?.map((accessory) => (
               <Card
                 key={accessory.id}
-                className="overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
+                className="overflow-hidden rounded-lg bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black shadow-lg transition-transform duration-300 hover:scale-105"
               >
                 <Link href={`/product/${accessory.id}`}>
                   <CardContent className="p-0">

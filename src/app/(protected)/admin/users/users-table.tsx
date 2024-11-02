@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   type ColumnDef,
@@ -6,9 +6,9 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import { ListFilter, PlusCircle, Search } from "lucide-react";
-import Link from "next/link";
+} from '@tanstack/react-table';
+import { ListFilter, PlusCircle, Search } from 'lucide-react';
+import Link from 'next/link';
 
 import {
   Breadcrumb,
@@ -17,8 +17,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "~/components/ui/breadcrumb";
-import { Button } from "~/components/ui/button";
+} from '~/components/ui/breadcrumb';
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
@@ -26,8 +26,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
-import { DataTablePagination } from "~/components/ui/data-table-pagination";
+} from '~/components/ui/card';
+import { DataTablePagination } from '~/components/ui/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -35,8 +35,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import { Input } from "~/components/ui/input";
+} from '~/components/ui/dropdown-menu';
+import { Input } from '~/components/ui/input';
 import {
   Table,
   TableBody,
@@ -44,48 +44,48 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/table";
-import { Tabs, TabsContent } from "~/components/ui/tabs";
-import { GetUser } from "~/services/users-service";
+} from '~/components/ui/table';
+import { Tabs, TabsContent } from '~/components/ui/tabs';
+import { GetUser } from '~/services/users-service';
 
 const columns: ColumnDef<GetUser>[] = [
   {
-    accessorKey: "id",
+    accessorKey: 'id',
   },
   {
-    accessorKey: "profileImage",
-    header: "Image",
+    accessorKey: 'profileImage',
+    header: 'Image',
     cell: ({ row }) => {
       return (
         <img
           alt="Profile image"
           className="aspect-square rounded-md object-cover"
           height="64"
-          src={row.getValue("profileImage")}
+          src={row.getValue('profileImage')}
           width="64"
         />
       );
     },
   },
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: 'name',
+    header: 'Name',
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: 'email',
+    header: 'Email',
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: 'status',
+    header: 'Status',
   },
   {
-    accessorKey: "role",
-    header: "Role",
+    accessorKey: 'role',
+    header: 'Role',
   },
   {
-    accessorKey: "bannedReason",
-    header: "Banned Reason",
+    accessorKey: 'bannedReason',
+    header: 'Banned Reason',
   },
 ];
 
@@ -210,7 +210,7 @@ export function UsersTable({
                         table.getRowModel().rows.map((row) => (
                           <TableRow
                             key={row.id}
-                            data-state={row.getIsSelected() && "selected"}
+                            data-state={row.getIsSelected() && 'selected'}
                           >
                             {row.getVisibleCells().map((cell) => (
                               <TableCell key={cell.id}>

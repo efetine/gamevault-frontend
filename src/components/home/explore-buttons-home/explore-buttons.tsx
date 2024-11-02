@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 
 export function ExploreButtons() {
-  const categories = ["Games", "Consoles", "Accessories", "Cards"];
+  const categories = ['Games', 'Consoles', 'Accessories', 'Cards'];
   return (
     <section className="my-12">
       <h2 className="mb-6 text-2xl font-semibold md:text-3xl">

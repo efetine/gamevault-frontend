@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import useEmblaCarousel from "embla-carousel-react";
-import * as React from "react";
-import { Card, CardContent } from "~/components/ui/card";
-import { cn } from "~/lib/utils";
+import useEmblaCarousel from 'embla-carousel-react';
+import * as React from 'react';
+import { Card, CardContent } from '~/components/ui/card';
 
 type CarouselProps = {
   images: { src: string; alt: string }[];
@@ -14,11 +13,9 @@ export default function EmblaCarousel({ images, options }: CarouselProps) {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
-    containScroll: "keepSnaps",
+    containScroll: 'keepSnaps',
     dragFree: true,
   });
-
-  
 
   const onSelect = React.useCallback(() => {
     if (!emblaMainApi || !emblaThumbsApi) return;
@@ -29,18 +26,18 @@ export default function EmblaCarousel({ images, options }: CarouselProps) {
   React.useEffect(() => {
     if (!emblaMainApi) return;
     onSelect();
-    emblaMainApi.on("select", onSelect);
+    emblaMainApi.on('select', onSelect);
     return () => {
-      emblaMainApi.off("select", onSelect);
+      emblaMainApi.off('select', onSelect);
     };
-  }, [emblaMainApi, onSelect]);  
+  }, [emblaMainApi, onSelect]);
 
   return (
-    <div className="space-y-4 ">
-      <Card className="relative bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black">
+    <div className="space-y-4">
+      <Card className="relative bg-gradient-to-b from-[#4d5665] via-[#374152] to-[#374152]">
         <CardContent className="overflow-hidden p-0">
           <div className="overflow-hidden rounded-lg" ref={emblaMainRef}>
-            <div className="flex ">
+            <div className="flex">
               {images.map((image, index) => (
                 <div key={index} className="min-w-0 flex-[0_0_100%]">
                   <div className="relative aspect-video">
@@ -60,5 +57,3 @@ export default function EmblaCarousel({ images, options }: CarouselProps) {
     </div>
   );
 }
-
-

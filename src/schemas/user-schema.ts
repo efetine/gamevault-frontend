@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const userSchema = z.object({
   id: z.string().uuid(),
@@ -7,9 +7,9 @@ export const userSchema = z.object({
   email: z.string().email(),
   profileImage: z.string().optional(),
   description: z.string().optional(),
-  status: z.enum(["active", "inactive", "banned"]),
+  status: z.enum(['active', 'inactive', 'banned']),
   bannedReason: z.string().nullable(),
-  role: z.enum(["client", "admin"]),
+  role: z.enum(['client', 'admin']),
 });
 
 export type User = z.infer<typeof userSchema>;

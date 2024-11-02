@@ -1,21 +1,27 @@
-"use client";
+'use client';
 
 import {
-  CreditCardIcon,
   GamepadIcon,
   ShieldCheckIcon,
-} from "lucide-react";
-import React from "react";
+  ShoppingBasket,
+  ShoppingCart,
+} from 'lucide-react';
+import React from 'react';
 
-
-import { Product } from "~/schemas/product-schema";
-import EmblaCarousel from "./slider";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
-import { Separator } from "@radix-ui/react-dropdown-menu";
-import { Button } from "../ui/button";
+import { Separator } from '@radix-ui/react-dropdown-menu';
+import Link from 'next/link';
+import { Product } from '~/schemas/product-schema';
+import { Button } from '../ui/button';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../ui/card';
+import EmblaCarousel from './slider';
 
 const OPTIONS = {};
-
 
 export const ProductDetailPage: React.FC<Product> = ({
   price,
@@ -28,22 +34,20 @@ export const ProductDetailPage: React.FC<Product> = ({
   const productImages = Array(1).fill({ src: imageUrl, alt: name });
 
   return (
-    <div className="w-full  mx-auto px-4 py-8 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black">
-      <div className="flex flex-col w-[70%] m-auto mt-32 md:flex-row gap-8 ">
-        <div className="w-full md:w-3/5 ">
-          <h2 className="text-2xl font-bold capitalize mb-4">{name}</h2>
-          <div className="mb-6  ">
+    <div className="mx-auto w-full bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black px-4 py-8">
+      <div className="m-auto mt-32 flex w-[70%] flex-col gap-8 md:flex-row">
+        <div className="w-full md:w-3/5">
+          <h2 className="mb-4 text-2xl font-bold capitalize">{name}</h2>
+          <div className="mb-6">
             <EmblaCarousel images={productImages} options={OPTIONS} />
           </div>
           <div>
-            <h3 className="text-2xl font-bold capitalize mb-2">Description:</h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              {description}
-            </p>
+            <h3 className="mb-2 text-2xl font-bold capitalize">Description:</h3>
+            <p className="text-gray-600 dark:text-gray-400">{description}</p>
           </div>
         </div>
-        <div className="w-full  md:w-2/5 pt-[52px] ">
-          <Card className="bg-gradient-to-t from-[#161616]  to-[#1a1a1a]">
+        <div className="w-full pt-[52px] md:w-2/5">
+          <Card className="bg-gradient-to-t from-[#161616] to-[#1a1a1a]">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div>
@@ -59,7 +63,9 @@ export const ProductDetailPage: React.FC<Product> = ({
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-emerald-600">${price.toFixed(2)}</p>
+                  <p className="text-2xl font-bold text-emerald-600">
+                    ${price.toFixed(2)}
+                  </p>
                   <p className="text-sm text-muted-foreground line-through">
                     ${(price + price * 0.2).toFixed(2)}
                   </p>
@@ -78,10 +84,16 @@ export const ProductDetailPage: React.FC<Product> = ({
               </div>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
-              <Button className="w-full bg-gradient-to-b from-sky-600 via-cyan-900 to-slate-800 text-white hover:from-sky-500 hover:via-cyan-600 hover:to-slate-700">
-                <CreditCardIcon className="mr-2 h-5 w-5" />
-                Buy with Mercado Pago
+              <Button className="w-full bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900">
+                <ShoppingCart className="mr-2 h-5 w-5" />
+                Add to cart
               </Button>
+              <Link href="/">
+                <Button className="w-full bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900">
+                  <ShoppingBasket className="mr-2 h-5 w-5" />
+                  Continue shopping
+                </Button>
+              </Link>
               <p className="text-center text-xs text-muted-foreground">
                 Secure payment processed by Mercado Pago. We don&apos;t store
                 your financial information.

@@ -1,16 +1,16 @@
-import { getServerAuthSession } from "~/server/auth";
+import { getServerAuthSession } from '~/server/auth';
 
-import { CiShoppingTag } from "react-icons/ci";
-import { RiCoupon2Line } from "react-icons/ri";
+import { CiShoppingTag } from 'react-icons/ci';
+import { RiCoupon2Line } from 'react-icons/ri';
 
-import { MessageSquare, Package, ShoppingCart, Users } from "lucide-react";
+import { MessageSquare, Package, ShoppingCart, Users } from 'lucide-react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 
 export default async function Admin() {
   const session = await getServerAuthSession();

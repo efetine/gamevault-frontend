@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { env } from "~/env";
-import { paginationDtoSchema } from "~/schemas/pagination-dto";
-import { userSchema } from "~/schemas/user-schema";
+import { env } from '~/env';
+import { paginationDtoSchema } from '~/schemas/pagination-dto';
+import { userSchema } from '~/schemas/user-schema';
 
 export const getUserSchema = userSchema.omit({
   description: true,
@@ -23,19 +23,19 @@ const getUsersOutputSchema = z.object({
 export type GetUsersOutput = z.infer<typeof getUsersOutputSchema>;
 
 export async function getUsers(input: GetUsersInput): Promise<GetUsersOutput> {
-  const { cursor, limit = "10" } = getUsersInputSchemma.parse(input);
-  const url = new URL("/users", env.NEXT_PUBLIC_API_URL);
+  const { cursor, limit = '10' } = getUsersInputSchemma.parse(input);
+  const url = new URL('/users', env.NEXT_PUBLIC_API_URL);
 
   if (cursor) {
-    url.searchParams.append("cursor", cursor);
+    url.searchParams.append('cursor', cursor);
   }
 
-  url.searchParams.append("limit", limit);
+  url.searchParams.append('limit', limit);
 
   const response = await fetch(url.toString(), {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 

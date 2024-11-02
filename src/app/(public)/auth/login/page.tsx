@@ -1,12 +1,12 @@
-import { getProviders } from "next-auth/react";
+import { getProviders } from 'next-auth/react';
 
-import { Login } from "./form";
+import { Login } from './form';
 
 export default async function LoginPage() {
   const providers = await getProviders();
 
   const providersArray = Object.values(providers ?? {}).filter(
-    (provider) => provider.id !== "credentials",
+    (provider) => provider.id !== 'credentials',
   );
 
   return <Login providers={providersArray} />;
