@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { CgSpinnerTwo } from "react-icons/cg";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { CgSpinnerTwo } from 'react-icons/cg';
 
-import { CategoriesCombobox } from "~/components/admin/categories/categories";
-import { Button } from "~/components/ui/button";
+import { CategoriesCombobox } from '~/components/admin/categories/categories';
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 import {
   Form,
   FormControl,
@@ -23,15 +23,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { useToast } from "~/hooks/use-toast";
+} from '~/components/ui/form';
+import { Input } from '~/components/ui/input';
+import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group';
+import { useToast } from '~/hooks/use-toast';
 import {
   createProductSchema,
   type CreateProduct,
-} from "~/schemas/create-product-schema";
-import { createProduct } from "~/services/products-service";
+} from '~/schemas/create-product-schema';
+import { createProduct } from '~/services/products-service';
 
 export default function CreateProduct() {
   const router = useRouter();
@@ -41,27 +41,27 @@ export default function CreateProduct() {
     mutationFn: async (values) => createProduct(values),
     onError: () => {
       toast({
-        title: "Failed to create product 😔",
+        title: 'Failed to create product 😔',
       });
     },
     onSuccess: () => {
       toast({
-        title: "Product created! 😊",
+        title: 'Product created! 😊',
       });
 
-      router.push("/admin/products");
+      router.push('/admin/products');
     },
   });
 
   const form = useForm<CreateProduct>({
     resolver: zodResolver(createProductSchema),
     defaultValues: {
-      name: "",
-      type: "digital",
+      name: '',
+      type: 'digital',
       stock: 0,
       price: 0,
-      description: "",
-      imageUrl: "",
+      description: '',
+      imageUrl: '',
     },
   });
 
@@ -212,7 +212,7 @@ export default function CreateProduct() {
               <CategoriesCombobox />
             </CardContent>
             <CardFooter className="justify-end gap-2">
-              <Link href={"/admin/products"}>
+              <Link href={'/admin/products'}>
                 <Button
                   variant="secondary"
                   className="transition-colors duration-200"
@@ -222,10 +222,10 @@ export default function CreateProduct() {
               </Link>
               <Button
                 type="submit"
-                disabled={createProductMutation.status === "pending"}
+                disabled={createProductMutation.status === 'pending'}
                 className="bg-green-500 text-white transition-colors duration-200 hover:bg-[#2ea043]"
               >
-                {createProductMutation.status === "pending" ? (
+                {createProductMutation.status === 'pending' ? (
                   <CgSpinnerTwo className="animate-spin" />
                 ) : null}
                 Create

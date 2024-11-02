@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
-import { Loading } from "~/components/layout/loading";
-import { ProductDetailPage } from "~/components/products/product-detail-page";
-import { getProductById } from "~/services/products-service";
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { Loading } from '~/components/layout/loading';
+import { ProductDetailPage } from '~/components/products/product-detail-page';
+import { getProductById } from '~/services/products-service';
 
 export default function ProductDetail() {
   const params = useParams();
@@ -15,7 +15,7 @@ export default function ProductDetail() {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["product", id],
+    queryKey: ['product', id],
     queryFn: () => getProductById(id),
   });
 

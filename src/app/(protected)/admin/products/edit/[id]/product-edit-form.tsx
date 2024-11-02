@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 
-import { CategoriesCombobox } from "~/components/admin/categories/categories";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { CategoriesCombobox } from '~/components/admin/categories/categories';
+import { Button } from '~/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
 import {
   Form,
   FormControl,
@@ -16,23 +16,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
+} from '~/components/ui/form';
+import { Input } from '~/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "~/components/ui/select";
-import { Textarea } from "~/components/ui/textarea";
-import { useToast } from "~/hooks/use-toast";
+} from '~/components/ui/select';
+import { Textarea } from '~/components/ui/textarea';
+import { useToast } from '~/hooks/use-toast';
 import {
   editProductSchema,
   type EditProduct,
-} from "~/schemas/edit-product-schema";
-import type { Product } from "~/schemas/product-schema";
-import { updateProduct } from "~/services/products-service";
+} from '~/schemas/edit-product-schema';
+import type { Product } from '~/schemas/product-schema';
+import { updateProduct } from '~/services/products-service';
 
 type ProductEditFormProps = {
   product: Product;
@@ -43,24 +43,24 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const updateMutation = useMutation<Product["id"], unknown, EditProduct>({
-    mutationKey: ["update-product", product.id],
+  const updateMutation = useMutation<Product['id'], unknown, EditProduct>({
+    mutationKey: ['update-product', product.id],
     mutationFn: (data) => updateProduct(product.id, data),
     onError: () => {
       toast({
-        title: "Failed to update product 😔",
+        title: 'Failed to update product 😔',
       });
     },
     onSuccess: () => {
       toast({
-        title: "Product updated!",
+        title: 'Product updated!',
       });
 
       queryClient.invalidateQueries({
-        queryKey: ["products"],
+        queryKey: ['products'],
       });
 
-      router.push("/admin/products");
+      router.push('/admin/products');
     },
   });
 
@@ -232,7 +232,7 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
                           <Select
                             onValueChange={field.onChange}
                             defaultValue={
-                              field.value === true ? "active" : "inactive"
+                              field.value === true ? 'active' : 'inactive'
                             }
                           >
                             <FormControl>
@@ -272,7 +272,7 @@ export default function ProductEditForm({ product }: ProductEditFormProps) {
                                   type="button"
                                   onClick={() =>
                                     document
-                                      .getElementById("image-upload")
+                                      .getElementById('image-upload')
                                       ?.click()
                                   }
                                   variant="outline"

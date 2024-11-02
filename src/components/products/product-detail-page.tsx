@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import { Separator } from "@radix-ui/react-dropdown-menu";
+import { Separator } from '@radix-ui/react-dropdown-menu';
 import {
   CreditCardIcon,
   GamepadIcon,
   PackageIcon,
   ShieldCheckIcon,
   StarIcon,
-} from "lucide-react";
-import React from "react";
-import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
+} from 'lucide-react';
+import React from 'react';
+import { Badge } from '~/components/ui/badge';
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 
-import { Progress } from "~/components/ui/progress";
-import { Product } from "~/schemas/product-schema";
-import EmblaCarousel from "./slider";
+import { Progress } from '~/components/ui/progress';
+import { Product } from '~/schemas/product-schema';
+import EmblaCarousel from './slider';
 const OPTIONS = {};
 
 export const ProductDetailPage: React.FC<Product> = ({
@@ -42,7 +42,7 @@ export const ProductDetailPage: React.FC<Product> = ({
   return (
     <div
       className={
-        "flex h-full w-full flex-row justify-center gap-12 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black pb-14 md:flex-col"
+        'flex h-full w-full flex-row justify-center gap-12 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black pb-14 md:flex-col'
       }
     >
       <div className="flex w-[60%] flex-row">
@@ -61,14 +61,14 @@ export const ProductDetailPage: React.FC<Product> = ({
                     <PackageIcon className="mr-2 h-4 w-4" />
                     Stock Availability
                   </h3>
-                  <Badge variant={lowStock ? "destructive" : "secondary"}>
-                    {lowStock ? "Low Stock" : "In Stock"}
+                  <Badge variant={lowStock ? 'destructive' : 'secondary'}>
+                    {lowStock ? 'Low Stock' : 'In Stock'}
                   </Badge>
                 </div>
                 <Progress value={stockPercentage} className="h-2" />
                 <p className="text-sm text-muted-foreground">
-                  {stockPercentage}% of stock remaining.{" "}
-                  {lowStock ? "Order soon!" : ""}
+                  {stockPercentage}% of stock remaining.{' '}
+                  {lowStock ? 'Order soon!' : ''}
                 </p>
               </div>
             </div>

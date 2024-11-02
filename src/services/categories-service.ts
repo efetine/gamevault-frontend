@@ -1,9 +1,9 @@
-import { env } from "~/env";
-import { categoriesSchema } from "~/schemas/categories-schema";
-import { Category } from "~/schemas/category-schema";
+import { env } from '~/env';
+import { categoriesSchema } from '~/schemas/categories-schema';
+import { Category } from '~/schemas/category-schema';
 
 export async function getCategories(): Promise<Category[]> {
-  const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
+  const url = new URL('/categories', env.NEXT_PUBLIC_API_URL);
 
   const response = await fetch(url.toString());
 

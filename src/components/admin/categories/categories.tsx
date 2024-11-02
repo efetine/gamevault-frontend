@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useQuery } from "@tanstack/react-query";
-import { Check, ChevronsUpDown } from "lucide-react";
-import * as React from "react";
-import { useFormContext } from "react-hook-form";
+import { useQuery } from '@tanstack/react-query';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import * as React from 'react';
+import { useFormContext } from 'react-hook-form';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -13,35 +13,35 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "~/components/ui/command";
+} from '~/components/ui/command';
 import {
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
+} from '~/components/ui/form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "~/components/ui/popover";
-import { cn } from "~/lib/utils";
-import { getCategories } from "~/services/categories-service";
+} from '~/components/ui/popover';
+import { cn } from '~/lib/utils';
+import { getCategories } from '~/services/categories-service';
 
 export function CategoriesCombobox() {
   const form = useFormContext();
   const [open, setOpen] = React.useState(false);
 
   const { data: categories, status } = useQuery({
-    queryKey: ["categories"],
+    queryKey: ['categories'],
     queryFn: async () => getCategories(),
   });
 
-  if (status === "error") {
+  if (status === 'error') {
     return <div>Error</div>;
   }
 
-  if (status === "pending") {
+  if (status === 'pending') {
     return <div>Loading...</div>;
   }
 
@@ -63,7 +63,7 @@ export function CategoriesCombobox() {
                 {field.value
                   ? categories.find((category) => category.id === field.value)
                       ?.name
-                  : "Select category..."}
+                  : 'Select category...'}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -78,15 +78,15 @@ export function CategoriesCombobox() {
                         key={category.id}
                         value={category.id}
                         onSelect={() => {
-                          form.setValue("categoryId", category.id);
+                          form.setValue('categoryId', category.id);
                         }}
                       >
                         <Check
                           className={cn(
-                            "mr-2 h-4 w-4",
+                            'mr-2 h-4 w-4',
                             field.value === category.id
-                              ? "opacity-100"
-                              : "opacity-0",
+                              ? 'opacity-100'
+                              : 'opacity-0',
                           )}
                         />
                         <span className="first-letter:uppercase">

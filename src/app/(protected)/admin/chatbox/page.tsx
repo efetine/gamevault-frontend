@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { CornerDownLeft, Mic, Paperclip, Settings } from "lucide-react";
-import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
-import { Avatar, AvatarFallback } from "~/components/ui/avatar";
-import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
+import { CornerDownLeft, Mic, Paperclip, Settings } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
+import { Avatar, AvatarFallback } from '~/components/ui/avatar';
+import { Badge } from '~/components/ui/badge';
+import { Button } from '~/components/ui/button';
 import {
   Drawer,
   DrawerContent,
@@ -13,41 +13,41 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "~/components/ui/drawer";
-import { Label } from "~/components/ui/label";
-import { ScrollArea } from "~/components/ui/scroll-area";
-import { Textarea } from "~/components/ui/textarea";
+} from '~/components/ui/drawer';
+import { Label } from '~/components/ui/label';
+import { ScrollArea } from '~/components/ui/scroll-area';
+import { Textarea } from '~/components/ui/textarea';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "~/components/ui/tooltip";
+} from '~/components/ui/tooltip';
 
 interface Message {
-  sender: "client" | "admin";
+  sender: 'client' | 'admin';
   text: string;
 }
 
 interface ClientMessage {
   clientId: string;
-  messages: { sender: "client" | "admin"; text: string }[];
+  messages: { sender: 'client' | 'admin'; text: string }[];
 }
 
 export default function ChatboxAdmin() {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [clients, setClients] = useState<Map<string, ClientMessage>>(new Map());
   const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
-  const [messageInput, setMessageInput] = useState<string>("");
+  const [messageInput, setMessageInput] = useState<string>('');
 
   useEffect(() => {
-    const newSocket: Socket = io("http://localhost:3001", {
-      query: { role: "admin" },
-      transports: ["websocket"],
+    const newSocket: Socket = io('http://localhost:3001', {
+      query: { role: 'admin' },
+      transports: ['websocket'],
       upgrade: false,
     });
 
     newSocket.on(
-      "messageFromClient",
+      'messageFromClient',
       (data: { clientId: string; message: string }) => {
         setClients((prev) => {
           const clientMessages = prev.get(data.clientId) || {
@@ -58,7 +58,7 @@ export default function ChatboxAdmin() {
             !clientMessages.messages.some((msg) => msg.text === data.message)
           ) {
             clientMessages.messages.push({
-              sender: "client",
+              sender: 'client',
               text: data.message,
             });
           }
@@ -84,7 +84,7 @@ export default function ChatboxAdmin() {
       console.log(`Sending message to client: ${selectedClientId}`);
       console.log(`Message content: ${messageInput}`);
 
-      socket.emit("messageToClient", {
+      socket.emit('messageToClient', {
         clientId: selectedClientId,
         message: messageInput,
       });
@@ -94,7 +94,7 @@ export default function ChatboxAdmin() {
           clientId: selectedClientId,
           messages: [] as Message[],
         };
-        const newMessage: Message = { sender: "admin", text: messageInput };
+        const newMessage: Message = { sender: 'admin', text: messageInput };
         const newMessages = [...clientMessages.messages, newMessage];
         return new Map(prev).set(selectedClientId, {
           clientId: selectedClientId,
@@ -102,9 +102,9 @@ export default function ChatboxAdmin() {
         });
       });
 
-      setMessageInput("");
+      setMessageInput('');
     } else {
-      console.log("No client selected or message is empty");
+      console.log('No client selected or message is empty');
     }
   };
 
@@ -146,7 +146,7 @@ export default function ChatboxAdmin() {
                   <div
                     key={client.clientId}
                     className={`mb-6 flex items-start space-x-4 ${
-                      selectedClientId === client.clientId ? "bg-gray-200" : ""
+                      selectedClientId === client.clientId ? 'bg-gray-200' : ''
                     }`}
                     onClick={() => setSelectedClientId(client.clientId)}
                   >
@@ -155,13 +155,13 @@ export default function ChatboxAdmin() {
                     </Avatar>
                     <div className="min-w-0 flex-1">
                       <p
-                        className={`text-sm font-medium ${selectedClientId === client.clientId ? "text-black" : "text-foreground"}`}
+                        className={`text-sm font-medium ${selectedClientId === client.clientId ? 'text-black' : 'text-foreground'}`}
                       >
                         Client {client.clientId}
                       </p>
                       <div className={`mt-1 flex items-center`}>
                         <p
-                          className={`truncate text-sm ${selectedClientId === client.clientId ? "text-black" : "text-muted-foreground"}`}
+                          className={`truncate text-sm ${selectedClientId === client.clientId ? 'text-black' : 'text-muted-foreground'}`}
                         >
                           {client.messages[client.messages.length - 1]?.text}
                         </p>
@@ -184,14 +184,14 @@ export default function ChatboxAdmin() {
                   <div
                     key={index}
                     className={`flex ${
-                      msg.sender === "admin" ? "justify-end" : "justify-start"
+                      msg.sender === 'admin' ? 'justify-end' : 'justify-start'
                     }`}
                   >
                     <div
                       className={`my-2 max-w-[60%] rounded-lg p-2 ${
-                        msg.sender === "admin"
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-200 text-black"
+                        msg.sender === 'admin'
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-gray-200 text-black'
                       }`}
                     >
                       {msg.text}

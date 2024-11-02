@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { useQuery } from "@tanstack/react-query";
-import Autoplay from "embla-carousel-autoplay";
-import { useRef } from "react";
-import { Loading } from "~/components/layout/loading";
+import { useQuery } from '@tanstack/react-query';
+import Autoplay from 'embla-carousel-autoplay';
+import { useRef } from 'react';
+import { Loading } from '~/components/layout/loading';
 
-import { Card, CardContent } from "~/components/ui/card";
+import { Card, CardContent } from '~/components/ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "~/components/ui/carousel";
-import { getProducts } from "~/services/products-service";
+} from '~/components/ui/carousel';
+import { getProducts } from '~/services/products-service';
 
 export function FeaturedProducts() {
   const { data, isPending, isError } = useQuery({
-    queryKey: ["products"],
+    queryKey: ['products'],
     queryFn: () =>
       getProducts({
-        limit: "8",
+        limit: '8',
       }),
   });
 

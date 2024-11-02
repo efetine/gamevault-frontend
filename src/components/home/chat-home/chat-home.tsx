@@ -1,50 +1,50 @@
-"use client";
+'use client';
 
-import { faHeadset } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { faHeadset } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useRef, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
 
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
+import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
 
 interface Message {
   text: string;
-  sender: "user" | "admin";
+  sender: 'user' | 'admin';
 }
 
 export const ChatButton: React.FC = () => {
   const [isChatOpen, setChatOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>('');
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const [socket, setSocket] = useState<Socket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = () => {
-    console.log("Chat button clicked");
+    console.log('Chat button clicked');
     setChatOpen(true);
 
     if (!socket) {
-      const newSocket: Socket = io("http://localhost:3001", {
-        query: { role: "client" },
-        transports: ["websocket"],
+      const newSocket: Socket = io('http://localhost:3001', {
+        query: { role: 'client' },
+        transports: ['websocket'],
         upgrade: false,
       });
 
-      newSocket.on("messageFromAdmin", (data: { message: string }) => {
+      newSocket.on('messageFromAdmin', (data: { message: string }) => {
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: data.message, sender: "admin" },
+          { text: data.message, sender: 'admin' },
         ]);
       });
 
-      newSocket.on("connect", () => {
-        console.log("Connected to WebSocket Server");
+      newSocket.on('connect', () => {
+        console.log('Connected to WebSocket Server');
       });
 
-      newSocket.on("disconnect", () => {
-        console.log("Disconnected from WebSocket Server");
+      newSocket.on('disconnect', () => {
+        console.log('Disconnected from WebSocket Server');
       });
 
       setSocket(newSocket);
@@ -52,7 +52,7 @@ export const ChatButton: React.FC = () => {
   };
 
   const handleCloseChat = () => {
-    console.log("Chat closed");
+    console.log('Chat closed');
     setChatOpen(false);
     if (socket) {
       socket.disconnect();
@@ -63,9 +63,9 @@ export const ChatButton: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputValue.trim() && socket) {
-      setMessages([...messages, { text: inputValue, sender: "user" }]);
-      socket.emit("messageToAdmin", inputValue);
-      setInputValue("");
+      setMessages([...messages, { text: inputValue, sender: 'user' }]);
+      socket.emit('messageToAdmin', inputValue);
+      setInputValue('');
     }
   };
 
@@ -76,7 +76,7 @@ export const ChatButton: React.FC = () => {
   }, [isChatOpen]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   return (
@@ -98,8 +98,8 @@ export const ChatButton: React.FC = () => {
         <div
           className={`flex h-96 w-96 flex-col rounded-lg border bg-zinc-800 bg-opacity-100 p-4 shadow-lg transition-all duration-300 ease-in-out ${
             isTransitioning
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0"
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-4 opacity-0'
           }`}
         >
           <div className="mb-2 flex items-center justify-between border-b pb-2">
@@ -111,8 +111,8 @@ export const ChatButton: React.FC = () => {
             </button>
           </div>
           <div className="mb-2 flex-1 overflow-y-auto border-b">
-            <div key="" className={"p-2 text-left"}>
-              <p className={"inline-block max-w-[70%] p-2"}>
+            <div key="" className={'p-2 text-left'}>
+              <p className={'inline-block max-w-[70%] p-2'}>
                 Admin: Hello, how can we help you?. We will be with you soon.
               </p>
             </div>
@@ -121,11 +121,11 @@ export const ChatButton: React.FC = () => {
                 <div
                   key={index}
                   className={`p-2 ${
-                    msg.sender === "user" ? "text-right" : "text-left"
+                    msg.sender === 'user' ? 'text-right' : 'text-left'
                   }`}
                 >
                   <p className={`inline-block max-w-[70%] p-2`}>
-                    {msg.sender === "user" ? "Me: " : "Admin: "}
+                    {msg.sender === 'user' ? 'Me: ' : 'Admin: '}
                     {msg.text}
                   </p>
                 </div>

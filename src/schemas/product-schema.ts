@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const productSchema = z.object({
   id: z.string().uuid(),
   name: z.string(),
-  type: z.enum(["digital", "physical"], {
+  type: z.enum(['digital', 'physical'], {
     required_error: "Product isn't digital or physical",
   }),
   stock: z.coerce.number().nonnegative(),

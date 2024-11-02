@@ -1,6 +1,6 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { editProductSchema } from "./edit-product-schema";
+import { editProductSchema } from './edit-product-schema';
 
 export const createProductSchema = editProductSchema.omit({
   active: true,

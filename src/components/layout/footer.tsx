@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { FaGithub, FaInstagram, FaXTwitter, FaYoutube } from "react-icons/fa6";
-import { IconComponent } from "../icon/icon.svg";
+import Link from 'next/link';
+import { FaGithub, FaInstagram, FaXTwitter, FaYoutube } from 'react-icons/fa6';
+import { IconComponent } from '../icon/icon.svg';
 
 const Footer = () => {
   return (

@@ -4,15 +4,15 @@ import {
   Package,
   ShoppingCart,
   Users2,
-} from "lucide-react";
-import Link from "next/link";
+} from 'lucide-react';
+import Link from 'next/link';
 
-import { UserMenu } from "~/components/layout/navbar/user-menu";
+import { UserMenu } from '~/components/layout/navbar/user-menu';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "~/components/ui/tooltip";
+} from '~/components/ui/tooltip';
 
 export default function Aside() {
   return (

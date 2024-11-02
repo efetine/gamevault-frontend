@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { LogoutButton } from "~/components/layout/logout-button";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { Button } from "~/components/ui/button";
+import { LogoutButton } from '~/components/layout/logout-button';
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+import { Button } from '~/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,8 +10,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import { getServerAuthSession } from "~/server/auth";
+} from '~/components/ui/dropdown-menu';
+import { getServerAuthSession } from '~/server/auth';
 
 export async function UserMenu() {
   const session = await getServerAuthSession();
@@ -39,7 +39,7 @@ export async function UserMenu() {
         >
           <Avatar>
             <AvatarImage
-              src={session.user.image ?? "/default_profile_picture.png"}
+              src={session.user.image ?? '/default_profile_picture.png'}
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import * as React from "react";
-import { Card, CardContent } from "~/components/ui/card";
-import { cn } from "~/lib/utils";
+import useEmblaCarousel from 'embla-carousel-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import * as React from 'react';
+import { Card, CardContent } from '~/components/ui/card';
+import { cn } from '~/lib/utils';
 
 type CarouselProps = {
   images: { src: string; alt: string }[];
@@ -15,7 +15,7 @@ export default function EmblaCarousel({ images, options }: CarouselProps) {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
-    containScroll: "keepSnaps",
+    containScroll: 'keepSnaps',
     dragFree: true,
   });
 
@@ -36,9 +36,9 @@ export default function EmblaCarousel({ images, options }: CarouselProps) {
   React.useEffect(() => {
     if (!emblaMainApi) return;
     onSelect();
-    emblaMainApi.on("select", onSelect);
+    emblaMainApi.on('select', onSelect);
     return () => {
-      emblaMainApi.off("select", onSelect);
+      emblaMainApi.off('select', onSelect);
     };
   }, [emblaMainApi, onSelect]);
 
@@ -110,8 +110,8 @@ function Thumb({ selected, image, onClick }: ThumbProps) {
   return (
     <div
       className={cn(
-        "min-w-0 flex-[0_0_20%] transition-opacity duration-300",
-        selected ? "opacity-100" : "opacity-50 hover:opacity-75",
+        'min-w-0 flex-[0_0_20%] transition-opacity duration-300',
+        selected ? 'opacity-100' : 'opacity-50 hover:opacity-75',
       )}
     >
       <button

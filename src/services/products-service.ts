@@ -1,16 +1,16 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { env } from "~/env";
-import { CreateProduct } from "~/schemas/create-product-schema";
-import { EditProduct } from "~/schemas/edit-product-schema";
-import { Product, productSchema } from "~/schemas/product-schema";
-import { productsSchema } from "~/schemas/products-schema";
+import { env } from '~/env';
+import { CreateProduct } from '~/schemas/create-product-schema';
+import { EditProduct } from '~/schemas/edit-product-schema';
+import { Product, productSchema } from '~/schemas/product-schema';
+import { productsSchema } from '~/schemas/products-schema';
 
 export async function createProduct(values: CreateProduct) {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/products/create`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(values),
   });
@@ -28,29 +28,29 @@ export type GetProducts = z.infer<typeof getProductsSchema>;
 export const paginationDtoSchema = z.object({
   cursor: z.string().nullish(),
   limit: z.string().optional(),
-  type: z.enum(["digital", "physical"]).optional(),
+  type: z.enum(['digital', 'physical']).optional(),
 });
 
 export type PaginationDto = z.infer<typeof paginationDtoSchema>;
 
 export async function getProducts(params: PaginationDto): Promise<GetProducts> {
-  const { cursor, limit = "10", type } = paginationDtoSchema.parse(params);
-  const url = new URL("/products", env.NEXT_PUBLIC_API_URL);
+  const { cursor, limit = '10', type } = paginationDtoSchema.parse(params);
+  const url = new URL('/products', env.NEXT_PUBLIC_API_URL);
 
   if (cursor) {
-    url.searchParams.append("cursor", cursor);
+    url.searchParams.append('cursor', cursor);
   }
 
-  if (type === "digital" || type === "physical") {
-    url.searchParams.append("type", type);
+  if (type === 'digital' || type === 'physical') {
+    url.searchParams.append('type', type);
   }
 
-  url.searchParams.append("limit", limit);
+  url.searchParams.append('limit', limit);
 
   const response = await fetch(url.toString(), {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -66,11 +66,11 @@ export async function getProducts(params: PaginationDto): Promise<GetProducts> {
   return parsedProducts.data;
 }
 
-export async function getProductById(id: Product["id"]): Promise<Product> {
+export async function getProductById(id: Product['id']): Promise<Product> {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/products/${id}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -85,11 +85,11 @@ export async function getProductById(id: Product["id"]): Promise<Product> {
   return parsedProduct.data;
 }
 
-export async function updateProduct(id: Product["id"], values: EditProduct) {
+export async function updateProduct(id: Product['id'], values: EditProduct) {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/products/${id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(values),
   });
