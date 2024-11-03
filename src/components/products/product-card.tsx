@@ -5,7 +5,7 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { CardContent, CardFooter, Card as Cards } from "~/components/ui/card";
 import type { ProductWithCategory } from "~/schemas/product-schema";
-import { useCart } from "~/state/cart-state";
+import { useAddProductToCart, useCart } from "~/state/cart-state";
 
 interface ProductCardProps {
   product: ProductWithCategory;
@@ -13,6 +13,12 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { dispatch } = useCart();
+
+  const { mutate: addProduct } = useAddProductToCart();
+
+  const handleAddToCart = () => {
+    addProduct({ productId: product.id, qty: 1, image: product.imageUrl ?? " ", price: product.price, category: product.category.name, title: product.name });
+  };
 
   return (
     <Cards className="group w-[300px] overflow-hidden">
@@ -46,19 +52,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
         <Button
           className="bg-green-600 text-white hover:bg-green-700"
-          onClick={() => {
-            dispatch({
-              type: "addProduct",
-              payload: {
-                productId: product.id,
-                category: product.category?.name ?? "N/A",
-                title: product.name,
-                price: product.price,
-                image: product.imageUrl,
-                qty: 1,
-              },
-            });
-          }}
+          onClick={handleAddToCart}
         >
           <ShoppingCart className="mr-2 h-4 w-4" />
           Add

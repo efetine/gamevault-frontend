@@ -19,25 +19,34 @@ import {
 } from "~/components/ui/select";
 import { Separator } from "~/components/ui/separator";
 import { useMercadopago } from "~/hooks/use-mercadopago";
-import { BuyAProductProps } from "~/services/products-service";
-import { useCart } from "~/state/cart-state";
+import { type BuyAProductProps } from "~/services/products-service";
+import { useCart, useDeleteProductFromCart, useUpdateProductQuantity } from "~/state/cart-state";
 
 type CartPageProps = {
   authToken?: string;
 };
 
 export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
-  const { state, dispatch } = useCart();
+
+  const { cartQuery } = useCart();
+
+  const { data, isLoading, isError } = cartQuery
 
   const buyProductProp: BuyAProductProps = {
-    products: state.products.map((product) => {
+    products: data?.data?.map((product) => {
       return {
         id: product.productId,
         quantity: product.qty,
       };
-    }),
-    authToken,
-  };
+    }) ?? [], authToken
+  }
+
+  const totalAmount = data?.data?.reduce((reducer, product) => reducer + (product.price * product.qty),
+    0) ?? 0
+
+  const { mutate: deleteProduct } = useDeleteProductFromCart();
+
+  const { mutate: updateQuantity } = useUpdateProductQuantity()
 
   const { mutate, isPending } = useMercadopago(buyProductProp);
 
@@ -52,7 +61,9 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
         </div>
         <div className="grid gap-4">
           <div className="grid gap-4 overflow-hidden rounded-lg border">
-            {state.products.map((product) => {
+            {isLoading ? <div className="text-center">Loading...</div> : isError || !data?.data?.length ? (
+              <div className="text-center">No products in the cart</div>
+            ) : (data.data.map((product) => {
               return (
                 <div
                   key={product.productId}
@@ -74,7 +85,7 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
                   </div>
                   <div className="flex items-center justify-end gap-2">
                     <span className="font-medium">${product.price}.00</span>
-                    <Select defaultValue="1">
+                    <Select onValueChange={(qty) => { updateQuantity({qty:Number(qty), productId:product.productId})}} defaultValue={`${product.qty}`}>
                       <SelectTrigger>
                         <SelectValue placeholder="Qty" />
                       </SelectTrigger>
@@ -89,19 +100,14 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
                     <Button
                       type="button"
                       className="border bg-transparent text-red-400"
-                      onClick={() => {
-                        dispatch({
-                          type: "removeProduct",
-                          payload: { productId: product.productId },
-                        });
-                      }}
+                      onClick={() => deleteProduct(product.productId)}
                     >
                       <FaRegTrashCan />
                     </Button>
                   </div>
                 </div>
               );
-            })}
+            }))}
           </div>
         </div>
       </div>
@@ -115,10 +121,7 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
               <span>Subtotal</span>
               <span className="font-medium">
                 $
-                {state.products.reduce(
-                  (reducer, product) => reducer + product.price,
-                  0,
-                )}
+                {totalAmount}
               </span>
             </div>
             <div className="flex items-center justify-between">
@@ -130,10 +133,7 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
               <span>Total</span>
               <span>
                 $
-                {state.products.reduce(
-                  (reducer, product) => reducer + product.price,
-                  0,
-                )}
+                {totalAmount}
               </span>
             </div>
           </CardContent>
