@@ -9,20 +9,18 @@ export function CategoryNotFound() {
       <div className="w-full max-w-md space-y-8 text-center">
         <div className="space-y-4">
           <h1 className="text-6xl font-bold text-purple-500">ERROR 404</h1>
-          <h2 className="text-3xl font-semibold text-white">
-            Category Not Found!
-          </h2>
-          <p className="text-xl text-gray-300">
+          <h2 className="text-3xl font-semibold">Category Not Found!</h2>
+          <p className="text-xl">
             This game genre doesn't exist in our universe.
           </p>
         </div>
 
         <div className="flex justify-center space-x-4">
-          <Gamepad2 className="h-24 w-24 animate-bounce text-gray-500" />
-          <Layers className="h-24 w-24 animate-pulse text-gray-500" />
+          <Gamepad2 className="h-24 w-24 animate-bounce text-gray-500 dark:text-gray-300" />
+          <Layers className="h-24 w-24 animate-pulse text-gray-500 dark:text-gray-300" />
         </div>
 
-        <p className="text-gray-400">
+        <p className="text-gray-700 dark:text-gray-100">
           Oops! It seems you've stumbled into an undiscovered game world. This
           category has either been warped to another dimension or is yet to be
           created.
@@ -40,7 +38,7 @@ export function CategoryNotFound() {
           </Button>
         </div>
 
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-700 dark:text-gray-100">
           Lost in the game? Contact our Game Master support team for assistance.
         </p>
       </div>

@@ -1,7 +1,9 @@
 "use client";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { useMemo } from "react";
+import { Loading } from "~/components/layout/loading";
 import { ProductCard } from "~/components/products/product-card";
 import type { PaginationDto } from "~/schemas/pagination-dto";
 import { getProductsByCategory } from "~/services/categories-service";
@@ -23,11 +25,11 @@ export default function ProductsByCategory({ categoryId }: CardListProps) {
   }, [data]);
 
   if (status === "error") {
-    return <div>Cannot show products</div>;
+    notFound();
   }
 
   if (status === "pending") {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

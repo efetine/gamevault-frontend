@@ -88,10 +88,10 @@ export default function Support() {
               <p className="mb-4 text-center text-gray-600 dark:text-gray-300 sm:text-left">
                 Speak directly with one of our support agents.
               </p>
-              <div className="w-full rounded-md border border-gray-200 p-4 text-center text-black hover:bg-gray-200 dark:border-white dark:bg-black dark:text-white dark:hover:bg-gray-700 sm:w-auto">
-                <h1>Call Now</h1>
-                <p>+51 934907866</p>
-              </div>
+
+              <Button>
+                <a href="tel:+529841400513">Call us</a>
+              </Button>
             </div>
             <div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
               <MessageSquare className="mx-auto mb-4 h-12 w-12 text-blue-600 sm:mx-0" />
@@ -101,12 +101,6 @@ export default function Support() {
               <p className="mb-4 text-center text-gray-600 dark:text-gray-300 sm:text-left">
                 Chat in real-time with our support team.
               </p>
-              <Button
-                variant="outline"
-                className="w-full border-gray-200 text-black hover:bg-gray-200 dark:border-white dark:text-white dark:hover:bg-gray-700 sm:w-auto"
-              >
-                Start Chat
-              </Button>
             </div>
             <div className="rounded-lg bg-white p-6 shadow-md dark:bg-gray-800">
               <Mail className="mx-auto mb-4 h-12 w-12 text-green-600 sm:mx-0" />
@@ -116,11 +110,8 @@ export default function Support() {
               <p className="mb-4 text-center text-gray-600 dark:text-gray-300 sm:text-left">
                 Send us an email and we'll respond within 24 hours.
               </p>
-              <Button
-                variant="outline"
-                className="w-full border-gray-200 text-black hover:bg-gray-200 dark:border-white dark:text-white dark:hover:bg-gray-700 sm:w-auto"
-              >
-                Send Email
+              <Button>
+                <a href="mailto:thenewkings3.0@gmail.com">Contact us</a>
               </Button>
             </div>
           </div>
