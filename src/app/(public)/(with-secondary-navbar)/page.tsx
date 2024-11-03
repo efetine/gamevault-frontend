@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ConsolePromotion } from "~/components/home/banner-bottom-home/banner-bottom";
 import { BestSellingAccessories } from "~/components/home/best-sell-accessories-home/best-sell-accessories";
 import { CategoryBrowser } from "~/components/home/browse-category-home/browse-category";
-import { ChatButton } from "~/components/home/chat-home/chat-home";
 import { ExploreButtons } from "~/components/home/explore-buttons-home/explore-buttons";
 import { FeaturedProducts } from "~/components/home/featured-home/featured";
 import { HeroSection } from "~/components/home/hero-home/hero";
@@ -11,7 +10,7 @@ import { Button } from "~/components/ui/button";
 
 const HomePage = () => {
   return (
-    <div className="mt-20 flex min-h-screen w-full flex-col items-center justify-start bg-red-50 from-[#0d1117] via-[#1a2332] to-black text-white dark:bg-gradient-to-b">
+    <div className="mt-20 flex min-h-screen w-full flex-col items-center justify-start">
       <HeroSection />
       <main className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
         <FeaturedProducts />
@@ -42,7 +41,6 @@ const HomePage = () => {
         <ExploreButtons />
       </main>
       <ConsolePromotion />
-      <ChatButton />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { IconComponent } from "../icon/icon.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 py-5">
+    <footer className="py-5">
       <div className="flew-row mb-4 mt-3 flex justify-center">
         <h1 className="flex items-center text-3xl font-semibold">
           <IconComponent />
@@ -18,14 +18,12 @@ const Footer = () => {
         <Link className="hover:text-gray-400" href="/products">
           Store
         </Link>
-        <Link className="hover:text-gray-400" href="/">
-          Categories
-        </Link>
-        <Link className="hover:text-gray-400" href="/">
+
+        <Link className="hover:text-gray-400" href="/about">
           About
         </Link>
-        <Link className="hover:text-gray-400" href="/">
-          Suport
+        <Link className="hover:text-gray-400" href="/support">
+          Support
         </Link>
       </div>
       <div className="flew-row my-4 flex columns-auto justify-center gap-3 text-2xl">

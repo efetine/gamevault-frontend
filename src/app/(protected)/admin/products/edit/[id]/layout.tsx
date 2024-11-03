@@ -25,7 +25,6 @@ export default function layout({ children }: ProductsEditLayoutProps) {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
 
-            <BreadcrumbSeparator />
             <BreadcrumbItem>
               <Link href={"/admin/products"}>Products</Link>
             </BreadcrumbItem>

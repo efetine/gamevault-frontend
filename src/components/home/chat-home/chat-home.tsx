@@ -2,6 +2,7 @@
 
 import { faHeadset } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { User } from "next-auth";
 import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
@@ -14,7 +15,11 @@ interface Message {
   sender: "user" | "admin";
 }
 
-export const ChatButton: React.FC = () => {
+interface ChatButtonProps {
+  user: User;
+}
+
+export function ChatButton({ user }: ChatButtonProps) {
   const [isChatOpen, setChatOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
@@ -126,7 +131,7 @@ export const ChatButton: React.FC = () => {
                   }`}
                 >
                   <p className={`inline-block max-w-[70%] p-2`}>
-                    {msg.sender === "user" ? "Me: " : "Admin: "}
+                    {msg.sender === "user" ? `${user.name}:` : "Admin: "}
                     {msg.text}
                   </p>
                 </div>
@@ -150,4 +155,4 @@ export const ChatButton: React.FC = () => {
       )}
     </div>
   );
-};
+}

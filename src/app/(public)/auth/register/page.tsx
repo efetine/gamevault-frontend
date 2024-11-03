@@ -29,7 +29,7 @@ import { env } from "~/env";
 const formSchema = z
   .object({
     username: z.string().min(3).max(20),
-    fullname: z.string().min(3).max(20),
+    name: z.string().min(3).max(20),
     email: z.string().email(),
     password: z.string().min(6).max(20),
     confirmPassword: z.string().min(6).max(20),
@@ -61,7 +61,7 @@ export default function RegisterPage() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      fullname: "",
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -124,7 +124,7 @@ export default function RegisterPage() {
               />
               <FormField
                 control={form.control}
-                name="fullname"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-100">Full name</FormLabel>

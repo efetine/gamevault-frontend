@@ -6,7 +6,7 @@ import { UserMenu } from "~/components/layout/navbar/user-menu";
 
 const Navbar = () => {
   return (
-    <header className="fixed z-10 h-20 w-full bg-gray-300 py-3 transition-colors duration-200 dark:bg-slate-700">
+    <header className="sticky top-0 z-10 h-20 w-full bg-gray-300 py-3 transition-colors duration-200 dark:bg-slate-700">
       <div className="container mx-auto flex items-center justify-center gap-10 px-4">
         <div className="flex w-[60%] items-center justify-end">
           <Link href="/" className="flex flex-row items-center gap-3">

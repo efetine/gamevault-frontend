@@ -78,7 +78,7 @@ const columns: ColumnDef<Category>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem asChild>
-              <Link href={`/admin/products/edit/${row.getValue("id")}`}>
+              <Link href={`/admin/categories/edit/${row.getValue("id")}`}>
                 <Pencil className="mr-2 h-4 w-4" />
                 Edit
               </Link>

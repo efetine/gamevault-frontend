@@ -1,9 +1,6 @@
-import { Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 import { CategoriesMenu } from "~/components/categories/categories-menu";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -41,29 +38,26 @@ const SubNavbar = async () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
+                <Link href="/about" legacyBehavior passHref>
                   <NavigationMenuLink>About</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
+                <Link href="/support" legacyBehavior passHref>
                   <NavigationMenuLink>Support</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          <Button variant="outline" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-          </Button>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="relative">
+          {/* <div className="relative">
             <Input
               className="bg-gray-100 pl-8 text-white dark:bg-gray-500"
               placeholder="Search games..."
             />
             <Search className="absolute right-2 top-2.5 h-4 w-4 text-[#dad9dc]" />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
