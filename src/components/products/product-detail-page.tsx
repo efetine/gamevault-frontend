@@ -18,21 +18,33 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-
 import { Progress } from "~/components/ui/progress";
-import { Product } from "~/schemas/product-schema";
+import { useMercadopago } from "~/hooks/use-mercadopago";
+import { type ProductDetailPageProps } from "~/schemas/product-details-schema";
+import { type BuyAProductProps } from "~/services/products-service";
 import EmblaCarousel from "./slider";
 const OPTIONS = {};
 
-export const ProductDetailPage: React.FC<Product> = ({
+export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   price,
   description,
   type,
   stock,
   name,
   imageUrl,
-  // category,
+  authToken,
+  id,
 }) => {
+  const buyProductProp: BuyAProductProps = {
+    products: [
+      {
+        id,
+        quantity: 1,
+      },
+    ],
+    authToken,
+  };
+  const { isPending, mutate } = useMercadopago(buyProductProp);
   const stockPercentage = (stock / 100) * 100;
   const lowStock = stockPercentage <= 20;
 
@@ -143,9 +155,12 @@ export const ProductDetailPage: React.FC<Product> = ({
             </CardContent>
 
             <CardFooter className="flex flex-col space-y-4">
-              <Button className="w-full bg-yellow-500 font-bold text-black hover:bg-yellow-600">
+              <Button
+                onClick={() => mutate()}
+                className="w-full bg-yellow-500 font-bold text-black hover:bg-yellow-600"
+              >
                 <CreditCardIcon className="mr-2 h-5 w-5" />
-                Buy with Mercado Pago
+                {isPending ? "Loading..." : "Buy with Mercado Pago"}
               </Button>
               <p className="text-center text-xs text-muted-foreground">
                 Secure payment processed by Mercado Pago. We don&apos;t store

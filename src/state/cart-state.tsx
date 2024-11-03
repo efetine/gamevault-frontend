@@ -4,10 +4,26 @@ import { createContext, useContext, useReducer } from "react";
 
 import { Product } from "~/schemas/product-schema";
 
-type Action = { type: "addProduct"; payload: { productId: Product["id"] } };
+type Action =
+  | {
+      type: "addProduct";
+      payload: Payload;
+    }
+  | {
+      type: "removeProduct";
+      payload: { productId: Product["id"] };
+    };
 type Dispatch = (action: Action) => void;
-type State = { products: Product["id"][] };
+type State = { products: Payload[] };
 type CartProviderProps = { children: React.ReactNode };
+type Payload = {
+  productId: Product["id"];
+  category: string;
+  qty: number;
+  price: Product["price"];
+  title: Product["name"];
+  image: Product["imageUrl"];
+};
 
 const CartStateContext = createContext<
   { state: State; dispatch: Dispatch } | undefined
@@ -17,11 +33,15 @@ function cartReducer(state: State, action: Action) {
   switch (action.type) {
     case "addProduct": {
       return {
-        products: [...state.products, action.payload.productId],
+        products: [...state.products, { ...action.payload }],
       };
     }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+    case "removeProduct": {
+      return {
+        products: state.products.filter(
+          ({ productId }) => productId !== action.payload.productId,
+        ),
+      };
     }
   }
 }

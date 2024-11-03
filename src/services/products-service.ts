@@ -3,6 +3,7 @@ import { z } from "zod";
 import { env } from "~/env";
 import type { CreateProduct } from "~/schemas/create-product-schema";
 import type { EditProduct } from "~/schemas/edit-product-schema";
+import { type ResponseMpDto } from "~/schemas/mercado-pago-dto";
 import { paginatedResultSchema } from "~/schemas/paginated-result";
 import { paginationDtoSchema } from "~/schemas/pagination-dto";
 import {
@@ -125,4 +126,30 @@ export async function uploadImage(uuid: Product["id"], file: File) {
   const body = await response.json();
 
   return body;
+}
+
+export type ProductsData = {
+  id: string;
+  quantity: number;
+};
+
+export type BuyAProductProps = {
+  products: ProductsData[];
+  authToken?: string;
+};
+
+export async function buyAProduct({ products, authToken }: BuyAProductProps) {
+  return await fetch(`${env.NEXT_PUBLIC_API_URL}/mercadopago`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify({ products }),
+  })
+    .then(async (res) => {
+      return (await res.json()) as ResponseMpDto;
+    })
+    .then((data) => data as object)
+    .catch((err) => console.log(err));
 }

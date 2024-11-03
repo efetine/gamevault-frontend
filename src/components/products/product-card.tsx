@@ -51,6 +51,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               type: "addProduct",
               payload: {
                 productId: product.id,
+                category: product.category?.name ?? "N/A",
+                title: product.name,
+                price: product.price,
+                image: product.imageUrl,
+                qty: 1,
               },
             });
           }}
