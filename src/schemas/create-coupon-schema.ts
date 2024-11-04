@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { editCouponSchema } from "./edit-coupon-schema";
+import { couponSchema } from "./coupons-schema";
 
-export const createCouponSchema = editCouponSchema
-  .omit({
-    isActive: true,
-  })
-  .extend({
-    isActive: z.boolean().default(true),
-  });
+export const createCouponSchema = z.object({
+  coupon: couponSchema.pick({
+    discountPercentage: true,
+    expirationDate: true,
+  }),
+  emails: z.array(z.string().email()).min(1),
+});
 
 export type CreateCoupon = z.infer<typeof createCouponSchema>;

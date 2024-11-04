@@ -6,13 +6,11 @@ import { Button } from "~/components/ui/button";
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
   hasNextPage: boolean;
-  pagesSize: number;
   fetchNextPage: Function;
 }
 
 export function DataTablePagination<TData>({
   table,
-  pagesSize = 10,
   hasNextPage = false,
   fetchNextPage,
 }: DataTablePaginationProps<TData>) {
@@ -37,7 +35,7 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => {
-              if (pagesSize <= table.getPageCount()) {
+              if (table.getCanNextPage() === false && hasNextPage === true) {
                 fetchNextPage();
               }
 

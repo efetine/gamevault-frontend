@@ -15,6 +15,7 @@ import {
 } from "@tanstack/react-table";
 import * as React from "react";
 
+import { DataTablePagination } from "~/components/ui/data-table-pagination";
 import {
   Table,
   TableBody,
@@ -23,18 +24,20 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-
-import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  hasNextPage: boolean;
+  fetchNextPage: Function;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  hasNextPage,
+  fetchNextPage,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -56,6 +59,7 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
     enableRowSelection: true,
+    autoResetPageIndex: false,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -123,7 +127,11 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination
+        table={table}
+        hasNextPage={hasNextPage}
+        fetchNextPage={fetchNextPage}
+      />
     </div>
   );
 }
