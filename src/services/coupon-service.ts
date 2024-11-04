@@ -1,25 +1,20 @@
-import { z } from "zod";
-import { env } from "~/env";
-import { Coupon } from "~/schemas/coupons-schema";
-import { CreateCoupon } from "~/schemas/create-coupon-schema";
-import { EditCoupon } from "~/schemas/edit-coupon-schema";
+import { z } from 'zod';
 
-export const couponSchema = z.object({
-  couponCode: z.string(),
-  discountPercentage: z.number(),
-  expirationDate: z.string(),
-  id: z.string(),
-  isActive: z.boolean(),
-});
+import { env } from '~/env';
+import { couponSchema, type Coupon } from '~/schemas/coupons-schema';
+import type { CreateCoupon } from '~/schemas/create-coupon-schema';
+import type { EditCoupon } from '~/schemas/edit-coupon-schema';
+import { paginatedResultSchema } from '~/schemas/paginated-result';
+import { paginationDtoSchema } from '~/schemas/pagination-dto';
+
 export const getCouponsSchema = z.array(couponSchema);
-
 
 export async function createCoupon(values: CreateCoupon) {
   try {
     const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/create`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(values),
     });
@@ -34,17 +29,39 @@ export async function createCoupon(values: CreateCoupon) {
   }
 }
 
+const getCouponsInputSchema = paginationDtoSchema;
 
-export const getCoupons = async () => {
+type GetCouponsInput = z.infer<typeof getCouponsInputSchema>;
+
+const paginatedCoupons = paginatedResultSchema(couponSchema);
+
+type PaginatedCoupons = z.infer<typeof paginatedCoupons>;
+
+export const getCoupons = async (
+  input: GetCouponsInput,
+): Promise<PaginatedCoupons> => {
   try {
-    const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/all`);
-    const data = await response.json();
+    const { cursor, limit = '10' } = getCouponsInputSchema.parse(input);
+    const url = new URL('/coupons/all', env.NEXT_PUBLIC_API_URL);
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch coupons: ${response.statusText}`);
+    if (cursor) {
+      url.searchParams.append('cursor', cursor);
     }
 
-    return getCouponsSchema.parse(data);
+    url.searchParams.append('limit', limit);
+
+    const response = await fetch(url.toString());
+
+    const body = await response.json();
+
+    const parsedCoupons = paginatedCoupons.safeParse(body);
+
+    if (parsedCoupons.success === false) {
+      console.log(parsedCoupons.error);
+      throw new Error(`Validation error: ${parsedCoupons.error.message}`);
+    }
+
+    return parsedCoupons.data;
   } catch (error: any) {
     throw new Error(`Error in getCoupons: ${error.message}`);
   }
@@ -53,13 +70,14 @@ export const getCoupons = async () => {
 export async function getCouponById(id: string | number): Promise<Coupon> {
   try {
     const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/${id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
     const body = await response.json();
+
     const parsedCoupon = couponSchema.safeParse(body);
 
     if (!parsedCoupon.success) {
@@ -72,15 +90,14 @@ export async function getCouponById(id: string | number): Promise<Coupon> {
   }
 }
 
-
-export async function updateCoupon(id: Coupon["id"], values: EditCoupon) {
+export async function updateCoupon(id: Coupon['id'], values: EditCoupon) {
   try {
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/coupons/update-discount/${id}`,
       {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
       },
@@ -96,15 +113,14 @@ export async function updateCoupon(id: Coupon["id"], values: EditCoupon) {
   }
 }
 
-
-export async function setInactiveCoupon(id: Coupon["id"]) {
+export async function setInactiveCoupon(id: Coupon['id']) {
   try {
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/coupons/${id}/inactive`,
       {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       },
     );
@@ -119,13 +135,12 @@ export async function setInactiveCoupon(id: Coupon["id"]) {
   }
 }
 
-
-export async function deleteCoupon(id: Coupon["id"]) {
+export async function deleteCoupon(id: Coupon['id']) {
   try {
     const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
@@ -139,15 +154,14 @@ export async function deleteCoupon(id: Coupon["id"]) {
   }
 }
 
-
-export async function changeStatus(id: Coupon["id"]) {
+export async function changeStatus(id: Coupon['id']) {
   try {
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/coupons/toggle-status/${id}`,
       {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       },
     );
@@ -162,7 +176,6 @@ export async function changeStatus(id: Coupon["id"]) {
   }
 }
 
-
 export async function sendCouponMail(emails: string[], coupons: Coupon[]) {
   if (emails.length !== coupons.length) {
     throw new Error(
@@ -175,9 +188,9 @@ export async function sendCouponMail(emails: string[], coupons: Coupon[]) {
       const response = await fetch(
         `${env.NEXT_PUBLIC_API_URL}/mail-test/send-coupon`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             emails: [emails[i]],
@@ -196,5 +209,5 @@ export async function sendCouponMail(emails: string[], coupons: Coupon[]) {
     }
   }
 
-  return { message: "Coupons sent successfully!" };
+  return { message: 'Coupons sent successfully!' };
 }

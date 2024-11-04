@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { useMemo, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { Check, ChevronsUpDown, PlusIcon } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -13,48 +13,50 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "~/components/ui/command";
+} from '~/components/ui/command';
 import {
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
+} from '~/components/ui/form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "~/components/ui/popover";
-import { cn } from "~/lib/utils";
-import { getCategories } from "~/services/categories-service";
+} from '~/components/ui/popover';
+import { cn } from '~/lib/utils';
+import { getCategories } from '~/services/categories-service';
 
 export function CategoriesCombobox() {
   const form = useFormContext();
   const [open, setOpen] = useState(false);
 
-  const { data, status } = useInfiniteQuery({
-    queryKey: ["categories"],
-    queryFn: async () =>
+  const { data, status, hasNextPage, fetchNextPage } = useInfiniteQuery({
+    queryKey: ['categories'],
+    queryFn: async ({ pageParam }) =>
       getCategories({
-        limit: "10",
+        cursor: pageParam,
+
+        limit: '10',
       }),
-    initialPageParam: "",
+    initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
-
-  if (status === "error") {
-    return <div>Error</div>;
-  }
-
-  if (status === "pending") {
-    return <div>Loading...</div>;
-  }
 
   const categories = useMemo(() => {
     if (!data) return [];
 
     return data.pages.flatMap((page) => page.data);
   }, [data]);
+
+  if (status === 'error') {
+    return <div>Error</div>;
+  }
+
+  if (status === 'pending') {
+    return <div>Loading...</div>;
+  }
 
   return (
     <FormField
@@ -74,7 +76,7 @@ export function CategoriesCombobox() {
                 {field.value
                   ? categories.find((category) => category.id === field.value)
                       ?.name
-                  : "Select category..."}
+                  : 'Select category...'}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -89,15 +91,15 @@ export function CategoriesCombobox() {
                         key={category.id}
                         value={category.id}
                         onSelect={() => {
-                          form.setValue("categoryId", category.id);
+                          form.setValue('categoryId', category.id);
                         }}
                       >
                         <Check
                           className={cn(
-                            "mr-2 h-4 w-4",
+                            'mr-2 h-4 w-4',
                             field.value === category.id
-                              ? "opacity-100"
-                              : "opacity-0",
+                              ? 'opacity-100'
+                              : 'opacity-0',
                           )}
                         />
                         <span className="first-letter:uppercase">
@@ -108,6 +110,15 @@ export function CategoriesCombobox() {
                   </CommandGroup>
                 </CommandList>
               </Command>
+              <Button
+                disabled={hasNextPage === false}
+                onClick={() => fetchNextPage()}
+                className="w-full"
+                variant="outline"
+              >
+                <PlusIcon className="mr-1" />
+                View more
+              </Button>
             </PopoverContent>
           </Popover>
           <FormMessage />

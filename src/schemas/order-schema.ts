@@ -9,4 +9,4 @@ export const orderSchema = z.object({
   orderDetails: z.array(orderDetailsSchema),
 });
 
-export type order = z.infer<typeof orderSchema>;
+export type Order = z.infer<typeof orderSchema>;
