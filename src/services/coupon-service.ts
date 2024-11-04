@@ -1,29 +1,29 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { env } from '~/env';
-import { couponSchema, type Coupon } from '~/schemas/coupons-schema';
-import type { CreateCoupon } from '~/schemas/create-coupon-schema';
-import type { EditCoupon } from '~/schemas/edit-coupon-schema';
-import { paginatedResultSchema } from '~/schemas/paginated-result';
-import { paginationDtoSchema } from '~/schemas/pagination-dto';
+import { env } from "~/env";
+import { couponSchema, type Coupon } from "~/schemas/coupons-schema";
+import type { CreateCoupon } from "~/schemas/create-coupon-schema";
+import type { EditCoupon } from "~/schemas/edit-coupon-schema";
+import { paginatedResultSchema } from "~/schemas/paginated-result";
+import { paginationDtoSchema } from "~/schemas/pagination-dto";
 
 export const getCouponsSchema = z.array(couponSchema);
 
-export async function createCoupon(values: CreateCoupon) {
+export async function createCoupons(values: CreateCoupon) {
   try {
-    const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/create`, {
-      method: 'POST',
+    const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons`, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(values),
     });
 
-    if (!response.ok) {
+    if (response.status !== 201) {
       throw new Error(`Failed to create coupon: ${response.statusText}`);
     }
 
-    return await response.json();
+    return;
   } catch (error: any) {
     throw new Error(`Error in createCoupon: ${error.message}`);
   }
@@ -41,14 +41,14 @@ export const getCoupons = async (
   input: GetCouponsInput,
 ): Promise<PaginatedCoupons> => {
   try {
-    const { cursor, limit = '10' } = getCouponsInputSchema.parse(input);
-    const url = new URL('/coupons/all', env.NEXT_PUBLIC_API_URL);
+    const { cursor, limit = "10" } = getCouponsInputSchema.parse(input);
+    const url = new URL("/coupons", env.NEXT_PUBLIC_API_URL);
 
     if (cursor) {
-      url.searchParams.append('cursor', cursor);
+      url.searchParams.append("cursor", cursor);
     }
 
-    url.searchParams.append('limit', limit);
+    url.searchParams.append("limit", limit);
 
     const response = await fetch(url.toString());
 
@@ -57,7 +57,6 @@ export const getCoupons = async (
     const parsedCoupons = paginatedCoupons.safeParse(body);
 
     if (parsedCoupons.success === false) {
-      console.log(parsedCoupons.error);
       throw new Error(`Validation error: ${parsedCoupons.error.message}`);
     }
 
@@ -70,9 +69,9 @@ export const getCoupons = async (
 export async function getCouponById(id: string | number): Promise<Coupon> {
   try {
     const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/${id}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -90,14 +89,17 @@ export async function getCouponById(id: string | number): Promise<Coupon> {
   }
 }
 
-export async function updateCoupon(id: Coupon['id'], values: EditCoupon) {
+export async function updateCouponDiscount(
+  id: Coupon["id"],
+  values: Partial<EditCoupon>,
+) {
   try {
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/coupons/update-discount/${id}`,
       {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
       },
@@ -113,14 +115,40 @@ export async function updateCoupon(id: Coupon['id'], values: EditCoupon) {
   }
 }
 
-export async function setInactiveCoupon(id: Coupon['id']) {
+export async function updateCouponStatus(
+  id: Coupon["id"],
+  values: Pick<EditCoupon, "isActive">,
+) {
+  try {
+    const response = await fetch(
+      `${env.NEXT_PUBLIC_API_URL}/coupons/status/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to update coupon: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    throw new Error(`Error in updateCoupon: ${error.message}`);
+  }
+}
+
+export async function setInactiveCoupon(id: Coupon["id"]) {
   try {
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/coupons/${id}/inactive`,
       {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       },
     );
@@ -135,12 +163,12 @@ export async function setInactiveCoupon(id: Coupon['id']) {
   }
 }
 
-export async function deleteCoupon(id: Coupon['id']) {
+export async function deleteCoupon(id: Coupon["id"]) {
   try {
     const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/coupons/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -154,14 +182,14 @@ export async function deleteCoupon(id: Coupon['id']) {
   }
 }
 
-export async function changeStatus(id: Coupon['id']) {
+export async function changeStatus(id: Coupon["id"]) {
   try {
     const response = await fetch(
       `${env.NEXT_PUBLIC_API_URL}/coupons/toggle-status/${id}`,
       {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       },
     );
@@ -188,9 +216,9 @@ export async function sendCouponMail(emails: string[], coupons: Coupon[]) {
       const response = await fetch(
         `${env.NEXT_PUBLIC_API_URL}/mail-test/send-coupon`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             emails: [emails[i]],
@@ -209,5 +237,5 @@ export async function sendCouponMail(emails: string[], coupons: Coupon[]) {
     }
   }
 
-  return { message: 'Coupons sent successfully!' };
+  return { message: "Coupons sent successfully!" };
 }

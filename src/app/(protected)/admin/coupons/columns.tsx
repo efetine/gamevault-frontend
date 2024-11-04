@@ -1,13 +1,12 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
 
 import { Checkbox } from "~/components/ui/checkbox";
-// import { DataTableColumnHeader } from "./data-table-column-header";
-import { Badge } from "~/components/ui/badge";
-import { cn } from "~/lib/utils";
 import { Coupon } from "~/schemas/coupons-schema";
 import { DataTableRowActions } from "./data-table-row-actions";
+import { EditCouponStatus } from "./edit-coupon-status";
 
 export const columns: ColumnDef<Coupon>[] = [
   {
@@ -44,31 +43,31 @@ export const columns: ColumnDef<Coupon>[] = [
   {
     accessorKey: "discountPercentage",
     header: "Discount",
+    cell: ({ row }) => {
+      const discountPercentage: number = row.getValue("discountPercentage");
+
+      return <span>{discountPercentage}%</span>;
+    },
   },
   {
     accessorKey: "isActive",
     header: "Status",
     cell: ({ row }) => {
-      const status: boolean = row.getValue("isActive");
-
-      return (
-        <Badge
-          variant="outline"
-          className={cn(status === true ? "bg-green-700" : "bg-red-700")}
-        >
-          <span className="first-letter:uppercase">
-            {status === true ? "Active" : "Inactive"}
-          </span>
-        </Badge>
-      );
+      return <EditCouponStatus coupon={row.original} />;
     },
   },
   {
     accessorKey: "expirationDate",
     header: "Expiration Date",
+    cell: ({ row }) => {
+      const expirationDate: Date = row.getValue("expirationDate");
+
+      return <span>{format(expirationDate, "dd/MM/yyyy")}</span>;
+    },
   },
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

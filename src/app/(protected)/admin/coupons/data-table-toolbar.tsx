@@ -2,6 +2,7 @@
 
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Table } from "@tanstack/react-table";
+import Link from "next/link";
 
 // import { DataTableViewOptions } from "@/app/(app)/examples/tasks/components/data-table-view-options";
 import { Button } from "~/components/ui/button";
@@ -58,6 +59,9 @@ export function DataTableToolbar<TData>({
           <Cross2Icon className="ml-2 h-4 w-4" />
         </Button>
       )}
+      <Link href="/admin/coupons/create">
+        <Button>Send cuopons</Button>
+      </Link>
       {/* <DataTableViewOptions table={table} /> */}
     </div>
   );
