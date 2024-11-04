@@ -160,7 +160,7 @@ export default function CreateCoupon() {
                                         className={cn(
                                           "w-[240px] border-purple-500 bg-transparent pl-3 text-left font-bold text-purple-500 hover:bg-opacity-50",
                                           !field.value &&
-                                            "text-muted-foreground",
+                                          "text-muted-foreground",
                                         )}
                                       >
                                         {field.value ? (

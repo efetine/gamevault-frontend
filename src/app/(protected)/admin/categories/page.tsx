@@ -9,6 +9,7 @@ import { Button } from "~/components/ui/button";
 import { DataTable } from "~/components/ui/data-table";
 import { getCategories } from "~/services/categories-service";
 import { columns } from "./columns";
+import { DataTable } from "./data-table";
 
 export default function AdminCategories() {
   const { data, status, hasNextPage, fetchNextPage } = useInfiniteQuery({
@@ -44,18 +45,7 @@ export default function AdminCategories() {
           <p className="text-muted-foreground">Manage your categories here.</p>
         </div>
       </div>
-      <DataTable
-        data={categories}
-        columns={columns}
-        hasNextPage={hasNextPage}
-        fetchNextPage={fetchNextPage}
-        filterBy="name"
-        renderActions={
-          <Link href="/admin/categories/create">
-            <Button>Add Categories</Button>
-          </Link>
-        }
-      />
+      <DataTable data={categories} columns={columns} />
     </div>
   );
 }

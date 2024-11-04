@@ -3,12 +3,12 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 
-import { DataTable } from "~/components/ui/data-table";
 import { getUsers } from "~/services/users-service";
 import { columns } from "./columns";
+import { DataTable } from "./data-table";
 
 export default function AdminUsers() {
-  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
+  const { data } = useInfiniteQuery({
     queryKey: ["users"],
     queryFn: ({ pageParam }) =>
       getUsers({
@@ -33,13 +33,7 @@ export default function AdminUsers() {
           <p className="text-muted-foreground">Manage your users here.</p>
         </div>
       </div>
-      <DataTable
-        data={users}
-        columns={columns}
-        hasNextPage={hasNextPage}
-        fetchNextPage={fetchNextPage}
-        filterBy="email"
-      />
+      <DataTable data={users} columns={columns} />
     </div>
   );
 }

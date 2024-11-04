@@ -1,25 +1,24 @@
 "use client";
 
-import { useInfiniteQuery } from "@tanstack/react-query";
-import Link from "next/link";
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import { useMemo } from "react";
 
-import { Loading } from "~/components/layout/loading";
-import { Button } from "~/components/ui/button";
-import { DataTable } from "~/components/ui/data-table";
-import { getCoupons } from "~/services/coupon-service";
-import { columns } from "./columns";
+import { toast } from "~/hooks/use-toast";
+import { Coupon } from "~/schemas/coupons-schema";
+import { getCoupons, sendCouponMail } from "~/services/coupon-service";
+// import { columns } from './columns';
+// import { DataTable } from './data-table';
 
 export default function CouponsPage() {
-  const { data, status, hasNextPage, fetchNextPage } = useInfiniteQuery({
+  const { data } = useInfiniteQuery({
     queryKey: ["coupons"],
-    queryFn: ({ pageParam }) =>
+    queryFn: () =>
       getCoupons({
-        cursor: pageParam,
+        cursor: "",
         limit: "10",
       }),
-    initialPageParam: "",
     getNextPageParam: (lastPage) => lastPage.nextCursor,
+    initialPageParam: "",
   });
 
   const coupons = useMemo(() => {
@@ -28,13 +27,25 @@ export default function CouponsPage() {
     return data.pages.flatMap((page) => page.data);
   }, [data]);
 
-  if (status === "error") {
-    return <div>Cannot show categories</div>;
-  }
-
-  if (status === "pending") {
-    return <Loading />;
-  }
+  const sendCouponsMutation = useMutation<
+    {},
+    {},
+    { emails: string[]; coupons: Coupon[] }
+  >({
+    mutationFn: async ({ emails, coupons }) => {
+      return await sendCouponMail(emails, coupons);
+    },
+    onError: () => {
+      toast({
+        title: "Ocurrió un error al enviar los cupones. Intenta nuevamente. 😔",
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "Cupones enviados exitosamente a los correos proporcionados. 😊",
+      });
+    },
+  });
 
   return (
     <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
@@ -44,18 +55,7 @@ export default function CouponsPage() {
           <p className="text-muted-foreground">Manage your coupons here.</p>
         </div>
       </div>
-      <DataTable
-        data={coupons}
-        columns={columns}
-        hasNextPage={hasNextPage}
-        fetchNextPage={fetchNextPage}
-        filterBy="couponCode"
-        renderActions={
-          <Link href="/admin/coupons/create">
-            <Button>Send cuopons</Button>
-          </Link>
-        }
-      />
+      {/* <DataTable data={coupons} columns={columns} /> */}
     </div>
   );
 }
