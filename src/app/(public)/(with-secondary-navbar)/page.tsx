@@ -14,7 +14,7 @@ const HomePage = async () => {
   const session = await getServerAuthSession();
 
   return (
-    <div className="mt-20 flex min-h-screen w-full flex-col items-center justify-start from-[#0d1117] via-[#1a2332] to-black text-white dark:bg-gradient-to-b">
+    <div className="flex min-h-screen w-full flex-col items-center justify-start from-[#0d1117] via-[#1a2332] to-black text-white dark:bg-gradient-to-b lg:mt-20">
       <HeroSection />
       <main className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
         <FeaturedProducts />

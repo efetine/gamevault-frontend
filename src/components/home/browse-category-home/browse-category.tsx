@@ -20,7 +20,7 @@ export async function CategoryBrowser() {
         </h2>
       </div>
       <Carousel
-        className="w-full"
+        className="relative w-full"
         opts={{
           loop: true,
           align: 'start',
@@ -47,10 +47,8 @@ export async function CategoryBrowser() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="mt-4 flex justify-center sm:justify-end">
-          <CarouselPrevious className="mr-2" />
-          <CarouselNext />
-        </div>
+        <CarouselPrevious className="absolute left-0.5 top-1/2 z-10 h-20 -translate-y-1/2 transform rounded-md border-none bg-gradient-to-l from-blue-800 to-blue-700 hover:from-blue-700/90 hover:to-blue-600/80" />
+        <CarouselNext className="absolute right-0.5 top-1/2 z-10 h-20 -translate-y-1/2 transform rounded-md border-none bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-600 hover:to-blue-400" />
       </Carousel>
     </section>
   );

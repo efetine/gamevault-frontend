@@ -46,7 +46,7 @@ export function FeaturedProducts() {
             >
               <Link href={`/product/${product.id}`}>
                 <div className="overflow-visible p-1">
-                  <Card className="transform bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black transition-transform duration-300 hover:scale-105">
+                  <Card className="transform bg-gradient-to-b from-[#4d5665] via-[#374152] to-[#374152] transition-transform duration-300 hover:scale-105">
                     <CardContent className="p-0">
                       <div className="relative">
                         <img
