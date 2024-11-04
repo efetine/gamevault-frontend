@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -15,17 +16,16 @@ const paramsSchema = z.object({
   type: z.enum(['digital', 'physical']).optional(),
 });
 
-export default function ProductsPage() {
+function ProductsList() {
   const searchParams = useSearchParams();
   const typeParam = searchParams.get('type') ?? undefined;
   const { type } = paramsSchema.parse({ type: typeParam });
 
   const { ref, inView } = useInView({
-    /* Optional options */
     threshold: 0,
   });
 
-  const { data, status, hasNextPage, fetchNextPage } = useInfiniteQuery({
+  const { data, isLoading, isError, hasNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: ['products', type],
     queryFn: ({ pageParam }) =>
       getProducts({
@@ -45,35 +45,42 @@ export default function ProductsPage() {
 
   const products = useMemo(() => {
     if (!data) return [];
-
     return data.pages.flatMap((page) => page.data);
   }, [data]);
 
-  if (status === 'error') {
+  if (isError) {
     return <div>Cannot show products</div>;
   }
 
-  if (status === 'pending') {
+  if (isLoading) {
     return <Loading />;
   }
 
   return (
-    <Suspense fallback={<Loading />}>
-      <div className="mt-36 w-full content-center items-center justify-center">
-        <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black">
-          <section className="relative flex flex-col items-center justify-center overflow-hidden pt-5">
-            <ProductTypeSelector />
-            <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </section>
-          <div ref={ref}>
-            {hasNextPage === true ? 'Loading more products...' : null}
-          </div>
-        </div>
+    <>
+      <ProductTypeSelector />
+      <div className="grid w-full grid-cols-4 gap-7 py-5 sm:justify-items-center">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
-    </Suspense>
+      <div ref={ref}>
+        {hasNextPage ? 'Loading more products...' : null}
+      </div>
+    </>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <div className="mt-36 w-full content-center items-center justify-center">
+      <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black">
+        <section className="relative flex flex-col items-center justify-center overflow-hidden pt-5">
+          <Suspense fallback={<Loading />}>
+            <ProductsList />
+          </Suspense>
+        </section>
+      </div>
+    </div>
   );
 }

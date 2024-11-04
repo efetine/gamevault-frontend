@@ -15,7 +15,7 @@ export function BestSellingAccessories() {
       }),
   });
 
-  console.log('Fetched Products:', data);
+  // console.log('Fetched Products:', data);
 
   const physicalProducts = data?.data.filter(
     (product) => product.type === 'physical'.slice(0, 10),
@@ -51,7 +51,7 @@ export function BestSellingAccessories() {
           : physicalProducts?.map((accessory) => (
               <Card
                 key={accessory.id}
-                className="overflow-hidden rounded-lg bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black shadow-lg transition-transform duration-300 hover:scale-105"
+                className="overflow-hidden rounded-lg bg-gradient-to-b from-[#4d5665] via-[#374152] to-[#374152] shadow-lg transition-transform duration-300 hover:scale-105"
               >
                 <Link href={`/product/${accessory.id}`}>
                   <CardContent className="p-0">
