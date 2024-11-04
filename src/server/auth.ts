@@ -128,7 +128,7 @@ export const authOptions: NextAuthOptions = {
         });
         const user = await res.json();
 
-        if (res.ok && user) {
+        if (res.ok && user && user.status === "active") {
           return user;
         }
 

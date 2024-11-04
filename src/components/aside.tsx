@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import { CiShoppingTag } from "react-icons/ci";
 import { RiCoupon2Line } from "react-icons/ri";
+import { RxDashboard } from "react-icons/rx";
 
 import { UserMenu } from "~/components/layout/navbar/user-menu";
 import {
@@ -27,6 +28,18 @@ export default function Aside() {
               className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
             >
               <Home className="h-5 w-5" />
+              <span className="sr-only">Home</span>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent side="right">Home</TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link
+              href="/admin"
+              className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
+            >
+              <RxDashboard />
               <span className="sr-only">Dashboard</span>
             </Link>
           </TooltipTrigger>

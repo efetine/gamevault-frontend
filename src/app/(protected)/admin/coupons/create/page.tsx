@@ -24,8 +24,14 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { useToast } from "~/hooks/use-toast";
-import { couponSchema, type Coupon } from "~/schemas/coupons-schema";
+import { Coupon, couponSchema } from "~/schemas/coupons-schema";
 import { createCoupon } from "~/services/coupon-service";
+
+// const createCouponSchema = couponSchema.extend({
+//   expirationDate: z.coerce.string().date(),
+// });
+
+// type CreateCouponSchema = z.infer<typeof createCouponSchema>;
 
 export default function CreateCoupon() {
   const router = useRouter();
@@ -52,7 +58,7 @@ export default function CreateCoupon() {
     defaultValues: {
       couponCode: "",
       discountPercentage: 0,
-      expirationDate: "",
+      // expirationDate: new Date(),
       isActive: true,
     },
   });
@@ -120,12 +126,12 @@ export default function CreateCoupon() {
                       Expiration Date
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
+                      {/* <Input
+                        type="date"
                         placeholder="YYYY/MM/DD"
                         {...field}
                         className="border-[#30363d] bg-[#1a2332]/60 text-white placeholder:text-gray-400"
-                      />
+                      /> */}
                     </FormControl>
                     <FormMessage className="text-red-300" />
                   </FormItem>
