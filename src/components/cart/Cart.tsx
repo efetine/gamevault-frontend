@@ -21,8 +21,8 @@ export function Cart() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="icon" className='bg-secondary'>
-          <ShoppingCart className="h-5 w-5" />
+        <Button variant="ghost" size="default"  className='hover:bg-slate-700 text-xl '>
+          <ShoppingCart className="h-8 w-8" />
         </Button>
       </PopoverTrigger>
       <PopoverContent>{JSON.stringify(state.products)}</PopoverContent>

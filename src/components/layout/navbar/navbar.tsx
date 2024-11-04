@@ -1,5 +1,3 @@
-
-
 import Link from 'next/link';
 
 import { Cart } from '~/components/cart/Cart';
@@ -10,23 +8,26 @@ import { NavbarDrawer } from './navbar-drawer';
 
 export default async function Navbar() {
   return (
-    <header className="fixed z-20 w-screen h-16 lg:h-20 bg-slate-400 py-0 transition-colors duration-200 dark:bg-slate-700">
-      <div className="container mx-auto flex h-full gap-20 lg:items-center justify-end lg:gap-[350px] px-4 ">
-        <Link href="/" className="flex items-center gap-3 ">
-          <h1 className="flex items-center text-lg lg:text-3xl font-semibold">
-          <IconComponent  />
-            Game Vault</h1>
-        </Link>
-        
-        <div className="hidden lg:flex lg:items-center lg:space-x-6">
+    <header className="fixed z-20 h-16 w-screen bg-gradient-to-r from-slate-400 to-sky-300 py-0 transition-colors duration-200 dark:bg-gradient-to-r dark:from-blue-900 dark:via-gray-800 dark:to-gray-900 lg:h-20">
+      <div className="container mx-auto flex gap-0 h-full lg:gap-2 flex-row justify-end   lg:items-center lg:justify-end ">
+        <div className="flex w-full pr-[80px] lg:p-0 lg:w-[58%] items-center justify-end lg:justify-end ">
+          <Link href="/" className="flex items-center gap-3">
+            <h1 className="flex items-center text-2xl font-semibold lg:text-3xl ">
+              <IconComponent />
+              Game Vault
+            </h1>
+          </Link>
+        </div>
+        <div className="hidden lg:flex lg:w-[42%] lg:items-center justify-end lg:space-x-6 ">
           <UserMenu />
           <Cart />
           <ModeToggle />
         </div>
-        
-        <NavbarDrawer>
-          <UserMenu />
-        </NavbarDrawer>
+        <div className="flex h-full w-10 items-center justify-center ">
+          <NavbarDrawer>
+            <UserMenu />
+          </NavbarDrawer>
+        </div>
       </div>
     </header>
   );
