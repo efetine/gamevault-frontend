@@ -56,9 +56,8 @@ export default function SubNavbar() {
             <Input
               className="w-full bg-gray-100 pl-8 pr-10 text-white dark:bg-gray-500"
               placeholder="Search games..."
-              aria-label="Search games"
             />
-            <Search className="absolute right-2 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
+            <Search className="absolute right-2 top-2.5 h-4 w-4 text-[#dad9dc]" />
           </div>
         </div> */}
       </div>

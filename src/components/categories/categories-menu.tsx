@@ -32,7 +32,7 @@ export function CategoriesMenu() {
 
   return (
     <div className="rounded-lg bg-gradient-to-br from-blue-900 via-cyan-900 to-slate-700 p-4 backdrop-blur-md">
-      <ul className="grid w-[350px] gap-3 p-2 md:w-[500px] md:grid-cols-3 lg:w-[550px]">
+      <ul className=" grid w-[350px] gap-3 p-2 md:w-[500px] md:grid-cols-3 lg:w-[550px]">
         {categories.map((category) => (
           <li key={category.id}>
             <NavigationMenuLink asChild className="flex items-center text-center justify-center">

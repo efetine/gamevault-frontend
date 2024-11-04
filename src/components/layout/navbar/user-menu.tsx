@@ -20,10 +20,10 @@ export async function UserMenu() {
     return (
       <>
         <Link href="/auth/register">
-          <Button variant="secondary">Register</Button>
+          <Button className='text-white text-lg hover:bg-slate-700' variant="ghost">Register</Button>
         </Link>
         <Link href="/api/auth/signin">
-          <Button variant="secondary">Login</Button>
+          <Button className='text-white text-lg hover:bg-slate-700' variant="ghost">Login</Button>
         </Link>
       </>
     );
