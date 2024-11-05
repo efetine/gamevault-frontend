@@ -12,7 +12,7 @@ export const couponSchema = z.object({
     .min(1, { message: "Discount must be at least 1%" })
     .max(100, { message: "Discount cannot exceed 100%" }),
   expirationDate: z.coerce.date(),
-  isActive: z.boolean().default(true),
+  isActive: z.boolean(),
 });
 
 export type Coupon = z.infer<typeof couponSchema>;

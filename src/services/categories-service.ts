@@ -1,32 +1,32 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { env } from '~/env';
-import { Category, categorySchema } from '~/schemas/category-schema';
-import { CreateCategory } from '~/schemas/create-category-schema';
-import { paginatedResultSchema } from '~/schemas/paginated-result';
-import { type PaginationDto } from '~/schemas/pagination-dto';
-import { productWithCategorySchema } from '~/schemas/product-schema';
+import { env } from "~/env";
+import { Category, categorySchema } from "~/schemas/category-schema";
+import { CreateCategory } from "~/schemas/create-category-schema";
+import { paginatedResultSchema } from "~/schemas/paginated-result";
+import { type PaginationDto } from "~/schemas/pagination-dto";
+import { productWithCategorySchema } from "~/schemas/product-schema";
 
 const paginatedCategories = paginatedResultSchema(categorySchema);
 
-export type PaginatedCategories = z.infer<typeof paginatedCategories>;
+type PaginatedCategories = z.infer<typeof paginatedCategories>;
 
 export async function getCategories({
   cursor,
   limit,
 }: PaginationDto): Promise<PaginatedCategories> {
-  const url = new URL('/categories', env.NEXT_PUBLIC_API_URL);
+  const url = new URL("/categories", env.NEXT_PUBLIC_API_URL);
 
   if (cursor !== null && cursor !== undefined) {
-    url.searchParams.set('cursor', cursor.toString());
+    url.searchParams.set("cursor", cursor.toString());
   }
 
   if (limit !== null && limit !== undefined) {
-    url.searchParams.set('limit', limit.toString());
+    url.searchParams.set("limit", limit.toString());
   }
 
   const response = await fetch(url.toString(), {
-    method: 'GET',
+    method: "GET",
     next: { revalidate: 1200 },
   });
 
@@ -61,17 +61,17 @@ export async function getProductsByCategory(
   try {
     const url = new URL(`/products/category/`, env.NEXT_PUBLIC_API_URL);
 
-    url.searchParams.append('limit', String(limit));
+    url.searchParams.append("limit", String(limit));
     if (cursor != undefined) {
-      url.searchParams.append('cursor', cursor);
+      url.searchParams.append("cursor", cursor);
     }
 
     if (categoryId !== undefined) {
-      url.searchParams.append('category', categoryId);
+      url.searchParams.append("category", categoryId);
     }
 
     const response = await fetch(url, {
-      method: 'GET',
+      method: "GET",
       next: { revalidate: 1200 },
     });
 
@@ -90,16 +90,16 @@ export async function getProductsByCategory(
     if (error instanceof Error) {
       throw new Error(error.message);
     } else {
-      throw new Error('an unknown error occurred');
+      throw new Error("an unknown error occurred");
     }
   }
 }
 
 export async function getCategoryById(id: string) {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/categories/${id}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
 
@@ -120,9 +120,9 @@ export async function getCategoryById(id: string) {
 
 export async function createCategory(input: CreateCategory): Promise<Category> {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/categories`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(input),
   });
@@ -139,15 +139,15 @@ export async function createCategory(input: CreateCategory): Promise<Category> {
 }
 
 export async function updateCategory(
-  categoryId: Category['id'],
+  categoryId: Category["id"],
   input: CreateCategory,
 ): Promise<Category> {
   const response = await fetch(
     `${env.NEXT_PUBLIC_API_URL}/categories/${categoryId}`,
     {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(input),
     },

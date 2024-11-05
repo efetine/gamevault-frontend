@@ -2,6 +2,7 @@
 
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { Row } from "@tanstack/react-table";
+import Link from "next/link";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -10,10 +11,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { couponSchema } from "~/schemas/coupons-schema";
-
-// import { labels } from "../data/data"
-// import { taskSchema } from "../data/schema"
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -22,7 +19,7 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const { id } = couponSchema.parse(row.original);
+  const categoryId = row.getValue("id");
 
   return (
     <DropdownMenu>
@@ -36,7 +33,9 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Mark as "Shipped"</DropdownMenuItem>
+        <Link href={`/admin/categories/edit/${categoryId}`}>
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -70,6 +70,7 @@ export async function getProducts(
   const parsedProducts = paginatedProducts.safeParse(body);
 
   if (parsedProducts.success === false) {
+    console.log(parsedProducts.error.message);
     throw new Error(parsedProducts.error.message);
   }
 
