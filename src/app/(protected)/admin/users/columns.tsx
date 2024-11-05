@@ -4,6 +4,8 @@ import { ColumnDef } from "@tanstack/react-table";
 
 // import { DataTableColumnHeader } from "./data-table-column-header";
 import { GetUser } from "~/services/users-service";
+import { EditUserRole } from "./edit-user-role";
+import { EditUserStatus } from "./edit-user-status";
 
 export const columns: ColumnDef<GetUser>[] = [
   {
@@ -35,10 +37,16 @@ export const columns: ColumnDef<GetUser>[] = [
   {
     accessorKey: "status",
     header: "Status",
+    cell: ({ row }) => {
+      return <EditUserStatus user={row.original} />;
+    },
   },
   {
     accessorKey: "role",
     header: "Role",
+    cell: ({ row }) => {
+      return <EditUserRole user={row.original} />;
+    },
   },
   {
     accessorKey: "bannedReason",

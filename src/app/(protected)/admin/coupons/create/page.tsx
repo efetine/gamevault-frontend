@@ -37,7 +37,7 @@ import { cn } from "~/lib/utils";
 import { couponSchema } from "~/schemas/coupons-schema";
 import { createCoupons } from "~/services/coupon-service";
 
-export const createCouponFormSchema = couponSchema
+const createCouponFormSchema = couponSchema
   .pick({
     discountPercentage: true,
     expirationDate: true,

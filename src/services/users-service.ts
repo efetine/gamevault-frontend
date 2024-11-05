@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { env } from "~/env";
+import type { EditUser } from "~/schemas/edit-user-schema";
 import { paginationDtoSchema } from "~/schemas/pagination-dto";
 import { userSchema } from "~/schemas/user-schema";
 
@@ -48,4 +49,20 @@ export async function getUsers(input: GetUsersInput): Promise<GetUsersOutput> {
   }
 
   return parsedUsers.data;
+}
+
+export async function updateUser(id: string, data: Partial<EditUser>) {
+  const url = new URL(`/users/${id}`, env.NEXT_PUBLIC_API_URL);
+
+  const response = await fetch(url.toString(), {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update user status");
+  }
 }

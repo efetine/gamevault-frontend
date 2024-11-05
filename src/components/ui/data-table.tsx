@@ -30,11 +30,19 @@ import { DataTableToolbar } from "./data-table-toolbar";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  hasNextPage: boolean;
+  filterBy: string;
+  fetchNextPage: Function;
+  renderActions?: React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  hasNextPage,
+  filterBy,
+  fetchNextPage,
+  renderActions,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -56,6 +64,7 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
     enableRowSelection: true,
+    autoResetPageIndex: false,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -72,6 +81,8 @@ export function DataTable<TData, TValue>({
       <DataTableToolbar
         table={table}
         hasSelectedRows={table.getFilteredSelectedRowModel().rows.length > 0}
+        renderActions={renderActions}
+        filterBy={filterBy}
       />
       <div className="rounded-md border">
         <Table>
@@ -123,7 +134,11 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination
+        table={table}
+        hasNextPage={hasNextPage}
+        fetchNextPage={fetchNextPage}
+      />
     </div>
   );
 }

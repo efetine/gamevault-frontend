@@ -3,12 +3,12 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 
+import { DataTable } from "~/components/ui/data-table";
 import { getOrders } from "~/services/orders-service";
 import { columns } from "./columns";
-import { DataTable } from "./data-table";
 
 export default function AdminOrders() {
-  const { data } = useInfiniteQuery({
+  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: ["orders"],
     queryFn: ({ pageParam }) =>
       getOrders({
@@ -33,7 +33,13 @@ export default function AdminOrders() {
           <p className="text-muted-foreground">Manage your orders here.</p>
         </div>
       </div>
-      <DataTable data={orders} columns={columns} />
+      <DataTable
+        data={orders}
+        columns={columns}
+        hasNextPage={hasNextPage}
+        fetchNextPage={fetchNextPage}
+        filterBy="email"
+      />
     </div>
   );
 }
