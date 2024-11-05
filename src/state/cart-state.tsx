@@ -1,13 +1,14 @@
 "use client";
 
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 import { type Product } from "~/schemas/product-schema";
 import { useAuth } from "./token-state";
 import { useMutation, useQuery, type UseQueryResult } from "@tanstack/react-query";
-import { addProductToCartAPI, addProductToLocalStorage, deleteProductFromCartAPI, deleteProductFromLocalStorage, fetchProductsCart, getLocalStorageCart, updateProductQuantityAPI, updateProductQuantityInLocalStorage } from "~/services/cart-service";
+import { addProductToCartAPI, addProductToLocalStorage, deleteProductFromCartAPI, deleteProductFromLocalStorage, fetchProductsCart, getLocalStorageCart, mixedCartProductsLocalWithServer, updateProductQuantityAPI, updateProductQuantityInLocalStorage } from "~/services/cart-service";
 import { type ObjectPayload } from "~/schemas/cart-payload-schema";
 import { useToast } from "~/hooks/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
 
 type Action =
   | {
@@ -66,8 +67,11 @@ function cartReducer(state: State, action: Action) {
 }
 
 function CartProvider({ children }: CartProviderProps) {
+  const { toast } = useToast()
   const { state: authState } = useAuth();
   const [state, dispatch] = useReducer(cartReducer, { data: [], nextCursor: null });
+
+
   const cartQuery = useQuery({
     queryKey: ["cart", authState.token],
     queryFn: async () => {
@@ -78,6 +82,28 @@ function CartProvider({ children }: CartProviderProps) {
       }
     }
   });
+
+  useEffect(() => {
+    if (authState.token && window.localStorage.getItem("cart")) {
+      setTimeout(() => {
+        toast({
+          title: "Products added to cart",
+          description: "You have products in your local cart. Would you like to add them to your account cart?",
+          action: (
+            <ToastAction
+              altText="Get Cart"
+              onClick={async () => {
+                await mixedCartProductsLocalWithServer(authState.token)
+                  .then(() => cartQuery.refetch());
+              }}
+            >
+              Get Local Cart
+            </ToastAction>
+          ),
+        });
+      }, 100);
+    }
+  }, [authState.token]);
 
   const value = { state, dispatch, cartQuery };
 
@@ -192,6 +218,31 @@ function useUpdateProductQuantity() {
   });
 }
 
-export {
-  CartProvider, useCart, useAddProductToCart, useDeleteProductFromCart, useUpdateProductQuantity
+function useMixedLocalWithServer() {
+  const { toast } = useToast()
+  const { state: authState } = useAuth();
+  const { cartQuery } = useCart();
+  const { refetch } = cartQuery;
+
+  return useMutation({
+    mutationFn: () => mixedCartProductsLocalWithServer(authState.token),
+    onSuccess: () => {
+      void refetch()
+      toast({
+        title: "Cart updated",
+        description: "The cart has been updated",
+        color: "green"
+      })
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: "An error occurred while updating the cart",
+        color: "red"
+      })
+    }
+  });
 }
+
+export {
+  CartProvider, useCart, useAddProductToCart, useDeleteProductFromCart, useUpdateProductQuantity}

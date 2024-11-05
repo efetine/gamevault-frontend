@@ -2,8 +2,8 @@
 
 import { env } from "~/env";
 import {
-  type CartQuerySchema,
   cartQuerySchema,
+  type CartQuerySchema,
 } from "~/schemas/cart-fetch-schema";
 import {
   cartPayloadArraySchema,
@@ -90,12 +90,15 @@ export async function deleteProductFromCartAPI(
   token: string,
   productId: string,
 ) {
-  const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/carts?product=${productId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_API_URL}/carts?product=${productId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   if (!response.ok) {
     throw new Error("Failed to delete product from cart");
   }
@@ -112,7 +115,11 @@ export async function deleteProductFromLocalStorage(productId: string) {
   localStorage.setItem("cart", JSON.stringify(updatedCart));
 }
 
-export async function updateProductQuantityAPI(token: string, productId: string, qty: number) {
+export async function updateProductQuantityAPI(
+  token: string,
+  productId: string,
+  qty: number,
+) {
   const response = await fetch(
     `${env.NEXT_PUBLIC_API_URL}/carts?product=${productId}&quantity=${qty}`,
     {
@@ -125,11 +132,14 @@ export async function updateProductQuantityAPI(token: string, productId: string,
     },
   );
   if (!response.ok) {
-    console.log(response)
+    console.log(response);
   }
 }
 
-export async function updateProductQuantityInLocalStorage(productId: string, qty: number) {
+export async function updateProductQuantityInLocalStorage(
+  productId: string,
+  qty: number,
+) {
   const cart =
     (JSON.parse(localStorage.getItem("cart") ?? "[]") as ArrayPayload) || [];
   const updatedCart = cart.map((item: { productId: string; qty: number }) => {
@@ -139,4 +149,26 @@ export async function updateProductQuantityInLocalStorage(productId: string, qty
     return item;
   });
   localStorage.setItem("cart", JSON.stringify(updatedCart));
+}
+
+export async function mixedCartProductsLocalWithServer(token: string | null) {
+  const cart = window.localStorage.getItem("cart") ?? "[]";
+
+  const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/carts/mixed`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: cart,
+  })
+    .then((res) => {
+      if(res.ok) 
+        window.localStorage.removeItem("cart");
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
+  return response;
 }
