@@ -1,4 +1,4 @@
-import { CreateCategory } from "~/components/categories/create-category";
+import { CreateCategory } from '~/components/categories/create-category';
 
 import {
   Card,
@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 
 export default function CreateCategoryPage() {
   return (

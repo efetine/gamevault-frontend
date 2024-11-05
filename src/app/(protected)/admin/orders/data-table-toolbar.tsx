@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Cross2Icon } from "@radix-ui/react-icons";
-import { Table } from "@tanstack/react-table";
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { Table } from '@tanstack/react-table';
 
 // import { DataTableViewOptions } from "@/app/(app)/examples/tasks/components/data-table-view-options";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
+import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
 
 // import { priorities, statuses } from "../data/data";
 // import { DataTableFacetedFilter } from "./data-table-faceted-filter";
@@ -26,10 +26,10 @@ export function DataTableToolbar<TData>({
         <Input
           placeholder="Filter orders..."
           value={
-            (table.getColumn("couponCode")?.getFilterValue() as string) ?? ""
+            (table.getColumn('couponCode')?.getFilterValue() as string) ?? ''
           }
           onChange={(event) =>
-            table.getColumn("couponCode")?.setFilterValue(event.target.value)
+            table.getColumn('couponCode')?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />

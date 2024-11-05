@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { categorySchema } from "./category-schema";
+import { z } from 'zod';
+import { categorySchema } from './category-schema';
 
 export const categoriesSchema = z.array(categorySchema);
 

@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
 // export default function Support() {
 //   return <div>support</div>;
 // }
-import { Headphones, Mail, MessageSquare } from "lucide-react";
+import { Headphones, Mail, MessageSquare } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "~/components/ui/accordion";
-import { Button } from "~/components/ui/button";
+} from '~/components/ui/accordion';
+import { Button } from '~/components/ui/button';
 
 export default function Support() {
   return (

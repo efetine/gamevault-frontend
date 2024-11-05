@@ -1,6 +1,6 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { productSchema } from "./product-schema";
+import { productSchema } from './product-schema';
 
 export const productDetailPropsSchema = productSchema.extend({
   authToken: z.string().optional(),

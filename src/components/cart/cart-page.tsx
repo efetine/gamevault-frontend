@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import React from "react";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { Button } from "~/components/ui/button";
+import React from 'react';
+import { FaRegTrashCan } from 'react-icons/fa6';
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "~/components/ui/select";
-import { Separator } from "~/components/ui/separator";
-import { useMercadopago } from "~/hooks/use-mercadopago";
-import { BuyAProductProps } from "~/services/products-service";
-import { useCart } from "~/state/cart-state";
+} from '~/components/ui/select';
+import { Separator } from '~/components/ui/separator';
+import { useMercadopago } from '~/hooks/use-mercadopago';
+import { BuyAProductProps } from '~/services/products-service';
+import { useCart } from '~/state/cart-state';
 
 type CartPageProps = {
   authToken?: string;
@@ -64,7 +64,7 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
                     width={100}
                     height={100}
                     className="rounded-md object-cover"
-                    style={{ aspectRatio: "100/100", objectFit: "cover" }}
+                    style={{ aspectRatio: '100/100', objectFit: 'cover' }}
                   />
                   <div className="grid gap-1">
                     <h3 className="font-medium">{product.title}</h3>
@@ -91,7 +91,7 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
                       className="border bg-transparent text-red-400"
                       onClick={() => {
                         dispatch({
-                          type: "removeProduct",
+                          type: 'removeProduct',
                           payload: { productId: product.productId },
                         });
                       }}
@@ -139,7 +139,7 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
           </CardContent>
           <CardFooter>
             <Button size="lg" className="w-full" onClick={() => mutate()}>
-              {isPending ? "Loading..." : "Proceed to Checkout"}
+              {isPending ? 'Loading...' : 'Proceed to Checkout'}
             </Button>
           </CardFooter>
         </Card>

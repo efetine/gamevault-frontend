@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { Checkbox } from "~/components/ui/checkbox";
+import { Checkbox } from '~/components/ui/checkbox';
 // import { DataTableColumnHeader } from "./data-table-column-header";
-import { Badge } from "~/components/ui/badge";
-import { cn } from "~/lib/utils";
-import { Coupon } from "~/schemas/coupons-schema";
-import { DataTableRowActions } from "./data-table-row-actions";
+import { Badge } from '~/components/ui/badge';
+import { cn } from '~/lib/utils';
+import { Coupon } from '~/schemas/coupons-schema';
+import { DataTableRowActions } from './data-table-row-actions';
 
 export const columns: ColumnDef<Coupon>[] = [
   {
-    accessorKey: "id",
+    accessorKey: 'id',
   },
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+          (table.getIsSomePageRowsSelected() && 'indeterminate')
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -38,37 +38,37 @@ export const columns: ColumnDef<Coupon>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "couponCode",
-    header: "Code",
+    accessorKey: 'couponCode',
+    header: 'Code',
   },
   {
-    accessorKey: "discountPercentage",
-    header: "Discount",
+    accessorKey: 'discountPercentage',
+    header: 'Discount',
   },
   {
-    accessorKey: "isActive",
-    header: "Status",
+    accessorKey: 'isActive',
+    header: 'Status',
     cell: ({ row }) => {
-      const status: boolean = row.getValue("isActive");
+      const status: boolean = row.getValue('isActive');
 
       return (
         <Badge
           variant="outline"
-          className={cn(status === true ? "bg-green-700" : "bg-red-700")}
+          className={cn(status === true ? 'bg-green-700' : 'bg-red-700')}
         >
           <span className="first-letter:uppercase">
-            {status === true ? "Active" : "Inactive"}
+            {status === true ? 'Active' : 'Inactive'}
           </span>
         </Badge>
       );
     },
   },
   {
-    accessorKey: "expirationDate",
-    header: "Expiration Date",
+    accessorKey: 'expirationDate',
+    header: 'Expiration Date',
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,15 +14,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { toast } from "~/hooks/use-toast";
-import { Category } from "~/schemas/category-schema";
+} from '~/components/ui/form';
+import { Input } from '~/components/ui/input';
+import { toast } from '~/hooks/use-toast';
+import { Category } from '~/schemas/category-schema';
 import {
   type CreateCategory,
   createCategorySchema,
-} from "~/schemas/create-category-schema";
-import { createCategory } from "~/services/categories-service";
+} from '~/schemas/create-category-schema';
+import { createCategory } from '~/services/categories-service';
 
 export function CreateCategory() {
   const router = useRouter();
@@ -36,7 +36,7 @@ export function CreateCategory() {
   const form = useForm<CreateCategory>({
     resolver: zodResolver(createCategorySchema),
     defaultValues: {
-      name: "",
+      name: '',
     },
   });
 
@@ -45,13 +45,13 @@ export function CreateCategory() {
       await createCategoryMutation.mutateAsync(data);
 
       toast({
-        title: "Category created!",
+        title: 'Category created!',
       });
 
-      router.replace("/admin/categories");
+      router.replace('/admin/categories');
     } catch {
       toast({
-        title: "Error creating category",
+        title: 'Error creating category',
       });
     }
   }

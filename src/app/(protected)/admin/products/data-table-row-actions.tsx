@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Row } from "@tanstack/react-table";
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Row } from '@tanstack/react-table';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import { couponSchema } from "~/schemas/coupons-schema";
+} from '~/components/ui/dropdown-menu';
+import { couponSchema } from '~/schemas/coupons-schema';
 
 // import { labels } from "../data/data"
 // import { taskSchema } from "../data/schema"

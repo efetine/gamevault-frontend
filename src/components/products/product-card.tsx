@@ -1,11 +1,11 @@
-import { ShoppingCart } from "lucide-react";
-import Link from "next/link";
+import { ShoppingCart } from 'lucide-react';
+import Link from 'next/link';
 
-import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
-import { CardContent, CardFooter, Card as Cards } from "~/components/ui/card";
-import type { ProductWithCategory } from "~/schemas/product-schema";
-import { useCart } from "~/state/cart-state";
+import { Badge } from '~/components/ui/badge';
+import { Button } from '~/components/ui/button';
+import { CardContent, CardFooter, Card as Cards } from '~/components/ui/card';
+import type { ProductWithCategory } from '~/schemas/product-schema';
+import { useCart } from '~/state/cart-state';
 
 interface ProductCardProps {
   product: ProductWithCategory;
@@ -48,10 +48,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className="bg-green-600 text-white hover:bg-green-700"
           onClick={() => {
             dispatch({
-              type: "addProduct",
+              type: 'addProduct',
               payload: {
                 productId: product.id,
-                category: product.category?.name ?? "N/A",
+                category: product.category?.name ?? 'N/A',
                 title: product.name,
                 price: product.price,
                 image: product.imageUrl,

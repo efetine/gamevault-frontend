@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
-import { useMemo } from "react";
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
+import { useMemo } from 'react';
 
-import { toast } from "~/hooks/use-toast";
-import { Coupon } from "~/schemas/coupons-schema";
-import { getCoupons, sendCouponMail } from "~/services/coupon-service";
+import { toast } from '~/hooks/use-toast';
+import { Coupon } from '~/schemas/coupons-schema';
+import { getCoupons, sendCouponMail } from '~/services/coupon-service';
 // import { columns } from './columns';
 // import { DataTable } from './data-table';
 
 export default function CouponsPage() {
   const { data } = useInfiniteQuery({
-    queryKey: ["coupons"],
+    queryKey: ['coupons'],
     queryFn: () =>
       getCoupons({
-        cursor: "",
-        limit: "10",
+        cursor: '',
+        limit: '10',
       }),
     getNextPageParam: (lastPage) => lastPage.nextCursor,
-    initialPageParam: "",
+    initialPageParam: '',
   });
 
   const coupons = useMemo(() => {
@@ -37,12 +37,12 @@ export default function CouponsPage() {
     },
     onError: () => {
       toast({
-        title: "Ocurrió un error al enviar los cupones. Intenta nuevamente. 😔",
+        title: 'Ocurrió un error al enviar los cupones. Intenta nuevamente. 😔',
       });
     },
     onSuccess: () => {
       toast({
-        title: "Cupones enviados exitosamente a los correos proporcionados. 😊",
+        title: 'Cupones enviados exitosamente a los correos proporcionados. 😊',
       });
     },
   });

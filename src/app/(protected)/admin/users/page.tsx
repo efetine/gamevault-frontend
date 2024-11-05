@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 
-import { getUsers } from "~/services/users-service";
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
+import { getUsers } from '~/services/users-service';
+import { columns } from './columns';
+import { DataTable } from './data-table';
 
 export default function AdminUsers() {
   const { data } = useInfiniteQuery({
-    queryKey: ["users"],
+    queryKey: ['users'],
     queryFn: ({ pageParam }) =>
       getUsers({
         cursor: pageParam,
-        limit: "10",
+        limit: '10',
       }),
     getNextPageParam: (lastPage) => lastPage.nextCursor,
-    initialPageParam: "",
+    initialPageParam: '',
   });
 
   const users = useMemo(() => {

@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { Separator } from "@radix-ui/react-dropdown-menu";
+import { Separator } from '@radix-ui/react-dropdown-menu';
 import {
   CreditCardIcon,
   GamepadIcon,
   PackageIcon,
   ShieldCheckIcon,
   StarIcon,
-} from "lucide-react";
-import React from "react";
-import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
+} from 'lucide-react';
+import React from 'react';
+import { Badge } from '~/components/ui/badge';
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
-import { Progress } from "~/components/ui/progress";
-import { useMercadopago } from "~/hooks/use-mercadopago";
-import { type ProductDetailPageProps } from "~/schemas/product-details-schema";
-import { type BuyAProductProps } from "~/services/products-service";
-import EmblaCarousel from "./slider";
+} from '~/components/ui/card';
+import { Progress } from '~/components/ui/progress';
+import { useMercadopago } from '~/hooks/use-mercadopago';
+import { type ProductDetailPageProps } from '~/schemas/product-details-schema';
+import { type BuyAProductProps } from '~/services/products-service';
+import EmblaCarousel from './slider';
 const OPTIONS = {};
 
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
@@ -54,7 +54,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   return (
     <div
       className={
-        "flex h-full w-full flex-row justify-center gap-12 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black pb-14 md:flex-col"
+        'flex h-full w-full flex-row justify-center gap-12 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black pb-14 md:flex-col'
       }
     >
       <div className="flex w-[60%] flex-row">
@@ -73,14 +73,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     <PackageIcon className="mr-2 h-4 w-4" />
                     Stock Availability
                   </h3>
-                  <Badge variant={lowStock ? "destructive" : "secondary"}>
-                    {lowStock ? "Low Stock" : "In Stock"}
+                  <Badge variant={lowStock ? 'destructive' : 'secondary'}>
+                    {lowStock ? 'Low Stock' : 'In Stock'}
                   </Badge>
                 </div>
                 <Progress value={stockPercentage} className="h-2" />
                 <p className="text-sm text-muted-foreground">
-                  {stockPercentage}% of stock remaining.{" "}
-                  {lowStock ? "Order soon!" : ""}
+                  {stockPercentage}% of stock remaining.{' '}
+                  {lowStock ? 'Order soon!' : ''}
                 </p>
               </div>
             </div>
@@ -160,7 +160,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 className="w-full bg-yellow-500 font-bold text-black hover:bg-yellow-600"
               >
                 <CreditCardIcon className="mr-2 h-5 w-5" />
-                {isPending ? "Loading..." : "Buy with Mercado Pago"}
+                {isPending ? 'Loading...' : 'Buy with Mercado Pago'}
               </Button>
               <p className="text-center text-xs text-muted-foreground">
                 Secure payment processed by Mercado Pago. We don&apos;t store

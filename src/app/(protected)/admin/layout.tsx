@@ -1,8 +1,8 @@
-import { redirect } from "next/navigation";
-import type { ReactNode } from "react";
+import { redirect } from 'next/navigation';
+import type { ReactNode } from 'react';
 
-import Aside from "~/components/aside";
-import { getServerAuthSession } from "~/server/auth";
+import Aside from '~/components/aside';
+import { getServerAuthSession } from '~/server/auth';
 
 interface AdminProps {
   children: ReactNode;
@@ -11,8 +11,8 @@ interface AdminProps {
 export default async function ProtectedLayout({ children }: AdminProps) {
   const session = await getServerAuthSession();
 
-  if (session === null || session.user.role !== "admin") {
-    redirect("/api/auth/signin");
+  if (session === null || session.user.role !== 'admin') {
+    redirect('/api/auth/signin');
   }
 
   return (

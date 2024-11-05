@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { Checkbox } from "~/components/ui/checkbox";
+import { Checkbox } from '~/components/ui/checkbox';
 // import { DataTableColumnHeader } from "./data-table-column-header";
-import { Badge } from "~/components/ui/badge";
-import { cn } from "~/lib/utils";
-import type { Order } from "~/schemas/order-schema";
-import { DataTableRowActions } from "./data-table-row-actions";
+import { Badge } from '~/components/ui/badge';
+import { cn } from '~/lib/utils';
+import type { Order } from '~/schemas/order-schema';
+import { DataTableRowActions } from './data-table-row-actions';
 
 export const columns: ColumnDef<Order>[] = [
   {
-    accessorKey: "id",
+    accessorKey: 'id',
   },
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+          (table.getIsSomePageRowsSelected() && 'indeterminate')
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -38,37 +38,37 @@ export const columns: ColumnDef<Order>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "orderEstatus",
-    header: "Status",
+    accessorKey: 'orderEstatus',
+    header: 'Status',
   },
   {
-    accessorKey: "amount",
-    header: "Amount",
+    accessorKey: 'amount',
+    header: 'Amount',
   },
   {
-    accessorKey: "isPaid",
-    header: "Payment",
+    accessorKey: 'isPaid',
+    header: 'Payment',
     cell: ({ row }) => {
-      const payment: boolean = row.getValue("isPaid");
+      const payment: boolean = row.getValue('isPaid');
 
       return (
         <Badge
           variant="outline"
-          className={cn(payment === true ? "bg-green-700" : "bg-red-700")}
+          className={cn(payment === true ? 'bg-green-700' : 'bg-red-700')}
         >
           <span className="first-letter:uppercase">
-            {payment === true ? "Payment" : "Unpaid"}
+            {payment === true ? 'Payment' : 'Unpaid'}
           </span>
         </Badge>
       );
     },
   },
   {
-    accessorKey: "createdAt",
-    header: "Date",
+    accessorKey: 'createdAt',
+    header: 'Date',
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

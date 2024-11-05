@@ -1,7 +1,7 @@
-import { MessageSquare, Package, ShoppingCart, Users } from "lucide-react";
-import Link from "next/link";
-import { CiShoppingTag } from "react-icons/ci";
-import { RiCoupon2Line } from "react-icons/ri";
+import { MessageSquare, Package, ShoppingCart, Users } from 'lucide-react';
+import Link from 'next/link';
+import { CiShoppingTag } from 'react-icons/ci';
+import { RiCoupon2Line } from 'react-icons/ri';
 
 import {
   Card,
@@ -9,8 +9,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
-import { getServerAuthSession } from "~/server/auth";
+} from '~/components/ui/card';
+import { getServerAuthSession } from '~/server/auth';
 
 export default async function Admin() {
   const session = await getServerAuthSession();

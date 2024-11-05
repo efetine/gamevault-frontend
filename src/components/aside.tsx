@@ -4,18 +4,18 @@ import {
   Package,
   ShoppingCart,
   Users2,
-} from "lucide-react";
-import Link from "next/link";
-import { CiShoppingTag } from "react-icons/ci";
-import { RiCoupon2Line } from "react-icons/ri";
-import { RxDashboard } from "react-icons/rx";
+} from 'lucide-react';
+import Link from 'next/link';
+import { CiShoppingTag } from 'react-icons/ci';
+import { RiCoupon2Line } from 'react-icons/ri';
+import { RxDashboard } from 'react-icons/rx';
 
-import { UserMenu } from "~/components/layout/navbar/user-menu";
+import { UserMenu } from '~/components/layout/navbar/user-menu';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "~/components/ui/tooltip";
+} from '~/components/ui/tooltip';
 
 export default function Aside() {
   return (

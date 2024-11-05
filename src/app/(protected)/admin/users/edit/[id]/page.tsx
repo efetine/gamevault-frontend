@@ -1,7 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { EditCategory } from "~/components/categories/edit-category";
-import { Button } from "~/components/ui/button";
+import { EditCategory } from '~/components/categories/edit-category';
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 
 export default function EditUser() {
   return (

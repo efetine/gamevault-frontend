@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { CategoriesMenu } from "~/components/categories/categories-menu";
+import { CategoriesMenu } from '~/components/categories/categories-menu';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -8,7 +8,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "~/components/ui/navigation-menu";
+} from '~/components/ui/navigation-menu';
 
 // import { ModeToggle } from "./mode-toggle";
 

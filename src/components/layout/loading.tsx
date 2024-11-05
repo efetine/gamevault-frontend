@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Heart } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Heart } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export function Loading({
   initialHealth = 0,
@@ -43,12 +43,12 @@ export function Loading({
                 key={i}
                 className={`h-8 w-8 ${
                   isFull
-                    ? "text-red-600"
+                    ? 'text-red-600'
                     : isHalf
-                      ? "text-red-600"
-                      : "text-gray-800"
-                } ${isLow ? "animate-pulse" : ""}`}
-                fill={isFull ? "currentColor" : isHalf ? "url(#half)" : "none"}
+                      ? 'text-red-600'
+                      : 'text-gray-800'
+                } ${isLow ? 'animate-pulse' : ''}`}
+                fill={isFull ? 'currentColor' : isHalf ? 'url(#half)' : 'none'}
                 strokeWidth={2}
               />
             );

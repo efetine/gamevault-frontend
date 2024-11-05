@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Award, Gamepad2, Globe, Users } from "lucide-react";
-import Image from "next/image";
+import { Award, Gamepad2, Globe, Users } from 'lucide-react';
+import Image from 'next/image';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 
 export default function About() {
   return (

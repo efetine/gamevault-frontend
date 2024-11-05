@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useQuery } from "@tanstack/react-query";
-import { ShoppingCart } from "lucide-react";
-import Link from "next/link";
+import { useQuery } from '@tanstack/react-query';
+import { ShoppingCart } from 'lucide-react';
+import Link from 'next/link';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "~/components/ui/popover";
-import { useCart } from "~/state/cart-state";
+} from '~/components/ui/popover';
+import { useCart } from '~/state/cart-state';
 
 export function Cart() {
   const { state, dispatch } = useCart();
 
   const { data } = useQuery({
-    queryKey: ["products"],
+    queryKey: ['products'],
   });
 
   return (
@@ -45,7 +45,7 @@ export function Cart() {
                     <div>
                       <div className="flex justify-between text-base font-medium text-gray-900 dark:text-gray-300">
                         <h3>
-                          <a href={"#"}>{product.title}</a>
+                          <a href={'#'}>{product.title}</a>
                         </h3>
                         <p className="ml-4">${product.price}</p>
                       </div>
@@ -61,7 +61,7 @@ export function Cart() {
                           className="font-medium text-blue-600 hover:text-indigo-500"
                           onClick={() => {
                             dispatch({
-                              type: "removeProduct",
+                              type: 'removeProduct',
                               payload: { productId: product.productId },
                             });
                           }}
@@ -78,7 +78,7 @@ export function Cart() {
         )}
         <div className="flex w-full justify-center pt-3">
           <Link href="/cart" className="font-medium text-gray-400">
-            {"See more details >"}
+            {'See more details >'}
           </Link>
         </div>
       </PopoverContent>

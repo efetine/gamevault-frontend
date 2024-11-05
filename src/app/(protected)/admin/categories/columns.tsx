@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { type ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, Pencil, Trash } from "lucide-react";
-import Link from "next/link";
+import { type ColumnDef } from '@tanstack/react-table';
+import { MoreHorizontal, Pencil, Trash } from 'lucide-react';
+import Link from 'next/link';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import { Category } from "~/schemas/category-schema";
+} from '~/components/ui/dropdown-menu';
+import { Category } from '~/schemas/category-schema';
 
 export const columns: ColumnDef<Category>[] = [
   {
-    accessorKey: "id",
+    accessorKey: 'id',
   },
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: 'name',
+    header: 'Name',
   },
   {
-    id: "actions",
-    header: "Actions",
+    id: 'actions',
+    header: 'Actions',
     cell: ({ row }) => {
       return (
         <DropdownMenu>
@@ -35,7 +35,7 @@ export const columns: ColumnDef<Category>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem asChild>
-              <Link href={`/admin/categories/edit/${row.getValue("id")}`}>
+              <Link href={`/admin/categories/edit/${row.getValue('id')}`}>
                 <Pencil className="mr-2 h-4 w-4" />
                 Edit
               </Link>

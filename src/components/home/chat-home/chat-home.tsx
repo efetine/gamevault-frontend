@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { faHeadset } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { User } from "next-auth";
-import { useEffect, useRef, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { faHeadset } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { User } from 'next-auth';
+import { useEffect, useRef, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
 
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { env } from "~/env";
+import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
+import { env } from '~/env';
 
 interface Message {
   text: string;
-  sender: "user" | "admin";
+  sender: 'user' | 'admin';
 }
 
 interface ChatButtonProps {
@@ -22,35 +22,35 @@ interface ChatButtonProps {
 export function ChatButton({ user }: ChatButtonProps) {
   const [isChatOpen, setChatOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>('');
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const [socket, setSocket] = useState<Socket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = () => {
-    console.log("Chat button clicked");
+    console.log('Chat button clicked');
     setChatOpen(true);
 
     if (!socket) {
       const newSocket: Socket = io(env.NEXT_PUBLIC_API_URL, {
-        query: { role: "client" },
-        transports: ["websocket"],
+        query: { role: 'client' },
+        transports: ['websocket'],
         upgrade: false,
       });
 
-      newSocket.on("messageFromAdmin", (data: { message: string }) => {
+      newSocket.on('messageFromAdmin', (data: { message: string }) => {
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: data.message, sender: "admin" },
+          { text: data.message, sender: 'admin' },
         ]);
       });
 
-      newSocket.on("connect", () => {
-        console.log("Connected to WebSocket Server");
+      newSocket.on('connect', () => {
+        console.log('Connected to WebSocket Server');
       });
 
-      newSocket.on("disconnect", () => {
-        console.log("Disconnected from WebSocket Server");
+      newSocket.on('disconnect', () => {
+        console.log('Disconnected from WebSocket Server');
       });
 
       setSocket(newSocket);
@@ -58,7 +58,7 @@ export function ChatButton({ user }: ChatButtonProps) {
   };
 
   const handleCloseChat = () => {
-    console.log("Chat closed");
+    console.log('Chat closed');
     setChatOpen(false);
     if (socket) {
       socket.disconnect();
@@ -69,9 +69,9 @@ export function ChatButton({ user }: ChatButtonProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputValue.trim() && socket) {
-      setMessages([...messages, { text: inputValue, sender: "user" }]);
-      socket.emit("messageToAdmin", inputValue);
-      setInputValue("");
+      setMessages([...messages, { text: inputValue, sender: 'user' }]);
+      socket.emit('messageToAdmin', inputValue);
+      setInputValue('');
     }
   };
 
@@ -82,7 +82,7 @@ export function ChatButton({ user }: ChatButtonProps) {
   }, [isChatOpen]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   return (
@@ -104,8 +104,8 @@ export function ChatButton({ user }: ChatButtonProps) {
         <div
           className={`flex h-96 w-96 flex-col rounded-lg border bg-zinc-800 bg-opacity-100 p-4 shadow-lg transition-all duration-300 ease-in-out ${
             isTransitioning
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0"
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-4 opacity-0'
           }`}
         >
           <div className="mb-2 flex items-center justify-between border-b pb-2">
@@ -117,8 +117,8 @@ export function ChatButton({ user }: ChatButtonProps) {
             </button>
           </div>
           <div className="mb-2 flex-1 overflow-y-auto border-b">
-            <div key="" className={"p-2 text-left"}>
-              <p className={"inline-block max-w-[70%] p-2"}>
+            <div key="" className={'p-2 text-left'}>
+              <p className={'inline-block max-w-[70%] p-2'}>
                 Admin: Hello, how can we help you?. We will be with you soon.
               </p>
             </div>
@@ -127,11 +127,11 @@ export function ChatButton({ user }: ChatButtonProps) {
                 <div
                   key={index}
                   className={`p-2 ${
-                    msg.sender === "user" ? "text-right" : "text-left"
+                    msg.sender === 'user' ? 'text-right' : 'text-left'
                   }`}
                 >
                   <p className={`inline-block max-w-[70%] p-2`}>
-                    {msg.sender === "user" ? `${user.name}:` : "Admin: "}
+                    {msg.sender === 'user' ? `${user.name}:` : 'Admin: '}
                     {msg.text}
                   </p>
                 </div>

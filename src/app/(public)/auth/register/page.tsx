@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import { Button } from "~/components/ui/button";
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
@@ -13,7 +13,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 import {
   Form,
   FormControl,
@@ -22,9 +22,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { env } from "~/env";
+} from '~/components/ui/form';
+import { Input } from '~/components/ui/input';
+import { env } from '~/env';
 
 const formSchema = z
   .object({
@@ -38,14 +38,14 @@ const formSchema = z
     if (value.password !== value.confirmPassword) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Passwords should be equals",
-        path: ["confirmPassword"],
+        message: 'Passwords should be equals',
+        path: ['confirmPassword'],
       });
 
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Passwords should be equals",
-        path: ["password"],
+        message: 'Passwords should be equals',
+        path: ['password'],
       });
     }
 
@@ -60,11 +60,11 @@ export default function RegisterPage() {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      username: '',
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
   });
 
@@ -72,9 +72,9 @@ export default function RegisterPage() {
     const { confirmPassword, ...rest } = values;
 
     const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/auth/register`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(rest),
     });

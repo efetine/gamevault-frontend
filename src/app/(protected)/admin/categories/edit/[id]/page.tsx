@@ -1,11 +1,11 @@
-import { EditCategory } from "~/components/categories/edit-category";
+import { EditCategory } from '~/components/categories/edit-category';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "~/components/ui/card";
+} from '~/components/ui/card';
 
 export default function EditCategoryPage() {
   return (

@@ -1,15 +1,15 @@
-import { Edit } from "lucide-react";
-import { redirect } from "next/navigation";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent } from "~/components/ui/card";
-import { Textarea } from "~/components/ui/textarea";
-import { getServerAuthSession } from "~/server/auth";
+import { Edit } from 'lucide-react';
+import { redirect } from 'next/navigation';
+import { Button } from '~/components/ui/button';
+import { Card, CardContent } from '~/components/ui/card';
+import { Textarea } from '~/components/ui/textarea';
+import { getServerAuthSession } from '~/server/auth';
 
 export default async function Profile() {
   const session = await getServerAuthSession();
 
   if (session === null) {
-    redirect("/api/auth/signin");
+    redirect('/api/auth/signin');
   }
 
   const { user } = session;
@@ -35,7 +35,7 @@ export default async function Profile() {
                 />
                 <div>
                   <h1 className="text-3xl font-bold">
-                    {user.username ?? "username"}
+                    {user.username ?? 'username'}
                   </h1>
                 </div>
               </div>

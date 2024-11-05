@@ -42,24 +42,24 @@
 //   );
 // }
 
-"use client";
+'use client';
 
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 
-import { Loading } from "~/components/layout/loading";
-import { getProducts } from "~/services/products-service";
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
+import { Loading } from '~/components/layout/loading';
+import { getProducts } from '~/services/products-service';
+import { columns } from './columns';
+import { DataTable } from './data-table';
 
 export default function AdminProducts() {
   const { data, status, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: ["products"],
+    queryKey: ['products'],
     queryFn: ({ pageParam }) =>
       getProducts({
         cursor: pageParam,
       }),
-    initialPageParam: "",
+    initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
@@ -69,11 +69,11 @@ export default function AdminProducts() {
     return data.pages.flatMap((page) => page.data);
   }, [data]);
 
-  if (status === "error") {
+  if (status === 'error') {
     return <div>Cannot show products</div>;
   }
 
-  if (status === "pending") {
+  if (status === 'pending') {
     return <Loading />;
   }
 

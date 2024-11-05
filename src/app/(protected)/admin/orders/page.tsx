@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 
-import { getOrders } from "~/services/orders-service";
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
+import { getOrders } from '~/services/orders-service';
+import { columns } from './columns';
+import { DataTable } from './data-table';
 
 export default function AdminOrders() {
   const { data } = useInfiniteQuery({
-    queryKey: ["orders"],
+    queryKey: ['orders'],
     queryFn: ({ pageParam }) =>
       getOrders({
         cursor: pageParam,
-        limit: "10",
+        limit: '10',
       }),
     getNextPageParam: (lastPage) => lastPage.nextCursor,
-    initialPageParam: "",
+    initialPageParam: '',
   });
 
   const orders = useMemo(() => {

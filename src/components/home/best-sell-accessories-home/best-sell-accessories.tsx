@@ -1,39 +1,39 @@
-import { Card, CardContent } from "~/components/ui/card";
+import { Card, CardContent } from '~/components/ui/card';
 
 const servicesToPreLoad = [
   {
     id: 1,
-    name: "Video Games",
+    name: 'Video Games',
     price: 25,
     description:
-      "Wide variety of video games from digital copies to great classics in physical.",
+      'Wide variety of video games from digital copies to great classics in physical.',
     imageUrl:
-      "https://preview.redd.it/your-favorite-game-from-2011-v0-t2cheorxu5ic1.jpeg?width=640&crop=smart&auto=webp&s=42c11a4521b601562b3afa41e8f77b90a767c0ac",
+      'https://preview.redd.it/your-favorite-game-from-2011-v0-t2cheorxu5ic1.jpeg?width=640&crop=smart&auto=webp&s=42c11a4521b601562b3afa41e8f77b90a767c0ac',
   },
   {
     id: 2,
-    name: "Consoles",
+    name: 'Consoles',
     price: 19,
-    description: "Wide range of consoles",
+    description: 'Wide range of consoles',
     imageUrl:
-      "https://erikstore.com/blog/wp-content/uploads/2024/04/BannerBlog_CONSOLAS_EVOLUCION.webp",
+      'https://erikstore.com/blog/wp-content/uploads/2024/04/BannerBlog_CONSOLAS_EVOLUCION.webp',
   },
   {
     id: 3,
-    name: "Accessories",
+    name: 'Accessories',
     price: 21,
     description:
-      "Large selection of accessories that enhance the gaming experience on any platform.",
+      'Large selection of accessories that enhance the gaming experience on any platform.',
     imageUrl:
-      "https://www.gamerpoint.com.mx/cdn/shop/collections/accesorios_y_consolas.webp?v=1655923939&width=2048",
+      'https://www.gamerpoint.com.mx/cdn/shop/collections/accesorios_y_consolas.webp?v=1655923939&width=2048',
   },
   {
     id: 4,
-    name: "Cards",
+    name: 'Cards',
     price: 21,
     description:
-      "Large selection of accessories that enhance the gaming experience on any platform.",
-    imageUrl: "https://gameflip.com/img/front/overview_giftcards_header.webp",
+      'Large selection of accessories that enhance the gaming experience on any platform.',
+    imageUrl: 'https://gameflip.com/img/front/overview_giftcards_header.webp',
   },
 ];
 

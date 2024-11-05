@@ -1,9 +1,9 @@
-import { z } from "zod";
-import { env } from "~/env";
+import { z } from 'zod';
+import { env } from '~/env';
 
-import { orderSchema } from "~/schemas/order-schema";
-import { paginatedResultSchema } from "~/schemas/paginated-result";
-import { paginationDtoSchema } from "~/schemas/pagination-dto";
+import { orderSchema } from '~/schemas/order-schema';
+import { paginatedResultSchema } from '~/schemas/paginated-result';
+import { paginationDtoSchema } from '~/schemas/pagination-dto';
 
 const getOrdersInputSchema = paginationDtoSchema;
 
@@ -17,14 +17,14 @@ export const getOrders = async (
   input: GetOrdersInput,
 ): Promise<PaginatedOrders> => {
   try {
-    const { cursor, limit = "10" } = getOrdersInputSchema.parse(input);
-    const url = new URL("/orders/findAll", env.NEXT_PUBLIC_API_URL);
+    const { cursor, limit = '10' } = getOrdersInputSchema.parse(input);
+    const url = new URL('/orders/findAll', env.NEXT_PUBLIC_API_URL);
 
     if (cursor) {
-      url.searchParams.append("cursor", cursor);
+      url.searchParams.append('cursor', cursor);
     }
 
-    url.searchParams.append("limit", limit);
+    url.searchParams.append('limit', limit);
 
     const response = await fetch(url.toString());
 
