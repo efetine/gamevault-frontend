@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 import { ConsolePromotion } from "~/components/home/banner-bottom-home/banner-bottom";
 import { BestSellingAccessories } from "~/components/home/best-sell-accessories-home/best-sell-accessories";

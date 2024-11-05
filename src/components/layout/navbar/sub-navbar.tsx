@@ -10,7 +10,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "~/components/ui/navigation-menu";
+} from '~/components/ui/navigation-menu';
+import { MobileCategoriesMenu } from './mobile-sub-navbar-categories';
 
 export default function SubNavbar() {
   return (

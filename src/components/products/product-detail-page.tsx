@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   CreditCardIcon,
@@ -102,6 +102,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 <CreditCardIcon className="mr-2 h-5 w-5" />
                 {isPending ? "Loading..." : "Buy with Mercado Pago"}
               </Button>
+              {/* <Link href="/products">
+                <Button className="w-full bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900">
+                  <ShoppingBasket className="mr-2 h-5 w-5" />
+                  Continue shopping
+                </Button>
+              </Link> */}
               <p className="text-center text-xs text-muted-foreground">
                 Secure payment processed by Mercado Pago. We don&apos;t store
                 your financial information.
