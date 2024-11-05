@@ -7,6 +7,7 @@ import { useAuth } from "./token-state";
 import { useMutation, useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { addProductToCartAPI, addProductToLocalStorage, deleteProductFromCartAPI, deleteProductFromLocalStorage, fetchProductsCart, getLocalStorageCart, updateProductQuantityAPI, updateProductQuantityInLocalStorage } from "~/services/cart-service";
 import { type ObjectPayload } from "~/schemas/cart-payload-schema";
+import { useToast } from "~/hooks/use-toast";
 
 type Action =
   | {
@@ -96,7 +97,10 @@ function useCart() {
 }
 
 function useAddProductToCart() {
+  const { toast } = useToast()
   const { state: authState } = useAuth();
+  const { cartQuery } = useCart();
+  const { refetch } = cartQuery;
 
   return useMutation({
     mutationFn: (product: ObjectPayload) => {
@@ -107,16 +111,28 @@ function useAddProductToCart() {
       }
     },
     onSuccess: () => {
-      console.log("Producto agregado al carrito");
+      void refetch()
+      toast({
+        title: "Product add to cart",
+        description: "The product has been added to the cart",
+        color: "green"
+      })
     },
     onError: (error) => {
-      console.error("Error al agregar producto al carrito:", error);
+      toast({
+        title: "Error",
+        description: "An error occurred while adding the product to the cart",
+        color: "red"
+      })
     }
   });
 }
 
 function useDeleteProductFromCart() {
+  const { toast } = useToast()
   const { state: authState } = useAuth();
+  const { cartQuery } = useCart();
+  const { refetch } = cartQuery;
 
   return useMutation({
     mutationFn: (productId: string) => {
@@ -127,16 +143,28 @@ function useDeleteProductFromCart() {
       }
     },
     onSuccess: () => {
-      console.log("Producto eliminado del carrito");
+      void refetch()
+      toast({
+        title: "Product removed from cart",
+        description: "The product has been removed from the cart",
+        color: "green"
+      })
     },
     onError: (error) => {
-      console.error("Error al eliminar el producto del carrito:", error);
+      toast({
+        title: "Error",
+        description: "An error occurred while removing the product from the cart",
+        color: "red"
+      })
     }
   });
 }
 
 function useUpdateProductQuantity() {
+  const { toast } = useToast()
   const { state: authState } = useAuth();
+  const { cartQuery } = useCart();
+  const { refetch } = cartQuery;
 
   return useMutation({
     mutationFn: ({ productId, qty }: { productId: string; qty: number }) => {
@@ -147,14 +175,23 @@ function useUpdateProductQuantity() {
       }
     },
     onSuccess: () => {
-      console.log("Cantidad actualizada en el carrito");
+      void refetch()
+      toast({
+        title: "Product quantity updated",
+        description: "The product quantity has been updated",
+        color: "green"
+      })
     },
     onError: (error) => {
-      console.error("Error al actualizar la cantidad:", error);
+      toast({
+        title: "Error",
+        description: "An error occurred while updating the product quantity",
+        color: "red"
+      })
     }
   });
 }
 
 export {
   CartProvider, useCart, useAddProductToCart, useDeleteProductFromCart, useUpdateProductQuantity
-};
+}
