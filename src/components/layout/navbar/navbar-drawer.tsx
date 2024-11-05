@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
-import { Cart } from '~/components/cart/Cart';
 import { ModeToggle } from '~/components/layout/navbar/mode-toggle';
+import { Cart } from '~/components/cart/Cart';
 
 export function NavbarDrawer({ children }: { children: React.ReactNode }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 import { env } from '~/env';
-import { categoriesSchema } from '~/schemas/categories-schema';
 import { Category, categorySchema } from '~/schemas/category-schema';
 import { CreateCategory } from '~/schemas/create-category-schema';
 import { paginatedResultSchema } from '~/schemas/paginated-result';
@@ -12,22 +11,11 @@ const paginatedCategories = paginatedResultSchema(categorySchema);
 
 export type PaginatedCategories = z.infer<typeof paginatedCategories>;
 
-
 export async function getCategories({
   cursor,
   limit,
 }: PaginationDto): Promise<PaginatedCategories> {
   const url = new URL('/categories', env.NEXT_PUBLIC_API_URL);
-
-  if (cursor !== null && cursor !== undefined) {
-    url.searchParams.set('cursor', cursor.toString());
-  }
-
-  if (limit !== null && limit !== undefined) {
-    url.searchParams.set('limit', limit.toString());
-  }
-
-
 
   if (cursor !== null && cursor !== undefined) {
     url.searchParams.set('cursor', cursor.toString());
@@ -47,10 +35,8 @@ export async function getCategories({
   }
 
   const categories = await response.json();
-  // console.log("Fetched Categories: ",  categories);
 
-
-  const parsedCategories = categoriesSchema.safeParse(categories);
+  const parsedCategories = paginatedCategories.safeParse(categories);
 
   if (!parsedCategories.success) {
     throw new Error(`Validation error: ${parsedCategories.error.message}`);
@@ -104,7 +90,7 @@ export async function getProductsByCategory(
     if (error instanceof Error) {
       throw new Error(error.message);
     } else {
-      throw new Error('An unknown error occurred');
+      throw new Error('an unknown error occurred');
     }
   }
 }

@@ -5,10 +5,10 @@ interface ServerComponentProps {
   children: React.ReactNode;
 }
 
-export default function SessionComponent({ children }: ServerComponentProps) {
+export default async function SessionComponent({ children }: ServerComponentProps) {
   const cookieStore = cookies();
   const authToken =
-    cookieStore
+    (await cookieStore)
       .getAll()
       .find((cookie) => cookie.name === "next-auth.session-token")?.value ??
     "default";
