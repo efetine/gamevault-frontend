@@ -20,12 +20,12 @@ export default function SubNavbar() {
         <NavigationMenu className="w-full">
           <NavigationMenuList className="flex flex-col gap-4 text-lg font-semibold text-[#dad9dc] md:gap-5 lg:flex-row lg:gap-10">
             <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
+              <Link href="/">
                 <NavigationMenuLink>Home</NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/products" legacyBehavior passHref>
+              <Link href="/products">
                 <NavigationMenuLink>Store</NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -41,12 +41,12 @@ export default function SubNavbar() {
               </div>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
+              <Link href="/about">
                 <NavigationMenuLink>About</NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
+              <Link href="/support">
                 <NavigationMenuLink>Support</NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
