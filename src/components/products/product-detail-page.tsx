@@ -47,7 +47,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const productImages = Array(1).fill({ src: imageUrl, alt: name });
 
   return (
-    <div className="mx-auto w-full bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black px-4 py-8">
+    <div className="mx-auto w-full bg-gradient-to-b from-[#d8d8d8] via-[#f2f2f2] to-[#d8d8d8] dark:bg-gradient-to-b dark:from-[#0d1117] dark:via-[#212c3f] dark:to-black px-4 py-8">
       <div className="m-auto mt-32 flex w-[70%] flex-col gap-8 md:flex-row">
         <div className="w-full md:w-3/5">
           <h2 className="mb-4 text-2xl font-bold capitalize">{name}</h2>
@@ -60,7 +60,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           </div>
         </div>
         <div className="w-full pt-[52px] md:w-2/5">
-          <Card className="bg-gradient-to-t from-[#161616] to-[#1a1a1a]">
+          <Card className="bg-gradient-to-b from-[#d8d8d8] via-[#f2f2f2] to-[#d8d8d8] dark:bg-gradient-to-t dark:from-[#161616] dark:to-[#1a1a1a]">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div>

@@ -26,9 +26,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <Cards className="group w-[300px] overflow-hidden">
+    <Cards className="bg-gradient-to-b from-[#9ca3af] via-[#e1e3e7] to-slate-400 dark:bg-gradient-to-b dark:from-[#3e4146] dark:via-[#7c828c] dark:to-slate-800 group w-[300px] overflow-hidden transition duration-700 ease-in-out hover:scale-[1.05]">
       <Link
-        className="transition duration-700 ease-in-out hover:scale-[1.05]"
+        className=""
         href={`/product/${product.id}`}
         key={product.id}
       >
@@ -36,10 +36,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="h-[150px] w-full object-cover transition-transform duration-300 group-hover:scale-110"
+            className="h-[150px] w-full object-cover transition-transform duration-300"
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <Button variant="secondary" className="text-white">
+            <Button variant="secondary" className="dark:text-white text-gray-900">
               See details
             </Button>
           </div>

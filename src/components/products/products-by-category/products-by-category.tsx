@@ -33,7 +33,7 @@ export default function ProductsByCategory({ categoryId }: CardListProps) {
 
   return (
     <div className="mt-36 w-full content-center items-center justify-center">
-      <div className="flex h-screen flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black">
+      <div className="flex h-screen flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#d8d8d8] via-[#f2f2f2] to-[#d8d8d8] dark:bg-gradient-to-b dark:from-[#0d1117] dark:via-[#212c3f] dark:to-black">
         <section className="relative flex h-full flex-col justify-start overflow-hidden">
           <div className="grid w-full grid-cols-1 gap-7 py-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (

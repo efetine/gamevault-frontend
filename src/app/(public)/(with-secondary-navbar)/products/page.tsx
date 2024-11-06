@@ -72,7 +72,7 @@ function ProductsList() {
 export default function ProductsPage() {
   return (
     <div className="mt-36 w-full content-center items-center justify-center">
-      <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black">
+      <div className="flex h-full flex-col items-center justify-center gap-16 bg-gradient-to-b from-[#d8d8d8] via-[#f2f2f2] to-[#d8d8d8] dark:bg-gradient-to-b dark:from-[#0d1117] dark:via-[#212c3f] dark:to-black">
         <section className="relative flex flex-col items-center justify-center overflow-hidden pt-5">
           <Suspense fallback={<Loading />}>
             <ProductsList />

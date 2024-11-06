@@ -57,18 +57,18 @@ export function Login({ providers }: LoginProps) {
   }
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-b from-[#0d1117] via-[#1a2332] to-black">
+    <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-b from-[#d8d8d8] via-[#f2f2f2] to-[#d8d8d8] dark:bg-gradient-to-b dark:from-[#0d1117] dark:via-[#212c3f] dark:to-black">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="m-8 w-full max-w-md"
         >
-          <Card className="border border-[#30363d] bg-[#0d1117]/80 shadow-lg backdrop-blur-sm">
+          <Card className="border border-[#30363d] bg-gradient-to-b from-gray-500 via-gray-400 to-slate-400 dark:bg-gradient-to-b dark:from-[#0d1117]/80 dark:to-[#0d1117] shadow-lg backdrop-blur-sm">
             <CardHeader className="space-y-1">
               <CardTitle className="text-2xl font-bold text-gray-100">
                 Login
               </CardTitle>
-              <CardDescription className="text-gray-300">
+              <CardDescription className="text-gray-100 darktext-gray-300">
                 Login to your account
               </CardDescription>
             </CardHeader>
@@ -84,13 +84,13 @@ export function Login({ providers }: LoginProps) {
                 ))}
               </div>
               <Separator className="my-4" />
-              <h2 className="text-center">Or</h2>
+              <h2 className="text-center font-semibold">Or</h2>
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-200">Email</FormLabel>
+                    <FormLabel className="text-gray-100">Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="example@gmail.com"

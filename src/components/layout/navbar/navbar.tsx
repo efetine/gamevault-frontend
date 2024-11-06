@@ -12,7 +12,7 @@ export function Navbar() {
       <div className="container mx-auto flex h-full flex-row justify-end gap-0 lg:items-center lg:justify-end lg:gap-2">
         <div className="flex w-full items-center justify-end pr-[80px] lg:w-[58%] lg:justify-end lg:p-0">
           <Link href="/" className="flex items-center gap-3">
-            <h1 className="flex items-center text-2xl font-semibold lg:text-3xl">
+            <h1 className="flex items-center text-white text-2xl font-semibold lg:text-3xl">
               <IconComponent />
               Game Vault
             </h1>

@@ -31,7 +31,7 @@ export function CategoriesMenu() {
   }
 
   return (
-    <div className="rounded-lg bg-gradient-to-br from-blue-900 via-cyan-900 to-slate-700 p-4 backdrop-blur-md">
+    <div className="rounded-lg bg-gradient-to-br from-slate-400 via-slate-400 to-sky-300 dark:bg-gradient-to-br dark:from-blue-900 dark:via-cyan-900 dark:to-slate-700 p-4 backdrop-blur-md">
       <ul className="grid w-[350px] gap-3 p-2 md:w-[500px] md:grid-cols-3 lg:w-[550px]">
         {categories.map((category) => (
           <li key={category.id}>
@@ -41,9 +41,9 @@ export function CategoriesMenu() {
             >
               <Link
                 href={`/categories/${category.id}`}
-                className="block select-none space-y-1 rounded-md p-2 leading-none text-white no-underline outline-none transition-colors hover:bg-white/10 focus:bg-white/10"
+                className="block select-none space-y-1 rounded-md p-2 leading-none text-gray-900 dark:text-white no-underline outline-none transition-colors hover:bg-white/10 focus:bg-white/10"
               >
-                <div className="text-sm font-medium capitalize leading-none">
+                <div className="text-lg font-medium capitalize leading-none">
                   {category.name}
                 </div>
               </Link>
@@ -52,7 +52,7 @@ export function CategoriesMenu() {
         ))}
       </ul>
       <Button
-        className="mt-4 w-full bg-white/10 text-white hover:bg-white/20"
+        className="mt-4 w-full bg-white/10 text-lg text-white hover:bg-white/20"
         variant="outline"
         onClick={() => {
           void fetchNextPage();

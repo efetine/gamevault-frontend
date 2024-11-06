@@ -20,7 +20,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="flex min-h-screen flex-col bg-zinc-300 dark:bg-page-gradient">
+      <body className="flex min-h-screen flex-col bg-[#d8d8d8] dark:bg-page-gradient">
         <ReactQueryProvider>
           <ThemeProvider
             attribute="class"
