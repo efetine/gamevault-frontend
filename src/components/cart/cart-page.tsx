@@ -133,7 +133,7 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
           </div>
         </div>
         <div className="grid h-min gap-4">
-          <Card>
+          <Card className="stiky top-17 lg:top-22">
             <CardHeader>
               <CardTitle>Order Summary</CardTitle>
             </CardHeader>

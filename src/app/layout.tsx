@@ -1,6 +1,8 @@
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
+import { cookies } from "next/headers";
+
 import { ThemeProvider } from "~/components/layout/navbar/theme-provider";
 import { ReactQueryProvider } from "~/components/react-query-provider";
 import { Toaster } from "~/components/ui/toaster";
@@ -18,6 +20,8 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const initialToken = cookies().get("next-auth.session-token")?.value ?? null;
+
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="flex min-h-screen flex-col bg-zinc-300 dark:bg-page-gradient">
@@ -29,7 +33,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TooltipProvider>
-              <AuthProvider>
+              <AuthProvider initialToken={initialToken}>
                 <CartProvider>{children}</CartProvider>
               </AuthProvider>
             </TooltipProvider>

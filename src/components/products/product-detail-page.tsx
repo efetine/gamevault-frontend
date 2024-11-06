@@ -21,6 +21,7 @@ import { useMercadopago } from "~/hooks/use-mercadopago";
 import { type ProductDetailPageProps } from "~/schemas/product-details-schema";
 import { type BuyAProductProps } from "~/services/products-service";
 import EmblaCarousel from "./slider";
+import { useAddProductToCart } from "~/state/cart-state";
 
 const OPTIONS = {};
 
@@ -43,6 +44,19 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     authToken,
   };
   const { isPending, mutate } = useMercadopago(buyProductProp);
+
+  const { mutate: addProduct } = useAddProductToCart();
+
+  const handleAddToCart = () => {
+    addProduct({
+      productId: id,
+      qty: 1,
+      image: imageUrl ?? " ",
+      price: price,
+      category: type,
+      title: name,
+    });
+  };
 
   const productImages = Array(1).fill({ src: imageUrl, alt: name });
 
@@ -100,13 +114,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               >
                 <CreditCardIcon className="mr-2 h-5 w-5" />
                 {isPending ? "Loading..." : "Buy with Mercado Pago"}
-              </Button>
-              <Link href="/products">
-                <Button className="w-full bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900">
+              </Button>   
+                <Button className="w-full bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900" onClick={handleAddToCart}>
                   <ShoppingBasket className="mr-2 h-5 w-5" />
-                  Continue shopping
+                  Add to Carth
                 </Button>
-              </Link>
               <p className="text-center text-xs text-muted-foreground">
                 Secure payment processed by Mercado Pago. We don&apos;t store
                 your financial information.
