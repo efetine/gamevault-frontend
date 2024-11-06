@@ -31,18 +31,19 @@ export function CategoriesMenu() {
   }
 
   return (
-    <>
-      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-3 lg:w-[600px]">
+    <div className="rounded-lg bg-gradient-to-br from-blue-900 via-cyan-900 to-slate-700 p-4 backdrop-blur-md">
+      <ul className="grid w-[350px] gap-3 p-2 md:w-[500px] md:grid-cols-3 lg:w-[550px]">
         {categories.map((category) => (
           <li key={category.id}>
-            <NavigationMenuLink asChild>
+            <NavigationMenuLink
+              asChild
+              className="flex items-center justify-center text-center"
+            >
               <Link
                 href={`/categories/${category.id}`}
-                className={
-                  "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                }
+                className="block select-none space-y-1 rounded-md p-2 leading-none text-white no-underline outline-none transition-colors hover:bg-white/10 focus:bg-white/10"
               >
-                <div className="text-sm font-medium leading-none">
+                <div className="text-sm font-medium capitalize leading-none">
                   {category.name}
                 </div>
               </Link>
@@ -51,15 +52,15 @@ export function CategoriesMenu() {
         ))}
       </ul>
       <Button
-        className="w-full"
+        className="mt-4 w-full bg-white/10 text-white hover:bg-white/20"
         variant="outline"
         onClick={() => {
-          fetchNextPage();
+          void fetchNextPage();
         }}
       >
-        <ChevronDown className="h-4 w-4" />
+        <ChevronDown className="mr-2 h-4 w-4" />
         View more
       </Button>
-    </>
+    </div>
   );
 }
