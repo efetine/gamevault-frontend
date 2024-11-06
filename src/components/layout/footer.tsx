@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaGithub, FaInstagram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { IconComponent } from "../icon/icon.svg";
 
-const Footer = () => {
+export function Footer() {
   return (
     <footer className="py-5">
       <div className="flew-row mb-4 mt-3 flex justify-center">
@@ -10,21 +10,6 @@ const Footer = () => {
           <IconComponent />
           Game Vault
         </h1>
-      </div>
-      <div className="flew-row my-4 flex columns-auto justify-center gap-2">
-        <Link className="hover:text-gray-400" href="/">
-          Home
-        </Link>
-        <Link className="hover:text-gray-400" href="/products">
-          Store
-        </Link>
-
-        <Link className="hover:text-gray-400" href="/about">
-          About
-        </Link>
-        <Link className="hover:text-gray-400" href="/support">
-          Support
-        </Link>
       </div>
       <div className="flew-row my-4 flex columns-auto justify-center gap-3 text-2xl">
         <Link href="https://x.com/" target="blank">
@@ -45,6 +30,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

@@ -15,7 +15,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { dispatch } = useCart();
 
   return (
-    <Cards className="group w-[300px] overflow-hidden">
+    <Cards className="group w-[300px] transform overflow-hidden bg-gradient-to-b from-[#4d5665] via-[#374152] to-[#374152] transition-transform duration-500 hover:scale-105 hover:shadow-sky-800/60">
       <Link
         className="transition duration-700 ease-in-out hover:scale-[1.05]"
         href={`/product/${product.id}`}
@@ -25,19 +25,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="h-[150px] w-full object-cover transition-transform duration-300 group-hover:scale-110"
+            className="h-[150px] w-full object-cover"
           />
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <Button variant="secondary" className="text-white">
-              Ver detalles
+              See details
             </Button>
           </div>
         </div>
       </Link>
       <CardContent className="p-4">
-        <h3 className="mb-2 truncate text-lg font-bold">{product.name}</h3>
+        <h3 className="mb-2 truncate text-lg font-bold capitalize">
+          {product.name}
+        </h3>
         <div className="mb-2 flex flex-wrap gap-1">
-          <Badge variant="secondary" className="text-xs">
+          <Badge variant="secondary" className="text-xs capitalize">
             {product.category.name}
           </Badge>
         </div>
@@ -45,7 +47,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <CardFooter className="flex items-center justify-between p-4 pt-0">
         <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
         <Button
-          className="bg-green-600 text-white hover:bg-green-700"
+          className="bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900"
           onClick={() => {
             dispatch({
               type: "addProduct",
