@@ -6,6 +6,7 @@ import { ReactQueryProvider } from "~/components/react-query-provider";
 import { Toaster } from "~/components/ui/toaster";
 import { TooltipProvider } from "~/components/ui/tooltip";
 import { CartProvider } from "~/state/cart-state";
+import { AuthProvider } from "~/state/token-state";
 import "~/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -28,7 +29,9 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TooltipProvider>
-              <CartProvider>{children}</CartProvider>
+              <AuthProvider>
+                <CartProvider>{children}</CartProvider>
+              </AuthProvider>
             </TooltipProvider>
             <Toaster />
           </ThemeProvider>
