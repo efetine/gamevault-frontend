@@ -41,7 +41,7 @@ export default function ChatboxAdmin() {
   const [messageInput, setMessageInput] = useState<string>("");
 
   useEffect(() => {
-    const newSocket: Socket = io(env.NEXT_PUBLIC_API_URL, {
+    const newSocket: Socket = io(env.NEXT_PUBLIC_WEBSOCKET_API, {
       query: { role: "admin" },
       transports: ["websocket"],
       upgrade: false,

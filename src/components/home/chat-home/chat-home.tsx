@@ -32,7 +32,7 @@ export function ChatButton({ user }: ChatButtonProps) {
     setChatOpen(true);
 
     if (!socket) {
-      const newSocket: Socket = io(env.NEXT_PUBLIC_API_URL, {
+      const newSocket: Socket = io(env.NEXT_PUBLIC_WEBSOCKET_API, {
         query: { role: "client" },
         transports: ["websocket"],
         upgrade: false,
