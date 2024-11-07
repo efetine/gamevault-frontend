@@ -5,7 +5,6 @@ import { format } from "date-fns";
 
 import { Checkbox } from "~/components/ui/checkbox";
 import { Coupon } from "~/schemas/coupons-schema";
-import { DataTableRowActions } from "./data-table-row-actions";
 import { EditCouponStatus } from "./edit-coupon-status";
 
 export const columns: ColumnDef<Coupon>[] = [
@@ -65,9 +64,9 @@ export const columns: ColumnDef<Coupon>[] = [
       return <span>{format(expirationDate, "dd/MM/yyyy")}</span>;
     },
   },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => <DataTableRowActions row={row} />,
-  },
+  // {
+  //   id: "actions",
+  //   header: "Actions",
+  //   cell: ({ row }) => <DataTableRowActions row={row} />,
+  // },
 ];
