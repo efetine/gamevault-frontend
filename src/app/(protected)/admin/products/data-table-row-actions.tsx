@@ -2,7 +2,7 @@
 
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Row } from "@tanstack/react-table";
-import { MoreHorizontal, TrashIcon } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "~/components/ui/button";
@@ -34,10 +34,6 @@ export function DataTableRowActions<TData>({
             <Pencil1Icon className="mr-2 h-4 w-4" />
             Edit
           </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem disabled>
-          <TrashIcon className="mr-2 h-4 w-4" />
-          Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -48,8 +48,4 @@ export const columns: ColumnDef<GetUser>[] = [
       return <EditUserRole user={row.original} />;
     },
   },
-  {
-    accessorKey: "bannedReason",
-    header: "Banned Reason",
-  },
 ];
