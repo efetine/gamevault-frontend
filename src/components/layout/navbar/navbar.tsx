@@ -7,7 +7,7 @@ import { NavbarDrawer } from "./navbar-drawer";
 
 export function Navbar() {
   return (
-    <header className="fixed z-20 h-16 w-screen bg-gradient-to-r from-slate-400 to-sky-300 py-0 transition-colors duration-200 dark:bg-gradient-to-r dark:from-blue-900 dark:via-gray-800 dark:to-gray-900 lg:h-20">
+    <header className="sticky top-0 z-20 h-16 w-screen bg-gradient-to-r from-slate-400 to-sky-300 py-0 transition-colors duration-200 dark:bg-gradient-to-r dark:from-blue-900 dark:via-gray-800 dark:to-gray-900 lg:h-20">
       <div className="container mx-auto flex h-full flex-row justify-end gap-0 lg:items-center lg:justify-end lg:gap-2">
         <div className="flex w-full items-center justify-end pr-[80px] lg:w-[58%] lg:justify-end lg:p-0">
           <Link href="/" className="flex items-center gap-3">
