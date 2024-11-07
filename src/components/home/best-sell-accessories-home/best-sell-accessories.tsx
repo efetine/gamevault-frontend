@@ -10,7 +10,7 @@ export function BestSellingAccessories() {
     queryKey: ["products", "physical"],
     queryFn: () =>
       getProducts({
-        limit: "20",
+        limit: "6",
         type: "physical",
       }),
   });
