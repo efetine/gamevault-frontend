@@ -25,6 +25,8 @@ import {
   useDeleteProductFromCart,
   useUpdateProductQuantity,
 } from "~/state/cart-state";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 type CartPageProps = {
   authToken?: string;
@@ -46,6 +48,8 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
     authToken,
   };
 
+  const phisicalProducts = data?.data?.find((product) => product.type === 'physical') ? true : false
+
   const totalAmount =
     data?.data?.reduce(
       (reducer, product) => reducer + product.price * product.qty,
@@ -57,6 +61,13 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
   const { mutate: updateQuantity } = useUpdateProductQuantity();
 
   const { mutate, isPending } = useMercadopago(buyProductProp);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const props = Object.fromEntries(formData) as { couponCode?: string; shippingAddress?: string };
+    mutate(props);
+  };
 
   return (
     <div className="flex flex-1 items-center justify-center">
@@ -152,10 +163,20 @@ export const CartPage: React.FC<CartPageProps> = ({ authToken }) => {
                 <span>${totalAmount}</span>
               </div>
             </CardContent>
-            <CardFooter>
-              <Button size="lg" className="w-full" onClick={() => mutate()}>
-                {isPending ? "Loading..." : "Proceed to Checkout"}
-              </Button>
+            <CardFooter className=''>
+              <form action="" onSubmit={handleSubmit}>
+                <div>
+                  <Label htmlFor="cupon">Cupon</Label>
+                  <Input name="couponCode" type="text" id="cupon" placeholder="DRQ65Tk5" />
+                </div>
+                {phisicalProducts && (<div>
+                  <Label htmlFor="address">Address</Label>
+                  <Input type="text" id="address" name="shippingAddress" placeholder="State city Street 111" required />
+                </div>)}
+                <Button size="lg" className="w-full mt-3" >
+                  {isPending ? "Loading..." : "Proceed to Checkout"}
+                </Button>
+              </form>
             </CardFooter>
           </Card>
         </div>

@@ -53,6 +53,8 @@ type CartQuery = UseQueryResult<
       qty: number;
       title: string;
       image: string;
+      type?: string ;
+      stock?: number ;
     }[];
     nextCursor: number | null;
   },

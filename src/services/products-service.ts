@@ -137,16 +137,23 @@ export type ProductsData = {
 export type BuyAProductProps = {
   products: ProductsData[];
   authToken?: string;
+  shippingAddress?: string;
+  couponCode?: string;
 };
 
-export async function buyAProduct({ products, authToken }: BuyAProductProps) {
+export async function buyAProduct({
+  products,
+  authToken,
+  shippingAddress,
+  couponCode,
+}: BuyAProductProps) {
   return await fetch(`${env.NEXT_PUBLIC_API_URL}/mercadopago`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${authToken}`,
     },
-    body: JSON.stringify({ products }),
+    body: JSON.stringify({ products, shippingAddress, couponCode }),
   })
     .then(async (res) => {
       return (await res.json()) as ResponseMpDto;

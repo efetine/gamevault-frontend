@@ -15,7 +15,7 @@ export function useMercadopago({ products, authToken }: BuyAProductProps) {
   const { toast } = useToast();
 
   return useMutation({
-    mutationFn: () => buyAProduct({ products, authToken }),
+    mutationFn: ({ couponCode, shippingAddress }: { couponCode?: string, shippingAddress?: string }) => buyAProduct({ products, authToken, shippingAddress, couponCode }),
     onSuccess: (response) => {
       const validation = mpDataSchema.safeParse(response);
 

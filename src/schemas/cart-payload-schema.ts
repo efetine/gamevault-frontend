@@ -7,6 +7,8 @@ export const cartPayloadObjectSchema = z.object({
   price: z.number().nonnegative(),
   title: z.string(),
   image: z.string(),
+  type: z.string().optional(),
+  stock: z.number().optional()
 });
 export const cartPayloadArraySchema = z.array(cartPayloadObjectSchema);
 
