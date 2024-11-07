@@ -31,8 +31,8 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   hasNextPage: boolean;
-  filterBy: string;
   fetchNextPage: Function;
+  filterBy?: string;
   renderActions?: React.ReactNode;
 }
 
@@ -40,9 +40,9 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   hasNextPage,
-  filterBy,
   fetchNextPage,
   renderActions,
+  filterBy,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(

@@ -1,13 +1,12 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-
-import { Checkbox } from "~/components/ui/checkbox";
-// import { DataTableColumnHeader } from "./data-table-column-header";
 import { format } from "date-fns";
+
 import { Badge } from "~/components/ui/badge";
+import { Checkbox } from "~/components/ui/checkbox";
 import { cn } from "~/lib/utils";
-import { OrderWithUser } from "~/services/orders-service";
+import type { OrderWithUser } from "~/services/orders-service";
 import { EditShippingStatus } from "./edit-shipping-status";
 
 export const columns: ColumnDef<OrderWithUser>[] = [

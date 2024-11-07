@@ -1,9 +1,6 @@
-import { Edit } from "lucide-react";
 import { redirect } from "next/navigation";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent } from "~/components/ui/card";
-import { Textarea } from "~/components/ui/textarea";
 import { getServerAuthSession } from "~/server/auth";
+import { UserOrders } from "./user-orders-table";
 
 export default async function Profile() {
   const session = await getServerAuthSession();
@@ -41,23 +38,7 @@ export default async function Profile() {
               </div>
             </div>
           </div>
-
-          {/* User Description */}
-          <Card className="border-[#0e1621] bg-[#1a2634]">
-            <CardContent className="p-6">
-              <div className="mb-4 flex items-start justify-between">
-                <h2 className="text-2xl font-bold">About Me</h2>
-                <Button variant="ghost" size="icon">
-                  <Edit className="h-4 w-4" />
-                </Button>
-              </div>
-              <Textarea
-                className="border-[#0e1621] bg-[#1a2634] text-white"
-                placeholder="Add a description about yourself..."
-                defaultValue="Hardcore gamer since 2005. I live and breathe RPGs and FPS games. Always up for a challenge and making new gaming buddies!"
-              />
-            </CardContent>
-          </Card>
+          <UserOrders userId={session.user.id} />
         </div>
       </div>
     </div>

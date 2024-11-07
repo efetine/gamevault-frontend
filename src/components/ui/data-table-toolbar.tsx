@@ -9,28 +9,32 @@ import { Input } from "~/components/ui/input";
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   hasSelectedRows: boolean;
-  filterBy: string;
   renderActions: React.ReactNode;
+  filterBy?: string;
 }
 
 export function DataTableToolbar<TData>({
   table,
-  filterBy,
   renderActions,
+  filterBy,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
-        <Input
-          placeholder="Filter..."
-          value={(table.getColumn(filterBy)?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn(filterBy)?.setFilterValue(event.target.value)
-          }
-          className="h-8 w-[150px] lg:w-[250px]"
-        />
+        {filterBy ? (
+          <Input
+            placeholder="Filter..."
+            value={
+              (table.getColumn(filterBy)?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn(filterBy)?.setFilterValue(event.target.value)
+            }
+            className="h-8 w-[150px] lg:w-[250px]"
+          />
+        ) : null}
       </div>
       {isFiltered && (
         <Button
