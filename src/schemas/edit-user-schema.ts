@@ -15,10 +15,13 @@ export const editUserFormSchema = userSchema
     role: true,
   })
   .extend({
-    profileImage: z.union([z.string(), z.instanceof(File)]),
+    profileImage: z.union([z.string(), z.instanceof(File)]).optional(),
     oldPassword: z.string().optional(),
-    newPassword: z.string().optional(),
+    newPassword: z.string().min(6).max(20).optional(),
     confirmNewPassword: z.string().optional(),
+    name: z.string().optional(),
+    email: z.string().email().optional(),
+    username: z.string().optional(),
   })
   .refine(
     (data) => {
