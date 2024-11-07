@@ -142,7 +142,7 @@ export function ChatButton({ user }: ChatButtonProps) {
           <form onSubmit={handleSubmit} className="mt-2 flex">
             <Input
               type="text"
-              className="flex-1 rounded-lg border bg-white p-2"
+              className="flex-1 rounded-lg border bg-white p-2 text-black"
               placeholder="Write your message here..."
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
