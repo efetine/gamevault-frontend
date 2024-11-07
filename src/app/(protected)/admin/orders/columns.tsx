@@ -4,12 +4,13 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { Checkbox } from "~/components/ui/checkbox";
 // import { DataTableColumnHeader } from "./data-table-column-header";
+import { format } from "date-fns";
 import { Badge } from "~/components/ui/badge";
 import { cn } from "~/lib/utils";
-import type { Order } from "~/schemas/order-schema";
-import { DataTableRowActions } from "./data-table-row-actions";
+import { OrderWithUser } from "~/services/orders-service";
+import { EditShippingStatus } from "./edit-shipping-status";
 
-export const columns: ColumnDef<Order>[] = [
+export const columns: ColumnDef<OrderWithUser>[] = [
   {
     accessorKey: "id",
   },
@@ -36,6 +37,11 @@ export const columns: ColumnDef<Order>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    id: "email",
+    accessorFn: (row) => row.user.email,
+    header: "Email",
   },
   {
     accessorKey: "orderEstatus",
@@ -66,9 +72,21 @@ export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "createdAt",
     header: "Date",
+    cell: ({ row }) => {
+      const date: string = row.getValue("createdAt");
+
+      return format(new Date(date), "HH:mm MM/dd/yyyy");
+    },
   },
   {
-    id: "actions",
-    cell: ({ row }) => <DataTableRowActions row={row} />,
+    accessorKey: "shippingStatus",
+    header: "Shipping Status",
+    cell: ({ row }) => {
+      return <EditShippingStatus order={row.original} />;
+    },
+  },
+  {
+    accessorKey: "shippingAddress",
+    header: "Shipping Address",
   },
 ];

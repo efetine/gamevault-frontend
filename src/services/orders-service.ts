@@ -1,15 +1,25 @@
 import { z } from "zod";
 import { env } from "~/env";
 
-import { orderSchema } from "~/schemas/order-schema";
+import { Order, orderSchema } from "~/schemas/order-schema";
 import { paginatedResultSchema } from "~/schemas/paginated-result";
 import { paginationDtoSchema } from "~/schemas/pagination-dto";
+import { userSchema } from "~/schemas/user-schema";
 
 const getOrdersInputSchema = paginationDtoSchema;
 
 type GetOrdersInput = z.infer<typeof getOrdersInputSchema>;
 
-const paginatedOrders = paginatedResultSchema(orderSchema);
+const orderWithUserSchema = orderSchema.extend({
+  user: userSchema.pick({
+    id: true,
+    email: true,
+  }),
+});
+
+export type OrderWithUser = z.infer<typeof orderWithUserSchema>;
+
+const paginatedOrders = paginatedResultSchema(orderWithUserSchema);
 
 type PaginatedOrders = z.infer<typeof paginatedOrders>;
 
@@ -41,3 +51,16 @@ export const getOrders = async (
     throw new Error(`Error in getOrders: ${error.message}`);
   }
 };
+
+export function editOrderShippingStatus({
+  id,
+  shippingStatus,
+}: Pick<Order, "id" | "shippingStatus">) {
+  return fetch(`${env.NEXT_PUBLIC_API_URL}/orders/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ shippingStatus }),
+  });
+}

@@ -1,12 +1,15 @@
 import { z } from "zod";
-import { orderDetailsSchema } from "./order-details-schema";
+// import { orderDetailsSchema } from "./order-details-schema";
 import { userSchema } from "./user-schema";
 
 export const orderSchema = z.object({
-  id: z.string().uuid(),
+  id: z.number(),
   userId: userSchema.shape.id,
-  total: z.number().nonnegative(),
-  orderDetails: z.array(orderDetailsSchema),
+  amount: z.number().nonnegative(),
+  orderEstatus: z.enum(["pending", "paid", "cancelled", "refound"]),
+  shippingStatus: z.enum(["none", "pending", "shipped", "delivered"]),
+  shippingAddress: z.string().nullable(),
+  createdAt: z.coerce.date(),
 });
 
 export type Order = z.infer<typeof orderSchema>;
