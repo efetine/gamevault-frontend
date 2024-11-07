@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 import { env } from "~/env";
-import type { EditUser } from "~/schemas/edit-user-schema";
+import type { EditUser, EditUserForm } from "~/schemas/edit-user-schema";
 import { paginationDtoSchema } from "~/schemas/pagination-dto";
-import { userSchema } from "~/schemas/user-schema";
+import { User, userSchema } from "~/schemas/user-schema";
 
 export const getUserSchema = userSchema.omit({
   description: true,
@@ -65,4 +65,70 @@ export async function updateUser(id: string, data: Partial<EditUser>) {
   if (!response.ok) {
     throw new Error("Failed to update user status");
   }
+}
+
+export async function updateUserForm(
+  id: User["id"],
+  values: Partial<EditUserForm>,
+) {
+  const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/users/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(values),
+  });
+
+  const result = response.json();
+
+  return result;
+}
+
+export async function uploadImage(uuid: User["id"], file: File) {
+  const blob = new Blob([file], { type: file.type });
+  const formData = new FormData();
+
+  formData.append("image", blob);
+
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_API_URL}/user/uploadImage/${uuid}`,
+    {
+      method: "PATCH",
+      body: formData,
+    },
+  );
+
+  const body = await response.json();
+
+  return body;
+}
+
+export async function editPassword(
+  id: User["id"],
+  values: Partial<EditUserForm>,
+) {
+  const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/users/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(values),
+  });
+
+  const result = response.json();
+
+  return result;
+}
+
+export async function getUserById(id: User["id"]): Promise<User> {
+  const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/users/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const body = await response.json();
+
+  return body;
 }
