@@ -4,10 +4,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import Link from "next/link";
 
-import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
-import { cn } from "~/lib/utils";
 import type { OrderWithUser } from "~/services/orders-service";
 import { EditShippingStatus } from "./edit-shipping-status";
 
@@ -52,24 +50,24 @@ export const columns: ColumnDef<OrderWithUser>[] = [
     accessorKey: "amount",
     header: "Amount",
   },
-  {
-    accessorKey: "isPaid",
-    header: "Payment",
-    cell: ({ row }) => {
-      const payment: boolean = row.getValue("isPaid");
+  // {
+  //   accessorKey: "isPaid",
+  //   header: "Payment",
+  //   cell: ({ row }) => {
+  //     const payment: boolean = row.getValue("isPaid");
 
-      return (
-        <Badge
-          variant="outline"
-          className={cn(payment === true ? "bg-green-700" : "bg-red-700")}
-        >
-          <span className="first-letter:uppercase">
-            {payment === true ? "Payment" : "Unpaid"}
-          </span>
-        </Badge>
-      );
-    },
-  },
+  //     return (
+  //       <Badge
+  //         variant="outline"
+  //         className={cn(payment === true ? "bg-green-700" : "bg-red-700")}
+  //       >
+  //         <span className="first-letter:uppercase">
+  //           {payment === true ? "Payment" : "Unpaid"}
+  //         </span>
+  //       </Badge>
+  //     );
+  //   },
+  // },
   {
     accessorKey: "createdAt",
     header: "Date",
