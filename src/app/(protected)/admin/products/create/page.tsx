@@ -40,9 +40,10 @@ export default function CreateProduct() {
 
   const createProductMutation = useMutation<Product, {}, CreateProduct>({
     mutationFn: async (data) => {
-      const product = await createProduct(data);
+      const { imageUrl, ...rest } = data;
+      const product = await createProduct(rest);
 
-      await uploadImage(product.id, data.imageUrl);
+      await uploadImage(product.id, imageUrl);
 
       return product;
     },

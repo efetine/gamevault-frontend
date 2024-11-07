@@ -12,7 +12,9 @@ import {
   productWithCategorySchema,
 } from "~/schemas/product-schema";
 
-export async function createProduct(values: CreateProduct): Promise<Product> {
+export async function createProduct(
+  values: Omit<CreateProduct, "imageUrl">,
+): Promise<Product> {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/products/create`, {
     method: "POST",
     headers: {
