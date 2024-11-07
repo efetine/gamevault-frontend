@@ -22,6 +22,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const initialToken = cookies().get("next-auth.session-token")?.value ?? null;
 
+  console.log(initialToken);
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="flex min-h-screen flex-col bg-zinc-300 dark:bg-page-gradient">
