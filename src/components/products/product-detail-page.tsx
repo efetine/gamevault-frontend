@@ -108,13 +108,13 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </div>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
-              <Button
+              {/* <Button
                 onClick={() => mutate()}
                 className="w-full bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900"
               >
                 <CreditCardIcon className="mr-2 h-5 w-5" />
                 {isPending ? "Loading..." : "Buy with Mercado Pago"}
-              </Button>   
+              </Button> */}   
                 <Button className="w-full bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900" onClick={handleAddToCart}>
                   <ShoppingBasket className="mr-2 h-5 w-5" />
                   Add to Carth
