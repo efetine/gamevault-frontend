@@ -2,8 +2,10 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
+import Link from "next/link";
 
 import { Badge } from "~/components/ui/badge";
+import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
 import { cn } from "~/lib/utils";
 import type { OrderWithUser } from "~/services/orders-service";
@@ -87,5 +89,14 @@ export const columns: ColumnDef<OrderWithUser>[] = [
   {
     accessorKey: "shippingAddress",
     header: "Shipping Address",
+  },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+    cell: ({ row }) => (
+      <Link href={`/admin/orders/${row.original.id}`}>
+        <Button>View details</Button>
+      </Link>
+    ),
   },
 ];

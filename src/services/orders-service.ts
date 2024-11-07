@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { env } from "~/env";
 
+import { orderDetailsSchema } from "~/schemas/order-details-schema";
 import { Order, orderSchema } from "~/schemas/order-schema";
 import { paginatedResultSchema } from "~/schemas/paginated-result";
 import { paginationDtoSchema } from "~/schemas/pagination-dto";
@@ -98,4 +99,31 @@ export function editOrderShippingStatus({
     },
     body: JSON.stringify({ shippingStatus }),
   });
+}
+
+const orderWithDetailsSchema = orderSchema.extend({
+  ordersDetails: z.array(orderDetailsSchema),
+});
+
+type OrderWithDetails = z.infer<typeof orderWithDetailsSchema>;
+
+export async function getOrderById({
+  id,
+}: Pick<Order, "id">): Promise<OrderWithDetails> {
+  const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/orders/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const body = await response.json();
+
+  const parsedOrder = orderWithDetailsSchema.safeParse(body);
+
+  if (parsedOrder.success === false) {
+    throw new Error(`Validation error: ${parsedOrder.error.message}`);
+  }
+
+  return parsedOrder.data;
 }

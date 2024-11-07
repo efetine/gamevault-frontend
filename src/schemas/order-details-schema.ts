@@ -2,10 +2,11 @@ import { z } from "zod";
 import { productSchema } from "./product-schema";
 
 export const orderDetailsSchema = z.object({
-  id: z.string().uuid(),
+  id: z.number(),
   quantity: z.number().nonnegative(),
   productId: productSchema.shape.id,
-  productPrice: productSchema.shape.price,
+  price: productSchema.shape.price,
+  product: productSchema,
 });
 
 export type OrderDetails = z.infer<typeof orderDetailsSchema>;
