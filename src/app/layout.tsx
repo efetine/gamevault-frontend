@@ -31,8 +31,9 @@ export default async function RootLayout({
         <ReactQueryProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
+            defaultTheme="dark"
+            enableSystem={false}
+            forcedTheme="dark"
             disableTransitionOnChange
           >
             <TooltipProvider>

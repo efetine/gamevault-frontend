@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { Cart } from "~/components/cart/cart";
 import { IconComponent } from "~/components/icon/icon.svg";
-import { ModeToggle } from "~/components/layout/navbar/mode-toggle";
 import { UserMenu } from "~/components/layout/navbar/user-menu";
 import { NavbarDrawer } from "./navbar-drawer";
 
@@ -21,7 +20,6 @@ export function Navbar() {
         <div className="hidden justify-end lg:flex lg:w-[42%] lg:items-center lg:space-x-6">
           <UserMenu />
           <Cart />
-          <ModeToggle />
         </div>
         <div className="flex h-full w-10 items-center justify-center">
           <NavbarDrawer>
