@@ -120,7 +120,7 @@ export async function editPassword(
   return result;
 }
 
-export async function getUserById(id: User["id"]): Promise<User> {
+export async function getUserById(id: User["id"]) {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/users/${id}`, {
     method: "GET",
     headers: {

@@ -133,14 +133,28 @@ export default function UserEditForm({ userid }: UserEditFormProps) {
               </div>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-[1fr_250px] lg:grid-cols-3 lg:gap-8">
+            {/* Responsive Grid Layout */}
+            <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-[1fr_250px] lg:grid-cols-3 lg:gap-8">
               <div className="grid auto-rows-max items-start gap-4 lg:col-span-2 lg:gap-8">
-                <Card x-chunk="dashboard-07-chunk-0">
+                <Card>
                   <CardHeader>
                     <CardTitle>Details</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="grid gap-6">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                              <Input {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                       <FormField
                         control={form.control}
                         name="username"
@@ -167,7 +181,6 @@ export default function UserEditForm({ userid }: UserEditFormProps) {
                           </FormItem>
                         )}
                       />
-                      {/* Password fields section */}
                       <div className="grid gap-6">
                         <FormField
                           control={form.control}
@@ -209,17 +222,13 @@ export default function UserEditForm({ userid }: UserEditFormProps) {
                           )}
                         />
                       </div>
-                      {/* End of Password fields section */}
                     </div>
                   </CardContent>
                 </Card>
               </div>
 
               <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
-                <Card
-                  className="overflow-hidden"
-                  x-chunk="dashboard-07-chunk-4"
-                >
+                <Card className="overflow-hidden">
                   <CardHeader>
                     <CardTitle>Image</CardTitle>
                   </CardHeader>
