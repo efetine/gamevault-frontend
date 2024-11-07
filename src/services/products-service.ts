@@ -98,7 +98,7 @@ export async function getProductById(id: Product["id"]): Promise<Product> {
 
 export async function updateProduct(id: Product["id"], values: EditProduct) {
   const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/products/${id}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
