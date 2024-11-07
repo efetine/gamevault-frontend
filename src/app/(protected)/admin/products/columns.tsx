@@ -1,21 +1,12 @@
 "use client";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
-import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-import Link from "next/link";
 
 // import { DataTableColumnHeader } from "./data-table-column-header";
 import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 import { ProductWithCategory } from "~/schemas/product-schema";
+import { DataTableRowActions } from "./data-table-row-actions";
 
 export const columns: ColumnDef<ProductWithCategory>[] = [
   {
@@ -88,28 +79,7 @@ export const columns: ColumnDef<ProductWithCategory>[] = [
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button aria-haspopup="true" size="icon" variant="ghost">
-              <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem asChild>
-              <Link href={`/admin/products/edit/${row.getValue("id")}`}>
-                <Pencil1Icon className="mr-2 h-4 w-4" />
-                Edit
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem disabled>
-              <TrashIcon className="mr-2 h-4 w-4" />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      return <DataTableRowActions row={row} />;
     },
   },
 ];

@@ -1,7 +1,9 @@
 "use client";
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Row } from "@tanstack/react-table";
+import { MoreHorizontal, TrashIcon } from "lucide-react";
+import Link from "next/link";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -10,10 +12,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { couponSchema } from "~/schemas/coupons-schema";
-
-// import { labels } from "../data/data"
-// import { taskSchema } from "../data/schema"
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -22,21 +20,25 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const { id } = couponSchema.parse(row.original);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-        >
-          <DotsHorizontalIcon className="h-4 w-4" />
+        <Button aria-haspopup="true" size="icon" variant="ghost">
+          <MoreHorizontal className="h-4 w-4" />
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Mark as "Shipped"</DropdownMenuItem>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem asChild>
+          <Link href={`/admin/products/edit/${row.getValue("id")}`}>
+            <Pencil1Icon className="mr-2 h-4 w-4" />
+            Edit
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem disabled>
+          <TrashIcon className="mr-2 h-4 w-4" />
+          Delete
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
