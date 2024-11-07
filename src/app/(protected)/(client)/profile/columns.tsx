@@ -2,8 +2,10 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
+import Link from "next/link";
 
 import { Badge } from "~/components/ui/badge";
+import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 import type { Order } from "~/schemas/order-schema";
 
@@ -36,10 +38,18 @@ export const columns: ColumnDef<Order>[] = [
           className={cn(payment === true ? "bg-green-700" : "bg-red-700")}
         >
           <span className="first-letter:uppercase">
-            {payment === true ? "Payment" : "Unpaid"}
+            {payment === true ? "PAID" : "UNPAID"}
           </span>
         </Badge>
       );
+    },
+  },
+  {
+    accessorKey: "shippingStatus",
+    header: "Shipping Status",
+    cell: ({ row }) => {
+      const shippingStatus: string = row.getValue("shippingStatus");
+      return <Badge>{shippingStatus.toLocaleUpperCase()}</Badge>;
     },
   },
   {
@@ -49,5 +59,14 @@ export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "amount",
     header: "Amount",
+  },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+    cell: ({ row }) => (
+      <Link href={`/profile/orders/${row.original.id}`}>
+        <Button>View details</Button>
+      </Link>
+    ),
   },
 ];

@@ -7,6 +7,7 @@ export const orderSchema = z.object({
   userId: userSchema.shape.id,
   amount: z.number().nonnegative(),
   orderEstatus: z.enum(["pending", "paid", "cancelled", "refound"]),
+  isPaid: z.boolean(),
   shippingStatus: z.enum(["none", "pending", "shipped", "delivered"]),
   shippingAddress: z.string().nullable(),
   createdAt: z.coerce.date(),
