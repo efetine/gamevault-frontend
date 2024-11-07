@@ -1,12 +1,11 @@
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
-import { cookies } from "next/headers";
-
 import { ThemeProvider } from "~/components/layout/navbar/theme-provider";
 import { ReactQueryProvider } from "~/components/react-query-provider";
 import { Toaster } from "~/components/ui/toaster";
 import { TooltipProvider } from "~/components/ui/tooltip";
+import { getServerAuthSession } from "~/server/auth";
 import { CartProvider } from "~/state/cart-state";
 import { AuthProvider } from "~/state/token-state";
 import "~/styles/globals.css";
@@ -17,12 +16,11 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const initialToken = cookies().get("next-auth.session-token")?.value ?? null;
+  const session = await getServerAuthSession();
 
-  console.log(initialToken);
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="flex min-h-screen flex-col bg-zinc-300 dark:bg-page-gradient">
@@ -35,7 +33,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TooltipProvider>
-              <AuthProvider initialToken={initialToken}>
+              <AuthProvider initialToken={session?.user.id}>
                 <CartProvider>{children}</CartProvider>
               </AuthProvider>
             </TooltipProvider>
