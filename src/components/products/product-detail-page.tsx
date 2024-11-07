@@ -1,14 +1,9 @@
 "use client";
 
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import {
-  CreditCardIcon,
-  GamepadIcon,
-  ShieldCheckIcon,
-  ShoppingBasket,
-} from "lucide-react";
-import Link from "next/link";
+import { GamepadIcon, ShieldCheckIcon, ShoppingBasket } from "lucide-react";
 import React from "react";
+
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -20,10 +15,7 @@ import {
 import { useMercadopago } from "~/hooks/use-mercadopago";
 import { type ProductDetailPageProps } from "~/schemas/product-details-schema";
 import { type BuyAProductProps } from "~/services/products-service";
-import EmblaCarousel from "./slider";
 import { useAddProductToCart } from "~/state/cart-state";
-
-const OPTIONS = {};
 
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   price,
@@ -58,15 +50,13 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     });
   };
 
-  const productImages = Array(1).fill({ src: imageUrl, alt: name });
-
   return (
     <div className="mx-auto w-full bg-gradient-to-b from-[#0d1117] via-[#212c3f] to-black px-4 py-8">
       <div className="m-auto mt-32 flex w-[70%] flex-col gap-8 md:flex-row">
         <div className="w-full md:w-3/5">
           <h2 className="mb-4 text-2xl font-bold capitalize">{name}</h2>
           <div className="mb-6">
-            <EmblaCarousel images={productImages} options={OPTIONS} />
+            <img src={imageUrl} alt="" className="w-full" />
           </div>
           <div>
             <h3 className="mb-2 text-2xl font-bold capitalize">Description:</h3>
@@ -114,11 +104,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               >
                 <CreditCardIcon className="mr-2 h-5 w-5" />
                 {isPending ? "Loading..." : "Buy with Mercado Pago"}
-              </Button> */}   
-                <Button className="w-full bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900" onClick={handleAddToCart}>
-                  <ShoppingBasket className="mr-2 h-5 w-5" />
-                  Add to Carth
-                </Button>
+              </Button> */}
+              <Button
+                className="w-full bg-gradient-to-b from-emerald-700 to-emerald-800 text-white hover:from-emerald-800 hover:to-emerald-900"
+                onClick={handleAddToCart}
+              >
+                <ShoppingBasket className="mr-2 h-5 w-5" />
+                Add to Carth
+              </Button>
               <p className="text-center text-xs text-muted-foreground">
                 Secure payment processed by Mercado Pago. We don&apos;t store
                 your financial information.
