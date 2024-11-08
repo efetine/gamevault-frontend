@@ -24,18 +24,17 @@ function ProductsList() {
     threshold: 0,
   });
 
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ["products", type],
-      queryFn: ({ pageParam }) =>
-        getProducts({
-          cursor: pageParam,
-          limit: "8",
-          type,
-        }),
-      initialPageParam: "",
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-    });
+  const { data, status, hasNextPage, fetchNextPage } = useInfiniteQuery({
+    queryKey: ["products", type],
+    queryFn: ({ pageParam }) =>
+      getProducts({
+        cursor: pageParam,
+        limit: "8",
+        type,
+      }),
+    initialPageParam: "",
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+  });
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -48,12 +47,12 @@ function ProductsList() {
     return data.pages.flatMap((page) => page.data);
   }, [data]);
 
-  if (isError) {
-    return <div>Cannot show products</div>;
+  if (status === "pending") {
+    return <Loading />;
   }
 
-  if (isLoading) {
-    return <Loading />;
+  if (status === "error") {
+    return <div>Cannot show products</div>;
   }
 
   return (

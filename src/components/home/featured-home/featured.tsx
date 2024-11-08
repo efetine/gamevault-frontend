@@ -1,9 +1,9 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 import Link from "next/link";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 import { Card, CardContent } from "~/components/ui/card";
 import {
@@ -14,15 +14,23 @@ import {
 import { getProducts } from "~/services/products-service";
 
 export function FeaturedProducts() {
-  const { data, status } = useQuery({
+  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
+
+  const { data, status } = useInfiniteQuery({
     queryKey: ["products"],
     queryFn: () =>
       getProducts({
         limit: "10",
       }),
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    initialPageParam: "",
   });
 
-  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
+  const products = useMemo(() => {
+    if (!data) return [];
+
+    return data.pages.flatMap((page) => page.data);
+  }, [data]);
 
   if (status === "error") {
     return <div>Error...</div>;
@@ -39,7 +47,7 @@ export function FeaturedProducts() {
       </h2>
       <Carousel className="w-full" plugins={[plugin.current]}>
         <CarouselContent className="-ml-2 md:-ml-4">
-          {data.data.map((product) => (
+          {products.map((product) => (
             <CarouselItem
               key={product.id}
               className="pl-2 md:basis-1/2 md:pl-4 lg:basis-1/3"

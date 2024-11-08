@@ -61,9 +61,11 @@ export async function UserMenu() {
         <Link href="/profile">
           <DropdownMenuItem>My Profile</DropdownMenuItem>
         </Link>
-        <Link href="/admin">
-          <DropdownMenuItem>Admin</DropdownMenuItem>
-        </Link>
+        {session.user.role === "admin" && (
+          <Link href="/admin">
+            <DropdownMenuItem>Admin</DropdownMenuItem>
+          </Link>
+        )}
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogoutButton />

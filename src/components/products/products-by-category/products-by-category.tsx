@@ -10,7 +10,7 @@ import { getProductsByCategory } from "~/services/categories-service";
 type CardListProps = PaginationDto & { categoryId: string };
 
 export default function ProductsByCategory({ categoryId }: CardListProps) {
-  const { data, status, error } = useInfiniteQuery({
+  const { data, status } = useInfiniteQuery({
     queryKey: ["products", categoryId],
     queryFn: ({ pageParam }) => getProductsByCategory(categoryId, 8, pageParam),
     initialPageParam: "",

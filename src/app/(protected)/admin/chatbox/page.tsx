@@ -1,7 +1,7 @@
 "use client";
 
 import { CornerDownLeft, Mic, Paperclip, Settings } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { Avatar, AvatarFallback } from "~/components/ui/avatar";
 import { Badge } from "~/components/ui/badge";
@@ -109,10 +109,9 @@ export default function ChatboxAdmin() {
     }
   };
 
-  const currentClientMessages = selectedClientId
-    ? clients.get(selectedClientId)?.messages
-    : [];
-  console.log(currentClientMessages);
+  const currentClientMessages = useMemo(() => {
+    return selectedClientId ? clients.get(selectedClientId)?.messages : [];
+  }, [selectedClientId, clients]);
 
   return (
     <div className="grid w-full pl-[56px]">
