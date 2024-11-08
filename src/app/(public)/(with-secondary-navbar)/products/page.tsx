@@ -58,7 +58,7 @@ function ProductsList() {
   return (
     <>
       <ProductTypeSelector />
-      <div className="grid w-full grid-cols-1 gap-7 py-5 sm:justify-items-center md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid w-full grid-cols-1 place-items-center gap-7 py-5 sm:justify-items-center md:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
